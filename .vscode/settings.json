@@ -1,10 +1,40 @@
 {
+  // --- Go: обнаружение и запуск тестов --------------------------------------
+  // Go-модуль лежит в рабочем дереве .ai-worktree/base-connector (в корне
+  // репозитория go.mod нет). gopls поддерживает вложенные модули
+  // автоматически, но каталог .ai-worktree должен попадать в индекс, а cgo —
+  // быть включён (пакет client/eapx собирается через pkg-config libmdbsql).
+  "go.toolsEnvVars": {
+    "CGO_ENABLED": "1"
+  },
+  "go.testEnvVars": {
+    "CGO_ENABLED": "1",
+    "GODOG_FORMAT": "pretty"
+  },
+  "go.testTimeout": "300s",
+  "go.useLanguageServer": true,
+  "go.testExplorer.enable": true,
+  "go.enableCodeLens": {
+    "runtest": true
+  },
+  "gopls": {
+    "build.env": {
+      "CGO_ENABLED": "1"
+    },
+    // не выкидывать рабочие деревья агентов из индекса
+    "build.directoryFilters": [
+      "-**/node_modules",
+      "+.ai-worktree"
+    ]
+  },
+
+  // --- Cucumber (feature-файлы) -------------------------------------------
   "cucumber.glue": [
-    // Укажите маску путей к вашим тестовым go-файлам
-    "**/*_test.go",
+    // Маска путей к step-определениям на Go
+    "**/*_test.go"
   ],
   "cucumber.features": [
-    // Пути к вашим feature-файлам для автокомплита
+    // Пути к feature-файлам для автокомплита
     "**/*.feature"
   ]
 }
