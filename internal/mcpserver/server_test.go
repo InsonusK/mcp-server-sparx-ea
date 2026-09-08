@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/InsonusK/mcp-server-sparx-ea/eapx"
+	"github.com/InsonusK/mcp-server-sparx-ea/client/eapx"
 	"github.com/mark3labs/mcp-go/client"
 	"github.com/mark3labs/mcp-go/mcp"
 )

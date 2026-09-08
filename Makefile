@@ -11,7 +11,7 @@ SHELL := /bin/bash
 export CGO_ENABLED := 1
 
 GO        ?= go
-COVERPKG  ?= ./eapx/...,./internal/...
+COVERPKG  ?= ./client/...,./internal/mcpserver/...
 TESTKIT   := $(GO) run ./tools/testkit
 GOTESTSUM ?= $(GO) run gotest.tools/gotestsum@v1.13.0
 GREMLINS  ?= $(GO) run github.com/go-gremlins/gremlins/cmd/gremlins@v0.6.0
@@ -26,7 +26,7 @@ DELTA_BASE         ?=
 # serially: slower, but the only combination that (a) attributes coverage from
 # the out-of-package Cucumber tests and (b) avoids gremlins' adaptive-timeout
 # collapse, which mislabels every mutant "TIMED OUT" on a fast parallel run.
-MUTATE_PKGS ?= ./eapx ./internal/mcpserver
+MUTATE_PKGS ?= ./client/eapx ./internal/mcpserver
 
 # gremlins derives each mutant's timeout from the baseline test duration; on a
 # sub-second suite that estimate is far too tight and healthy mutants get

@@ -1,4 +1,4 @@
-package features
+package eapx_test
 
 import (
 	"os"
@@ -7,7 +7,9 @@ import (
 	"github.com/cucumber/godog"
 )
 
-// TestFeatures runs the project-wide architectural specs in this directory.
+// TestFeatures runs the connector's Cucumber specs under features/. godog
+// reports each scenario as a Go subtest, so `go test -json` counts them
+// individually alongside the plain tests in this package.
 func TestFeatures(t *testing.T) {
 	format := "pretty"
 	if f := os.Getenv("GODOG_FORMAT"); f != "" {
@@ -15,11 +17,11 @@ func TestFeatures(t *testing.T) {
 	}
 
 	suite := godog.TestSuite{
-		Name:                "project-architecture",
+		Name:                "eapx-connector",
 		ScenarioInitializer: InitializeScenario,
 		Options: &godog.Options{
 			Format:   format,
-			Paths:    []string{"."},
+			Paths:    []string{"features"},
 			Strict:   true,
 			TestingT: t,
 		},

@@ -19,14 +19,14 @@ is Go + cgo, so the Go choice has to be recorded here.
 Use **[gremlins](https://github.com/go-gremlins/gremlins)** (`go-gremlins/gremlins`),
 pinned to `v0.6.0`, invoked only through `make mutation-test`.
 
-- One `gremlins unleash` run per production package (`./eapx`,
+- One `gremlins unleash` run per production package (`./client/eapx`,
   `./internal/mcpserver`) — gremlins accepts a single path per invocation.
-- Run with `--integration --workers 1`: the Cucumber suite lives in the separate
-  `features` package, so a per-package coverage run sees the connector as
-  uncovered. `--integration` runs the whole test binary per mutant, which
-  restores that coverage; `--workers 1` plus a large `--timeout-coefficient`
-  works around gremlins mislabelling healthy mutants `TIMED OUT` when the
-  baseline suite finishes in well under a second.
+- Run with `--integration --workers 1 --timeout-coefficient 60`: each package's
+  Cucumber steps live in an external `_test` package next to it, and
+  `--integration` runs the whole test binary per mutant so that coverage is
+  attributed. `--workers 1` plus the large timeout coefficient work around
+  gremlins mislabelling healthy mutants `TIMED OUT` when the baseline suite
+  finishes in well under a second.
 - `tools/testkit mutation` merges the per-package gremlins JSON into the
   normalised `tmp/result/mutation-test.json`; `make mutation-test` then exits
   with gremlins' own status.
@@ -48,8 +48,6 @@ quality"). Rejected.
 - `make mutation-test` is slow (~40 s here) because every mutant reruns the full
   suite serially. Acceptable for a small codebase and for CI's `ONLY_DELTA` mode
   (`--diff`).
-- gremlins does not mutate the C in `eapx/cgo_mdb.go` (it is inside a cgo
-  comment). The Go glue around it is mutated and covered by the in-package
-  `eapx` tests. One defensively-coded fallback branch
-  (`cgo_mdb.go` "empty engine message") is left as `NOT COVERED` — see
-  [test-trace-matrix.md](../test-trace-matrix.md) row 17.
+- gremlins does not mutate the C in `client/eapx/cgo_mdb.go` (it is inside a cgo
+  comment). The Go glue around it is mutated and fully killed (34/34 mutants,
+  100% score) by the combined in-package + Cucumber suite.

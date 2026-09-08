@@ -15,12 +15,17 @@ Queries run **in-process**: the server binds directly to the `mdbtools` C librar
 
 | Path | What |
 |------|------|
-| `eapx/` | The connector. `Open(path)` → `Connector`; `Connector.Query(sql)` → `ResultSet`. `cgo_mdb.go` is the cgo binding, `connector.go` the Go API. |
-| `internal/mcpserver/` | Wires the connector to an MCP server and exposes the `ea_query` tool. |
+| `client/eapx/` | The connector library (package `eapx`). `Open(path)` → `Connector`; `Connector.Query(sql)` → `ResultSet`. `cgo_mdb.go` is the cgo binding, `connector.go` the Go API. Its Cucumber spec lives in `client/eapx/features/`. |
+| `internal/mcpserver/` | Wires the connector to an MCP server and exposes the `ea_query` tool. Its Cucumber spec lives in `internal/mcpserver/features/`. |
+| `internal/bddsupport/` | Small helpers shared by the godog step files (`RepoRoot`, `ResolvePath`). |
 | `main.go` | `server.ServeStdio` entry point. |
-| `features/` | Cucumber (godog) specs — behaviour and architectural concerns. |
+| `features/` | Project-wide architectural Cucumber specs (no `os/exec` anywhere, binary links `libmdb`). |
 | `tools/testkit/` | Normalises Go test / coverage / gremlins output into the report contract. |
 | `example/` | Sample projects: `TestProject.eapx` (populated), `EmptyProject.eapx`. |
+
+Each package owns its behavioural spec: the `.feature` files and their step
+definitions sit next to the code they exercise, and one `go test ./...` runs
+them all.
 
 ## Build
 
@@ -90,12 +95,12 @@ Normalised results land in `tmp/result/*.json`, native reports in
 `tmp/report/<kind>/`. What is and isn't covered:
 [docs/test-trace-matrix.md](docs/test-trace-matrix.md).
 
-Current numbers: 45 tests green · **95.4%** line coverage · **97.1%** mutation score.
+Current numbers: 45 tests green · **95.4%** line coverage · **100%** mutation score.
 
 ### Known gap
 
 The Cyrillic / legacy-CP1251 decoding scenario
-(`features/technical/text_encoding.feature`, `@needs-cyrillic-fixture`)
+(`client/eapx/features/text_encoding.feature`, `@needs-cyrillic-fixture`)
 **self-skips**: authoring a Cyrillic `.eapx` needs Sparx EA itself, since
 `mdbtools` cannot write rows. Add `example/CyrillicProject.eapx` to enable it.
 The JET4 UCS-2LE → UTF-8 path is covered.

@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/InsonusK/mcp-server-sparx-ea/eapx"
+	"github.com/InsonusK/mcp-server-sparx-ea/client/eapx"
 	"github.com/mark3labs/mcp-go/mcp"
 	"github.com/mark3labs/mcp-go/server"
 )

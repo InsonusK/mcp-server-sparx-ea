@@ -6,15 +6,14 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/InsonusK/mcp-server-sparx-ea/internal/bddsupport"
 )
 
 // fixture is the populated sample project shipped in example/.
 func fixture(t *testing.T) string {
 	t.Helper()
-	p, err := filepath.Abs(filepath.Join("..", "example", "TestProject.eapx"))
-	if err != nil {
-		t.Fatal(err)
-	}
+	p := bddsupport.ResolvePath(filepath.Join("example", "TestProject.eapx"))
 	if _, err := os.Stat(p); err != nil {
 		t.Skipf("fixture missing: %v", err)
 	}
