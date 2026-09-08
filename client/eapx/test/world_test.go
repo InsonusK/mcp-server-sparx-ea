@@ -70,8 +70,13 @@ func (w *world) reset() {
 
 // ---- shared helpers ----
 
-func logf(ctx context.Context, format string, a ...any) {
-	godog.T(ctx).Logf("· "+format, a...)
+// logf records what a step did. It writes straight to stdout (not t.Log) so the
+// line interleaves with godog's pretty tree and so VS Code's test terminal
+// attributes it to the running scenario rather than to godog's internals. Only
+// shown by `go test -v` (or on failure) — the repo's .vscode config passes -v.
+// ctx is kept in the signature for future use.
+func logf(_ context.Context, format string, a ...any) {
+	fmt.Printf("      · "+format+"\n", a...)
 }
 
 // fixturePath maps a name written in a .feature to a real path. "" stays "" (so
