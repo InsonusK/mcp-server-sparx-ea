@@ -11,6 +11,12 @@
     // godog печатает человекочитаемый вывод сценариев
     "GODOG_FORMAT": "pretty"
   },
+  // -v: показывать вывод t.Logf из каждого шага даже на зелёном прогоне
+  // (без -v go test прячет вывод прошедших тестов). См.
+  // docs/skills/cucumber-go-testing.md §4.
+  "go.testFlags": [
+    "-v"
+  ],
   // godog-сценарии + race медленнее обычных unit-тестов
   "go.testTimeout": "300s",
   // gopls как языковой сервер + встроенный Test Explorer / code lens
