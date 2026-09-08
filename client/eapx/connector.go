@@ -8,21 +8,7 @@ import (
 	"os"
 	"strings"
 	"sync"
-	"unicode"
 )
-
-// firstWord returns the lower-cased leading identifier of an SQL string,
-// skipping leading whitespace and an optional opening parenthesis.
-func firstWord(sql string) string {
-	sql = strings.TrimLeft(sql, " \t\r\n(")
-	end := strings.IndexFunc(sql, func(r rune) bool {
-		return unicode.IsSpace(r) || r == '(' || r == ';'
-	})
-	if end < 0 {
-		end = len(sql)
-	}
-	return strings.ToLower(sql[:end])
-}
 
 func init() {
 	// mdbtools decodes JET4 (UCS-2LE) text through iconv; the target charset
@@ -58,7 +44,7 @@ func Open(path string) (*Connector, error) {
 		return nil, &Error{Op: "open", Path: path, msg: "empty file path"}
 	}
 	if _, err := os.Stat(path); err != nil {
-		return nil, &Error{Op: "open", Path: path, msg: "file not found", cause: err}
+		return nil, &Error{Op: "open", Path: path, msg: "file not found"}
 	}
 
 	engine, err := mdbOpen(path)
@@ -80,10 +66,13 @@ var writeVerbs = map[string]bool{
 // Query runs one SQL statement against the file and returns its result set.
 // Only read-only SELECT statements are supported.
 func (c *Connector) Query(sql string) (*ResultSet, error) {
-	if strings.TrimSpace(sql) == "" {
+	trimmed := strings.TrimSpace(sql)
+	if trimmed == "" {
 		return nil, &Error{Op: "query", Path: c.path, msg: "empty SQL statement"}
 	}
-	if verb := firstWord(sql); writeVerbs[verb] {
+	// trimmed is non-empty and starts with a non-space rune, so Fields yields
+	// at least one element.
+	if verb := strings.ToLower(strings.Fields(trimmed)[0]); writeVerbs[verb] {
 		return nil, &Error{
 			Op:   "query",
 			Path: c.path,

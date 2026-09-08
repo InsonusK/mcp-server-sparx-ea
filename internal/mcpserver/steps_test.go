@@ -65,6 +65,34 @@ func (w *toolWorld) theToolIsAvailable(name string) error {
 	return fmt.Errorf("tool %q not found in %d advertised tools", name, len(w.tools))
 }
 
+func (w *toolWorld) exactlyNToolsAdvertised(n int) error {
+	if len(w.tools) != n {
+		names := make([]string, len(w.tools))
+		for i, t := range w.tools {
+			names[i] = t.Name
+		}
+		return fmt.Errorf("expected %d tool(s), got %d: %v", n, len(w.tools), names)
+	}
+	return nil
+}
+
+func (w *toolWorld) iCallEaQueryWithOnly(arg string) error {
+	args := map[string]any{}
+	switch arg {
+	case "file":
+		args["file"] = bddsupport.ResolvePath("example/TestProject.eapx")
+	case "sql":
+		args["sql"] = "select Object_ID from t_object"
+	default:
+		return fmt.Errorf("unknown arg %q", arg)
+	}
+	req := mcp.CallToolRequest{}
+	req.Params.Name = "ea_query"
+	req.Params.Arguments = args
+	w.toolRes, w.toolErr = w.client.CallTool(context.Background(), req)
+	return nil
+}
+
 func (w *toolWorld) iCallToolWith(name, file, sql string) error {
 	req := mcp.CallToolRequest{}
 	req.Params.Name = name
@@ -153,7 +181,9 @@ func InitializeScenario(sc *godog.ScenarioContext) {
 	sc.Step(`^a running MCP server$`, w.aRunningMCPServer)
 	sc.Step(`^I list the MCP tools$`, w.iListTheMCPTools)
 	sc.Step(`^the tool "([^"]*)" is available$`, w.theToolIsAvailable)
+	sc.Step(`^exactly (\d+) tool is advertised$`, w.exactlyNToolsAdvertised)
 	sc.Step(`^I call "([^"]*)" with file "([^"]*)" and sql "([^"]*)"$`, w.iCallToolWith)
+	sc.Step(`^I call "ea_query" with only (\w+) set$`, w.iCallEaQueryWithOnly)
 	sc.Step(`^the tool call is not an error$`, w.theToolCallIsNotAnError)
 	sc.Step(`^the tool call is an error containing "([^"]*)"$`, w.theToolCallIsAnErrorContaining)
 	sc.Step(`^the tool JSON field "([^"]*)" equals "([^"]*)"$`, w.theToolJSONFieldEquals)

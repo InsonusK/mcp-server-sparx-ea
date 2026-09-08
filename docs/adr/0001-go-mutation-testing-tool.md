@@ -22,11 +22,11 @@ pinned to `v0.6.0`, invoked only through `make mutation-test`.
 - One `gremlins unleash` run per production package (`./client/eapx`,
   `./internal/mcpserver`) — gremlins accepts a single path per invocation.
 - Run with `--integration --workers 1 --timeout-coefficient 60`: each package's
-  Cucumber steps live in an external `_test` package next to it, and
-  `--integration` runs the whole test binary per mutant so that coverage is
-  attributed. `--workers 1` plus the large timeout coefficient work around
-  gremlins mislabelling healthy mutants `TIMED OUT` when the baseline suite
-  finishes in well under a second.
+  only tests are godog scenarios in an external `_test` package, so a plain
+  per-package `go test` sees the code as uncovered. `--integration` runs the
+  whole test binary per mutant, which restores the attribution. `--workers 1`
+  plus the large timeout coefficient work around gremlins mislabelling healthy
+  mutants `TIMED OUT` when the baseline suite finishes in well under a second.
 - `tools/testkit mutation` merges the per-package gremlins JSON into the
   normalised `tmp/result/mutation-test.json`; `make mutation-test` then exits
   with gremlins' own status.
@@ -49,5 +49,5 @@ quality"). Rejected.
   suite serially. Acceptable for a small codebase and for CI's `ONLY_DELTA` mode
   (`--diff`).
 - gremlins does not mutate the C in `client/eapx/cgo_mdb.go` (it is inside a cgo
-  comment). The Go glue around it is mutated and fully killed (34/34 mutants,
-  100% score) by the combined in-package + Cucumber suite.
+  comment). The Go glue around it is mutated and fully killed (27/27 mutants,
+  100% score) by the Cucumber suite alone.

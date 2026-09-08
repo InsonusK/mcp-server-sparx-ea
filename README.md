@@ -23,9 +23,9 @@ Queries run **in-process**: the server binds directly to the `mdbtools` C librar
 | `tools/testkit/` | Normalises Go test / coverage / gremlins output into the report contract. |
 | `example/` | Sample projects: `TestProject.eapx` (populated), `EmptyProject.eapx`. |
 
-Each package owns its behavioural spec: the `.feature` files and their step
-definitions sit next to the code they exercise, and one `go test ./...` runs
-them all.
+Every test is a Cucumber scenario. Each package owns its spec: the `.feature`
+files and their step definitions sit next to the code they exercise, and one
+`go test ./...` runs them all.
 
 ## Build
 
@@ -83,7 +83,7 @@ Four targets, per
 
 | Command | Does |
 |---------|------|
-| `make unit-test` | Cucumber scenarios + Go tests in one run, with `-race` and coverage. |
+| `make unit-test` | Every Cucumber scenario in one run, with `-race` and coverage. |
 | `make mutation-test` | Mutation testing with [gremlins](docs/adr/0001-go-mutation-testing-tool.md). |
 | `make test-report` | Assembles `public/` (per-kind reports + shields.io badges + landing page). |
 | `make test-and-report` | All three, in order. |
@@ -95,12 +95,13 @@ Normalised results land in `tmp/result/*.json`, native reports in
 `tmp/report/<kind>/`. What is and isn't covered:
 [docs/test-trace-matrix.md](docs/test-trace-matrix.md).
 
-Current numbers: 45 tests green · **95.4%** line coverage · **100%** mutation score.
+Current numbers: 37 scenarios green · **95.8%** line coverage · **100%** mutation score.
 
 ### Known gap
 
 The Cyrillic / legacy-CP1251 decoding scenario
-(`client/eapx/features/text_encoding.feature`, `@needs-cyrillic-fixture`)
-**self-skips**: authoring a Cyrillic `.eapx` needs Sparx EA itself, since
-`mdbtools` cannot write rows. Add `example/CyrillicProject.eapx` to enable it.
-The JET4 UCS-2LE → UTF-8 path is covered.
+(`client/eapx/features/text_encoding.feature`, tagged `@todo`) is **excluded
+from the run** by the `~@todo` tag filter — it has no fixture. Authoring a
+Cyrillic `.eapx` needs Sparx EA itself, since `mdbtools` cannot write rows, and
+neither sample project has non-ASCII text. Add `example/CyrillicProject.eapx`
+and drop the `@todo` tag to enable it. The JET4 UCS-2LE → UTF-8 path is covered.

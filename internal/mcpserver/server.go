@@ -13,14 +13,16 @@ import (
 // Version is reported to MCP clients during initialization.
 const Version = "0.1.0"
 
-// Querier is the subset of *eapx.Connector the server needs. Declared as an
-// interface so tests can substitute a fake without touching a real file.
+// Querier is the subset of *eapx.Connector the tool handler needs. Keeping it an
+// interface behind Opener keeps the handler decoupled from how a connection is
+// obtained.
 type Querier interface {
 	Query(sql string) (*eapx.ResultSet, error)
 	Close() error
 }
 
-// Opener resolves a file path to a Querier.
+// Opener resolves a file path to a Querier. New(nil) uses defaultOpener (the
+// real eapx connector); a caller can supply its own.
 type Opener func(path string) (Querier, error)
 
 func defaultOpener(path string) (Querier, error) {

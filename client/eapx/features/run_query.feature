@@ -35,3 +35,18 @@ Feature: Run SQL queries against a Sparx EA file
     When I run the query "select Object_ID, Name from t_object"
     Then the query succeeds
     And the result has 0 rows
+
+  Scenario Outline: The leading keyword is recognised regardless of letter case
+    When I run the query "<sql>"
+    Then the query succeeds
+    And the result has 16 rows
+
+    Examples:
+      | sql                            |
+      | SELECT Object_ID from t_object |
+      | SeLeCt Object_ID from t_object |
+
+  Scenario: Leading whitespace before SELECT is tolerated
+    When I run the query "    select Object_ID from t_object"
+    Then the query succeeds
+    And the result has 16 rows

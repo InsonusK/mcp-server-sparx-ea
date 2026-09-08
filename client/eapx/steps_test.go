@@ -238,15 +238,6 @@ func (w *world) theTempDirIsStillEmpty() error {
 	return nil
 }
 
-// ---------- text encoding: optional Cyrillic fixture ----------
-
-func theCyrillicFixtureIsAvailable(path string) error {
-	if _, err := os.Stat(bddsupport.ResolvePath(path)); err != nil {
-		return fmt.Errorf("%w: fixture %s is not present (Sparx EA is needed to author a Cyrillic .eapx)", godog.ErrSkip, path)
-	}
-	return nil
-}
-
 // ---------- concurrency ----------
 
 func (w *world) iRunQueryFromNGoroutines(sql string, n int) error {
@@ -361,8 +352,6 @@ func InitializeScenario(sc *godog.ScenarioContext) {
 
 	sc.Step(`^an empty directory registered as the process temp dir$`, w.emptyDirAsTempDir)
 	sc.Step(`^the temp dir is still empty$`, w.theTempDirIsStillEmpty)
-
-	sc.Step(`^the Cyrillic fixture "([^"]*)" is available$`, theCyrillicFixtureIsAvailable)
 
 	sc.Step(`^I run the query "([^"]*)" from (\d+) goroutines concurrently$`, w.iRunQueryFromNGoroutines)
 	sc.Step(`^all (\d+) queries succeed$`, w.allNQueriesSucceed)

@@ -10,8 +10,6 @@ type Error struct {
 	Path string
 	SQL  string
 	msg  string
-
-	cause error
 }
 
 func (e *Error) Error() string {
@@ -20,5 +18,3 @@ func (e *Error) Error() string {
 	}
 	return fmt.Sprintf("eapx %s %q: %s", e.Op, e.Path, e.msg)
 }
-
-func (e *Error) Unwrap() error { return e.cause }

@@ -20,6 +20,11 @@ Feature: Query errors are reported, not swallowed
       | drop table t_object                     | only read-only SELECT statements are supported   |
       |                                        | empty SQL statement                              |
 
+  Scenario: A failing query's error echoes the offending SQL
+    When I run the query "select * from t_not_a_real_table"
+    Then the query fails with an error containing "Got no result"
+    And the query fails with an error containing "(sql: select * from t_not_a_real_table)"
+
   Scenario: Querying a closed connection fails
     When I close the connection
     And I run the query "select Object_ID from t_object"

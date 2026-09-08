@@ -9,9 +9,13 @@ Feature: Text columns are decoded to valid UTF-8
     Then the query succeeds
     And every result value is valid UTF-8
 
-  @needs-cyrillic-fixture
+  # Excluded from every run via the ~@todo tag filter (see the godog runners).
+  # Blocked: authoring a Cyrillic .eapx needs Sparx EA itself — mdbtools is
+  # read-only and cannot INSERT rows, and neither sample project contains
+  # non-ASCII text. Add example/CyrillicProject.eapx and drop the @todo tag to
+  # enable it. Tracked in docs/test-trace-matrix.md.
+  @todo
   Scenario: Cyrillic text round-trips without mojibake
-    Given the Cyrillic fixture "example/CyrillicProject.eapx" is available
-    And a connection to the Sparx EA file "example/CyrillicProject.eapx"
+    Given a connection to the Sparx EA file "example/CyrillicProject.eapx"
     When I run the query "select Name from t_object where Object_ID = 1"
     Then the single result value is "Кириллица объекта"

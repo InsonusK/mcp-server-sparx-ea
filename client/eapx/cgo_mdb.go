@@ -64,10 +64,9 @@ func mdbOpen(path string) (*mdbSQL, error) {
 	cPath := C.CString(path)
 	defer C.free(unsafe.Pointer(cPath))
 
+	// mdb_sql_init allocates with g_malloc0, which aborts rather than returning
+	// nil, so there is no nil case to guard here.
 	handle := C.mdb_sql_init()
-	if handle == nil {
-		return nil, fmt.Errorf("eapx: mdb_sql_init returned nil")
-	}
 
 	if C.mdb_sql_open(handle, cPath) == nil {
 		msg := C.GoString(C.mdbx_last_error(handle))
@@ -81,23 +80,17 @@ func mdbOpen(path string) (*mdbSQL, error) {
 	return &mdbSQL{handle: handle}, nil
 }
 
-// close releases the engine and the underlying database handle. Safe to call
-// more than once.
+// close releases the engine and the underlying database handle. Connector.Close
+// calls this exactly once, on a live handle, then drops its reference to the
+// mdbSQL value.
 func (m *mdbSQL) close() {
-	if m.handle == nil {
-		return
-	}
 	C.mdb_sql_exit(m.handle)
-	m.handle = nil
 }
 
 // query runs a single SQL statement and returns its full result set. The engine
 // is reset afterwards so the handle can be reused for the next statement.
+// Connector.Query guarantees the handle is live before calling this.
 func (m *mdbSQL) query(sql string) (*ResultSet, error) {
-	if m.handle == nil {
-		return nil, fmt.Errorf("eapx: connector is closed")
-	}
-
 	cSQL := C.CString(sql)
 	defer C.free(unsafe.Pointer(cSQL))
 

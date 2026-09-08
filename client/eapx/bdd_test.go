@@ -22,6 +22,7 @@ func TestFeatures(t *testing.T) {
 		Options: &godog.Options{
 			Format:   format,
 			Paths:    []string{"features"},
+			Tags:     "~@todo",
 			Strict:   true,
 			TestingT: t,
 		},
