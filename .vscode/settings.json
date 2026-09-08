@@ -1,10 +1,38 @@
 {
+  // --- Go: обнаружение и запуск тестов ---------------------------------------
+  // Пакет client/eapx использует cgo (pkg-config: libmdbsql glib-2.0),
+  // поэтому CGO обязан быть включён — иначе gopls не проанализирует пакет,
+  // а Test Explorer не соберёт и не запустит тесты.
+  "go.toolsEnvVars": {
+    "CGO_ENABLED": "1"
+  },
+  "go.testEnvVars": {
+    "CGO_ENABLED": "1",
+    // godog печатает человекочитаемый вывод сценариев
+    "GODOG_FORMAT": "pretty"
+  },
+  // godog-сценарии + race медленнее обычных unit-тестов
+  "go.testTimeout": "300s",
+  // gopls как языковой сервер + встроенный Test Explorer / code lens
+  "go.useLanguageServer": true,
+  "go.testExplorer.enable": true,
+  "go.testExplorer.showDynamicSubtestsInEditor": true,
+  "go.enableCodeLens": {
+    "runtest": true
+  },
+  "gopls": {
+    "build.env": {
+      "CGO_ENABLED": "1"
+    }
+  },
+
+  // --- Cucumber (feature-файлы) --------------------------------------------
   "cucumber.glue": [
-    // Укажите маску путей к вашим тестовым go-файлам
-    "**/*_test.go",
+    // Маска путей к step-определениям на Go
+    "**/*_test.go"
   ],
   "cucumber.features": [
-    // Пути к вашим feature-файлам для автокомплита
+    // Пути к feature-файлам для автокомплита
     "**/*.feature"
   ]
 }
