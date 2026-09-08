@@ -1,19 +1,22 @@
 {
-  // --- Go: обнаружение и запуск тестов --------------------------------------
-  // Go-модуль лежит в рабочем дереве .ai-worktree/base-connector (в корне
-  // репозитория go.mod нет). gopls поддерживает вложенные модули
-  // автоматически, но каталог .ai-worktree должен попадать в индекс, а cgo —
-  // быть включён (пакет client/eapx собирается через pkg-config libmdbsql).
+  // --- Go: обнаружение и запуск тестов ---------------------------------------
+  // Пакет client/eapx использует cgo (pkg-config: libmdbsql glib-2.0),
+  // поэтому CGO обязан быть включён — иначе gopls не проанализирует пакет,
+  // а Test Explorer не соберёт и не запустит тесты.
   "go.toolsEnvVars": {
     "CGO_ENABLED": "1"
   },
   "go.testEnvVars": {
     "CGO_ENABLED": "1",
+    // godog печатает человекочитаемый вывод сценариев
     "GODOG_FORMAT": "pretty"
   },
+  // godog-сценарии + race медленнее обычных unit-тестов
   "go.testTimeout": "300s",
+  // gopls как языковой сервер + встроенный Test Explorer / code lens
   "go.useLanguageServer": true,
   "go.testExplorer.enable": true,
+  "go.testExplorer.showDynamicSubtestsInEditor": true,
   "go.enableCodeLens": {
     "runtest": true
   },
@@ -24,7 +27,6 @@
     // не выкидывать рабочие деревья агентов из индекса
     "build.directoryFilters": [
       "-**/node_modules",
-      "+.ai-worktree"
     ]
   },
 
