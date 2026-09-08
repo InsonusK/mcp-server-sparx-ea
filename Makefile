@@ -11,7 +11,7 @@ SHELL := /bin/bash
 export CGO_ENABLED := 1
 
 GO        ?= go
-COVERPKG  ?= ./client/...,./internal/mcpserver/...
+COVERPKG  ?= ./client/eapx,./internal/mcpserver
 TESTKIT   := $(GO) run ./tools/testkit
 GOTESTSUM ?= $(GO) run gotest.tools/gotestsum@v1.13.0
 GREMLINS  ?= $(GO) run github.com/go-gremlins/gremlins/cmd/gremlins@v0.6.0
@@ -22,10 +22,12 @@ DELTA_BASE         ?=
 
 # Packages gremlins mutates, one `gremlins unleash` run each (it accepts one
 # path per invocation). Kept to the production packages that carry logic.
-# --integration + --workers 1 (below) run the full test suite per mutant,
-# serially: slower, but the only combination that (a) attributes coverage from
-# the out-of-package Cucumber tests and (b) avoids gremlins' adaptive-timeout
-# collapse, which mislabels every mutant "TIMED OUT" on a fast parallel run.
+# --integration + --workers 1 + --coverpkg <pkg> (below): the Cucumber suite for
+# a package lives in a sibling `test/` package, so a plain per-package coverage
+# run sees the code as uncovered. --integration runs the whole test binary per
+# mutant and --coverpkg attributes coverage back to <pkg>. --workers 1 + the
+# large timeout coefficient avoid gremlins' adaptive-timeout collapse, which
+# mislabels healthy mutants "TIMED OUT" on a fast parallel run.
 MUTATE_PKGS ?= ./client/eapx ./internal/mcpserver
 
 # gremlins derives each mutant's timeout from the baseline test duration; on a
@@ -71,6 +73,7 @@ mutation-test:
 		name=$$(echo "$$pkg" | sed 's#[./]#_#g;s#^_*##'); \
 		$(GREMLINS) unleash "$$pkg" \
 			--integration --workers 1 --timeout-coefficient $(MUTATE_TIMEOUT_COEFF) \
+			--coverpkg "$$pkg" \
 			--output "tmp/report/mutation/$$name.json" \
 			$$diffflag || status=$$?; \
 	done; \

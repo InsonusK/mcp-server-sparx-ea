@@ -15,17 +15,19 @@ Queries run **in-process**: the server binds directly to the `mdbtools` C librar
 
 | Path | What |
 |------|------|
-| `client/eapx/` | The connector library (package `eapx`). `Open(path)` → `Connector`; `Connector.Query(sql)` → `ResultSet`. `cgo_mdb.go` is the cgo binding, `connector.go` the Go API. Its Cucumber spec lives in `client/eapx/features/`. |
-| `internal/mcpserver/` | Wires the connector to an MCP server and exposes the `ea_query` tool. Its Cucumber spec lives in `internal/mcpserver/features/`. |
-| `internal/bddsupport/` | Small helpers shared by the godog step files (`RepoRoot`, `ResolvePath`). |
+| `client/eapx/` | The connector library (package `eapx`). `Open(path)` → `Connector`; `Connector.Query(sql)` → `ResultSet`. `cgo_mdb.go` is the cgo binding, `connector.go` the Go API. |
+| `client/eapx/features/` | The connector's Cucumber specs (`.feature`). |
+| `client/eapx/test/` | Black-box godog step definitions + `testdata/` fixtures (package `eapxtest`). |
+| `internal/mcpserver/` | Wires the connector to an MCP server and exposes the `ea_query` tool, with its own `features/` + step defs. |
+| `internal/bddsupport/` | Helpers shared by the mcpserver / project-wide step files. |
 | `main.go` | `server.ServeStdio` entry point. |
 | `features/` | Project-wide architectural Cucumber specs (no `os/exec` anywhere, binary links `libmdb`). |
 | `tools/testkit/` | Normalises Go test / coverage / gremlins output into the report contract. |
-| `example/` | Sample projects: `TestProject.eapx` (populated), `EmptyProject.eapx`. |
+| `example/` | Sample projects used by the mcpserver spec (`TestProject`, `EmptyProject`, `CyrillicProject`). |
 
-Every test is a Cucumber scenario. Each package owns its spec: the `.feature`
-files and their step definitions sit next to the code they exercise, and one
-`go test ./...` runs them all.
+Every test is a Cucumber scenario. Conventions for writing them:
+[docs/skills/cucumber-go-testing.md](docs/skills/cucumber-go-testing.md).
+One `go test ./...` runs everything.
 
 ## Build
 
@@ -92,16 +94,18 @@ Toggles: `WITH_CODE_COVERAGE=true` (emit the normalised coverage result + badge)
 `ONLY_DELTA=true DELTA_BASE=<ref>` (mutate only changed code).
 
 Normalised results land in `tmp/result/*.json`, native reports in
-`tmp/report/<kind>/`. What is and isn't covered:
-[docs/test-trace-matrix.md](docs/test-trace-matrix.md).
+`tmp/report/<kind>/`. Test-writing conventions:
+[docs/skills/cucumber-go-testing.md](docs/skills/cucumber-go-testing.md).
 
-Current numbers: 37 scenarios green · **95.8%** line coverage · **100%** mutation score.
+Current numbers: 40 scenarios green · **95.8%** line coverage · **100%** mutation score.
 
-### Known gap
+Cyrillic decoding (Name and Note) is covered by `CyrillicProject.eapx`
+(`client/eapx/features/text_encoding.feature`), including exact byte-level
+assertions and a Cyrillic literal in a `WHERE` clause.
 
-The Cyrillic / legacy-CP1251 decoding scenario
-(`client/eapx/features/text_encoding.feature`, tagged `@todo`) is **excluded
-from the run** by the `~@todo` tag filter — it has no fixture. Authoring a
-Cyrillic `.eapx` needs Sparx EA itself, since `mdbtools` cannot write rows, and
-neither sample project has non-ASCII text. Add `example/CyrillicProject.eapx`
-and drop the `@todo` tag to enable it. The JET4 UCS-2LE → UTF-8 path is covered.
+### Supported SQL
+
+The connector is a thin pass-through to the mdbtools SQL engine:
+`SELECT <cols> FROM <table> [WHERE <col> = / <> / LIKE ... AND / OR ...]`.
+`ORDER BY`, `LIMIT`, `IN (...)`, `JOIN` and `count(*)` with a `WHERE` clause are
+**not** supported by the backend. Rows come back in storage order.
