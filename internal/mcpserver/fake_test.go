@@ -23,6 +23,7 @@ type fakeModel struct {
 	diagram  *sparx.DiagramInfo
 	relation *sparx.Relation
 	count    int
+	rootName string
 }
 
 func defaultFake() *fakeModel {
@@ -44,6 +45,7 @@ func defaultFake() *fakeModel {
 		},
 		relation: &sparx.Relation{ID: "EAID_R", Type: "ArchiMate.Realization", Direction: "outgoing", OtherName: "Goal1"},
 		count:    2,
+		rootName: "Model",
 	}
 }
 
@@ -70,6 +72,19 @@ func containsSub(s, sub string) bool {
 }
 
 func (f *fakeModel) Tree() *sparx.Node { f.rec("Tree()"); return f.tree }
+
+func (f *fakeModel) CreateRootPackage(name string) (*sparx.PackageInfo, error) {
+	f.rec("CreateRootPackage(%s)", name)
+	return f.pkg, f.err
+}
+func (f *fakeModel) SetRootName(newName string, freshIdentity bool) (string, error) {
+	f.rec("SetRootName(%s,%v)", newName, freshIdentity)
+	if f.err != nil {
+		return "", f.err
+	}
+	f.rootName = newName
+	return newName, nil
+}
 
 func (f *fakeModel) Element(ref string) (*sparx.ElementInfo, error) {
 	f.rec("Element(%s)", ref)
