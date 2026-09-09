@@ -133,6 +133,32 @@ func (w *World) theWorkingModel(ctx context.Context, table *godog.Table) error {
 	return w.Save(ctx)
 }
 
+// theNewModel starts an empty model from scratch (no fixture) and records the
+// tmp file this scenario writes to.
+//
+//	Given a new model:
+//	  | root   | My Test Model       |
+//	  | output | rootnode_create.xml |
+func (w *World) theNewModel(ctx context.Context, table *godog.Table) error {
+	cfg := map[string]string{}
+	for _, r := range table.Rows {
+		if len(r.Cells) == 2 {
+			cfg[r.Cells[0].Value] = r.Cells[1].Value
+		}
+	}
+	root, out := cfg["root"], cfg["output"]
+	if root == "" || out == "" {
+		return fmt.Errorf(`a new model needs "root" and "output" rows`)
+	}
+	svc, err := sparx.NewModel(root)
+	if err != nil {
+		return err
+	}
+	w.Mut, w.Source, w.Output, w.RootName, w.SavedPath = svc, "", out, root, ""
+	Logf(ctx, "new model with root %q → saves to %s/%s", root, ScenarioDir, out)
+	return w.Save(ctx)
+}
+
 // Save persists the working copy to ScenarioDir/<output>.
 func (w *World) Save(ctx context.Context) error {
 	if w.Mut == nil {
@@ -505,6 +531,7 @@ func sameSet(got, want []string) error {
 func RegisterSharedSteps(sc *godog.ScenarioContext, w *World) {
 	sc.Step(`^the model file "([^"]*)"$`, w.theModelFile)
 	sc.Step(`^the working model:$`, w.theWorkingModel)
+	sc.Step(`^a new model:$`, w.theNewModel)
 
 	sc.Step(`^the (?:read|create|delete|placement|rename|move) succeeds$`, w.succeeds)
 	sc.Step(`^the (?:read|create|delete|placement|rename|move) fails with "([^"]*)"$`, w.failsWith)
