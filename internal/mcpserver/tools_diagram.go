@@ -6,13 +6,25 @@ import (
 	"github.com/mark3labs/mcp-go/server"
 )
 
-// registerDiagramTools adds the diagram tools: read one diagram, and place /
-// move / remove an element on it.
+// registerDiagramTools adds the diagram tools: read one diagram, create a
+// diagram, and place / move / remove an element on it.
 func registerDiagramTools(s *server.MCPServer, h sparxTools) {
 	s.AddTool(mcp.NewTool("ea_diagram",
 		mcp.WithDescription("One diagram by id, GUID or slash path: its type and the elements placed on it with coordinates."),
 		fileArg(), refArg("the diagram"),
 	), h.read(func(m Model, r mcp.CallToolRequest) (any, error) { return m.Diagram(r.GetString("ref", "")) }))
+
+	s.AddTool(mcp.NewTool("ea_create_diagram",
+		mcp.WithDescription("Add an empty diagram to a package, then fill it with ea_place_on_diagram. "+
+			"'layer' is an optional ArchiMate viewpoint (Motivation, Strategy, Business, Application, "+
+			"Technology, Physical, Implementation_Migration) that picks EA's toolbox; omit it for a plain diagram."),
+		fileArg(), outputArg(),
+		mcp.WithString("parent", mcp.Required(), mcp.Description("the package to add the diagram to (id, GUID or path)")),
+		mcp.WithString("name", mcp.Required()),
+		mcp.WithString("layer", mcp.Description("ArchiMate viewpoint / EA toolbox (optional)")),
+	), h.write(func(m Model, r mcp.CallToolRequest) (any, error) {
+		return m.CreateDiagram(r.GetString("parent", ""), r.GetString("name", ""), r.GetString("layer", ""))
+	}))
 
 	place := func(op func(m Model, d, e string, at sparx.Rect) error) toolFn {
 		return func(m Model, r mcp.CallToolRequest) (any, error) {

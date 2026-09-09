@@ -8,7 +8,7 @@ Feature: The ArchiMate read tools
 
   Scenario: The read tools are advertised
     When I list the MCP tools
-    Then exactly 20 tools are advertised
+    Then exactly 21 tools are advertised
     And the tool "ea_model_tree" is available
     And the tool "ea_element" is available
     And the tool "ea_package" is available

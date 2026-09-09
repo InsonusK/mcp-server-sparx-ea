@@ -79,6 +79,29 @@ Feature: Editing the model and writing it back
     Then the diagram "Model/Motivation_Package/Motivation_Diagram" has 16 objects and 7 links
     And the diagram "Model/Motivation_Package/Motivation_Diagram" places "Model/Motivation_Package/Extra" at 10,20,110,90
 
+  Scenario: Creating a diagram and placing connected elements shows the connector, and survives a round-trip
+    Given a new model with root "Fresh"
+    When I add a package "Views" under "Fresh"
+    And I add an element "Aim" of type "uml:Class" stereotype "ArchiMate_Goal" under "Fresh/Views"
+    And I add an element "Rule" of type "uml:Class" stereotype "ArchiMate_Principle" under "Fresh/Views"
+    And I add a connector from "Fresh/Views/Rule" to "Fresh/Views/Aim" ea-type "Dependency" repr "dependency" stereotype "ArchiMate_Realization"
+    And I add a diagram "Overview" of layer "ArchiMate3::Motivation" under "Fresh/Views"
+    And I place the element "Fresh/Views/Aim" on the diagram "Fresh/Views/Overview" at 40,40,180,110
+    And I place the element "Fresh/Views/Rule" on the diagram "Fresh/Views/Overview" at 40,200,180,270
+    And I show the connector from "Fresh/Views/Rule" to "Fresh/Views/Aim" on the diagram "Fresh/Views/Overview"
+    And I write and reopen as "create_diagram.xml"
+    Then the diagram "Fresh/Views/Overview" has 2 objects and 1 links
+    And the diagram "Fresh/Views/Overview" places "Fresh/Views/Aim" at 40,40,180,110
+    And the written file contains "MDGDgm=ArchiMate3::Motivation"
+    And the reopened file has no dangling id references
+
+  Scenario: A second diagram with the same name in one package is refused
+    Given a new model with root "Fresh"
+    When I add a package "Views" under "Fresh"
+    And I add a diagram "Overview" of layer "" under "Fresh/Views"
+    And I add a diagram "Overview" of layer "" under "Fresh/Views"
+    Then the operation fails with "already has a diagram named"
+
   Scenario: Removing a non-empty package removes its whole subtree
     Given the model file "TestProject.xml"
     When I remove the package "Model/Motivation_Package"

@@ -415,6 +415,21 @@ func (w *World) reloadDiagramHasNObjects(ctx context.Context, ref string, n int)
 	return nil
 }
 
+func (w *World) reloadDiagramHasNLinks(ctx context.Context, ref string, n int) error {
+	svc, err := w.Reloaded(ctx)
+	if err != nil {
+		return err
+	}
+	d, err := svc.Diagram(ref)
+	if err != nil {
+		return err
+	}
+	if len(d.Links) != n {
+		return fmt.Errorf("after reload diagram has %d links, want %d", len(d.Links), n)
+	}
+	return nil
+}
+
 func (w *World) reloadDiagramObjectsInclude(ctx context.Context, table *godog.Table) error {
 	return w.reloadDiagramObjectsIncludeRef(ctx, w.LastDiagramRef, table)
 }
@@ -576,6 +591,7 @@ func RegisterSharedSteps(sc *godog.ScenarioContext, w *World) {
 	sc.Step(`^after reload the element "([^"]*)" has no relation to "([^"]*)"$`, w.reloadElementNoRelationTo)
 	sc.Step(`^after reload the element "([^"]*)" relations include:$`, w.reloadElementRelationsInclude)
 	sc.Step(`^after reload the diagram "([^"]*)" has (\d+) placed elements$`, w.reloadDiagramHasNObjects)
+	sc.Step(`^after reload the diagram "([^"]*)" has (\d+) links$`, w.reloadDiagramHasNLinks)
 	sc.Step(`^after reload the diagram placed elements include:$`, w.reloadDiagramObjectsInclude)
 	sc.Step(`^after reload the diagram "([^"]*)" placed elements include:$`, w.reloadDiagramObjectsIncludeRef)
 	sc.Step(`^after reload the root package is "([^"]*)"$`, w.reloadRootIs)

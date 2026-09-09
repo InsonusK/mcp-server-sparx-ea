@@ -17,6 +17,7 @@ Feature: The ArchiMate editing tools
     And the tool "ea_update_package" is available
     And the tool "ea_copy_package" is available
     And the tool "ea_delete_package" is available
+    And the tool "ea_create_diagram" is available
     And the tool "ea_place_on_diagram" is available
     And the tool "ea_move_on_diagram" is available
     And the tool "ea_remove_from_diagram" is available
@@ -97,6 +98,29 @@ Feature: The ArchiMate editing tools
       | ref     | Model/Motivation |
       | cascade | true             |
     Then the model method "DeletePackage(Model/Motivation,true)" was called
+
+  Scenario: ea_create_diagram maps its arguments and saves the copy
+    When I call "ea_create_diagram" with:
+      | file   | model.xml        |
+      | output | edited.xml       |
+      | parent | Model/Motivation |
+      | name   | Capabilities     |
+      | layer  | Application      |
+    Then the tool call is not an error
+    And the model was opened with "model.xml"
+    And the model method "CreateDiagram(Model/Motivation,Capabilities,Application)" was called
+    And the model was saved to "edited.xml"
+    And the tool JSON contains "saved"
+
+  Scenario: ea_create_diagram works without a layer
+    When I call "ea_create_diagram" with:
+      | file   | model.xml        |
+      | output | edited.xml       |
+      | parent | Model/Motivation |
+      | name   | Notes            |
+    Then the tool call is not an error
+    And the model method "CreateDiagram(Model/Motivation,Notes,)" was called
+    And the model was saved to "edited.xml"
 
   Scenario: ea_place_on_diagram passes the rectangle
     When I call "ea_place_on_diagram" with:

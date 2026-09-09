@@ -335,6 +335,30 @@ model objects removed.
 
 ## Diagram tools
 
+### `ea_create_diagram`
+
+Add an empty diagram to a package, then fill it with `ea_place_on_diagram`.
+
+| Arg | Type | Required | Description |
+| --- | --- | --- | --- |
+| `file`, `output` | string | yes | `output` ≠ `file` |
+| `parent` | string | yes | the package to add the diagram to (`ref`) |
+| `name` | string | yes | diagram name (must be unique within the package) |
+| `layer` | string | no | an ArchiMate viewpoint that picks EA's toolbox: `Motivation`, `Strategy`, `Business`, `Application`, `Technology`, `Physical`, `Implementation_Migration`. Omit it for a plain diagram — ArchiMate elements still render with their stereotyped shapes. |
+
+**Returns** `{"result": <DiagramInfo>, "saved": …}` — the new, empty diagram.
+Its `diagramType` is `Logical` (EA's kind for every extended diagram); `layer`
+is recorded in the diagram style, not this field.
+
+**Errors** — `no package for` (bad `parent`), `diagram name is required`
+(blank `name`), `already has a diagram named` (name clash),
+`not a known ArchiMate diagram layer` (bad `layer`).
+
+```
+ea_create_diagram  file=model.xml  output=/tmp/edited.xml
+                   parent="Model/Motivation_Package"  name="Goals"  layer=Motivation
+```
+
 ### `ea_place_on_diagram` / `ea_move_on_diagram`
 
 Place an element on a diagram at a rectangle, or move one that is already there.

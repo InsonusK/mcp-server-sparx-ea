@@ -41,6 +41,21 @@ func registerWriteSteps(sc *godog.ScenarioContext, w *world) {
 			return err
 		})
 
+	sc.Step(`^I add a diagram "([^"]*)" of layer "([^"]*)" under "([^"]*)"$`,
+		func(ctx context.Context, name, mdg, parentRef string) error {
+			parent := w.doc.ResolvePackage(parentRef)
+			if parent == nil {
+				return fmt.Errorf("no package for %q", parentRef)
+			}
+			g, err := w.doc.AddDiagram(parent.XMIID, name, mdg)
+			w.err = err
+			if err == nil {
+				w.diag = g
+				logf(ctx, "added diagram %q under %q (mdg %q)", name, parentRef, mdg)
+			}
+			return nil
+		})
+
 	sc.Step(`^I set the name of the element "([^"]*)" to "([^"]*)"$`, func(ctx context.Context, ref, name string) error {
 		e := w.doc.ResolveElement(ref)
 		if e == nil {
@@ -124,6 +139,22 @@ func registerWriteSteps(sc *godog.ScenarioContext, w *world) {
 				return fmt.Errorf("element or diagram not found")
 			}
 			return w.doc.AddDiagramObject(g.XMIID, e.XMIID, l, t, r, b)
+		})
+
+	sc.Step(`^I show the connector from "([^"]*)" to "([^"]*)" on the diagram "([^"]*)"$`,
+		func(ctx context.Context, srcRef, tgtRef, diagRef string) error {
+			src := w.doc.ResolveElement(srcRef)
+			tgt := w.doc.ResolveElement(tgtRef)
+			g := w.doc.ResolveDiagram(diagRef)
+			if src == nil || tgt == nil || g == nil {
+				return fmt.Errorf("endpoint or diagram not found")
+			}
+			for _, c := range w.doc.Connectors() {
+				if c.SourceID == src.XMIID && c.TargetID == tgt.XMIID {
+					return w.doc.AddDiagramLink(g.XMIID, c.XMIID)
+				}
+			}
+			return fmt.Errorf("no connector from %s to %s", src.Name, tgt.Name)
 		})
 
 	sc.Step(`^I take the element "([^"]*)" off the diagram "([^"]*)"$`, func(ctx context.Context, elemRef, diagRef string) error {

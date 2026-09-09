@@ -2,282 +2,362 @@
 <xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ArchiMate3="http://www.sparxsystems.com/profiles/ArchiMate3/1.0">
   <xmi:Documentation exporter="Enterprise Architect" exporterVersion="6.5"/>
   <uml:Model xmi:type="uml:Model" name="EA_Model" visibility="public">
-    <packagedElement xmi:type="uml:Package" xmi:id="EAPK_173048C6_113D_45B5_B54B_D0F74526D875" name="Sparx EA MCP Server" visibility="public">
-      <packagedElement xmi:type="uml:Package" xmi:id="EAPK_FAA0AE92_F939_425B_BCDA_938EEA19A02D" name="Возможности сервиса" visibility="public">
-        <packagedElement xmi:type="uml:Package" xmi:id="EAPK_4C4920B9_FE30_4328_A17E_4E83E6371ADA" name="Приложение" visibility="public">
-          <packagedElement xmi:type="uml:Class" xmi:id="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6" name="mcp-server-sparx-ea" visibility="public"/>
-          <packagedElement xmi:type="uml:Association" xmi:id="EAID_3D5640B7_FDB5_4F3E_8297_349EAFC7156E" visibility="public">
-            <memberEnd xmi:idref="EAID_dst5640B7_FDB5_4F3E_8297_349EAFC7156E"/>
-            <memberEnd xmi:idref="EAID_src5640B7_FDB5_4F3E_8297_349EAFC7156E"/>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src5640B7_FDB5_4F3E_8297_349EAFC7156E" visibility="public" association="EAID_3D5640B7_FDB5_4F3E_8297_349EAFC7156E" aggregation="none">
-              <type xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="EAPK_ABC2D7E3_C736_4F97_B611_F39407396F40" name="Sparx EA MCP Server" visibility="public">
+      <packagedElement xmi:type="uml:Package" xmi:id="EAPK_989EB731_9B04_40F5_A3F3_4426B3D4D024" name="Возможности сервиса" visibility="public">
+        <packagedElement xmi:type="uml:Package" xmi:id="EAPK_BCE5181D_CEAD_429E_922B_32B750232CED" name="Приложение" visibility="public">
+          <packagedElement xmi:type="uml:Class" xmi:id="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" name="mcp-server-sparx-ea" visibility="public"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="EAID_357AB36D_8D16_4AAB_9C04_0978C2AE36A3" visibility="public">
+            <memberEnd xmi:idref="EAID_dst7AB36D_8D16_4AAB_9C04_0978C2AE36A3"/>
+            <memberEnd xmi:idref="EAID_src7AB36D_8D16_4AAB_9C04_0978C2AE36A3"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src7AB36D_8D16_4AAB_9C04_0978C2AE36A3" visibility="public" association="EAID_357AB36D_8D16_4AAB_9C04_0978C2AE36A3" aggregation="none">
+              <type xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54"/>
             </ownedEnd>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst5640B7_FDB5_4F3E_8297_349EAFC7156E" visibility="public" association="EAID_3D5640B7_FDB5_4F3E_8297_349EAFC7156E" aggregation="none">
-              <type xmi:idref="EAID_8E9198A4_56B5_4A0D_9ABB_8933F2F69559"/>
-            </ownedEnd>
-          </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="EAID_601E89E0_124E_4B9D_AAC6_78049580FEE8" visibility="public">
-            <memberEnd xmi:idref="EAID_dst1E89E0_124E_4B9D_AAC6_78049580FEE8"/>
-            <memberEnd xmi:idref="EAID_src1E89E0_124E_4B9D_AAC6_78049580FEE8"/>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src1E89E0_124E_4B9D_AAC6_78049580FEE8" visibility="public" association="EAID_601E89E0_124E_4B9D_AAC6_78049580FEE8" aggregation="none">
-              <type xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6"/>
-            </ownedEnd>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst1E89E0_124E_4B9D_AAC6_78049580FEE8" visibility="public" association="EAID_601E89E0_124E_4B9D_AAC6_78049580FEE8" aggregation="none">
-              <type xmi:idref="EAID_64C777FC_79AF_4B28_B8C2_4C0A5E72D109"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst7AB36D_8D16_4AAB_9C04_0978C2AE36A3" visibility="public" association="EAID_357AB36D_8D16_4AAB_9C04_0978C2AE36A3" aggregation="none">
+              <type xmi:idref="EAID_14D44CEC_00F4_4590_9D6F_EA63D97FCA91"/>
             </ownedEnd>
           </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="EAID_2959614A_B9A4_4D02_A14C_49DBF454B95E" visibility="public">
-            <memberEnd xmi:idref="EAID_dst59614A_B9A4_4D02_A14C_49DBF454B95E"/>
-            <memberEnd xmi:idref="EAID_src59614A_B9A4_4D02_A14C_49DBF454B95E"/>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src59614A_B9A4_4D02_A14C_49DBF454B95E" visibility="public" association="EAID_2959614A_B9A4_4D02_A14C_49DBF454B95E" aggregation="none">
-              <type xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="EAID_9CA64043_5BBD_4C24_BCFE_27E466CB2D62" visibility="public">
+            <memberEnd xmi:idref="EAID_dstA64043_5BBD_4C24_BCFE_27E466CB2D62"/>
+            <memberEnd xmi:idref="EAID_srcA64043_5BBD_4C24_BCFE_27E466CB2D62"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_srcA64043_5BBD_4C24_BCFE_27E466CB2D62" visibility="public" association="EAID_9CA64043_5BBD_4C24_BCFE_27E466CB2D62" aggregation="none">
+              <type xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54"/>
             </ownedEnd>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst59614A_B9A4_4D02_A14C_49DBF454B95E" visibility="public" association="EAID_2959614A_B9A4_4D02_A14C_49DBF454B95E" aggregation="none">
-              <type xmi:idref="EAID_9804205C_745C_400F_BACA_976C80CF8BCE"/>
-            </ownedEnd>
-          </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="EAID_6BD903FF_9A1C_4334_BAB7_0F6A7BAC6A1D" visibility="public">
-            <memberEnd xmi:idref="EAID_dstD903FF_9A1C_4334_BAB7_0F6A7BAC6A1D"/>
-            <memberEnd xmi:idref="EAID_srcD903FF_9A1C_4334_BAB7_0F6A7BAC6A1D"/>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_srcD903FF_9A1C_4334_BAB7_0F6A7BAC6A1D" visibility="public" association="EAID_6BD903FF_9A1C_4334_BAB7_0F6A7BAC6A1D" aggregation="none">
-              <type xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6"/>
-            </ownedEnd>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dstD903FF_9A1C_4334_BAB7_0F6A7BAC6A1D" visibility="public" association="EAID_6BD903FF_9A1C_4334_BAB7_0F6A7BAC6A1D" aggregation="none">
-              <type xmi:idref="EAID_FB3160D3_5980_49B5_A9E8_67377BB07EC6"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dstA64043_5BBD_4C24_BCFE_27E466CB2D62" visibility="public" association="EAID_9CA64043_5BBD_4C24_BCFE_27E466CB2D62" aggregation="none">
+              <type xmi:idref="EAID_52BBE7D8_EA4F_4FC9_AF2C_2F29B7E28B76"/>
             </ownedEnd>
           </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="EAID_DFA928F1_D4A0_4D78_81EF_6AF495441319" visibility="public">
-            <memberEnd xmi:idref="EAID_dstA928F1_D4A0_4D78_81EF_6AF495441319"/>
-            <memberEnd xmi:idref="EAID_srcA928F1_D4A0_4D78_81EF_6AF495441319"/>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_srcA928F1_D4A0_4D78_81EF_6AF495441319" visibility="public" association="EAID_DFA928F1_D4A0_4D78_81EF_6AF495441319" aggregation="none">
-              <type xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="EAID_0316205C_07C3_438A_8362_B64920511B88" visibility="public">
+            <memberEnd xmi:idref="EAID_dst16205C_07C3_438A_8362_B64920511B88"/>
+            <memberEnd xmi:idref="EAID_src16205C_07C3_438A_8362_B64920511B88"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src16205C_07C3_438A_8362_B64920511B88" visibility="public" association="EAID_0316205C_07C3_438A_8362_B64920511B88" aggregation="none">
+              <type xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54"/>
             </ownedEnd>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dstA928F1_D4A0_4D78_81EF_6AF495441319" visibility="public" association="EAID_DFA928F1_D4A0_4D78_81EF_6AF495441319" aggregation="none">
-              <type xmi:idref="EAID_52E7BD4D_F2C5_499A_A8FF_A66CAB138AFA"/>
-            </ownedEnd>
-          </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="EAID_64F1AD72_30E9_4EF6_9145_A85714EFD54A" visibility="public">
-            <memberEnd xmi:idref="EAID_dstF1AD72_30E9_4EF6_9145_A85714EFD54A"/>
-            <memberEnd xmi:idref="EAID_srcF1AD72_30E9_4EF6_9145_A85714EFD54A"/>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_srcF1AD72_30E9_4EF6_9145_A85714EFD54A" visibility="public" association="EAID_64F1AD72_30E9_4EF6_9145_A85714EFD54A" aggregation="none">
-              <type xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6"/>
-            </ownedEnd>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dstF1AD72_30E9_4EF6_9145_A85714EFD54A" visibility="public" association="EAID_64F1AD72_30E9_4EF6_9145_A85714EFD54A" aggregation="none">
-              <type xmi:idref="EAID_9458E7FD_0525_4AD9_A485_F378404AF491"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst16205C_07C3_438A_8362_B64920511B88" visibility="public" association="EAID_0316205C_07C3_438A_8362_B64920511B88" aggregation="none">
+              <type xmi:idref="EAID_2880D900_7E10_4922_9958_528CAF0DC84D"/>
             </ownedEnd>
           </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="EAID_36AD4D2F_97AE_4633_8386_8CDFFD046BA8" visibility="public">
-            <memberEnd xmi:idref="EAID_dstAD4D2F_97AE_4633_8386_8CDFFD046BA8"/>
-            <memberEnd xmi:idref="EAID_srcAD4D2F_97AE_4633_8386_8CDFFD046BA8"/>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_srcAD4D2F_97AE_4633_8386_8CDFFD046BA8" visibility="public" association="EAID_36AD4D2F_97AE_4633_8386_8CDFFD046BA8" aggregation="none">
-              <type xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="EAID_7D1950A9_2DE3_4720_BD76_4C2F673FB13F" visibility="public">
+            <memberEnd xmi:idref="EAID_dst1950A9_2DE3_4720_BD76_4C2F673FB13F"/>
+            <memberEnd xmi:idref="EAID_src1950A9_2DE3_4720_BD76_4C2F673FB13F"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src1950A9_2DE3_4720_BD76_4C2F673FB13F" visibility="public" association="EAID_7D1950A9_2DE3_4720_BD76_4C2F673FB13F" aggregation="none">
+              <type xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54"/>
             </ownedEnd>
-            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dstAD4D2F_97AE_4633_8386_8CDFFD046BA8" visibility="public" association="EAID_36AD4D2F_97AE_4633_8386_8CDFFD046BA8" aggregation="none">
-              <type xmi:idref="EAID_27FDF045_C8DF_4A4F_9A87_AC25031520BE"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst1950A9_2DE3_4720_BD76_4C2F673FB13F" visibility="public" association="EAID_7D1950A9_2DE3_4720_BD76_4C2F673FB13F" aggregation="none">
+              <type xmi:idref="EAID_2CF0B127_F63F_4A12_9400_66FD3B09F980"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="EAID_55A88F99_9257_4957_AC37_4439BA4AE14F" visibility="public">
+            <memberEnd xmi:idref="EAID_dstA88F99_9257_4957_AC37_4439BA4AE14F"/>
+            <memberEnd xmi:idref="EAID_srcA88F99_9257_4957_AC37_4439BA4AE14F"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_srcA88F99_9257_4957_AC37_4439BA4AE14F" visibility="public" association="EAID_55A88F99_9257_4957_AC37_4439BA4AE14F" aggregation="none">
+              <type xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54"/>
+            </ownedEnd>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dstA88F99_9257_4957_AC37_4439BA4AE14F" visibility="public" association="EAID_55A88F99_9257_4957_AC37_4439BA4AE14F" aggregation="none">
+              <type xmi:idref="EAID_1A92D741_6400_4073_90FC_1092D8CFA8F6"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="EAID_B7622764_6AF2_4D1B_ACEE_55AB9132C3D7" visibility="public">
+            <memberEnd xmi:idref="EAID_dst622764_6AF2_4D1B_ACEE_55AB9132C3D7"/>
+            <memberEnd xmi:idref="EAID_src622764_6AF2_4D1B_ACEE_55AB9132C3D7"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src622764_6AF2_4D1B_ACEE_55AB9132C3D7" visibility="public" association="EAID_B7622764_6AF2_4D1B_ACEE_55AB9132C3D7" aggregation="none">
+              <type xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54"/>
+            </ownedEnd>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst622764_6AF2_4D1B_ACEE_55AB9132C3D7" visibility="public" association="EAID_B7622764_6AF2_4D1B_ACEE_55AB9132C3D7" aggregation="none">
+              <type xmi:idref="EAID_D5DD900F_73A8_4754_AD29_3FDC66AE9B82"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="EAID_66C32B16_D554_4EFA_87DE_DF1D3F00233C" visibility="public">
+            <memberEnd xmi:idref="EAID_dstC32B16_D554_4EFA_87DE_DF1D3F00233C"/>
+            <memberEnd xmi:idref="EAID_srcC32B16_D554_4EFA_87DE_DF1D3F00233C"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_srcC32B16_D554_4EFA_87DE_DF1D3F00233C" visibility="public" association="EAID_66C32B16_D554_4EFA_87DE_DF1D3F00233C" aggregation="none">
+              <type xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54"/>
+            </ownedEnd>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dstC32B16_D554_4EFA_87DE_DF1D3F00233C" visibility="public" association="EAID_66C32B16_D554_4EFA_87DE_DF1D3F00233C" aggregation="none">
+              <type xmi:idref="EAID_C150976A_60B3_4B43_942C_9356A74D9251"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="EAID_754F9540_8F9B_4A79_B1F1_B44AD7E472AA" visibility="public">
+            <memberEnd xmi:idref="EAID_dst4F9540_8F9B_4A79_B1F1_B44AD7E472AA"/>
+            <memberEnd xmi:idref="EAID_src4F9540_8F9B_4A79_B1F1_B44AD7E472AA"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src4F9540_8F9B_4A79_B1F1_B44AD7E472AA" visibility="public" association="EAID_754F9540_8F9B_4A79_B1F1_B44AD7E472AA" aggregation="none">
+              <type xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54"/>
+            </ownedEnd>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst4F9540_8F9B_4A79_B1F1_B44AD7E472AA" visibility="public" association="EAID_754F9540_8F9B_4A79_B1F1_B44AD7E472AA" aggregation="none">
+              <type xmi:idref="EAID_50C65632_BE06_49E1_8F40_DCF38FBE8944"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="EAID_221646A8_50B5_4972_9117_80AE52D60BF2" visibility="public">
+            <memberEnd xmi:idref="EAID_dst1646A8_50B5_4972_9117_80AE52D60BF2"/>
+            <memberEnd xmi:idref="EAID_src1646A8_50B5_4972_9117_80AE52D60BF2"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src1646A8_50B5_4972_9117_80AE52D60BF2" visibility="public" association="EAID_221646A8_50B5_4972_9117_80AE52D60BF2" aggregation="none">
+              <type xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54"/>
+            </ownedEnd>
+            <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst1646A8_50B5_4972_9117_80AE52D60BF2" visibility="public" association="EAID_221646A8_50B5_4972_9117_80AE52D60BF2" aggregation="none">
+              <type xmi:idref="EAID_6251E93C_BC6E_48D9_AE89_7AB469420C55"/>
             </ownedEnd>
           </packagedElement>
         </packagedElement>
-        <packagedElement xmi:type="uml:Package" xmi:id="EAPK_4BE4B73B_1CA7_4E81_99F2_C9F8DF119880" name="Функции" visibility="public">
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_8E9198A4_56B5_4A0D_9ABB_8933F2F69559" name="Чтение модели" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_DFB3F21C_BB74_48DF_9B23_A82769475F0F" visibility="public" supplier="EAID_914EA98B_CB16_4ABD_AA9F_7E5885EC97EA" client="EAID_8E9198A4_56B5_4A0D_9ABB_8933F2F69559"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_64C777FC_79AF_4B28_B8C2_4C0A5E72D109" name="Словарь типов ArchiMate" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_519F6ED8_8312_45F4_A2D6_E83309F46DB3" visibility="public" supplier="EAID_4C2AA387_8491_4337_AEC7_E73894AF885B" client="EAID_64C777FC_79AF_4B28_B8C2_4C0A5E72D109"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_9804205C_745C_400F_BACA_976C80CF8BCE" name="Управление элементами" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_4D4B93F2_73AE_42A7_9709_AEE8F7F1DE79" visibility="public" supplier="EAID_5320FF98_847E_4F1E_82FE_AECE1475E83B" client="EAID_9804205C_745C_400F_BACA_976C80CF8BCE"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_FB3160D3_5980_49B5_A9E8_67377BB07EC6" name="Управление связями" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_1980C937_7759_47CC_9118_1DB54DBBC3DD" visibility="public" supplier="EAID_AB76B05A_040B_4C38_A7F8_841B464B8E24" client="EAID_FB3160D3_5980_49B5_A9E8_67377BB07EC6"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_52E7BD4D_F2C5_499A_A8FF_A66CAB138AFA" name="Управление пакетами" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_764412CA_232B_465F_BC53_02FA3AAB2CD1" visibility="public" supplier="EAID_D73D6DC8_935F_4068_B94A_05ADBAEF0363" client="EAID_52E7BD4D_F2C5_499A_A8FF_A66CAB138AFA"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_9458E7FD_0525_4AD9_A485_F378404AF491" name="Размещение на диаграммах" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_050C01D3_95F0_4288_B633_35F756E55D12" visibility="public" supplier="EAID_21E6C153_BE63_49DD_A109_9BDA286C370A" client="EAID_9458E7FD_0525_4AD9_A485_F378404AF491"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_27FDF045_C8DF_4A4F_9A87_AC25031520BE" name="Жизненный цикл модели" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_99C9D3A3_678C_488F_A3AD_AC3E94068226" visibility="public" supplier="EAID_B766B6CD_4602_4357_9AD3_F5EB33FBC758" client="EAID_27FDF045_C8DF_4A4F_9A87_AC25031520BE"/>
+        <packagedElement xmi:type="uml:Package" xmi:id="EAPK_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" name="Функции" visibility="public">
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_14D44CEC_00F4_4590_9D6F_EA63D97FCA91" name="Чтение модели" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_D6E538D8_BE33_4701_9288_4D324A3D00E4" visibility="public" supplier="EAID_3B995981_E852_44D9_8C5A_7AFC08A4088D" client="EAID_14D44CEC_00F4_4590_9D6F_EA63D97FCA91"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_52BBE7D8_EA4F_4FC9_AF2C_2F29B7E28B76" name="Словарь типов ArchiMate" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_E08CC532_0776_4BB8_A88C_D1414ABEC963" visibility="public" supplier="EAID_B9A281C7_DCFC_4848_9927_6C52A19F32BA" client="EAID_52BBE7D8_EA4F_4FC9_AF2C_2F29B7E28B76"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_2880D900_7E10_4922_9958_528CAF0DC84D" name="Управление элементами" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_4E96ACB6_686E_4BE7_A429_B2FD6CB228F8" visibility="public" supplier="EAID_1288A68C_037D_468A_A342_85A0A83FDD11" client="EAID_2880D900_7E10_4922_9958_528CAF0DC84D"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_2CF0B127_F63F_4A12_9400_66FD3B09F980" name="Управление связями" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_2BDDDF3B_C467_446B_8A7E_A44040D6CB61" visibility="public" supplier="EAID_C40BF638_51BC_4A0B_A1D7_AC7D9ADB182D" client="EAID_2CF0B127_F63F_4A12_9400_66FD3B09F980"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_1A92D741_6400_4073_90FC_1092D8CFA8F6" name="Управление пакетами" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_DCA4F9C3_5E0D_48EA_BD8F_5C044D241981" visibility="public" supplier="EAID_52FF190D_586F_4998_8C1B_51EE1101CA58" client="EAID_1A92D741_6400_4073_90FC_1092D8CFA8F6"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_D5DD900F_73A8_4754_AD29_3FDC66AE9B82" name="Диаграммы" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_A2220540_14AD_4CB3_A05F_19C59A2B1961" visibility="public" supplier="EAID_CABA6010_E905_4CBC_9492_1FFF5904F6C8" client="EAID_D5DD900F_73A8_4754_AD29_3FDC66AE9B82"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_C150976A_60B3_4B43_942C_9356A74D9251" name="Жизненный цикл модели" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_0D818CBD_8F7D_4794_BA83_5A63304EA3F1" visibility="public" supplier="EAID_6D9C2F42_FF1B_4F05_B8B5_D5B80A87CE58" client="EAID_C150976A_60B3_4B43_942C_9356A74D9251"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_50C65632_BE06_49E1_8F40_DCF38FBE8944" name="Отправка bug report" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_22EAF3D1_AC4E_4B4C_BE01_36616680F322" visibility="public" supplier="EAID_7F4188FE_2D0C_4EF0_9B36_C2C878CD52FF" client="EAID_50C65632_BE06_49E1_8F40_DCF38FBE8944"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_6251E93C_BC6E_48D9_AE89_7AB469420C55" name="Запрос новых типов ArchiMate" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_2B73D720_A2C1_4850_9E58_846A4C9CC789" visibility="public" supplier="EAID_0AA00D9C_0349_4E2F_968D_0D71138D0534" client="EAID_6251E93C_BC6E_48D9_AE89_7AB469420C55"/>
         </packagedElement>
-        <packagedElement xmi:type="uml:Package" xmi:id="EAPK_7B4774E8_D583_4CC7_B236_590F3C3A228D" name="Сервисы" visibility="public">
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_914EA98B_CB16_4ABD_AA9F_7E5885EC97EA" name="Чтение модели" visibility="public"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_4C2AA387_8491_4337_AEC7_E73894AF885B" name="Словарь типов ArchiMate" visibility="public"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_5320FF98_847E_4F1E_82FE_AECE1475E83B" name="Управление элементами" visibility="public"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_AB76B05A_040B_4C38_A7F8_841B464B8E24" name="Управление связями" visibility="public"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_D73D6DC8_935F_4068_B94A_05ADBAEF0363" name="Управление пакетами" visibility="public"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_21E6C153_BE63_49DD_A109_9BDA286C370A" name="Размещение на диаграммах" visibility="public"/>
-          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_B766B6CD_4602_4357_9AD3_F5EB33FBC758" name="Жизненный цикл модели" visibility="public"/>
+        <packagedElement xmi:type="uml:Package" xmi:id="EAPK_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" name="Сервисы" visibility="public">
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_3B995981_E852_44D9_8C5A_7AFC08A4088D" name="Чтение модели" visibility="public"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_B9A281C7_DCFC_4848_9927_6C52A19F32BA" name="Словарь типов ArchiMate" visibility="public"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_1288A68C_037D_468A_A342_85A0A83FDD11" name="Управление элементами" visibility="public"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_C40BF638_51BC_4A0B_A1D7_AC7D9ADB182D" name="Управление связями" visibility="public"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_52FF190D_586F_4998_8C1B_51EE1101CA58" name="Управление пакетами" visibility="public"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_CABA6010_E905_4CBC_9492_1FFF5904F6C8" name="Диаграммы" visibility="public"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_6D9C2F42_FF1B_4F05_B8B5_D5B80A87CE58" name="Жизненный цикл модели" visibility="public"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_7F4188FE_2D0C_4EF0_9B36_C2C878CD52FF" name="Отправка bug report" visibility="public"/>
+          <packagedElement xmi:type="uml:Activity" xmi:id="EAID_0AA00D9C_0349_4E2F_968D_0D71138D0534" name="Запрос новых типов ArchiMate" visibility="public"/>
         </packagedElement>
       </packagedElement>
-      <packagedElement xmi:type="uml:Package" xmi:id="EAPK_CE5BB4BE_E27C_4770_B44D_D219D60A5CC2" name="План развития" visibility="public">
-        <packagedElement xmi:type="uml:Package" xmi:id="EAPK_3BC8CADA_181D_44D6_9D89_EB1CF4B70589" name="Работы" visibility="public">
-          <packagedElement xmi:type="uml:Class" xmi:id="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1" name="MVP" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_90A6C62C_6CDB_4A77_8097_5B00B9F33484" visibility="public" supplier="EAID_FB1973B7_CA47_4367_9972_3EBC3FCBF93D" client="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_6C3B35CF_09E4_4F50_A6FB_8943C0287D45" visibility="public" supplier="EAID_914EA98B_CB16_4ABD_AA9F_7E5885EC97EA" client="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_3A4B694B_8286_41DC_9283_431B20974C97" visibility="public" supplier="EAID_4C2AA387_8491_4337_AEC7_E73894AF885B" client="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_6F10EF7A_4357_4158_A420_A336A800B4C6" visibility="public" supplier="EAID_5320FF98_847E_4F1E_82FE_AECE1475E83B" client="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_61FCCCCE_211A_42BA_A50A_63DD7F964F38" visibility="public" supplier="EAID_AB76B05A_040B_4C38_A7F8_841B464B8E24" client="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_5F138240_BEFC_4902_A841_613047F3CD33" visibility="public" supplier="EAID_D73D6DC8_935F_4068_B94A_05ADBAEF0363" client="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_12CCBD42_B2FE_4BBA_ADCF_6F7BFE4625A6" visibility="public" supplier="EAID_21E6C153_BE63_49DD_A109_9BDA286C370A" client="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1"/>
-          <packagedElement xmi:type="uml:Class" xmi:id="EAID_DF1C337F_B0FE_496A_A061_F273C7865456" name="Публикация в GitHub workflow" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_C7F4DE85_B039_4619_A16F_BD235F3D194E" visibility="public" supplier="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4" client="EAID_DF1C337F_B0FE_496A_A061_F273C7865456"/>
-          <packagedElement xmi:type="uml:Class" xmi:id="EAID_041FBA98_10FD_41DF_87C6_A604416B1F9E" name="Создание Sparx XML" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_2E454C19_8DBD_48EB_B40A_4EFF2CA57847" visibility="public" supplier="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD" client="EAID_041FBA98_10FD_41DF_87C6_A604416B1F9E"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_D2E81010_9540_4DBF_B1E7_24DD19A15FCA" visibility="public" supplier="EAID_B766B6CD_4602_4357_9AD3_F5EB33FBC758" client="EAID_041FBA98_10FD_41DF_87C6_A604416B1F9E"/>
-          <packagedElement xmi:type="uml:Class" xmi:id="EAID_3C4F96F0_D23E_43F4_A363_99DA62AFFBD7" name="Отладка отчёта" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_874BDC7F_A2D8_4A8E_ADD4_DA77C5913DB9" visibility="public" supplier="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E" client="EAID_3C4F96F0_D23E_43F4_A363_99DA62AFFBD7"/>
-          <packagedElement xmi:type="uml:Class" xmi:id="EAID_B6861A72_FAFF_4448_92A6_1B704054E8E9" name="Управление status" visibility="public"/>
-          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_FA67FBD6_AF37_4401_B57A_D7F63CEACBB3" visibility="public" supplier="EAID_E8FB8B00_6275_40EE_BB34_64507D53D1AE" client="EAID_B6861A72_FAFF_4448_92A6_1B704054E8E9"/>
+      <packagedElement xmi:type="uml:Package" xmi:id="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" name="План развития" visibility="public">
+        <packagedElement xmi:type="uml:Package" xmi:id="EAPK_67A4FA2D_6EE6_41A4_8503_215F15CD790A" name="Работы" visibility="public">
+          <packagedElement xmi:type="uml:Class" xmi:id="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7" name="Работа: MVP" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_E0271DC4_A99B_46A9_882B_D846D34EB899" visibility="public" supplier="EAID_D750AC80_5BF2_48A1_A6D3_6D74B692DA8A" client="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="EAID_2A062192_B86A_4E40_A09A_376B5F781501" name="Работа: Публикация в GitHub" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_86C8F26B_7E7E_4690_814C_E8EE8AFA291A" visibility="public" supplier="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745" client="EAID_2A062192_B86A_4E40_A09A_376B5F781501"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24" name="Работа: Доп функции" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_DDAACF14_429E_4EEE_BB0D_1060686A533D" visibility="public" supplier="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71" client="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="EAID_B50FAC91_C5F8_4A8E_A9CB_8648139B9A30" name="Работа: Улучшения отчётов о тестировании" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_90F96393_4D8E_4C0E_AAE7_B4FFFC240B12" visibility="public" supplier="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C" client="EAID_B50FAC91_C5F8_4A8E_A9CB_8648139B9A30"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="EAID_006DAA5D_33E9_4C28_954A_E52EAFB3B15F" name="Работа: Нумерация всех ошибок" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_F5E9D89E_0ED5_4BEA_B484_ACF04391A7B9" visibility="public" supplier="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18" client="EAID_006DAA5D_33E9_4C28_954A_E52EAFB3B15F"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="EAID_87818999_AF12_4C03_8E65_5C9110C602B6" name="Работа: Отправка bug report" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_B60A745C_5A25_4079_ABF8_80ACA21B52F5" visibility="public" supplier="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626" client="EAID_87818999_AF12_4C03_8E65_5C9110C602B6"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="EAID_C4B948F4_8083_4339_8ABD_630904097020" name="Работа: Запрос добавления типов" visibility="public"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_561A4D33_7A50_4AF8_A2CD_5E565D16E9C4" visibility="public" supplier="EAID_33C890EE_0143_4F5B_8AC6_8CCAA7A20A3F" client="EAID_C4B948F4_8083_4339_8ABD_630904097020"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_054BF4F0_5CB3_413E_AB10_0306BA9EB7D4" visibility="public" supplier="EAID_3B995981_E852_44D9_8C5A_7AFC08A4088D" client="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_0CE71B52_5735_4476_9B71_DB0364C8538F" visibility="public" supplier="EAID_B9A281C7_DCFC_4848_9927_6C52A19F32BA" client="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_85A0A6F1_1B45_42D0_8F53_3DE7C4D7AA99" visibility="public" supplier="EAID_1288A68C_037D_468A_A342_85A0A83FDD11" client="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_3C0EED60_629B_49F8_96CA_FF95C2AD527E" visibility="public" supplier="EAID_C40BF638_51BC_4A0B_A1D7_AC7D9ADB182D" client="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_CE44A984_3DC5_4FE1_AA12_32199E85660B" visibility="public" supplier="EAID_52FF190D_586F_4998_8C1B_51EE1101CA58" client="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_53A432D4_4C3C_4E89_A29F_F95AB14C65B3" visibility="public" supplier="EAID_CABA6010_E905_4CBC_9492_1FFF5904F6C8" client="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_6C5BF0D7_C106_43AC_B19E_755801295A14" visibility="public" supplier="EAID_6D9C2F42_FF1B_4F05_B8B5_D5B80A87CE58" client="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_44D61F91_2749_4E00_BB48_18F233AB0A30" visibility="public" supplier="EAID_7F4188FE_2D0C_4EF0_9B36_C2C878CD52FF" client="EAID_87818999_AF12_4C03_8E65_5C9110C602B6"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_F0B16DAC_3E63_4BD8_A1BF_CCA11711BBDA" visibility="public" supplier="EAID_0AA00D9C_0349_4E2F_968D_0D71138D0534" client="EAID_C4B948F4_8083_4339_8ABD_630904097020"/>
+          <packagedElement xmi:type="uml:Dependency" xmi:id="EAID_1491B66A_8210_4271_81BB_96129D027E30" visibility="public" supplier="EAID_81AC9B88_3E37_4D80_BCB4_201A2A8AAE6E" client="EAID_006DAA5D_33E9_4C28_954A_E52EAFB3B15F"/>
         </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="EAID_FB1973B7_CA47_4367_9972_3EBC3FCBF93D" name="MVP" visibility="public"/>
-        <packagedElement xmi:type="uml:Class" xmi:id="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4" name="Публикация в GitHub workflow" visibility="public"/>
-        <packagedElement xmi:type="uml:Association" xmi:id="EAID_6314C917_357D_44F6_8188_36FBFEF847B0" name="затем" visibility="public">
-          <memberEnd xmi:idref="EAID_dst14C917_357D_44F6_8188_36FBFEF847B0"/>
-          <memberEnd xmi:idref="EAID_src14C917_357D_44F6_8188_36FBFEF847B0"/>
-          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src14C917_357D_44F6_8188_36FBFEF847B0" visibility="public" association="EAID_6314C917_357D_44F6_8188_36FBFEF847B0" aggregation="none">
-            <type xmi:idref="EAID_FB1973B7_CA47_4367_9972_3EBC3FCBF93D"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="EAID_D750AC80_5BF2_48A1_A6D3_6D74B692DA8A" name="1. MVP" visibility="public"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745" name="2. Публикация в GitHub" visibility="public"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="EAID_5AC14804_D0CE_47E9_B237_68A17C3EB1E3" name="затем" visibility="public">
+          <memberEnd xmi:idref="EAID_dstC14804_D0CE_47E9_B237_68A17C3EB1E3"/>
+          <memberEnd xmi:idref="EAID_srcC14804_D0CE_47E9_B237_68A17C3EB1E3"/>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_srcC14804_D0CE_47E9_B237_68A17C3EB1E3" visibility="public" association="EAID_5AC14804_D0CE_47E9_B237_68A17C3EB1E3" aggregation="none">
+            <type xmi:idref="EAID_D750AC80_5BF2_48A1_A6D3_6D74B692DA8A"/>
           </ownedEnd>
-          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst14C917_357D_44F6_8188_36FBFEF847B0" visibility="public" association="EAID_6314C917_357D_44F6_8188_36FBFEF847B0" aggregation="none">
-            <type xmi:idref="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4"/>
-          </ownedEnd>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD" name="Создание Sparx XML" visibility="public"/>
-        <packagedElement xmi:type="uml:Association" xmi:id="EAID_6C625DA4_EE27_43C4_B6D4_928B148CEBDF" name="затем" visibility="public">
-          <memberEnd xmi:idref="EAID_dst625DA4_EE27_43C4_B6D4_928B148CEBDF"/>
-          <memberEnd xmi:idref="EAID_src625DA4_EE27_43C4_B6D4_928B148CEBDF"/>
-          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src625DA4_EE27_43C4_B6D4_928B148CEBDF" visibility="public" association="EAID_6C625DA4_EE27_43C4_B6D4_928B148CEBDF" aggregation="none">
-            <type xmi:idref="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4"/>
-          </ownedEnd>
-          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst625DA4_EE27_43C4_B6D4_928B148CEBDF" visibility="public" association="EAID_6C625DA4_EE27_43C4_B6D4_928B148CEBDF" aggregation="none">
-            <type xmi:idref="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD"/>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dstC14804_D0CE_47E9_B237_68A17C3EB1E3" visibility="public" association="EAID_5AC14804_D0CE_47E9_B237_68A17C3EB1E3" aggregation="none">
+            <type xmi:idref="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745"/>
           </ownedEnd>
         </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E" name="Отладка отчёта" visibility="public"/>
-        <packagedElement xmi:type="uml:Association" xmi:id="EAID_CED584BE_EF31_4310_ACBA_5CEB8D6C6816" name="затем" visibility="public">
-          <memberEnd xmi:idref="EAID_dstD584BE_EF31_4310_ACBA_5CEB8D6C6816"/>
-          <memberEnd xmi:idref="EAID_srcD584BE_EF31_4310_ACBA_5CEB8D6C6816"/>
-          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_srcD584BE_EF31_4310_ACBA_5CEB8D6C6816" visibility="public" association="EAID_CED584BE_EF31_4310_ACBA_5CEB8D6C6816" aggregation="none">
-            <type xmi:idref="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71" name="3. Доп функции" visibility="public"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="EAID_6D791407_D134_4F42_87C7_38F4925BCD6D" name="затем" visibility="public">
+          <memberEnd xmi:idref="EAID_dst791407_D134_4F42_87C7_38F4925BCD6D"/>
+          <memberEnd xmi:idref="EAID_src791407_D134_4F42_87C7_38F4925BCD6D"/>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src791407_D134_4F42_87C7_38F4925BCD6D" visibility="public" association="EAID_6D791407_D134_4F42_87C7_38F4925BCD6D" aggregation="none">
+            <type xmi:idref="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745"/>
           </ownedEnd>
-          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dstD584BE_EF31_4310_ACBA_5CEB8D6C6816" visibility="public" association="EAID_CED584BE_EF31_4310_ACBA_5CEB8D6C6816" aggregation="none">
-            <type xmi:idref="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E"/>
-          </ownedEnd>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="EAID_E8FB8B00_6275_40EE_BB34_64507D53D1AE" name="Управление status" visibility="public"/>
-        <packagedElement xmi:type="uml:Association" xmi:id="EAID_9F46733C_4E17_42BA_A503_AEF50C8FF04B" name="затем" visibility="public">
-          <memberEnd xmi:idref="EAID_dst46733C_4E17_42BA_A503_AEF50C8FF04B"/>
-          <memberEnd xmi:idref="EAID_src46733C_4E17_42BA_A503_AEF50C8FF04B"/>
-          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src46733C_4E17_42BA_A503_AEF50C8FF04B" visibility="public" association="EAID_9F46733C_4E17_42BA_A503_AEF50C8FF04B" aggregation="none">
-            <type xmi:idref="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E"/>
-          </ownedEnd>
-          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst46733C_4E17_42BA_A503_AEF50C8FF04B" visibility="public" association="EAID_9F46733C_4E17_42BA_A503_AEF50C8FF04B" aggregation="none">
-            <type xmi:idref="EAID_E8FB8B00_6275_40EE_BB34_64507D53D1AE"/>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst791407_D134_4F42_87C7_38F4925BCD6D" visibility="public" association="EAID_6D791407_D134_4F42_87C7_38F4925BCD6D" aggregation="none">
+            <type xmi:idref="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71"/>
           </ownedEnd>
         </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C" name="4. Улучшения отчётов о тестировании" visibility="public"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="EAID_4783A074_00F4_4A13_8BC4_36E71FDBCF9A" name="затем" visibility="public">
+          <memberEnd xmi:idref="EAID_dst83A074_00F4_4A13_8BC4_36E71FDBCF9A"/>
+          <memberEnd xmi:idref="EAID_src83A074_00F4_4A13_8BC4_36E71FDBCF9A"/>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src83A074_00F4_4A13_8BC4_36E71FDBCF9A" visibility="public" association="EAID_4783A074_00F4_4A13_8BC4_36E71FDBCF9A" aggregation="none">
+            <type xmi:idref="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71"/>
+          </ownedEnd>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst83A074_00F4_4A13_8BC4_36E71FDBCF9A" visibility="public" association="EAID_4783A074_00F4_4A13_8BC4_36E71FDBCF9A" aggregation="none">
+            <type xmi:idref="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18" name="5. Нумерация всех ошибок" visibility="public"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="EAID_E51533CC_A890_4A11_AD85_64DF6DFCDB1E" name="затем" visibility="public">
+          <memberEnd xmi:idref="EAID_dst1533CC_A890_4A11_AD85_64DF6DFCDB1E"/>
+          <memberEnd xmi:idref="EAID_src1533CC_A890_4A11_AD85_64DF6DFCDB1E"/>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src1533CC_A890_4A11_AD85_64DF6DFCDB1E" visibility="public" association="EAID_E51533CC_A890_4A11_AD85_64DF6DFCDB1E" aggregation="none">
+            <type xmi:idref="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C"/>
+          </ownedEnd>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst1533CC_A890_4A11_AD85_64DF6DFCDB1E" visibility="public" association="EAID_E51533CC_A890_4A11_AD85_64DF6DFCDB1E" aggregation="none">
+            <type xmi:idref="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626" name="6. Отправка bug report" visibility="public"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="EAID_E16C8662_B517_47F0_B737_13AB7B13B26A" name="затем" visibility="public">
+          <memberEnd xmi:idref="EAID_dst6C8662_B517_47F0_B737_13AB7B13B26A"/>
+          <memberEnd xmi:idref="EAID_src6C8662_B517_47F0_B737_13AB7B13B26A"/>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src6C8662_B517_47F0_B737_13AB7B13B26A" visibility="public" association="EAID_E16C8662_B517_47F0_B737_13AB7B13B26A" aggregation="none">
+            <type xmi:idref="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18"/>
+          </ownedEnd>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst6C8662_B517_47F0_B737_13AB7B13B26A" visibility="public" association="EAID_E16C8662_B517_47F0_B737_13AB7B13B26A" aggregation="none">
+            <type xmi:idref="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="EAID_33C890EE_0143_4F5B_8AC6_8CCAA7A20A3F" name="7. Запрос добавления типов" visibility="public"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="EAID_8473D10F_1812_4DE6_B837_BA471692BE61" name="затем" visibility="public">
+          <memberEnd xmi:idref="EAID_dst73D10F_1812_4DE6_B837_BA471692BE61"/>
+          <memberEnd xmi:idref="EAID_src73D10F_1812_4DE6_B837_BA471692BE61"/>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_src73D10F_1812_4DE6_B837_BA471692BE61" visibility="public" association="EAID_8473D10F_1812_4DE6_B837_BA471692BE61" aggregation="none">
+            <type xmi:idref="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626"/>
+          </ownedEnd>
+          <ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst73D10F_1812_4DE6_B837_BA471692BE61" visibility="public" association="EAID_8473D10F_1812_4DE6_B837_BA471692BE61" aggregation="none">
+            <type xmi:idref="EAID_33C890EE_0143_4F5B_8AC6_8CCAA7A20A3F"/>
+          </ownedEnd>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="EAPK_05F190E7_53E9_45A3_B3F8_F55255C3A3AF" name="Требования" visibility="public">
+        <packagedElement xmi:type="uml:Class" xmi:id="EAID_81AC9B88_3E37_4D80_BCB4_201A2A8AAE6E" name="Сквозная нумерация ошибок" visibility="public"/>
       </packagedElement>
     </packagedElement>
-    <ArchiMate3:ArchiMate_ApplicationComponent base_Class="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6"/>
-    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_8E9198A4_56B5_4A0D_9ABB_8933F2F69559"/>
-    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_914EA98B_CB16_4ABD_AA9F_7E5885EC97EA"/>
-    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_3D5640B7_FDB5_4F3E_8297_349EAFC7156E"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_DFB3F21C_BB74_48DF_9B23_A82769475F0F"/>
-    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_64C777FC_79AF_4B28_B8C2_4C0A5E72D109"/>
-    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_4C2AA387_8491_4337_AEC7_E73894AF885B"/>
-    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_601E89E0_124E_4B9D_AAC6_78049580FEE8"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_519F6ED8_8312_45F4_A2D6_E83309F46DB3"/>
-    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_9804205C_745C_400F_BACA_976C80CF8BCE"/>
-    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_5320FF98_847E_4F1E_82FE_AECE1475E83B"/>
-    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_2959614A_B9A4_4D02_A14C_49DBF454B95E"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_4D4B93F2_73AE_42A7_9709_AEE8F7F1DE79"/>
-    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_FB3160D3_5980_49B5_A9E8_67377BB07EC6"/>
-    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_AB76B05A_040B_4C38_A7F8_841B464B8E24"/>
-    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_6BD903FF_9A1C_4334_BAB7_0F6A7BAC6A1D"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_1980C937_7759_47CC_9118_1DB54DBBC3DD"/>
-    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_52E7BD4D_F2C5_499A_A8FF_A66CAB138AFA"/>
-    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_D73D6DC8_935F_4068_B94A_05ADBAEF0363"/>
-    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_DFA928F1_D4A0_4D78_81EF_6AF495441319"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_764412CA_232B_465F_BC53_02FA3AAB2CD1"/>
-    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_9458E7FD_0525_4AD9_A485_F378404AF491"/>
-    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_21E6C153_BE63_49DD_A109_9BDA286C370A"/>
-    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_64F1AD72_30E9_4EF6_9145_A85714EFD54A"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_050C01D3_95F0_4288_B633_35F756E55D12"/>
-    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_27FDF045_C8DF_4A4F_9A87_AC25031520BE"/>
-    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_B766B6CD_4602_4357_9AD3_F5EB33FBC758"/>
-    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_36AD4D2F_97AE_4633_8386_8CDFFD046BA8"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_99C9D3A3_678C_488F_A3AD_AC3E94068226"/>
-    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_FB1973B7_CA47_4367_9972_3EBC3FCBF93D"/>
-    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_90A6C62C_6CDB_4A77_8097_5B00B9F33484"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_6C3B35CF_09E4_4F50_A6FB_8943C0287D45"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_3A4B694B_8286_41DC_9283_431B20974C97"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_6F10EF7A_4357_4158_A420_A336A800B4C6"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_61FCCCCE_211A_42BA_A50A_63DD7F964F38"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_5F138240_BEFC_4902_A841_613047F3CD33"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_12CCBD42_B2FE_4BBA_ADCF_6F7BFE4625A6"/>
-    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4"/>
-    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_DF1C337F_B0FE_496A_A061_F273C7865456"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_C7F4DE85_B039_4619_A16F_BD235F3D194E"/>
-    <ArchiMate3:ArchiMate_Association base_Association="EAID_6314C917_357D_44F6_8188_36FBFEF847B0"/>
-    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD"/>
-    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_041FBA98_10FD_41DF_87C6_A604416B1F9E"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_2E454C19_8DBD_48EB_B40A_4EFF2CA57847"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_D2E81010_9540_4DBF_B1E7_24DD19A15FCA"/>
-    <ArchiMate3:ArchiMate_Association base_Association="EAID_6C625DA4_EE27_43C4_B6D4_928B148CEBDF"/>
-    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E"/>
-    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_3C4F96F0_D23E_43F4_A363_99DA62AFFBD7"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_874BDC7F_A2D8_4A8E_ADD4_DA77C5913DB9"/>
-    <ArchiMate3:ArchiMate_Association base_Association="EAID_CED584BE_EF31_4310_ACBA_5CEB8D6C6816"/>
-    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_E8FB8B00_6275_40EE_BB34_64507D53D1AE"/>
-    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_B6861A72_FAFF_4448_92A6_1B704054E8E9"/>
-    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_FA67FBD6_AF37_4401_B57A_D7F63CEACBB3"/>
-    <ArchiMate3:ArchiMate_Association base_Association="EAID_9F46733C_4E17_42BA_A503_AEF50C8FF04B"/>
+    <ArchiMate3:ArchiMate_ApplicationComponent base_Class="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54"/>
+    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_14D44CEC_00F4_4590_9D6F_EA63D97FCA91"/>
+    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_3B995981_E852_44D9_8C5A_7AFC08A4088D"/>
+    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_357AB36D_8D16_4AAB_9C04_0978C2AE36A3"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_D6E538D8_BE33_4701_9288_4D324A3D00E4"/>
+    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_52BBE7D8_EA4F_4FC9_AF2C_2F29B7E28B76"/>
+    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_B9A281C7_DCFC_4848_9927_6C52A19F32BA"/>
+    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_9CA64043_5BBD_4C24_BCFE_27E466CB2D62"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_E08CC532_0776_4BB8_A88C_D1414ABEC963"/>
+    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_2880D900_7E10_4922_9958_528CAF0DC84D"/>
+    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_1288A68C_037D_468A_A342_85A0A83FDD11"/>
+    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_0316205C_07C3_438A_8362_B64920511B88"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_4E96ACB6_686E_4BE7_A429_B2FD6CB228F8"/>
+    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_2CF0B127_F63F_4A12_9400_66FD3B09F980"/>
+    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_C40BF638_51BC_4A0B_A1D7_AC7D9ADB182D"/>
+    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_7D1950A9_2DE3_4720_BD76_4C2F673FB13F"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_2BDDDF3B_C467_446B_8A7E_A44040D6CB61"/>
+    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_1A92D741_6400_4073_90FC_1092D8CFA8F6"/>
+    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_52FF190D_586F_4998_8C1B_51EE1101CA58"/>
+    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_55A88F99_9257_4957_AC37_4439BA4AE14F"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_DCA4F9C3_5E0D_48EA_BD8F_5C044D241981"/>
+    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_D5DD900F_73A8_4754_AD29_3FDC66AE9B82"/>
+    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_CABA6010_E905_4CBC_9492_1FFF5904F6C8"/>
+    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_B7622764_6AF2_4D1B_ACEE_55AB9132C3D7"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_A2220540_14AD_4CB3_A05F_19C59A2B1961"/>
+    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_C150976A_60B3_4B43_942C_9356A74D9251"/>
+    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_6D9C2F42_FF1B_4F05_B8B5_D5B80A87CE58"/>
+    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_66C32B16_D554_4EFA_87DE_DF1D3F00233C"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_0D818CBD_8F7D_4794_BA83_5A63304EA3F1"/>
+    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_50C65632_BE06_49E1_8F40_DCF38FBE8944"/>
+    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_7F4188FE_2D0C_4EF0_9B36_C2C878CD52FF"/>
+    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_754F9540_8F9B_4A79_B1F1_B44AD7E472AA"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_22EAF3D1_AC4E_4B4C_BE01_36616680F322"/>
+    <ArchiMate3:ArchiMate_ApplicationFunction base_Activity="EAID_6251E93C_BC6E_48D9_AE89_7AB469420C55"/>
+    <ArchiMate3:ArchiMate_ApplicationService base_Activity="EAID_0AA00D9C_0349_4E2F_968D_0D71138D0534"/>
+    <ArchiMate3:ArchiMate_Assignment base_Association="EAID_221646A8_50B5_4972_9117_80AE52D60BF2"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_2B73D720_A2C1_4850_9E58_846A4C9CC789"/>
+    <ArchiMate3:ArchiMate_Requirement base_Class="EAID_81AC9B88_3E37_4D80_BCB4_201A2A8AAE6E"/>
+    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_D750AC80_5BF2_48A1_A6D3_6D74B692DA8A"/>
+    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_E0271DC4_A99B_46A9_882B_D846D34EB899"/>
+    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745"/>
+    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_2A062192_B86A_4E40_A09A_376B5F781501"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_86C8F26B_7E7E_4690_814C_E8EE8AFA291A"/>
+    <ArchiMate3:ArchiMate_Association base_Association="EAID_5AC14804_D0CE_47E9_B237_68A17C3EB1E3"/>
+    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71"/>
+    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_DDAACF14_429E_4EEE_BB0D_1060686A533D"/>
+    <ArchiMate3:ArchiMate_Association base_Association="EAID_6D791407_D134_4F42_87C7_38F4925BCD6D"/>
+    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C"/>
+    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_B50FAC91_C5F8_4A8E_A9CB_8648139B9A30"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_90F96393_4D8E_4C0E_AAE7_B4FFFC240B12"/>
+    <ArchiMate3:ArchiMate_Association base_Association="EAID_4783A074_00F4_4A13_8BC4_36E71FDBCF9A"/>
+    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18"/>
+    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_006DAA5D_33E9_4C28_954A_E52EAFB3B15F"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_F5E9D89E_0ED5_4BEA_B484_ACF04391A7B9"/>
+    <ArchiMate3:ArchiMate_Association base_Association="EAID_E51533CC_A890_4A11_AD85_64DF6DFCDB1E"/>
+    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626"/>
+    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_87818999_AF12_4C03_8E65_5C9110C602B6"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_B60A745C_5A25_4079_ABF8_80ACA21B52F5"/>
+    <ArchiMate3:ArchiMate_Association base_Association="EAID_E16C8662_B517_47F0_B737_13AB7B13B26A"/>
+    <ArchiMate3:ArchiMate_Plateau base_Class="EAID_33C890EE_0143_4F5B_8AC6_8CCAA7A20A3F"/>
+    <ArchiMate3:ArchiMate_WorkPackage base_Class="EAID_C4B948F4_8083_4339_8ABD_630904097020"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_561A4D33_7A50_4AF8_A2CD_5E565D16E9C4"/>
+    <ArchiMate3:ArchiMate_Association base_Association="EAID_8473D10F_1812_4DE6_B837_BA471692BE61"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_054BF4F0_5CB3_413E_AB10_0306BA9EB7D4"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_0CE71B52_5735_4476_9B71_DB0364C8538F"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_85A0A6F1_1B45_42D0_8F53_3DE7C4D7AA99"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_3C0EED60_629B_49F8_96CA_FF95C2AD527E"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_CE44A984_3DC5_4FE1_AA12_32199E85660B"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_53A432D4_4C3C_4E89_A29F_F95AB14C65B3"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_6C5BF0D7_C106_43AC_B19E_755801295A14"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_44D61F91_2749_4E00_BB48_18F233AB0A30"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_F0B16DAC_3E63_4BD8_A1BF_CCA11711BBDA"/>
+    <ArchiMate3:ArchiMate_Realization base_Dependency="EAID_1491B66A_8210_4271_81BB_96129D027E30"/>
   </uml:Model>
   <xmi:Extension extender="Enterprise Architect" extenderID="6.5">
     <elements>
-      <element xmi:idref="EAPK_173048C6_113D_45B5_B54B_D0F74526D875" xmi:type="uml:Package" name="Sparx EA MCP Server" scope="public">
-        <model package2="EAID_173048C6_113D_45B5_B54B_D0F74526D875" tpos="0" ea_localid="1" ea_eleType="package"/>
+      <element xmi:idref="EAPK_ABC2D7E3_C736_4F97_B611_F39407396F40" xmi:type="uml:Package" name="Sparx EA MCP Server" scope="public">
+        <model package2="EAID_ABC2D7E3_C736_4F97_B611_F39407396F40" tpos="0" ea_localid="1" ea_eleType="package"/>
         <properties isSpecification="false" sType="Package" nType="0" scope="public"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0"/>
         <flags iscontrolled="FALSE" isprotected="FALSE" batchsave="1" batchload="1" usedtd="FALSE" logxml="FALSE" packageFlags="Recurse=1;isModel=1;"/>
       </element>
-      <element xmi:idref="EAPK_FAA0AE92_F939_425B_BCDA_938EEA19A02D" xmi:type="uml:Package" name="Возможности сервиса" scope="public">
-        <model package2="EAID_FAA0AE92_F939_425B_BCDA_938EEA19A02D" package="EAPK_173048C6_113D_45B5_B54B_D0F74526D875" tpos="0" ea_localid="0" ea_eleType="package"/>
+      <element xmi:idref="EAPK_989EB731_9B04_40F5_A3F3_4426B3D4D024" xmi:type="uml:Package" name="Возможности сервиса" scope="public">
+        <model package2="EAID_989EB731_9B04_40F5_A3F3_4426B3D4D024" package="EAPK_ABC2D7E3_C736_4F97_B611_F39407396F40" tpos="0" ea_localid="0" ea_eleType="package"/>
         <properties isSpecification="false" sType="Package" nType="0" scope="public"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
       </element>
-      <element xmi:idref="EAPK_4C4920B9_FE30_4328_A17E_4E83E6371ADA" xmi:type="uml:Package" name="Приложение" scope="public">
-        <model package2="EAID_4C4920B9_FE30_4328_A17E_4E83E6371ADA" package="EAPK_FAA0AE92_F939_425B_BCDA_938EEA19A02D" tpos="0" ea_localid="0" ea_eleType="package"/>
+      <element xmi:idref="EAPK_BCE5181D_CEAD_429E_922B_32B750232CED" xmi:type="uml:Package" name="Приложение" scope="public">
+        <model package2="EAID_BCE5181D_CEAD_429E_922B_32B750232CED" package="EAPK_989EB731_9B04_40F5_A3F3_4426B3D4D024" tpos="0" ea_localid="0" ea_eleType="package"/>
         <properties isSpecification="false" sType="Package" nType="0" scope="public"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
       </element>
-      <element xmi:idref="EAPK_4BE4B73B_1CA7_4E81_99F2_C9F8DF119880" xmi:type="uml:Package" name="Функции" scope="public">
-        <model package2="EAID_4BE4B73B_1CA7_4E81_99F2_C9F8DF119880" package="EAPK_FAA0AE92_F939_425B_BCDA_938EEA19A02D" tpos="0" ea_localid="0" ea_eleType="package"/>
+      <element xmi:idref="EAPK_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" xmi:type="uml:Package" name="Функции" scope="public">
+        <model package2="EAID_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" package="EAPK_989EB731_9B04_40F5_A3F3_4426B3D4D024" tpos="0" ea_localid="0" ea_eleType="package"/>
         <properties isSpecification="false" sType="Package" nType="0" scope="public"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
       </element>
-      <element xmi:idref="EAPK_7B4774E8_D583_4CC7_B236_590F3C3A228D" xmi:type="uml:Package" name="Сервисы" scope="public">
-        <model package2="EAID_7B4774E8_D583_4CC7_B236_590F3C3A228D" package="EAPK_FAA0AE92_F939_425B_BCDA_938EEA19A02D" tpos="0" ea_localid="0" ea_eleType="package"/>
+      <element xmi:idref="EAPK_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" xmi:type="uml:Package" name="Сервисы" scope="public">
+        <model package2="EAID_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" package="EAPK_989EB731_9B04_40F5_A3F3_4426B3D4D024" tpos="0" ea_localid="0" ea_eleType="package"/>
         <properties isSpecification="false" sType="Package" nType="0" scope="public"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
       </element>
-      <element xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6" xmi:type="uml:Class" name="mcp-server-sparx-ea" scope="public">
-        <model package="EAPK_4C4920B9_FE30_4328_A17E_4E83E6371ADA" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="MCP-сервер (stdio) над экспортом Sparx EA в XMI 2.1. Читает и редактирует копию модели, отдавая файл для повторного импорта в EA. Чистый Go, без SQL." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_ApplicationComponent" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" xmi:type="uml:Class" name="mcp-server-sparx-ea" scope="public">
+        <model package="EAPK_BCE5181D_CEAD_429E_922B_32B750232CED" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="MCP-сервер (stdio) над экспортом Sparx EA в XMI 2.1. Читает и редактирует копию модели, отдавая новый файл для повторного импорта в EA. Чистый Go, один статический бинарник, без SQL. Слои: client/eaxmi (кодек XMI 2.1), internal/service/sparx (словарь и валидация ArchiMate 3.2), internal/mcpserver (инструменты)." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_ApplicationComponent" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Приложение"/>
         <links>
-          <Association xmi:id="EAID_3D5640B7_FDB5_4F3E_8297_349EAFC7156E" start="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6" end="EAID_8E9198A4_56B5_4A0D_9ABB_8933F2F69559"/>
-          <Association xmi:id="EAID_601E89E0_124E_4B9D_AAC6_78049580FEE8" start="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6" end="EAID_64C777FC_79AF_4B28_B8C2_4C0A5E72D109"/>
-          <Association xmi:id="EAID_2959614A_B9A4_4D02_A14C_49DBF454B95E" start="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6" end="EAID_9804205C_745C_400F_BACA_976C80CF8BCE"/>
-          <Association xmi:id="EAID_6BD903FF_9A1C_4334_BAB7_0F6A7BAC6A1D" start="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6" end="EAID_FB3160D3_5980_49B5_A9E8_67377BB07EC6"/>
-          <Association xmi:id="EAID_DFA928F1_D4A0_4D78_81EF_6AF495441319" start="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6" end="EAID_52E7BD4D_F2C5_499A_A8FF_A66CAB138AFA"/>
-          <Association xmi:id="EAID_64F1AD72_30E9_4EF6_9145_A85714EFD54A" start="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6" end="EAID_9458E7FD_0525_4AD9_A485_F378404AF491"/>
-          <Association xmi:id="EAID_36AD4D2F_97AE_4633_8386_8CDFFD046BA8" start="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6" end="EAID_27FDF045_C8DF_4A4F_9A87_AC25031520BE"/>
+          <Association xmi:id="EAID_357AB36D_8D16_4AAB_9C04_0978C2AE36A3" start="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" end="EAID_14D44CEC_00F4_4590_9D6F_EA63D97FCA91"/>
+          <Association xmi:id="EAID_9CA64043_5BBD_4C24_BCFE_27E466CB2D62" start="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" end="EAID_52BBE7D8_EA4F_4FC9_AF2C_2F29B7E28B76"/>
+          <Association xmi:id="EAID_0316205C_07C3_438A_8362_B64920511B88" start="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" end="EAID_2880D900_7E10_4922_9958_528CAF0DC84D"/>
+          <Association xmi:id="EAID_7D1950A9_2DE3_4720_BD76_4C2F673FB13F" start="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" end="EAID_2CF0B127_F63F_4A12_9400_66FD3B09F980"/>
+          <Association xmi:id="EAID_55A88F99_9257_4957_AC37_4439BA4AE14F" start="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" end="EAID_1A92D741_6400_4073_90FC_1092D8CFA8F6"/>
+          <Association xmi:id="EAID_B7622764_6AF2_4D1B_ACEE_55AB9132C3D7" start="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" end="EAID_D5DD900F_73A8_4754_AD29_3FDC66AE9B82"/>
+          <Association xmi:id="EAID_66C32B16_D554_4EFA_87DE_DF1D3F00233C" start="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" end="EAID_C150976A_60B3_4B43_942C_9356A74D9251"/>
+          <Association xmi:id="EAID_754F9540_8F9B_4A79_B1F1_B44AD7E472AA" start="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" end="EAID_50C65632_BE06_49E1_8F40_DCF38FBE8944"/>
+          <Association xmi:id="EAID_221646A8_50B5_4972_9117_80AE52D60BF2" start="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" end="EAID_6251E93C_BC6E_48D9_AE89_7AB469420C55"/>
         </links>
       </element>
-      <element xmi:idref="EAID_8E9198A4_56B5_4A0D_9ABB_8933F2F69559" xmi:type="uml:Activity" name="Чтение модели" scope="public">
-        <model package="EAPK_4BE4B73B_1CA7_4E81_99F2_C9F8DF119880" tpos="0" ea_localid="0" ea_eleType="element"/>
+      <element xmi:idref="EAID_14D44CEC_00F4_4590_9D6F_EA63D97FCA91" xmi:type="uml:Activity" name="Чтение модели" scope="public">
+        <model package="EAPK_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" tpos="0" ea_localid="0" ea_eleType="element"/>
         <properties documentation="Навигация по дереву и чтение одного элемента, пакета или диаграммы.
 
 Инструменты: ea_model_tree(file); ea_element(file, ref); ea_package(file, ref); ea_diagram(file, ref)" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
@@ -285,19 +365,19 @@
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Функции"/>
         <links>
-          <Dependency xmi:id="EAID_DFB3F21C_BB74_48DF_9B23_A82769475F0F" start="EAID_8E9198A4_56B5_4A0D_9ABB_8933F2F69559" end="EAID_914EA98B_CB16_4ABD_AA9F_7E5885EC97EA"/>
+          <Dependency xmi:id="EAID_D6E538D8_BE33_4701_9288_4D324A3D00E4" start="EAID_14D44CEC_00F4_4590_9D6F_EA63D97FCA91" end="EAID_3B995981_E852_44D9_8C5A_7AFC08A4088D"/>
         </links>
       </element>
-      <element xmi:idref="EAID_914EA98B_CB16_4ABD_AA9F_7E5885EC97EA" xmi:type="uml:Activity" name="Чтение модели" scope="public">
-        <model package="EAPK_7B4774E8_D583_4CC7_B236_590F3C3A228D" tpos="0" ea_localid="0" ea_eleType="element"/>
+      <element xmi:idref="EAID_3B995981_E852_44D9_8C5A_7AFC08A4088D" xmi:type="uml:Activity" name="Чтение модели" scope="public">
+        <model package="EAPK_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" tpos="0" ea_localid="0" ea_eleType="element"/>
         <properties documentation="Навигация по дереву и чтение одного элемента, пакета или диаграммы." isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationService" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Сервисы"/>
         <links/>
       </element>
-      <element xmi:idref="EAID_64C777FC_79AF_4B28_B8C2_4C0A5E72D109" xmi:type="uml:Activity" name="Словарь типов ArchiMate" scope="public">
-        <model package="EAPK_4BE4B73B_1CA7_4E81_99F2_C9F8DF119880" tpos="0" ea_localid="0" ea_eleType="element"/>
+      <element xmi:idref="EAID_52BBE7D8_EA4F_4FC9_AF2C_2F29B7E28B76" xmi:type="uml:Activity" name="Словарь типов ArchiMate" scope="public">
+        <model package="EAPK_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" tpos="0" ea_localid="0" ea_eleType="element"/>
         <properties documentation="Список принимаемых сервером типов элементов и связей ArchiMate 3.2.
 
 Инструменты: ea_archimate_types()" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
@@ -305,243 +385,340 @@
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Функции"/>
         <links>
-          <Dependency xmi:id="EAID_519F6ED8_8312_45F4_A2D6_E83309F46DB3" start="EAID_64C777FC_79AF_4B28_B8C2_4C0A5E72D109" end="EAID_4C2AA387_8491_4337_AEC7_E73894AF885B"/>
+          <Dependency xmi:id="EAID_E08CC532_0776_4BB8_A88C_D1414ABEC963" start="EAID_52BBE7D8_EA4F_4FC9_AF2C_2F29B7E28B76" end="EAID_B9A281C7_DCFC_4848_9927_6C52A19F32BA"/>
         </links>
       </element>
-      <element xmi:idref="EAID_4C2AA387_8491_4337_AEC7_E73894AF885B" xmi:type="uml:Activity" name="Словарь типов ArchiMate" scope="public">
-        <model package="EAPK_7B4774E8_D583_4CC7_B236_590F3C3A228D" tpos="0" ea_localid="0" ea_eleType="element"/>
+      <element xmi:idref="EAID_B9A281C7_DCFC_4848_9927_6C52A19F32BA" xmi:type="uml:Activity" name="Словарь типов ArchiMate" scope="public">
+        <model package="EAPK_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" tpos="0" ea_localid="0" ea_eleType="element"/>
         <properties documentation="Список принимаемых сервером типов элементов и связей ArchiMate 3.2." isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationService" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Сервисы"/>
         <links/>
       </element>
-      <element xmi:idref="EAID_9804205C_745C_400F_BACA_976C80CF8BCE" xmi:type="uml:Activity" name="Управление элементами" scope="public">
-        <model package="EAPK_4BE4B73B_1CA7_4E81_99F2_C9F8DF119880" tpos="0" ea_localid="0" ea_eleType="element"/>
+      <element xmi:idref="EAID_2880D900_7E10_4922_9958_528CAF0DC84D" xmi:type="uml:Activity" name="Управление элементами" scope="public">
+        <model package="EAPK_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" tpos="0" ea_localid="0" ea_eleType="element"/>
         <properties documentation="Создание, переименование, смена документации и перенос, удаление элементов ArchiMate.
 
-Инструменты: ea_create_element(file, output, parent, type, name, note); ea_update_element(file, output, ref, name?, note?, parent?); ea_delete_element(file, output, ref)" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+Инструменты: ea_create_element; ea_update_element; ea_delete_element" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Функции"/>
         <links>
-          <Dependency xmi:id="EAID_4D4B93F2_73AE_42A7_9709_AEE8F7F1DE79" start="EAID_9804205C_745C_400F_BACA_976C80CF8BCE" end="EAID_5320FF98_847E_4F1E_82FE_AECE1475E83B"/>
+          <Dependency xmi:id="EAID_4E96ACB6_686E_4BE7_A429_B2FD6CB228F8" start="EAID_2880D900_7E10_4922_9958_528CAF0DC84D" end="EAID_1288A68C_037D_468A_A342_85A0A83FDD11"/>
         </links>
       </element>
-      <element xmi:idref="EAID_5320FF98_847E_4F1E_82FE_AECE1475E83B" xmi:type="uml:Activity" name="Управление элементами" scope="public">
-        <model package="EAPK_7B4774E8_D583_4CC7_B236_590F3C3A228D" tpos="0" ea_localid="0" ea_eleType="element"/>
+      <element xmi:idref="EAID_1288A68C_037D_468A_A342_85A0A83FDD11" xmi:type="uml:Activity" name="Управление элементами" scope="public">
+        <model package="EAPK_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" tpos="0" ea_localid="0" ea_eleType="element"/>
         <properties documentation="Создание, переименование, смена документации и перенос, удаление элементов ArchiMate." isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationService" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Сервисы"/>
         <links/>
       </element>
-      <element xmi:idref="EAID_FB3160D3_5980_49B5_A9E8_67377BB07EC6" xmi:type="uml:Activity" name="Управление связями" scope="public">
-        <model package="EAPK_4BE4B73B_1CA7_4E81_99F2_C9F8DF119880" tpos="0" ea_localid="0" ea_eleType="element"/>
+      <element xmi:idref="EAID_2CF0B127_F63F_4A12_9400_66FD3B09F980" xmi:type="uml:Activity" name="Управление связями" scope="public">
+        <model package="EAPK_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" tpos="0" ea_localid="0" ea_eleType="element"/>
         <properties documentation="Создание связей ArchiMate с проверкой правил и удаление по id или паре концов.
 
-Инструменты: ea_create_relationship(file, output, source, target, type, name?, note?); ea_delete_relationship(file, output, id | source+target)" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+Инструменты: ea_create_relationship; ea_delete_relationship" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Функции"/>
         <links>
-          <Dependency xmi:id="EAID_1980C937_7759_47CC_9118_1DB54DBBC3DD" start="EAID_FB3160D3_5980_49B5_A9E8_67377BB07EC6" end="EAID_AB76B05A_040B_4C38_A7F8_841B464B8E24"/>
+          <Dependency xmi:id="EAID_2BDDDF3B_C467_446B_8A7E_A44040D6CB61" start="EAID_2CF0B127_F63F_4A12_9400_66FD3B09F980" end="EAID_C40BF638_51BC_4A0B_A1D7_AC7D9ADB182D"/>
         </links>
       </element>
-      <element xmi:idref="EAID_AB76B05A_040B_4C38_A7F8_841B464B8E24" xmi:type="uml:Activity" name="Управление связями" scope="public">
-        <model package="EAPK_7B4774E8_D583_4CC7_B236_590F3C3A228D" tpos="0" ea_localid="0" ea_eleType="element"/>
+      <element xmi:idref="EAID_C40BF638_51BC_4A0B_A1D7_AC7D9ADB182D" xmi:type="uml:Activity" name="Управление связями" scope="public">
+        <model package="EAPK_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" tpos="0" ea_localid="0" ea_eleType="element"/>
         <properties documentation="Создание связей ArchiMate с проверкой правил и удаление по id или паре концов." isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationService" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Сервисы"/>
         <links/>
       </element>
-      <element xmi:idref="EAID_52E7BD4D_F2C5_499A_A8FF_A66CAB138AFA" xmi:type="uml:Activity" name="Управление пакетами" scope="public">
-        <model package="EAPK_4BE4B73B_1CA7_4E81_99F2_C9F8DF119880" tpos="0" ea_localid="0" ea_eleType="element"/>
+      <element xmi:idref="EAID_1A92D741_6400_4073_90FC_1092D8CFA8F6" xmi:type="uml:Activity" name="Управление пакетами" scope="public">
+        <model package="EAPK_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" tpos="0" ea_localid="0" ea_eleType="element"/>
         <properties documentation="Создание, переименование и перенос, глубокое копирование, удаление пакетов.
 
-Инструменты: ea_create_package(file, output, parent, name); ea_update_package(file, output, ref, name?, parent?); ea_copy_package(file, output, ref, dest); ea_delete_package(file, output, ref, cascade?)" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+Инструменты: ea_create_package; ea_update_package; ea_copy_package; ea_delete_package" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Функции"/>
         <links>
-          <Dependency xmi:id="EAID_764412CA_232B_465F_BC53_02FA3AAB2CD1" start="EAID_52E7BD4D_F2C5_499A_A8FF_A66CAB138AFA" end="EAID_D73D6DC8_935F_4068_B94A_05ADBAEF0363"/>
+          <Dependency xmi:id="EAID_DCA4F9C3_5E0D_48EA_BD8F_5C044D241981" start="EAID_1A92D741_6400_4073_90FC_1092D8CFA8F6" end="EAID_52FF190D_586F_4998_8C1B_51EE1101CA58"/>
         </links>
       </element>
-      <element xmi:idref="EAID_D73D6DC8_935F_4068_B94A_05ADBAEF0363" xmi:type="uml:Activity" name="Управление пакетами" scope="public">
-        <model package="EAPK_7B4774E8_D583_4CC7_B236_590F3C3A228D" tpos="0" ea_localid="0" ea_eleType="element"/>
+      <element xmi:idref="EAID_52FF190D_586F_4998_8C1B_51EE1101CA58" xmi:type="uml:Activity" name="Управление пакетами" scope="public">
+        <model package="EAPK_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" tpos="0" ea_localid="0" ea_eleType="element"/>
         <properties documentation="Создание, переименование и перенос, глубокое копирование, удаление пакетов." isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationService" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Сервисы"/>
         <links/>
       </element>
-      <element xmi:idref="EAID_9458E7FD_0525_4AD9_A485_F378404AF491" xmi:type="uml:Activity" name="Размещение на диаграммах" scope="public">
-        <model package="EAPK_4BE4B73B_1CA7_4E81_99F2_C9F8DF119880" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Добавление, перемещение и снятие элемента на существующей диаграмме (координаты EA, origin — левый верх).
+      <element xmi:idref="EAID_D5DD900F_73A8_4754_AD29_3FDC66AE9B82" xmi:type="uml:Activity" name="Диаграммы" scope="public">
+        <model package="EAPK_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Создание диаграммы и размещение / перемещение / снятие элементов на ней (координаты EA).
 
-Инструменты: ea_place_on_diagram(file, output, diagram, element, left, top, right, bottom); ea_move_on_diagram(...); ea_remove_from_diagram(file, output, diagram, element)" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+Инструменты: ea_create_diagram(file, output, parent, name, layer?); ea_place_on_diagram; ea_move_on_diagram; ea_remove_from_diagram" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Функции"/>
         <links>
-          <Dependency xmi:id="EAID_050C01D3_95F0_4288_B633_35F756E55D12" start="EAID_9458E7FD_0525_4AD9_A485_F378404AF491" end="EAID_21E6C153_BE63_49DD_A109_9BDA286C370A"/>
+          <Dependency xmi:id="EAID_A2220540_14AD_4CB3_A05F_19C59A2B1961" start="EAID_D5DD900F_73A8_4754_AD29_3FDC66AE9B82" end="EAID_CABA6010_E905_4CBC_9492_1FFF5904F6C8"/>
         </links>
       </element>
-      <element xmi:idref="EAID_21E6C153_BE63_49DD_A109_9BDA286C370A" xmi:type="uml:Activity" name="Размещение на диаграммах" scope="public">
-        <model package="EAPK_7B4774E8_D583_4CC7_B236_590F3C3A228D" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Добавление, перемещение и снятие элемента на существующей диаграмме (координаты EA, origin — левый верх)." isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationService" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_CABA6010_E905_4CBC_9492_1FFF5904F6C8" xmi:type="uml:Activity" name="Диаграммы" scope="public">
+        <model package="EAPK_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Создание диаграммы и размещение / перемещение / снятие элементов на ней (координаты EA)." isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationService" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Сервисы"/>
         <links/>
       </element>
-      <element xmi:idref="EAID_27FDF045_C8DF_4A4F_9A87_AC25031520BE" xmi:type="uml:Activity" name="Жизненный цикл модели" scope="public">
-        <model package="EAPK_4BE4B73B_1CA7_4E81_99F2_C9F8DF119880" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Создание модели с нуля (ArchiMate-профиль встроен), добавление и переименование корневого пакета.
+      <element xmi:idref="EAID_C150976A_60B3_4B43_942C_9356A74D9251" xmi:type="uml:Activity" name="Жизненный цикл модели" scope="public">
+        <model package="EAPK_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Создание модели с нуля (ArchiMate3-профиль встроен), добавление и переименование корневого пакета.
 
-Инструменты: ea_new_model(root, output); ea_create_root_package(file, output, name); ea_set_root_name(file, output, name, fresh_identity?)" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+Инструменты: ea_new_model; ea_create_root_package; ea_set_root_name" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Функции"/>
         <links>
-          <Dependency xmi:id="EAID_99C9D3A3_678C_488F_A3AD_AC3E94068226" start="EAID_27FDF045_C8DF_4A4F_9A87_AC25031520BE" end="EAID_B766B6CD_4602_4357_9AD3_F5EB33FBC758"/>
+          <Dependency xmi:id="EAID_0D818CBD_8F7D_4794_BA83_5A63304EA3F1" start="EAID_C150976A_60B3_4B43_942C_9356A74D9251" end="EAID_6D9C2F42_FF1B_4F05_B8B5_D5B80A87CE58"/>
         </links>
       </element>
-      <element xmi:idref="EAID_B766B6CD_4602_4357_9AD3_F5EB33FBC758" xmi:type="uml:Activity" name="Жизненный цикл модели" scope="public">
-        <model package="EAPK_7B4774E8_D583_4CC7_B236_590F3C3A228D" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Создание модели с нуля (ArchiMate-профиль встроен), добавление и переименование корневого пакета." isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationService" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_6D9C2F42_FF1B_4F05_B8B5_D5B80A87CE58" xmi:type="uml:Activity" name="Жизненный цикл модели" scope="public">
+        <model package="EAPK_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Создание модели с нуля (ArchiMate3-профиль встроен), добавление и переименование корневого пакета." isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationService" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Сервисы"/>
         <links/>
       </element>
-      <element xmi:idref="EAPK_CE5BB4BE_E27C_4770_B44D_D219D60A5CC2" xmi:type="uml:Package" name="План развития" scope="public">
-        <model package2="EAID_CE5BB4BE_E27C_4770_B44D_D219D60A5CC2" package="EAPK_173048C6_113D_45B5_B54B_D0F74526D875" tpos="0" ea_localid="0" ea_eleType="package"/>
+      <element xmi:idref="EAID_50C65632_BE06_49E1_8F40_DCF38FBE8944" xmi:type="uml:Activity" name="Отправка bug report" scope="public">
+        <model package="EAPK_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Запланировано. Отправка структурированного отчёта об ошибке сопровождающему (номер ошибки, контекст, входной файл).
+
+Инструменты: ea_bug_report(code, summary, context?)" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+        <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
+        <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+        <extendedProperties tagged="0" package_name="Функции"/>
+        <links>
+          <Dependency xmi:id="EAID_22EAF3D1_AC4E_4B4C_BE01_36616680F322" start="EAID_50C65632_BE06_49E1_8F40_DCF38FBE8944" end="EAID_7F4188FE_2D0C_4EF0_9B36_C2C878CD52FF"/>
+        </links>
+      </element>
+      <element xmi:idref="EAID_7F4188FE_2D0C_4EF0_9B36_C2C878CD52FF" xmi:type="uml:Activity" name="Отправка bug report" scope="public">
+        <model package="EAPK_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Запланировано. Отправка структурированного отчёта об ошибке сопровождающему (номер ошибки, контекст, входной файл)." isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationService" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+        <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
+        <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+        <extendedProperties tagged="0" package_name="Сервисы"/>
+        <links/>
+      </element>
+      <element xmi:idref="EAID_6251E93C_BC6E_48D9_AE89_7AB469420C55" xmi:type="uml:Activity" name="Запрос новых типов ArchiMate" scope="public">
+        <model package="EAPK_C816ECD9_29CA_4C99_A1E7_E8C97C85F582" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Запланировано. Запрос на расширение словаря типов при неизвестном стереотипе или нехватке типов агенту.
+
+Инструменты: ea_request_type(name, kind, rationale)" isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationFunction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+        <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
+        <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+        <extendedProperties tagged="0" package_name="Функции"/>
+        <links>
+          <Dependency xmi:id="EAID_2B73D720_A2C1_4850_9E58_846A4C9CC789" start="EAID_6251E93C_BC6E_48D9_AE89_7AB469420C55" end="EAID_0AA00D9C_0349_4E2F_968D_0D71138D0534"/>
+        </links>
+      </element>
+      <element xmi:idref="EAID_0AA00D9C_0349_4E2F_968D_0D71138D0534" xmi:type="uml:Activity" name="Запрос новых типов ArchiMate" scope="public">
+        <model package="EAPK_215ED8D4_2258_47A8_ACB6_01F3AEFA0C28" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Запланировано. Запрос на расширение словаря типов при неизвестном стереотипе или нехватке типов агенту." isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ApplicationService" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+        <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
+        <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+        <extendedProperties tagged="0" package_name="Сервисы"/>
+        <links/>
+      </element>
+      <element xmi:idref="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" xmi:type="uml:Package" name="План развития" scope="public">
+        <model package2="EAID_0880083A_3F1F_4C3F_A033_FE833E26F12B" package="EAPK_ABC2D7E3_C736_4F97_B611_F39407396F40" tpos="0" ea_localid="0" ea_eleType="package"/>
         <properties isSpecification="false" sType="Package" nType="0" scope="public"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
       </element>
-      <element xmi:idref="EAPK_3BC8CADA_181D_44D6_9D89_EB1CF4B70589" xmi:type="uml:Package" name="Работы" scope="public">
-        <model package2="EAID_3BC8CADA_181D_44D6_9D89_EB1CF4B70589" package="EAPK_CE5BB4BE_E27C_4770_B44D_D219D60A5CC2" tpos="0" ea_localid="0" ea_eleType="package"/>
+      <element xmi:idref="EAPK_67A4FA2D_6EE6_41A4_8503_215F15CD790A" xmi:type="uml:Package" name="Работы" scope="public">
+        <model package2="EAID_67A4FA2D_6EE6_41A4_8503_215F15CD790A" package="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" tpos="0" ea_localid="0" ea_eleType="package"/>
         <properties isSpecification="false" sType="Package" nType="0" scope="public"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
       </element>
-      <element xmi:idref="EAID_FB1973B7_CA47_4367_9972_3EBC3FCBF93D" xmi:type="uml:Class" name="MVP" scope="public">
-        <model package="EAPK_CE5BB4BE_E27C_4770_B44D_D219D60A5CC2" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Готово. Базовые read/write инструменты над экспортом «Export Package to XMI»: дерево модели, элементы, связи, пакеты, размещение на диаграммах, словарь типов." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAPK_05F190E7_53E9_45A3_B3F8_F55255C3A3AF" xmi:type="uml:Package" name="Требования" scope="public">
+        <model package2="EAID_05F190E7_53E9_45A3_B3F8_F55255C3A3AF" package="EAPK_ABC2D7E3_C736_4F97_B611_F39407396F40" tpos="0" ea_localid="0" ea_eleType="package"/>
+        <properties isSpecification="false" sType="Package" nType="0" scope="public"/>
+        <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
+        <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+      </element>
+      <element xmi:idref="EAID_81AC9B88_3E37_4D80_BCB4_201A2A8AAE6E" xmi:type="uml:Class" name="Сквозная нумерация ошибок" scope="public">
+        <model package="EAPK_05F190E7_53E9_45A3_B3F8_F55255C3A3AF" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Каждая ошибка сервера имеет стабильный номер/код (напр. EA-1234), одинаковый в сообщении MCP, логах и документации. Код — ключ для поиска в базе известных проблем и для функции отправки bug report." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Requirement" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+        <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
+        <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+        <extendedProperties tagged="0" package_name="Требования"/>
+        <links/>
+      </element>
+      <element xmi:idref="EAID_D750AC80_5BF2_48A1_A6D3_6D74B692DA8A" xmi:type="uml:Class" name="1. MVP" scope="public">
+        <model package="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Готово. Базовые read/write инструменты над экспортом «Export Package to XMI»: дерево модели, чтение элемента/пакета/диаграммы, создание и правка элементов и связей, словарь типов ArchiMate 3.2. Каждая правка пишется в новый XMI-файл для повторного импорта в EA." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="План развития"/>
         <links>
-          <Association xmi:id="EAID_6314C917_357D_44F6_8188_36FBFEF847B0" start="EAID_FB1973B7_CA47_4367_9972_3EBC3FCBF93D" end="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4"/>
+          <Association xmi:id="EAID_5AC14804_D0CE_47E9_B237_68A17C3EB1E3" start="EAID_D750AC80_5BF2_48A1_A6D3_6D74B692DA8A" end="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745"/>
         </links>
       </element>
-      <element xmi:idref="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1" xmi:type="uml:Class" name="MVP" scope="public">
-        <model package="EAPK_3BC8CADA_181D_44D6_9D89_EB1CF4B70589" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Готово. Базовые read/write инструменты над экспортом «Export Package to XMI»: дерево модели, элементы, связи, пакеты, размещение на диаграммах, словарь типов." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7" xmi:type="uml:Class" name="Работа: MVP" scope="public">
+        <model package="EAPK_67A4FA2D_6EE6_41A4_8503_215F15CD790A" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="client/eaxmi (кодек XMI 2.1), internal/service/sparx (словарь и валидация ArchiMate 3.2), internal/mcpserver. Тесты — Cucumber-сценарии (godog)." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Работы"/>
         <links>
-          <Dependency xmi:id="EAID_90A6C62C_6CDB_4A77_8097_5B00B9F33484" start="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1" end="EAID_FB1973B7_CA47_4367_9972_3EBC3FCBF93D"/>
-          <Dependency xmi:id="EAID_6C3B35CF_09E4_4F50_A6FB_8943C0287D45" start="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1" end="EAID_914EA98B_CB16_4ABD_AA9F_7E5885EC97EA"/>
-          <Dependency xmi:id="EAID_3A4B694B_8286_41DC_9283_431B20974C97" start="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1" end="EAID_4C2AA387_8491_4337_AEC7_E73894AF885B"/>
-          <Dependency xmi:id="EAID_6F10EF7A_4357_4158_A420_A336A800B4C6" start="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1" end="EAID_5320FF98_847E_4F1E_82FE_AECE1475E83B"/>
-          <Dependency xmi:id="EAID_61FCCCCE_211A_42BA_A50A_63DD7F964F38" start="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1" end="EAID_AB76B05A_040B_4C38_A7F8_841B464B8E24"/>
-          <Dependency xmi:id="EAID_5F138240_BEFC_4902_A841_613047F3CD33" start="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1" end="EAID_D73D6DC8_935F_4068_B94A_05ADBAEF0363"/>
-          <Dependency xmi:id="EAID_12CCBD42_B2FE_4BBA_ADCF_6F7BFE4625A6" start="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1" end="EAID_21E6C153_BE63_49DD_A109_9BDA286C370A"/>
+          <Dependency xmi:id="EAID_E0271DC4_A99B_46A9_882B_D846D34EB899" start="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7" end="EAID_D750AC80_5BF2_48A1_A6D3_6D74B692DA8A"/>
+          <Dependency xmi:id="EAID_054BF4F0_5CB3_413E_AB10_0306BA9EB7D4" start="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7" end="EAID_3B995981_E852_44D9_8C5A_7AFC08A4088D"/>
+          <Dependency xmi:id="EAID_0CE71B52_5735_4476_9B71_DB0364C8538F" start="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7" end="EAID_B9A281C7_DCFC_4848_9927_6C52A19F32BA"/>
+          <Dependency xmi:id="EAID_85A0A6F1_1B45_42D0_8F53_3DE7C4D7AA99" start="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7" end="EAID_1288A68C_037D_468A_A342_85A0A83FDD11"/>
+          <Dependency xmi:id="EAID_3C0EED60_629B_49F8_96CA_FF95C2AD527E" start="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7" end="EAID_C40BF638_51BC_4A0B_A1D7_AC7D9ADB182D"/>
         </links>
       </element>
-      <element xmi:idref="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4" xmi:type="uml:Class" name="Публикация в GitHub workflow" scope="public">
-        <model package="EAPK_CE5BB4BE_E27C_4770_B44D_D219D60A5CC2" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Готово. Release-workflow: пер-ОС бинарники при бампе mcpserver.Version; PR-гейт — unit-test и проверка бампа версии." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745" xmi:type="uml:Class" name="2. Публикация в GitHub" scope="public">
+        <model package="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Готово. Release-workflow: пер-ОС бинарники (linux/darwin/windows × amd64/arm64) при бампе версии; one-line install.sh / install.ps1; PR-гейт — unit-test и проверка бампа версии." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="План развития"/>
         <links>
-          <Association xmi:id="EAID_6C625DA4_EE27_43C4_B6D4_928B148CEBDF" start="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4" end="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD"/>
+          <Association xmi:id="EAID_6D791407_D134_4F42_87C7_38F4925BCD6D" start="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745" end="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71"/>
         </links>
       </element>
-      <element xmi:idref="EAID_DF1C337F_B0FE_496A_A061_F273C7865456" xmi:type="uml:Class" name="Публикация в GitHub workflow" scope="public">
-        <model package="EAPK_3BC8CADA_181D_44D6_9D89_EB1CF4B70589" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Готово. Release-workflow: пер-ОС бинарники при бампе mcpserver.Version; PR-гейт — unit-test и проверка бампа версии." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_2A062192_B86A_4E40_A09A_376B5F781501" xmi:type="uml:Class" name="Работа: Публикация в GitHub" scope="public">
+        <model package="EAPK_67A4FA2D_6EE6_41A4_8503_215F15CD790A" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation=".github/workflows: release (пер-ОС бинарники при бампе mcpserver.Version), pr (unit-test + version-check). scripts/install.sh, scripts/install.ps1." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Работы"/>
         <links>
-          <Dependency xmi:id="EAID_C7F4DE85_B039_4619_A16F_BD235F3D194E" start="EAID_DF1C337F_B0FE_496A_A061_F273C7865456" end="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4"/>
+          <Dependency xmi:id="EAID_86C8F26B_7E7E_4690_814C_E8EE8AFA291A" start="EAID_2A062192_B86A_4E40_A09A_376B5F781501" end="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745"/>
         </links>
       </element>
-      <element xmi:idref="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD" xmi:type="uml:Class" name="Создание Sparx XML" scope="public">
-        <model package="EAPK_CE5BB4BE_E27C_4770_B44D_D219D60A5CC2" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="В работе. ea_new_model / ea_create_root_package / ea_set_root_name; ArchiMate3-профиль встроен в модель, созданную с нуля, чтобы EA распознавал стереотипы при импорте." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71" xmi:type="uml:Class" name="3. Доп функции" scope="public">
+        <model package="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="В работе. Создание Sparx XML с нуля (ea_new_model / ea_create_root_package / ea_set_root_name, ArchiMate3-профиль встроен); глубокое копирование пакетов; создание диаграмм (ea_create_diagram) и размещение элементов на них." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="План развития"/>
         <links>
-          <Association xmi:id="EAID_CED584BE_EF31_4310_ACBA_5CEB8D6C6816" start="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD" end="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E"/>
+          <Association xmi:id="EAID_4783A074_00F4_4A13_8BC4_36E71FDBCF9A" start="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71" end="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C"/>
         </links>
       </element>
-      <element xmi:idref="EAID_041FBA98_10FD_41DF_87C6_A604416B1F9E" xmi:type="uml:Class" name="Создание Sparx XML" scope="public">
-        <model package="EAPK_3BC8CADA_181D_44D6_9D89_EB1CF4B70589" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="В работе. ea_new_model / ea_create_root_package / ea_set_root_name; ArchiMate3-профиль встроен в модель, созданную с нуля, чтобы EA распознавал стереотипы при импорте." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24" xmi:type="uml:Class" name="Работа: Доп функции" scope="public">
+        <model package="EAPK_67A4FA2D_6EE6_41A4_8503_215F15CD790A" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="tools/modelgen; ea_new_model / ea_create_root_package / ea_set_root_name; встраивание ArchiMate3-профиля; ea_copy_package; ea_create_diagram; ea_place_on_diagram / ea_move_on_diagram / ea_remove_from_diagram." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Работы"/>
         <links>
-          <Dependency xmi:id="EAID_2E454C19_8DBD_48EB_B40A_4EFF2CA57847" start="EAID_041FBA98_10FD_41DF_87C6_A604416B1F9E" end="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD"/>
-          <Dependency xmi:id="EAID_D2E81010_9540_4DBF_B1E7_24DD19A15FCA" start="EAID_041FBA98_10FD_41DF_87C6_A604416B1F9E" end="EAID_B766B6CD_4602_4357_9AD3_F5EB33FBC758"/>
+          <Dependency xmi:id="EAID_DDAACF14_429E_4EEE_BB0D_1060686A533D" start="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24" end="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71"/>
+          <Dependency xmi:id="EAID_CE44A984_3DC5_4FE1_AA12_32199E85660B" start="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24" end="EAID_52FF190D_586F_4998_8C1B_51EE1101CA58"/>
+          <Dependency xmi:id="EAID_53A432D4_4C3C_4E89_A29F_F95AB14C65B3" start="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24" end="EAID_CABA6010_E905_4CBC_9492_1FFF5904F6C8"/>
+          <Dependency xmi:id="EAID_6C5BF0D7_C106_43AC_B19E_755801295A14" start="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24" end="EAID_6D9C2F42_FF1B_4F05_B8B5_D5B80A87CE58"/>
         </links>
       </element>
-      <element xmi:idref="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E" xmi:type="uml:Class" name="Отладка отчёта" scope="public">
-        <model package="EAPK_CE5BB4BE_E27C_4770_B44D_D219D60A5CC2" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Запланировано. AssembleReport — сборка нескольких XMI в один импортируемый файл; junit / coverage / mutation отчёты и бейджи README на GitHub Pages." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C" xmi:type="uml:Class" name="4. Улучшения отчётов о тестировании" scope="public">
+        <model package="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Запланировано. junit / coverage / mutation отчёты и бейджи README на GitHub Pages; сборка нескольких XMI в один импортируемый файл (AssembleReport); человекочитаемый отчёт о правках модели." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="План развития"/>
         <links>
-          <Association xmi:id="EAID_9F46733C_4E17_42BA_A503_AEF50C8FF04B" start="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E" end="EAID_E8FB8B00_6275_40EE_BB34_64507D53D1AE"/>
+          <Association xmi:id="EAID_E51533CC_A890_4A11_AD85_64DF6DFCDB1E" start="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C" end="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18"/>
         </links>
       </element>
-      <element xmi:idref="EAID_3C4F96F0_D23E_43F4_A363_99DA62AFFBD7" xmi:type="uml:Class" name="Отладка отчёта" scope="public">
-        <model package="EAPK_3BC8CADA_181D_44D6_9D89_EB1CF4B70589" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Запланировано. AssembleReport — сборка нескольких XMI в один импортируемый файл; junit / coverage / mutation отчёты и бейджи README на GitHub Pages." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_B50FAC91_C5F8_4A8E_A9CB_8648139B9A30" xmi:type="uml:Class" name="Работа: Улучшения отчётов о тестировании" scope="public">
+        <model package="EAPK_67A4FA2D_6EE6_41A4_8503_215F15CD790A" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="make test-report / test-and-report; report-template/; публикация coverage / mutation / junit и бейджей на GitHub Pages; AssembleReport — склейка XMI." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Работы"/>
         <links>
-          <Dependency xmi:id="EAID_874BDC7F_A2D8_4A8E_ADD4_DA77C5913DB9" start="EAID_3C4F96F0_D23E_43F4_A363_99DA62AFFBD7" end="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E"/>
+          <Dependency xmi:id="EAID_90F96393_4D8E_4C0E_AAE7_B4FFFC240B12" start="EAID_B50FAC91_C5F8_4A8E_A9CB_8648139B9A30" end="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C"/>
         </links>
       </element>
-      <element xmi:idref="EAID_E8FB8B00_6275_40EE_BB34_64507D53D1AE" xmi:type="uml:Class" name="Управление status" scope="public">
-        <model package="EAPK_CE5BB4BE_E27C_4770_B44D_D219D60A5CC2" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Запланировано. Чтение и изменение project-атрибутов элемента (status / phase / version): Proposed → Approved → Implemented." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18" xmi:type="uml:Class" name="5. Нумерация всех ошибок" scope="public">
+        <model package="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Запланировано. Сквозные стабильные коды ошибок (EA-NNNN) во всех сообщениях MCP, логах и документации; реестр известных ошибок." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+        <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
+        <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+        <extendedProperties tagged="0" package_name="План развития"/>
+        <links>
+          <Association xmi:id="EAID_E16C8662_B517_47F0_B737_13AB7B13B26A" start="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18" end="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626"/>
+        </links>
+      </element>
+      <element xmi:idref="EAID_006DAA5D_33E9_4C28_954A_E52EAFB3B15F" xmi:type="uml:Class" name="Работа: Нумерация всех ошибок" scope="public">
+        <model package="EAPK_67A4FA2D_6EE6_41A4_8503_215F15CD790A" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Единый тип ошибки с кодом EA-NNNN в internal/service/sparx и internal/mcpserver; реестр кодов в docs; коды в сообщениях MCP и логах." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+        <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
+        <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+        <extendedProperties tagged="0" package_name="Работы"/>
+        <links>
+          <Dependency xmi:id="EAID_F5E9D89E_0ED5_4BEA_B484_ACF04391A7B9" start="EAID_006DAA5D_33E9_4C28_954A_E52EAFB3B15F" end="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18"/>
+          <Dependency xmi:id="EAID_1491B66A_8210_4271_81BB_96129D027E30" start="EAID_006DAA5D_33E9_4C28_954A_E52EAFB3B15F" end="EAID_81AC9B88_3E37_4D80_BCB4_201A2A8AAE6E"/>
+        </links>
+      </element>
+      <element xmi:idref="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626" xmi:type="uml:Class" name="6. Отправка bug report" scope="public">
+        <model package="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Запланировано. Инструмент, которым агент отправляет отчёт об ошибке сопровождающему проекта (номер ошибки, контекст вызова, входной файл). Кандидат реализации — создание GitHub Issue." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+        <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
+        <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+        <extendedProperties tagged="0" package_name="План развития"/>
+        <links>
+          <Association xmi:id="EAID_8473D10F_1812_4DE6_B837_BA471692BE61" start="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626" end="EAID_33C890EE_0143_4F5B_8AC6_8CCAA7A20A3F"/>
+        </links>
+      </element>
+      <element xmi:idref="EAID_87818999_AF12_4C03_8E65_5C9110C602B6" xmi:type="uml:Class" name="Работа: Отправка bug report" scope="public">
+        <model package="EAPK_67A4FA2D_6EE6_41A4_8503_215F15CD790A" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Инструмент ea_bug_report: сбор контекста (код ошибки, аргументы, входной файл), отправка сопровождающему (GitHub Issue API / вебхук), возврат ссылки агенту." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+        <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
+        <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+        <extendedProperties tagged="0" package_name="Работы"/>
+        <links>
+          <Dependency xmi:id="EAID_B60A745C_5A25_4079_ABF8_80ACA21B52F5" start="EAID_87818999_AF12_4C03_8E65_5C9110C602B6" end="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626"/>
+          <Dependency xmi:id="EAID_44D61F91_2749_4E00_BB48_18F233AB0A30" start="EAID_87818999_AF12_4C03_8E65_5C9110C602B6" end="EAID_7F4188FE_2D0C_4EF0_9B36_C2C878CD52FF"/>
+        </links>
+      </element>
+      <element xmi:idref="EAID_33C890EE_0143_4F5B_8AC6_8CCAA7A20A3F" xmi:type="uml:Class" name="7. Запрос добавления типов" scope="public">
+        <model package="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Запланировано. Функционал для запроса расширения словаря типов: когда сервер встречает неизвестный тип при чтении модели, либо когда агенту не хватает текущих типов ArchiMate." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Plateau" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="План развития"/>
         <links/>
       </element>
-      <element xmi:idref="EAID_B6861A72_FAFF_4448_92A6_1B704054E8E9" xmi:type="uml:Class" name="Управление status" scope="public">
-        <model package="EAPK_3BC8CADA_181D_44D6_9D89_EB1CF4B70589" tpos="0" ea_localid="0" ea_eleType="element"/>
-        <properties documentation="Запланировано. Чтение и изменение project-атрибутов элемента (status / phase / version): Proposed → Approved → Implemented." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+      <element xmi:idref="EAID_C4B948F4_8083_4339_8ABD_630904097020" xmi:type="uml:Class" name="Работа: Запрос добавления типов" scope="public">
+        <model package="EAPK_67A4FA2D_6EE6_41A4_8503_215F15CD790A" tpos="0" ea_localid="0" ea_eleType="element"/>
+        <properties documentation="Детект неизвестного стереотипа в client/eaxmi при чтении; инструмент ea_request_type (имя, вид, надтип, обоснование); канал запроса сопровождающему; расширение словаря в internal/service/sparx." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_WorkPackage" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
         <project author="mcp-server-sparx-ea" version="1.0" phase="1.0" status="Proposed"/>
         <style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
         <extendedProperties tagged="0" package_name="Работы"/>
         <links>
-          <Dependency xmi:id="EAID_FA67FBD6_AF37_4401_B57A_D7F63CEACBB3" start="EAID_B6861A72_FAFF_4448_92A6_1B704054E8E9" end="EAID_E8FB8B00_6275_40EE_BB34_64507D53D1AE"/>
+          <Dependency xmi:id="EAID_561A4D33_7A50_4AF8_A2CD_5E565D16E9C4" start="EAID_C4B948F4_8083_4339_8ABD_630904097020" end="EAID_33C890EE_0143_4F5B_8AC6_8CCAA7A20A3F"/>
+          <Dependency xmi:id="EAID_F0B16DAC_3E63_4BD8_A1BF_CCA11711BBDA" start="EAID_C4B948F4_8083_4339_8ABD_630904097020" end="EAID_0AA00D9C_0349_4E2F_968D_0D71138D0534"/>
         </links>
       </element>
     </elements>
     <connectors>
-      <connector xmi:idref="EAID_3D5640B7_FDB5_4F3E_8297_349EAFC7156E">
-        <source xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6">
+      <connector xmi:idref="EAID_357AB36D_8D16_4AAB_9C04_0978C2AE36A3">
+        <source xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54">
           <model type="Class" name="mcp-server-sparx-ea"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_8E9198A4_56B5_4A0D_9ABB_8933F2F69559">
+        <target xmi:idref="EAID_14D44CEC_00F4_4590_9D6F_EA63D97FCA91">
           <model type="Activity" name="Чтение модели"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
@@ -550,223 +727,13 @@
         <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_DFB3F21C_BB74_48DF_9B23_A82769475F0F">
-        <source xmi:idref="EAID_8E9198A4_56B5_4A0D_9ABB_8933F2F69559">
+      <connector xmi:idref="EAID_D6E538D8_BE33_4701_9288_4D324A3D00E4">
+        <source xmi:idref="EAID_14D44CEC_00F4_4590_9D6F_EA63D97FCA91">
           <model type="Activity" name="Чтение модели"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_914EA98B_CB16_4ABD_AA9F_7E5885EC97EA">
-          <model type="Activity" name="Чтение модели"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_601E89E0_124E_4B9D_AAC6_78049580FEE8">
-        <source xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6">
-          <model type="Class" name="mcp-server-sparx-ea"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_64C777FC_79AF_4B28_B8C2_4C0A5E72D109">
-          <model type="Activity" name="Словарь типов ArchiMate"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_519F6ED8_8312_45F4_A2D6_E83309F46DB3">
-        <source xmi:idref="EAID_64C777FC_79AF_4B28_B8C2_4C0A5E72D109">
-          <model type="Activity" name="Словарь типов ArchiMate"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_4C2AA387_8491_4337_AEC7_E73894AF885B">
-          <model type="Activity" name="Словарь типов ArchiMate"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_2959614A_B9A4_4D02_A14C_49DBF454B95E">
-        <source xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6">
-          <model type="Class" name="mcp-server-sparx-ea"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_9804205C_745C_400F_BACA_976C80CF8BCE">
-          <model type="Activity" name="Управление элементами"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_4D4B93F2_73AE_42A7_9709_AEE8F7F1DE79">
-        <source xmi:idref="EAID_9804205C_745C_400F_BACA_976C80CF8BCE">
-          <model type="Activity" name="Управление элементами"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_5320FF98_847E_4F1E_82FE_AECE1475E83B">
-          <model type="Activity" name="Управление элементами"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_6BD903FF_9A1C_4334_BAB7_0F6A7BAC6A1D">
-        <source xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6">
-          <model type="Class" name="mcp-server-sparx-ea"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_FB3160D3_5980_49B5_A9E8_67377BB07EC6">
-          <model type="Activity" name="Управление связями"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_1980C937_7759_47CC_9118_1DB54DBBC3DD">
-        <source xmi:idref="EAID_FB3160D3_5980_49B5_A9E8_67377BB07EC6">
-          <model type="Activity" name="Управление связями"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_AB76B05A_040B_4C38_A7F8_841B464B8E24">
-          <model type="Activity" name="Управление связями"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_DFA928F1_D4A0_4D78_81EF_6AF495441319">
-        <source xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6">
-          <model type="Class" name="mcp-server-sparx-ea"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_52E7BD4D_F2C5_499A_A8FF_A66CAB138AFA">
-          <model type="Activity" name="Управление пакетами"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_764412CA_232B_465F_BC53_02FA3AAB2CD1">
-        <source xmi:idref="EAID_52E7BD4D_F2C5_499A_A8FF_A66CAB138AFA">
-          <model type="Activity" name="Управление пакетами"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_D73D6DC8_935F_4068_B94A_05ADBAEF0363">
-          <model type="Activity" name="Управление пакетами"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_64F1AD72_30E9_4EF6_9145_A85714EFD54A">
-        <source xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6">
-          <model type="Class" name="mcp-server-sparx-ea"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_9458E7FD_0525_4AD9_A485_F378404AF491">
-          <model type="Activity" name="Размещение на диаграммах"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_050C01D3_95F0_4288_B633_35F756E55D12">
-        <source xmi:idref="EAID_9458E7FD_0525_4AD9_A485_F378404AF491">
-          <model type="Activity" name="Размещение на диаграммах"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_21E6C153_BE63_49DD_A109_9BDA286C370A">
-          <model type="Activity" name="Размещение на диаграммах"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_36AD4D2F_97AE_4633_8386_8CDFFD046BA8">
-        <source xmi:idref="EAID_DE4FD02E_0942_4A47_98CA_CB8D7A4D0BF6">
-          <model type="Class" name="mcp-server-sparx-ea"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_27FDF045_C8DF_4A4F_9A87_AC25031520BE">
-          <model type="Activity" name="Жизненный цикл модели"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_99C9D3A3_678C_488F_A3AD_AC3E94068226">
-        <source xmi:idref="EAID_27FDF045_C8DF_4A4F_9A87_AC25031520BE">
-          <model type="Activity" name="Жизненный цикл модели"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_B766B6CD_4602_4357_9AD3_F5EB33FBC758">
-          <model type="Activity" name="Жизненный цикл модели"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_90A6C62C_6CDB_4A77_8097_5B00B9F33484">
-        <source xmi:idref="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1">
-          <model type="Class" name="MVP"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_FB1973B7_CA47_4367_9972_3EBC3FCBF93D">
-          <model type="Class" name="MVP"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_6C3B35CF_09E4_4F50_A6FB_8943C0287D45">
-        <source xmi:idref="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1">
-          <model type="Class" name="MVP"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_914EA98B_CB16_4ABD_AA9F_7E5885EC97EA">
+        <target xmi:idref="EAID_3B995981_E852_44D9_8C5A_7AFC08A4088D">
           <model type="Activity" name="Чтение модели"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
@@ -775,13 +742,28 @@
         <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_3A4B694B_8286_41DC_9283_431B20974C97">
-        <source xmi:idref="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1">
-          <model type="Class" name="MVP"/>
+      <connector xmi:idref="EAID_9CA64043_5BBD_4C24_BCFE_27E466CB2D62">
+        <source xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54">
+          <model type="Class" name="mcp-server-sparx-ea"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_4C2AA387_8491_4337_AEC7_E73894AF885B">
+        <target xmi:idref="EAID_52BBE7D8_EA4F_4FC9_AF2C_2F29B7E28B76">
+          <model type="Activity" name="Словарь типов ArchiMate"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_E08CC532_0776_4BB8_A88C_D1414ABEC963">
+        <source xmi:idref="EAID_52BBE7D8_EA4F_4FC9_AF2C_2F29B7E28B76">
+          <model type="Activity" name="Словарь типов ArchiMate"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_B9A281C7_DCFC_4848_9927_6C52A19F32BA">
           <model type="Activity" name="Словарь типов ArchiMate"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
@@ -790,13 +772,28 @@
         <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_6F10EF7A_4357_4158_A420_A336A800B4C6">
-        <source xmi:idref="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1">
-          <model type="Class" name="MVP"/>
+      <connector xmi:idref="EAID_0316205C_07C3_438A_8362_B64920511B88">
+        <source xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54">
+          <model type="Class" name="mcp-server-sparx-ea"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_5320FF98_847E_4F1E_82FE_AECE1475E83B">
+        <target xmi:idref="EAID_2880D900_7E10_4922_9958_528CAF0DC84D">
+          <model type="Activity" name="Управление элементами"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_4E96ACB6_686E_4BE7_A429_B2FD6CB228F8">
+        <source xmi:idref="EAID_2880D900_7E10_4922_9958_528CAF0DC84D">
+          <model type="Activity" name="Управление элементами"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_1288A68C_037D_468A_A342_85A0A83FDD11">
           <model type="Activity" name="Управление элементами"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
@@ -805,13 +802,28 @@
         <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_61FCCCCE_211A_42BA_A50A_63DD7F964F38">
-        <source xmi:idref="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1">
-          <model type="Class" name="MVP"/>
+      <connector xmi:idref="EAID_7D1950A9_2DE3_4720_BD76_4C2F673FB13F">
+        <source xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54">
+          <model type="Class" name="mcp-server-sparx-ea"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_AB76B05A_040B_4C38_A7F8_841B464B8E24">
+        <target xmi:idref="EAID_2CF0B127_F63F_4A12_9400_66FD3B09F980">
+          <model type="Activity" name="Управление связями"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_2BDDDF3B_C467_446B_8A7E_A44040D6CB61">
+        <source xmi:idref="EAID_2CF0B127_F63F_4A12_9400_66FD3B09F980">
+          <model type="Activity" name="Управление связями"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_C40BF638_51BC_4A0B_A1D7_AC7D9ADB182D">
           <model type="Activity" name="Управление связями"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
@@ -820,13 +832,28 @@
         <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_5F138240_BEFC_4902_A841_613047F3CD33">
-        <source xmi:idref="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1">
-          <model type="Class" name="MVP"/>
+      <connector xmi:idref="EAID_55A88F99_9257_4957_AC37_4439BA4AE14F">
+        <source xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54">
+          <model type="Class" name="mcp-server-sparx-ea"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_D73D6DC8_935F_4068_B94A_05ADBAEF0363">
+        <target xmi:idref="EAID_1A92D741_6400_4073_90FC_1092D8CFA8F6">
+          <model type="Activity" name="Управление пакетами"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_DCA4F9C3_5E0D_48EA_BD8F_5C044D241981">
+        <source xmi:idref="EAID_1A92D741_6400_4073_90FC_1092D8CFA8F6">
+          <model type="Activity" name="Управление пакетами"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_52FF190D_586F_4998_8C1B_51EE1101CA58">
           <model type="Activity" name="Управление пакетами"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
@@ -835,14 +862,29 @@
         <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_12CCBD42_B2FE_4BBA_ADCF_6F7BFE4625A6">
-        <source xmi:idref="EAID_F7854E07_AC50_4E32_B5F5_5EB38631E1F1">
-          <model type="Class" name="MVP"/>
+      <connector xmi:idref="EAID_B7622764_6AF2_4D1B_ACEE_55AB9132C3D7">
+        <source xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54">
+          <model type="Class" name="mcp-server-sparx-ea"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_21E6C153_BE63_49DD_A109_9BDA286C370A">
-          <model type="Activity" name="Размещение на диаграммах"/>
+        <target xmi:idref="EAID_D5DD900F_73A8_4754_AD29_3FDC66AE9B82">
+          <model type="Activity" name="Диаграммы"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_A2220540_14AD_4CB3_A05F_19C59A2B1961">
+        <source xmi:idref="EAID_D5DD900F_73A8_4754_AD29_3FDC66AE9B82">
+          <model type="Activity" name="Диаграммы"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_CABA6010_E905_4CBC_9492_1FFF5904F6C8">
+          <model type="Activity" name="Диаграммы"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </target>
@@ -850,58 +892,28 @@
         <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_C7F4DE85_B039_4619_A16F_BD235F3D194E">
-        <source xmi:idref="EAID_DF1C337F_B0FE_496A_A061_F273C7865456">
-          <model type="Class" name="Публикация в GitHub workflow"/>
+      <connector xmi:idref="EAID_66C32B16_D554_4EFA_87DE_DF1D3F00233C">
+        <source xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54">
+          <model type="Class" name="mcp-server-sparx-ea"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4">
-          <model type="Class" name="Публикация в GitHub workflow"/>
+        <target xmi:idref="EAID_C150976A_60B3_4B43_942C_9356A74D9251">
+          <model type="Activity" name="Жизненный цикл модели"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </target>
         <model ea_localid="0"/>
-        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_6314C917_357D_44F6_8188_36FBFEF847B0" name="затем">
-        <source xmi:idref="EAID_FB1973B7_CA47_4367_9972_3EBC3FCBF93D">
-          <model type="Class" name="MVP"/>
+      <connector xmi:idref="EAID_0D818CBD_8F7D_4794_BA83_5A63304EA3F1">
+        <source xmi:idref="EAID_C150976A_60B3_4B43_942C_9356A74D9251">
+          <model type="Activity" name="Жизненный цикл модели"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4">
-          <model type="Class" name="Публикация в GitHub workflow"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Association" stereotype="ArchiMate_Association" direction="Unspecified"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_2E454C19_8DBD_48EB_B40A_4EFF2CA57847">
-        <source xmi:idref="EAID_041FBA98_10FD_41DF_87C6_A604416B1F9E">
-          <model type="Class" name="Создание Sparx XML"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD">
-          <model type="Class" name="Создание Sparx XML"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </target>
-        <model ea_localid="0"/>
-        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-      </connector>
-      <connector xmi:idref="EAID_D2E81010_9540_4DBF_B1E7_24DD19A15FCA">
-        <source xmi:idref="EAID_041FBA98_10FD_41DF_87C6_A604416B1F9E">
-          <model type="Class" name="Создание Sparx XML"/>
-          <role visibility="Public" targetScope="instance"/>
-          <type containment="Unspecified"/>
-        </source>
-        <target xmi:idref="EAID_B766B6CD_4602_4357_9AD3_F5EB33FBC758">
+        <target xmi:idref="EAID_6D9C2F42_FF1B_4F05_B8B5_D5B80A87CE58">
           <model type="Activity" name="Жизненный цикл модели"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
@@ -910,29 +922,29 @@
         <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_6C625DA4_EE27_43C4_B6D4_928B148CEBDF" name="затем">
-        <source xmi:idref="EAID_7E1B308B_0E89_4E29_A457_50609E416DF4">
-          <model type="Class" name="Публикация в GitHub workflow"/>
+      <connector xmi:idref="EAID_754F9540_8F9B_4A79_B1F1_B44AD7E472AA">
+        <source xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54">
+          <model type="Class" name="mcp-server-sparx-ea"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD">
-          <model type="Class" name="Создание Sparx XML"/>
+        <target xmi:idref="EAID_50C65632_BE06_49E1_8F40_DCF38FBE8944">
+          <model type="Activity" name="Отправка bug report"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </target>
         <model ea_localid="0"/>
-        <properties ea_type="Association" stereotype="ArchiMate_Association" direction="Unspecified"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_874BDC7F_A2D8_4A8E_ADD4_DA77C5913DB9">
-        <source xmi:idref="EAID_3C4F96F0_D23E_43F4_A363_99DA62AFFBD7">
-          <model type="Class" name="Отладка отчёта"/>
+      <connector xmi:idref="EAID_22EAF3D1_AC4E_4B4C_BE01_36616680F322">
+        <source xmi:idref="EAID_50C65632_BE06_49E1_8F40_DCF38FBE8944">
+          <model type="Activity" name="Отправка bug report"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E">
-          <model type="Class" name="Отладка отчёта"/>
+        <target xmi:idref="EAID_7F4188FE_2D0C_4EF0_9B36_C2C878CD52FF">
+          <model type="Activity" name="Отправка bug report"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </target>
@@ -940,29 +952,29 @@
         <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_CED584BE_EF31_4310_ACBA_5CEB8D6C6816" name="затем">
-        <source xmi:idref="EAID_B8EAAD6C_B500_4A4E_8CA2_F2DD20355EAD">
-          <model type="Class" name="Создание Sparx XML"/>
+      <connector xmi:idref="EAID_221646A8_50B5_4972_9117_80AE52D60BF2">
+        <source xmi:idref="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54">
+          <model type="Class" name="mcp-server-sparx-ea"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E">
-          <model type="Class" name="Отладка отчёта"/>
+        <target xmi:idref="EAID_6251E93C_BC6E_48D9_AE89_7AB469420C55">
+          <model type="Activity" name="Запрос новых типов ArchiMate"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </target>
         <model ea_localid="0"/>
-        <properties ea_type="Association" stereotype="ArchiMate_Association" direction="Unspecified"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Assignment" direction="Unspecified"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_FA67FBD6_AF37_4401_B57A_D7F63CEACBB3">
-        <source xmi:idref="EAID_B6861A72_FAFF_4448_92A6_1B704054E8E9">
-          <model type="Class" name="Управление status"/>
+      <connector xmi:idref="EAID_2B73D720_A2C1_4850_9E58_846A4C9CC789">
+        <source xmi:idref="EAID_6251E93C_BC6E_48D9_AE89_7AB469420C55">
+          <model type="Activity" name="Запрос новых типов ArchiMate"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_E8FB8B00_6275_40EE_BB34_64507D53D1AE">
-          <model type="Class" name="Управление status"/>
+        <target xmi:idref="EAID_0AA00D9C_0349_4E2F_968D_0D71138D0534">
+          <model type="Activity" name="Запрос новых типов ArchiMate"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </target>
@@ -970,19 +982,349 @@
         <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
-      <connector xmi:idref="EAID_9F46733C_4E17_42BA_A503_AEF50C8FF04B" name="затем">
-        <source xmi:idref="EAID_1BCDF011_A1F1_4C08_8B5D_490FAE3A332E">
-          <model type="Class" name="Отладка отчёта"/>
+      <connector xmi:idref="EAID_E0271DC4_A99B_46A9_882B_D846D34EB899">
+        <source xmi:idref="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7">
+          <model type="Class" name="Работа: MVP"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </source>
-        <target xmi:idref="EAID_E8FB8B00_6275_40EE_BB34_64507D53D1AE">
-          <model type="Class" name="Управление status"/>
+        <target xmi:idref="EAID_D750AC80_5BF2_48A1_A6D3_6D74B692DA8A">
+          <model type="Class" name="1. MVP"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_86C8F26B_7E7E_4690_814C_E8EE8AFA291A">
+        <source xmi:idref="EAID_2A062192_B86A_4E40_A09A_376B5F781501">
+          <model type="Class" name="Работа: Публикация в GitHub"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745">
+          <model type="Class" name="2. Публикация в GitHub"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_5AC14804_D0CE_47E9_B237_68A17C3EB1E3" name="затем">
+        <source xmi:idref="EAID_D750AC80_5BF2_48A1_A6D3_6D74B692DA8A">
+          <model type="Class" name="1. MVP"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745">
+          <model type="Class" name="2. Публикация в GitHub"/>
           <role visibility="Public" targetScope="instance"/>
           <type containment="Unspecified"/>
         </target>
         <model ea_localid="0"/>
         <properties ea_type="Association" stereotype="ArchiMate_Association" direction="Unspecified"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_DDAACF14_429E_4EEE_BB0D_1060686A533D">
+        <source xmi:idref="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24">
+          <model type="Class" name="Работа: Доп функции"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71">
+          <model type="Class" name="3. Доп функции"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_6D791407_D134_4F42_87C7_38F4925BCD6D" name="затем">
+        <source xmi:idref="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745">
+          <model type="Class" name="2. Публикация в GitHub"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71">
+          <model type="Class" name="3. Доп функции"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Association" direction="Unspecified"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_90F96393_4D8E_4C0E_AAE7_B4FFFC240B12">
+        <source xmi:idref="EAID_B50FAC91_C5F8_4A8E_A9CB_8648139B9A30">
+          <model type="Class" name="Работа: Улучшения отчётов о тестировании"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C">
+          <model type="Class" name="4. Улучшения отчётов о тестировании"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_4783A074_00F4_4A13_8BC4_36E71FDBCF9A" name="затем">
+        <source xmi:idref="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71">
+          <model type="Class" name="3. Доп функции"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C">
+          <model type="Class" name="4. Улучшения отчётов о тестировании"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Association" direction="Unspecified"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_F5E9D89E_0ED5_4BEA_B484_ACF04391A7B9">
+        <source xmi:idref="EAID_006DAA5D_33E9_4C28_954A_E52EAFB3B15F">
+          <model type="Class" name="Работа: Нумерация всех ошибок"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18">
+          <model type="Class" name="5. Нумерация всех ошибок"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_E51533CC_A890_4A11_AD85_64DF6DFCDB1E" name="затем">
+        <source xmi:idref="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C">
+          <model type="Class" name="4. Улучшения отчётов о тестировании"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18">
+          <model type="Class" name="5. Нумерация всех ошибок"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Association" direction="Unspecified"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_B60A745C_5A25_4079_ABF8_80ACA21B52F5">
+        <source xmi:idref="EAID_87818999_AF12_4C03_8E65_5C9110C602B6">
+          <model type="Class" name="Работа: Отправка bug report"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626">
+          <model type="Class" name="6. Отправка bug report"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_E16C8662_B517_47F0_B737_13AB7B13B26A" name="затем">
+        <source xmi:idref="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18">
+          <model type="Class" name="5. Нумерация всех ошибок"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626">
+          <model type="Class" name="6. Отправка bug report"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Association" direction="Unspecified"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_561A4D33_7A50_4AF8_A2CD_5E565D16E9C4">
+        <source xmi:idref="EAID_C4B948F4_8083_4339_8ABD_630904097020">
+          <model type="Class" name="Работа: Запрос добавления типов"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_33C890EE_0143_4F5B_8AC6_8CCAA7A20A3F">
+          <model type="Class" name="7. Запрос добавления типов"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_8473D10F_1812_4DE6_B837_BA471692BE61" name="затем">
+        <source xmi:idref="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626">
+          <model type="Class" name="6. Отправка bug report"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_33C890EE_0143_4F5B_8AC6_8CCAA7A20A3F">
+          <model type="Class" name="7. Запрос добавления типов"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Association" stereotype="ArchiMate_Association" direction="Unspecified"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_054BF4F0_5CB3_413E_AB10_0306BA9EB7D4">
+        <source xmi:idref="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7">
+          <model type="Class" name="Работа: MVP"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_3B995981_E852_44D9_8C5A_7AFC08A4088D">
+          <model type="Activity" name="Чтение модели"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_0CE71B52_5735_4476_9B71_DB0364C8538F">
+        <source xmi:idref="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7">
+          <model type="Class" name="Работа: MVP"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_B9A281C7_DCFC_4848_9927_6C52A19F32BA">
+          <model type="Activity" name="Словарь типов ArchiMate"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_85A0A6F1_1B45_42D0_8F53_3DE7C4D7AA99">
+        <source xmi:idref="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7">
+          <model type="Class" name="Работа: MVP"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_1288A68C_037D_468A_A342_85A0A83FDD11">
+          <model type="Activity" name="Управление элементами"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_3C0EED60_629B_49F8_96CA_FF95C2AD527E">
+        <source xmi:idref="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7">
+          <model type="Class" name="Работа: MVP"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_C40BF638_51BC_4A0B_A1D7_AC7D9ADB182D">
+          <model type="Activity" name="Управление связями"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_CE44A984_3DC5_4FE1_AA12_32199E85660B">
+        <source xmi:idref="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24">
+          <model type="Class" name="Работа: Доп функции"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_52FF190D_586F_4998_8C1B_51EE1101CA58">
+          <model type="Activity" name="Управление пакетами"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_53A432D4_4C3C_4E89_A29F_F95AB14C65B3">
+        <source xmi:idref="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24">
+          <model type="Class" name="Работа: Доп функции"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_CABA6010_E905_4CBC_9492_1FFF5904F6C8">
+          <model type="Activity" name="Диаграммы"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_6C5BF0D7_C106_43AC_B19E_755801295A14">
+        <source xmi:idref="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24">
+          <model type="Class" name="Работа: Доп функции"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_6D9C2F42_FF1B_4F05_B8B5_D5B80A87CE58">
+          <model type="Activity" name="Жизненный цикл модели"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_44D61F91_2749_4E00_BB48_18F233AB0A30">
+        <source xmi:idref="EAID_87818999_AF12_4C03_8E65_5C9110C602B6">
+          <model type="Class" name="Работа: Отправка bug report"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_7F4188FE_2D0C_4EF0_9B36_C2C878CD52FF">
+          <model type="Activity" name="Отправка bug report"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_F0B16DAC_3E63_4BD8_A1BF_CCA11711BBDA">
+        <source xmi:idref="EAID_C4B948F4_8083_4339_8ABD_630904097020">
+          <model type="Class" name="Работа: Запрос добавления типов"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_0AA00D9C_0349_4E2F_968D_0D71138D0534">
+          <model type="Activity" name="Запрос новых типов ArchiMate"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
+        <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+      </connector>
+      <connector xmi:idref="EAID_1491B66A_8210_4271_81BB_96129D027E30">
+        <source xmi:idref="EAID_006DAA5D_33E9_4C28_954A_E52EAFB3B15F">
+          <model type="Class" name="Работа: Нумерация всех ошибок"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </source>
+        <target xmi:idref="EAID_81AC9B88_3E37_4D80_BCB4_201A2A8AAE6E">
+          <model type="Class" name="Сквозная нумерация ошибок"/>
+          <role visibility="Public" targetScope="instance"/>
+          <type containment="Unspecified"/>
+        </target>
+        <model ea_localid="0"/>
+        <properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
         <appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
       </connector>
     </connectors>
@@ -1604,6 +1946,89 @@
         </packagedElement>
       </uml:Profile>
     </profiles>
-    <diagrams/>
+    <diagrams>
+      <diagram xmi:id="EAID_D33FB283_9ABF_4F1C_8523_22F4070426E4">
+        <model package="EAPK_989EB731_9B04_40F5_A3F3_4426B3D4D024" owner="EAPK_989EB731_9B04_40F5_A3F3_4426B3D4D024" localID="0"/>
+        <properties name="Обзор возможностей" type="Logical" documentation=""/>
+        <project author="mcp-server-sparx-ea" version="1.0"/>
+        <style2 value="ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;MDGDgm=ArchiMate3::Application;"/>
+        <elements>
+          <element geometry="Left=40;Top=520;Right=210;Bottom=590;" subject="EAID_80F4315C_1A3A_45D7_B848_8F6FF245CC54" seqno="1" style="DUID=FA5C346F;UCRect=1;HideIcon=0;"/>
+          <element geometry="Left=270;Top=40;Right=440;Bottom=110;" subject="EAID_14D44CEC_00F4_4590_9D6F_EA63D97FCA91" seqno="2" style="DUID=3F405E27;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_357AB36D_8D16_4AAB_9C04_0978C2AE36A3" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=500;Top=40;Right=670;Bottom=110;" subject="EAID_3B995981_E852_44D9_8C5A_7AFC08A4088D" seqno="3" style="DUID=854696E9;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_D6E538D8_BE33_4701_9288_4D324A3D00E4" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=270;Top=160;Right=440;Bottom=230;" subject="EAID_52BBE7D8_EA4F_4FC9_AF2C_2F29B7E28B76" seqno="4" style="DUID=AC7BAA3B;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_9CA64043_5BBD_4C24_BCFE_27E466CB2D62" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=500;Top=160;Right=670;Bottom=230;" subject="EAID_B9A281C7_DCFC_4848_9927_6C52A19F32BA" seqno="5" style="DUID=BD2A89C0;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_E08CC532_0776_4BB8_A88C_D1414ABEC963" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=270;Top=280;Right=440;Bottom=350;" subject="EAID_2880D900_7E10_4922_9958_528CAF0DC84D" seqno="6" style="DUID=5B80F3B2;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_0316205C_07C3_438A_8362_B64920511B88" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=500;Top=280;Right=670;Bottom=350;" subject="EAID_1288A68C_037D_468A_A342_85A0A83FDD11" seqno="7" style="DUID=319864C8;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_4E96ACB6_686E_4BE7_A429_B2FD6CB228F8" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=270;Top=400;Right=440;Bottom=470;" subject="EAID_2CF0B127_F63F_4A12_9400_66FD3B09F980" seqno="8" style="DUID=E651842A;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_7D1950A9_2DE3_4720_BD76_4C2F673FB13F" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=500;Top=400;Right=670;Bottom=470;" subject="EAID_C40BF638_51BC_4A0B_A1D7_AC7D9ADB182D" seqno="9" style="DUID=DB16CC6F;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_2BDDDF3B_C467_446B_8A7E_A44040D6CB61" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=270;Top=520;Right=440;Bottom=590;" subject="EAID_1A92D741_6400_4073_90FC_1092D8CFA8F6" seqno="10" style="DUID=53DD399B;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_55A88F99_9257_4957_AC37_4439BA4AE14F" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=500;Top=520;Right=670;Bottom=590;" subject="EAID_52FF190D_586F_4998_8C1B_51EE1101CA58" seqno="11" style="DUID=63F2ED0B;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_DCA4F9C3_5E0D_48EA_BD8F_5C044D241981" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=270;Top=640;Right=440;Bottom=710;" subject="EAID_D5DD900F_73A8_4754_AD29_3FDC66AE9B82" seqno="12" style="DUID=705E6C10;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_B7622764_6AF2_4D1B_ACEE_55AB9132C3D7" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=500;Top=640;Right=670;Bottom=710;" subject="EAID_CABA6010_E905_4CBC_9492_1FFF5904F6C8" seqno="13" style="DUID=481DBBE7;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_A2220540_14AD_4CB3_A05F_19C59A2B1961" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=270;Top=760;Right=440;Bottom=830;" subject="EAID_C150976A_60B3_4B43_942C_9356A74D9251" seqno="14" style="DUID=4C695E03;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_66C32B16_D554_4EFA_87DE_DF1D3F00233C" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=500;Top=760;Right=670;Bottom=830;" subject="EAID_6D9C2F42_FF1B_4F05_B8B5_D5B80A87CE58" seqno="15" style="DUID=6811FA9E;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_0D818CBD_8F7D_4794_BA83_5A63304EA3F1" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=270;Top=880;Right=440;Bottom=950;" subject="EAID_50C65632_BE06_49E1_8F40_DCF38FBE8944" seqno="16" style="DUID=03CC2A26;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_754F9540_8F9B_4A79_B1F1_B44AD7E472AA" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=500;Top=880;Right=670;Bottom=950;" subject="EAID_7F4188FE_2D0C_4EF0_9B36_C2C878CD52FF" seqno="17" style="DUID=7331A4D7;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_22EAF3D1_AC4E_4B4C_BE01_36616680F322" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=270;Top=1000;Right=440;Bottom=1070;" subject="EAID_6251E93C_BC6E_48D9_AE89_7AB469420C55" seqno="18" style="DUID=5D87DEE3;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_221646A8_50B5_4972_9117_80AE52D60BF2" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=500;Top=1000;Right=670;Bottom=1070;" subject="EAID_0AA00D9C_0349_4E2F_968D_0D71138D0534" seqno="19" style="DUID=6EBE35B9;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_2B73D720_A2C1_4850_9E58_846A4C9CC789" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+        </elements>
+      </diagram>
+      <diagram xmi:id="EAID_C5164B87_739C_46D6_BC96_92BF2E825C0A">
+        <model package="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" owner="EAPK_0880083A_3F1F_4C3F_A033_FE833E26F12B" localID="0"/>
+        <properties name="Дорожная карта" type="Logical" documentation=""/>
+        <project author="mcp-server-sparx-ea" version="1.0"/>
+        <style2 value="ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;MDGDgm=ArchiMate3::Implementation_Migration;"/>
+        <elements>
+          <element geometry="Left=40;Top=40;Right=210;Bottom=110;" subject="EAID_D750AC80_5BF2_48A1_A6D3_6D74B692DA8A" seqno="1" style="DUID=473B8844;UCRect=1;HideIcon=0;"/>
+          <element geometry="Left=40;Top=160;Right=210;Bottom=230;" subject="EAID_16194FF7_6E46_413C_B4A7_BD76EF6D7DD7" seqno="2" style="DUID=A30B0136;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_E0271DC4_A99B_46A9_882B_D846D34EB899" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=270;Top=40;Right=440;Bottom=110;" subject="EAID_0408F4A8_0DDA_4109_BCBF_7AA8A9B63745" seqno="3" style="DUID=AB78515E;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_5AC14804_D0CE_47E9_B237_68A17C3EB1E3" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=270;Top=160;Right=440;Bottom=230;" subject="EAID_2A062192_B86A_4E40_A09A_376B5F781501" seqno="4" style="DUID=5DBA868F;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_86C8F26B_7E7E_4690_814C_E8EE8AFA291A" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=500;Top=40;Right=670;Bottom=110;" subject="EAID_09C9E41A_BCA7_4F97_BDC9_BECADD9FBF71" seqno="5" style="DUID=1055816B;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_6D791407_D134_4F42_87C7_38F4925BCD6D" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=500;Top=160;Right=670;Bottom=230;" subject="EAID_1F6EF16D_F070_4B6D_9ADB_96C088BCFC24" seqno="6" style="DUID=EEE86D68;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_DDAACF14_429E_4EEE_BB0D_1060686A533D" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=730;Top=40;Right=900;Bottom=110;" subject="EAID_FB1EB27D_D7A4_484E_969A_3428F75CF54C" seqno="7" style="DUID=A11226B2;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_4783A074_00F4_4A13_8BC4_36E71FDBCF9A" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=730;Top=160;Right=900;Bottom=230;" subject="EAID_B50FAC91_C5F8_4A8E_A9CB_8648139B9A30" seqno="8" style="DUID=DEE947B9;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_90F96393_4D8E_4C0E_AAE7_B4FFFC240B12" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=960;Top=40;Right=1130;Bottom=110;" subject="EAID_D91111DC_A46A_4BCF_9DD5_438ED8728D18" seqno="9" style="DUID=D0294D42;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_E51533CC_A890_4A11_AD85_64DF6DFCDB1E" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=960;Top=160;Right=1130;Bottom=230;" subject="EAID_006DAA5D_33E9_4C28_954A_E52EAFB3B15F" seqno="10" style="DUID=301E1E9C;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_F5E9D89E_0ED5_4BEA_B484_ACF04391A7B9" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=960;Top=280;Right=1130;Bottom=350;" subject="EAID_81AC9B88_3E37_4D80_BCB4_201A2A8AAE6E" seqno="11" style="DUID=22DCAD1A;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_1491B66A_8210_4271_81BB_96129D027E30" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=1190;Top=40;Right=1360;Bottom=110;" subject="EAID_62CADC57_3B42_4399_AD60_930DA3B5A626" seqno="12" style="DUID=8AFAAAB9;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_E16C8662_B517_47F0_B737_13AB7B13B26A" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=1190;Top=160;Right=1360;Bottom=230;" subject="EAID_87818999_AF12_4C03_8E65_5C9110C602B6" seqno="13" style="DUID=5AAED9FE;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_B60A745C_5A25_4079_ABF8_80ACA21B52F5" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=1420;Top=40;Right=1590;Bottom=110;" subject="EAID_33C890EE_0143_4F5B_8AC6_8CCAA7A20A3F" seqno="14" style="DUID=A32BF41F;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_8473D10F_1812_4DE6_B837_BA471692BE61" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+          <element geometry="Left=1420;Top=160;Right=1590;Bottom=230;" subject="EAID_C4B948F4_8083_4339_8ABD_630904097020" seqno="15" style="DUID=6AFF4270;UCRect=1;HideIcon=0;"/>
+          <element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_561A4D33_7A50_4AF8_A2CD_5E565D16E9C4" style="Mode=3;Color=-1;LWidth=0;Hidden=0;"/>
+        </elements>
+      </diagram>
+    </diagrams>
   </xmi:Extension>
 </xmi:XMI>

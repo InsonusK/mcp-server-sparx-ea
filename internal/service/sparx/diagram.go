@@ -1,9 +1,55 @@
 package sparx
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+	"strings"
 
-// Diagrams: read contents and layout (method 3), and place / move / remove an
-// element on a diagram (method 6).
+	"github.com/InsonusK/mcp-server-sparx-ea/client/eaxmi"
+)
+
+// Diagrams: read contents and layout (method 3), create a diagram (method 6),
+// and place / move / remove an element on a diagram (method 6).
+
+// archimateDiagramLayers is the set of ArchiMate viewpoints CreateDiagram
+// accepts as its layer argument. Each maps to an EA ArchiMate3 MDG diagram
+// profile ("Motivation" -> "ArchiMate3::Motivation"), which selects the toolbox
+// EA shows when the diagram is opened. The empty layer is also allowed — a
+// plain logical diagram, on which ArchiMate elements still render with their
+// stereotyped shapes.
+var archimateDiagramLayers = map[string]bool{
+	"Motivation":               true,
+	"Strategy":                 true,
+	"Business":                 true,
+	"Application":              true,
+	"Technology":               true,
+	"Physical":                 true,
+	"Implementation_Migration": true,
+}
+
+// DiagramLayers returns the accepted CreateDiagram layer names, sorted.
+func DiagramLayers() []string {
+	out := make([]string, 0, len(archimateDiagramLayers))
+	for name := range archimateDiagramLayers {
+		out = append(out, name)
+	}
+	sort.Strings(out)
+	return out
+}
+
+// mdgForLayer validates a layer argument and returns the EA MDG diagram type to
+// store. "" is valid and yields "" (a plain logical diagram).
+func mdgForLayer(layer string) (string, error) {
+	layer = strings.TrimSpace(layer)
+	if layer == "" {
+		return "", nil
+	}
+	if !archimateDiagramLayers[layer] {
+		return "", fmt.Errorf("sparx: %q is not a known ArchiMate diagram layer; use one of %s (or omit it)",
+			layer, strings.Join(DiagramLayers(), ", "))
+	}
+	return "ArchiMate3::" + layer, nil
+}
 
 // Rect is an element's rectangle on a diagram (EA coordinates: origin top-left,
 // y downward).
@@ -76,6 +122,35 @@ func (s *Service) Diagram(ref string) (*DiagramInfo, error) {
 	return info, nil
 }
 
+// CreateDiagram adds an empty diagram named name inside the package at
+// parentRef. layer, when given, is an ArchiMate viewpoint (see DiagramLayers)
+// that selects EA's toolbox for the diagram; omit it for a plain logical
+// diagram. Populate the diagram with AddToDiagram.
+func (s *Service) CreateDiagram(parentRef, name, layer string) (*DiagramInfo, error) {
+	name = strings.TrimSpace(name)
+	if name == "" {
+		return nil, fmt.Errorf("sparx: diagram name is required")
+	}
+	mdg, err := mdgForLayer(layer)
+	if err != nil {
+		return nil, err
+	}
+	parent := s.resolvePackage(parentRef)
+	if parent == nil {
+		return nil, fmt.Errorf("sparx: no package for %q", parentRef)
+	}
+	for _, g := range parent.Diagrams {
+		if g.Name == name {
+			return nil, fmt.Errorf("sparx: package %q already has a diagram named %q", parent.Name, name)
+		}
+	}
+	g, err := s.doc.AddDiagram(parent.XMIID, name, mdg)
+	if err != nil {
+		return nil, errWrap(err)
+	}
+	return s.Diagram(g.XMIID)
+}
+
 // AddToDiagram places an element on a diagram at the given rectangle.
 func (s *Service) AddToDiagram(diagramRef, elementRef string, at Rect) error {
 	d, _ := s.resolveDiagram(diagramRef)
@@ -94,7 +169,35 @@ func (s *Service) AddToDiagram(diagramRef, elementRef string, at Rect) error {
 	if !validRect(at) {
 		return fmt.Errorf("sparx: invalid rectangle %+v (need right>left, bottom>top)", at)
 	}
-	return errWrap(s.doc.AddDiagramObject(d.XMIID, el.XMIID, at.Left, at.Top, at.Right, at.Bottom))
+	if err := s.doc.AddDiagramObject(d.XMIID, el.XMIID, at.Left, at.Top, at.Right, at.Bottom); err != nil {
+		return errWrap(err)
+	}
+	s.showRelatedConnectors(d, el.XMIID)
+	return nil
+}
+
+// showRelatedConnectors adds a diagram line for every connector between the
+// just-placed element newID and an element already on the diagram, so dropping
+// two connected elements on a diagram shows the relationship between them.
+func (s *Service) showRelatedConnectors(d *eaxmi.Diagram, newID string) {
+	placed := map[string]bool{}
+	for _, o := range d.Objects {
+		placed[o.SubjectID] = true
+	}
+	for _, c := range s.doc.Connectors() {
+		var other string
+		switch newID {
+		case c.SourceID:
+			other = c.TargetID
+		case c.TargetID:
+			other = c.SourceID
+		default:
+			continue
+		}
+		if placed[other] {
+			_ = s.doc.AddDiagramLink(d.XMIID, c.XMIID)
+		}
+	}
 }
 
 // RemoveFromDiagram removes an element's placement from a diagram.
@@ -107,7 +210,16 @@ func (s *Service) RemoveFromDiagram(diagramRef, elementRef string) error {
 	if el == nil {
 		return fmt.Errorf("sparx: no element for %q", elementRef)
 	}
-	return errWrap(s.doc.RemoveDiagramObject(d.XMIID, el.XMIID))
+	if err := s.doc.RemoveDiagramObject(d.XMIID, el.XMIID); err != nil {
+		return errWrap(err)
+	}
+	// Drop any connector lines that can no longer be drawn (one end just left).
+	for _, c := range s.doc.Connectors() {
+		if c.SourceID == el.XMIID || c.TargetID == el.XMIID {
+			s.doc.RemoveDiagramLink(d.XMIID, c.XMIID)
+		}
+	}
+	return nil
 }
 
 // MoveOnDiagram changes an element's rectangle on a diagram (remove + re-add).
