@@ -35,25 +35,12 @@ All 176 Cucumber scenarios should pass.
 
 ## Register with an MCP client
 
-The server speaks MCP over stdio. Point your client at the built binary.
+The server speaks MCP over stdio — run it with no arguments and it reads MCP
+requests on stdin, writes responses on stdout. Nothing is configured through
+flags or environment variables.
 
-### Claude Code / Claude Desktop
-
-```json
-{
-  "mcpServers": {
-    "sparx-ea": {
-      "command": "/absolute/path/to/mcp-server-sparx-ea"
-    }
-  }
-}
-```
-
-### Any MCP client
-
-Run `mcp-server-sparx-ea` with no arguments; it reads MCP requests on stdin and
-writes responses on stdout. Nothing is configured through flags or environment
-variables — every input is a tool argument.
+For a step-by-step guide covering Claude Desktop, Claude Code and Cursor, plus
+troubleshooting, see **[setup-with-an-agent.md](setup-with-an-agent.md)**.
 
 ## What the server needs on disk
 

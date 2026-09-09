@@ -38,12 +38,13 @@ sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
 CGO_ENABLED=1 go build -o mcp-server-sparx-ea .
 ```
 
-See [docs/installation.md](docs/installation.md) for other platforms and for
-registering the server with an MCP client.
+Other platforms: [docs/installation.md](docs/installation.md).
 
 ## Quick start
 
-Register the built binary with an MCP client:
+New to MCP? Follow the step-by-step
+[setup guide](docs/setup-with-an-agent.md) — it covers Claude Desktop, Claude
+Code and Cursor. The short version: point your client at the built binary.
 
 ```json
 {
@@ -70,6 +71,7 @@ confirmation.
 
 | Topic | Docs | Covers |
 | --- | --- | --- |
+| Setup with an agent | [docs/setup-with-an-agent.md](docs/setup-with-an-agent.md) | Registering the server with Claude Desktop / Claude Code / Cursor, and troubleshooting |
 | Editing workflow | [docs/workflow.md](docs/workflow.md) | The export → edit → re-import loop, `report.xml`, identity |
 | SQL query tool | [docs/api/sql-query.md](docs/api/sql-query.md) | `ea_query` — read-only SQL against `.eapx` |
 | ArchiMate tools | [docs/api/archimate.md](docs/api/archimate.md) | The 17 read and editing tools over an exported model |
