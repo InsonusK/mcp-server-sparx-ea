@@ -1,79 +1,79 @@
 package sparxtest
 
-// Steps for features/diagram_contents.feature.
+// Actions on diagrams: read (method 3), add / move / remove an element
+// (method 6).
 
 import (
 	"context"
 	"fmt"
+	"regexp"
+	"strconv"
 
 	"github.com/cucumber/godog"
 
 	"github.com/InsonusK/mcp-server-sparx-ea/internal/service/sparx"
+	"github.com/InsonusK/mcp-server-sparx-ea/internal/service/sparx/test/common"
 )
 
-func (w *world) iReadTheDiagram(ctx context.Context, ref string) error {
-	if w.svc == nil {
-		return fmt.Errorf("no model loaded")
+var rectRe = regexp.MustCompile(`^\s*(-?\d+)\s*,\s*(-?\d+)\s*,\s*(-?\d+)\s*,\s*(-?\d+)\s*$`)
+
+func parseRect(s string) (sparx.Rect, error) {
+	m := rectRe.FindStringSubmatch(s)
+	if m == nil {
+		return sparx.Rect{}, fmt.Errorf("bad rectangle %q, want left,top,right,bottom", s)
 	}
-	w.diagram, w.lastErr = w.svc.Diagram(ref)
-	if w.lastErr != nil {
-		logf(ctx, "read diagram %q → error: %v", ref, w.lastErr)
+	n := func(i int) int { v, _ := strconv.Atoi(m[i]); return v }
+	return sparx.Rect{Left: n(1), Top: n(2), Right: n(3), Bottom: n(4)}, nil
+}
+
+func registerDiagramSteps(sc *godog.ScenarioContext, w *common.World) {
+	sc.Step(`^I read the diagram "([^"]*)"$`, func(ctx context.Context, ref string) error {
+		w.Diagram, w.Err = w.Active().Diagram(ref)
+		if w.Err != nil {
+			common.Logf(ctx, "read diagram %q → error: %v", ref, w.Err)
+			return nil
+		}
+		common.Logf(ctx, "read diagram %q → %s (%s), %d object(s), %d link(s)",
+			ref, w.Diagram.Name, w.Diagram.DiagramType, len(w.Diagram.Objects), len(w.Diagram.Links))
 		return nil
-	}
-	logf(ctx, "read diagram %q → %s (%s), %d object(s), %d link(s)",
-		ref, w.diagram.Name, w.diagram.DiagramType, len(w.diagram.Objects), len(w.diagram.Links))
-	return nil
-}
+	})
 
-func (w *world) diagramFieldIs(ctx context.Context, field, want string) error {
-	if w.diagram == nil {
-		return fmt.Errorf("no diagram read (err: %v)", w.lastErr)
-	}
-	rows, _ := toRows([]*sparx.DiagramInfo{w.diagram})
-	if got := rows[0][field]; got != want {
-		return fmt.Errorf("diagram %s = %q, want %q", field, got, want)
-	}
-	logf(ctx, "diagram %s == %q", field, want)
-	return nil
-}
+	sc.Step(`^I add "([^"]*)" to the diagram "([^"]*)" at (.+)$`, func(ctx context.Context, e, d, r string) error {
+		w.LastDiagramRef = d
+		rect, err := parseRect(r)
+		if err != nil {
+			return err
+		}
+		w.Err = w.Mut.AddToDiagram(d, e, rect)
+		if w.Err != nil {
+			common.Logf(ctx, "add %q to %q → error: %v", e, d, w.Err)
+			return nil
+		}
+		common.Logf(ctx, "added %q to diagram %q at %s", e, d, r)
+		return w.Save(ctx)
+	})
 
-func (w *world) diagramHasNPlacedElements(ctx context.Context, n int) error {
-	if w.diagram == nil {
-		return fmt.Errorf("no diagram read (err: %v)", w.lastErr)
-	}
-	if got := len(w.diagram.Objects); got != n {
-		return fmt.Errorf("diagram has %d placed elements, want %d", got, n)
-	}
-	logf(ctx, "diagram has %d placed element(s)", n)
-	return nil
-}
+	sc.Step(`^I move "([^"]*)" on the diagram "([^"]*)" to (.+)$`, func(ctx context.Context, e, d, r string) error {
+		w.LastDiagramRef = d
+		rect, err := parseRect(r)
+		if err != nil {
+			return err
+		}
+		w.Err = w.Mut.MoveOnDiagram(d, e, rect)
+		if w.Err != nil {
+			return nil
+		}
+		common.Logf(ctx, "moved %q on %q to %s", e, d, r)
+		return w.Save(ctx)
+	})
 
-func (w *world) diagramHasNLinks(ctx context.Context, n int) error {
-	if w.diagram == nil {
-		return fmt.Errorf("no diagram read (err: %v)", w.lastErr)
-	}
-	if got := len(w.diagram.Links); got != n {
-		return fmt.Errorf("diagram has %d links, want %d", got, n)
-	}
-	logf(ctx, "diagram has %d link(s)", n)
-	return nil
-}
-
-func (w *world) placedElementsInclude(ctx context.Context, table *godog.Table) error {
-	if w.diagram == nil {
-		return fmt.Errorf("no diagram read (err: %v)", w.lastErr)
-	}
-	rows, err := toRows(w.diagram.Objects)
-	if err != nil {
-		return err
-	}
-	return matchTable(rows, table, false)
-}
-
-func registerDiagramSteps(sc *godog.ScenarioContext, w *world) {
-	sc.Step(`^I read the diagram "([^"]*)"$`, w.iReadTheDiagram)
-	sc.Step(`^the diagram field "([^"]*)" is "([^"]*)"$`, w.diagramFieldIs)
-	sc.Step(`^the diagram has (\d+) placed elements$`, w.diagramHasNPlacedElements)
-	sc.Step(`^the diagram has (\d+) links$`, w.diagramHasNLinks)
-	sc.Step(`^the placed elements include:$`, w.placedElementsInclude)
+	sc.Step(`^I remove "([^"]*)" from the diagram "([^"]*)"$`, func(ctx context.Context, e, d string) error {
+		w.LastDiagramRef = d
+		w.Err = w.Mut.RemoveFromDiagram(d, e)
+		if w.Err != nil {
+			return nil
+		}
+		common.Logf(ctx, "removed %q from diagram %q", e, d)
+		return w.Save(ctx)
+	})
 }

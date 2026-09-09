@@ -1,3 +1,9 @@
+// Package sparxtest is the black-box Cucumber suite for internal/service/sparx.
+//
+// Layout (docs/skills/cucumber-go-testing.md):
+//   - features/            one .feature per operation
+//   - test/common/         the World, plumbing steps, generic data-table comparators
+//   - test/*_steps_test.go  the per-operation action steps ("I create", "I relate", …)
 package sparxtest
 
 import (
@@ -6,13 +12,14 @@ import (
 	"testing"
 
 	"github.com/cucumber/godog"
+
+	"github.com/InsonusK/mcp-server-sparx-ea/internal/service/sparx/test/common"
 )
 
 func TestFeatures(t *testing.T) {
-	// tmp/ holds the saved working copies from methods 4-6 scenarios. Cleared
-	// at the start of every run, kept afterwards for manual review / import
-	// into Sparx EA. It is gitignored.
-	_ = os.RemoveAll(tmpDir)
+	// tmp/ holds the saved working copies from methods 4-6 scenarios: cleared
+	// at the start of every run, kept afterwards for import into Sparx EA.
+	_ = os.RemoveAll(common.TmpDir)
 
 	opts := godog.Options{
 		Format:   "pretty",
@@ -39,21 +46,22 @@ func TestFeatures(t *testing.T) {
 }
 
 func initializeScenario(sc *godog.ScenarioContext) {
-	w := newWorld()
+	w := common.NewWorld()
 
 	sc.Before(func(ctx context.Context, s *godog.Scenario) (context.Context, error) {
-		w.reset()
-		w.scenarioName = s.Name
+		w.ScenarioName = s.Name
+		w.Reset()
 		return ctx, nil
 	})
 	sc.After(func(ctx context.Context, _ *godog.Scenario, _ error) (context.Context, error) {
-		w.reset()
+		w.Reset()
 		return ctx, nil
 	})
 
-	registerModelSteps(sc, w)
+	common.RegisterSharedSteps(sc, w)
+	registerTreeSteps(sc, w)
 	registerElementSteps(sc, w)
+	registerRelationshipSteps(sc, w)
 	registerDiagramSteps(sc, w)
 	registerVocabSteps(sc, w)
-	registerMutateSteps(sc, w)
 }

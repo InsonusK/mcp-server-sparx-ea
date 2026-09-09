@@ -83,21 +83,51 @@
   Для mdbtools (текущий бэкенд): `SELECT cols FROM table [WHERE simple = / <> / LIKE / AND / OR]`.
   **Не поддерживаются**: `ORDER BY`, `LIMIT`, `IN (...)`, `count(*)` с `WHERE`, JOIN.
 
-## 7. Раскладка (для `client/eapx`)
+## 7. Раскладка
 
-```
-client/eapx/features/            *.feature (остаются здесь)
-client/eapx/test/                package eapxtest — чёрный ящик, импортирует client/eapx
-  testdata/                      копии *.eapx фикстур (не ссылки на общий example/)
-  suite_test.go                  TestFeatures + сборка InitializeScenario
-  world_test.go                  общий world + reset + logf + хелперы
-  <concept>_steps_test.go        шаги по доменному понятию
-  <feature>_steps_test.go        шаги уникальные для одного feature (если есть)
-```
+Два варианта, оба валидны:
 
-- Один плоский тест-пакет (не подпакеты `common/` — иначе `world` пришлось бы экспортировать).
-- Фикстуры — в `testdata/` тест-пакета. Тест не зависит от каталога `example/`.
-- Раннер godog: `Options.Paths = ["../features"]`, `Tags = "~@todo"`, `Strict = true`, `TestingT = t`.
+**А. Плоский тест-пакет** (`client/eapx`): всё в `client/eapx/test/`, файлы по доменному понятию,
+общий `world` в `world_test.go`.
+
+**Б. С подпакетом `common/`** (`internal/service/sparx`) — когда step-файлов много:
+```
+internal/service/sparx/features/           одна *.feature на операцию (create/edit/read/delete)
+internal/service/sparx/test/
+  common/                                  package common (обычный, не _test)
+    world.go     — World (экспортируемый) + reset + Logf + FixturePath
+                 + plumbing-шаги (загрузка модели/рабочей копии, save, reload)
+                 + generic-компараторы (ToRows, MatchTable, "the X is:", "... include:")
+  suite_test.go                            TestFeatures + сборка
+  <operation>_steps_test.go                ТОЛЬКО action-шаги ("I create", "I relate", "I add …")
+  testdata/
+  tmp/                                     сохранённые рабочие копии (gitignore)
+```
+- `common/` — обычный пакет с экспортируемым `World`; action-шаги в `sparxtest` берут `*common.World`.
+- Граница: `common/` = plumbing + assertions (что переиспользуется); `test/*_steps_test.go` = действия
+  (что специфично для операции). Читателю сразу видно: assertion → в `common/`, действие → рядом с feature.
+
+Общее для обоих: фикстуры в `testdata/` (не ссылки на `example/`); раннер
+`Options.Paths=["../features"]`, `Tags="~@todo"`, `Strict=true`, `TestingT=t`; env `GODOG_STEPS=1` → каталог шагов.
+
+## 7a. Тесты, которые пишут файл (мутации)
+
+- Рабочая копия загружается в память из `testdata/`, правится, сохраняется в `tmp/<output>.xml`.
+  **Файл фикстуры никогда не перезаписывается.**
+- `tmp/` в `.gitignore`, чистится в начале прогона (`os.RemoveAll` в `TestFeatures`), **остаётся после** —
+  пользователь открывает в целевом приложении и проверяет/импортирует.
+- **Каждый мутационный сценарий явно объявляет** источник, выходной файл и (для EA) имя root-пакета:
+  ```gherkin
+  Given the working model:
+    | source | TestProject.xml    |
+    | output | element_create.xml |
+    | root   | element create     |
+  ```
+  Свой root-name на файл (со свежим GUID) → все выходные файлы можно импортировать в один проект
+  рядом друг с другом и сравнить с оригиналом.
+- Ассерты — через **reload**: `after reload the element "…" is:` переоткрывает сохранённый файл, т.е.
+  проверка идёт по реальному round-trip, а не по объекту в памяти.
+- Один output-файл на сценарий (детерминированные проверки); не аккумулируем изменения в один файл.
 
 ## 8. Конкретные типы сценариев
 

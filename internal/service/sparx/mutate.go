@@ -16,6 +16,40 @@ type Rect struct {
 	Left, Top, Right, Bottom int
 }
 
+// ---------- packages / root ----------
+
+// RootPackages returns the names of the EA root packages in this model (usually
+// one).
+func (s *Service) RootPackages() []string { return s.doc.RootPackages() }
+
+// SetRootName renames the single EA root package and gives it a fresh identity,
+// so a Saved copy imports into EA as a new package rather than merging into the
+// original. Returns the new root name.
+func (s *Service) SetRootName(newName string) (string, error) {
+	newName = strings.TrimSpace(newName)
+	if newName == "" {
+		return "", fmt.Errorf("sparx: root name is required")
+	}
+	if err := s.doc.RenameRootPackage(newName); err != nil {
+		return "", fmt.Errorf("sparx: %w", err)
+	}
+	return newName, nil
+}
+
+// RenamePackage renames a package (by id or path). Unlike SetRootName it keeps
+// the package identity.
+func (s *Service) RenamePackage(ref, newName string) error {
+	newName = strings.TrimSpace(newName)
+	if newName == "" {
+		return fmt.Errorf("sparx: new name is required")
+	}
+	pkg := s.resolvePackage(ref)
+	if pkg == nil {
+		return fmt.Errorf("sparx: no package for %q", ref)
+	}
+	return errWrap(s.doc.SetPackageName(pkg.XMIID, newName))
+}
+
 // ---------- method 4: elements ----------
 
 // CreateElement adds an element of ArchiMate type archimateType (e.g.
