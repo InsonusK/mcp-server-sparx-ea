@@ -1,25 +1,19 @@
 {
   // --- Go: обнаружение и запуск тестов ---------------------------------------
-  // Пакет client/eapx использует cgo (pkg-config: libmdbsql glib-2.0),
-  // поэтому CGO обязан быть включён — иначе gopls не проанализирует пакет,
-  // а Test Explorer не соберёт и не запустит тесты.
-  "go.toolsEnvVars": {
-    "CGO_ENABLED": "1"
-  },
+  // Проект чистый Go (CGO_ENABLED=0), внешних C-зависимостей нет.
   "go.testEnvVars": {
-    "CGO_ENABLED": "1",
     // godog печатает человекочитаемый вывод сценариев
     "GODOG_FORMAT": "pretty"
   },
-  // -v: показывать вывод t.Logf из каждого шага даже на зелёном прогоне
+  // -v: показывать вывод логов из каждого шага даже на зелёном прогоне
   // (без -v go test прячет вывод прошедших тестов). См.
   // docs/skills/cucumber-go-testing.md §4.
   "go.testFlags": [
     "-v"
   ],
-  // godog-сценарии + race медленнее обычных unit-тестов
+  // godog-сценарии медленнее обычных unit-тестов; project_architecture
+  // кросс-компилирует бинарь под несколько платформ
   "go.testTimeout": "300s",
-  // gopls как языковой сервер + встроенный Test Explorer / code lens
   "go.useLanguageServer": true,
   "go.testExplorer.enable": true,
   "go.testExplorer.showDynamicSubtestsInEditor": true,
@@ -27,23 +21,17 @@
     "runtest": true
   },
   "gopls": {
-    "build.env": {
-      "CGO_ENABLED": "1"
-    },
-    // не выкидывать рабочие деревья агентов из индекса
     "build.directoryFilters": [
-      "-**/node_modules",
+      "-**/node_modules"
     ]
   },
 
   // --- Cucumber (feature-файлы) -------------------------------------------
   "cucumber.glue": [
-    // Маска путей к step-определениям на Go
     "**/*_test.go",
-     "**/test/**/*.go"
+    "**/test/**/*.go"
   ],
   "cucumber.features": [
-    // Пути к feature-файлам для автокомплита
     "**/*.feature"
   ]
 }

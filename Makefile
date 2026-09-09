@@ -3,15 +3,15 @@
 #   WITH_CODE_COVERAGE=true   also emit the normalized coverage result + badge
 #   ONLY_DELTA=true DELTA_BASE=<ref>   mutate only code changed since <ref>
 #
-# Everything stack-specific (Go, cgo, gremlins, gotestsum) stays inside this file.
+# Everything stack-specific (Go, gremlins, gotestsum) stays inside this file.
 
 SHELL := /bin/bash
 .SHELLFLAGS := -eu -o pipefail -c
 
-export CGO_ENABLED := 1
+export CGO_ENABLED := 0
 
 GO        ?= go
-COVERPKG  ?= ./client/eapx,./client/eaxmi,./internal/mcpserver,./internal/service/sparx
+COVERPKG  ?= ./client/eaxmi,./internal/mcpserver,./internal/service/sparx
 TESTKIT   := $(GO) run ./tools/testkit
 GOTESTSUM ?= $(GO) run gotest.tools/gotestsum@v1.13.0
 GREMLINS  ?= $(GO) run github.com/go-gremlins/gremlins/cmd/gremlins@v0.6.0
@@ -28,7 +28,7 @@ DELTA_BASE         ?=
 # mutant and --coverpkg attributes coverage back to <pkg>. --workers 1 + the
 # large timeout coefficient avoid gremlins' adaptive-timeout collapse, which
 # mislabels healthy mutants "TIMED OUT" on a fast parallel run.
-MUTATE_PKGS ?= ./client/eapx ./client/eaxmi ./internal/mcpserver ./internal/service/sparx
+MUTATE_PKGS ?= ./client/eaxmi ./internal/mcpserver ./internal/service/sparx
 
 # gremlins derives each mutant's timeout from the baseline test duration; on a
 # sub-second suite that estimate is far too tight and healthy mutants get
@@ -39,7 +39,8 @@ MUTATE_TIMEOUT_COEFF ?= 60
 .PHONY: unit-test mutation-test test-report test-and-report clean
 
 ## Run every test — Cucumber scenarios and plain Go tests — in one invocation,
-## always with coverage and the race detector.
+## always with coverage. No -race: the codebase is pure Go with no
+## goroutines in production code (the race detector also needs cgo).
 unit-test:
 	@mkdir -p tmp/result tmp/report/tests tmp/report/coverage
 	@rm -f tmp/coverage.out
@@ -47,7 +48,7 @@ unit-test:
 	$(GOTESTSUM) --format testname \
 		--junitfile tmp/report/tests/junit.xml \
 		--jsonfile tmp/report/tests/go-test.json \
-		-- ./... -race -coverpkg=$(COVERPKG) -coverprofile=tmp/coverage.out; \
+		-- ./... -coverpkg=$(COVERPKG) -coverprofile=tmp/coverage.out; \
 	status=$$?; \
 	$(TESTKIT) unit-test tmp/report/tests/go-test.json; \
 	$(GO) tool cover -func=tmp/coverage.out | tee tmp/report/coverage/summary.txt; \

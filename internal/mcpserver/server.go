@@ -1,14 +1,12 @@
-// Package mcpserver exposes the eapx SQL connector and the ArchiMate service
-// over an MCP server (stdio).
+// Package mcpserver exposes the ArchiMate service over an MCP server (stdio).
 //
-//	ea_query                       read-only SQL against a .eapx file
 //	ea_model_tree / ea_element /    read an exported .xml model
 //	  ea_package / ea_diagram
 //	ea_archimate_types             the type vocabulary
 //	ea_create_element / …          edit a copy of the model and save it
 //
-// Tool handlers depend on interfaces (Querier, Model); New(nil) wires the real
-// implementations, tests pass fakes through Options.
+// Tool handlers depend on the Model interface; New(nil) wires the real XMI
+// service, tests pass a fake through Options.
 package mcpserver
 
 import (
@@ -16,20 +14,12 @@ import (
 )
 
 // Version is reported to MCP clients during initialization.
-const Version = "0.3.0"
+const Version = "0.4.0"
 
-// Options overrides the tool handlers' dependencies. A nil *Options (or nil
-// fields) uses the real eapx connector and XMI service.
+// Options overrides the tool handlers' dependencies. A nil *Options (or a nil
+// field) uses the real XMI service.
 type Options struct {
-	EAPX  Opener      // path -> Querier (SQL)
 	Sparx SparxOpener // path -> Model (ArchiMate)
-}
-
-func (o *Options) eapx() Opener {
-	if o != nil && o.EAPX != nil {
-		return o.EAPX
-	}
-	return defaultOpener
 }
 
 func (o *Options) sparx() SparxOpener {
@@ -40,7 +30,7 @@ func (o *Options) sparx() SparxOpener {
 }
 
 // New builds the MCP server with every tool registered. Pass nil for the real
-// implementations.
+// implementation.
 func New(o *Options) *server.MCPServer {
 	s := server.NewMCPServer(
 		"mcp-server-sparx-ea",
@@ -49,7 +39,6 @@ func New(o *Options) *server.MCPServer {
 		server.WithRecovery(),
 	)
 
-	registerQueryTool(s, o.eapx())
 	registerSparxTools(s, o.sparx())
 
 	return s
