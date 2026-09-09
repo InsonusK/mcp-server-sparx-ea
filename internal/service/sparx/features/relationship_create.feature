@@ -1,46 +1,67 @@
 Feature: Create relationships, with ArchiMate validation (method 5)
   As the MCP server
-  I want the service to refuse a relationship ArchiMate does not permit
-  So that an agent cannot put the model into an invalid state
+  I want the service to refuse a relationship ArchiMate does not permit or that
+  already exists, so an agent cannot put the model into an invalid state.
 
-  Scenario Outline: Relationship validity between two elements
+  All scenarios accumulate into tmp/relationship_create.xml — one file with a
+  worked example of every relationship the service currently supports, plus the
+  helper elements they connect.
+
+  Background:
     Given the working model:
-      | source | TestProject.xml           |
-      | output | relationship_create_matrix.xml |
-      | root   | relationship create matrix |
-    When I relate "relationship create matrix/Motivation_Package/<source>" to "relationship create matrix/Motivation_Package/<target>" as "<relation>"
-    Then the relate <outcome>
+      | source | TestProject.xml         |
+      | output | relationship_create.xml |
+      | root   | relationship create     |
+
+  Scenario: Helper elements the relationship examples connect
+    When I create a "ArchiMate.Goal" named "GoalA" in "relationship create/Motivation_Package" with note ""
+    And I create a "ArchiMate.Goal" named "GoalB" in "relationship create/Motivation_Package" with note ""
+    And I create a "ArchiMate.Requirement" named "ReqA" in "relationship create/Motivation_Package" with note ""
+    And I create a "ArchiMate.BusinessProcess" named "ProcA" in "relationship create/Motivation_Package" with note ""
+    And I create a "ArchiMate.BusinessProcess" named "ProcB" in "relationship create/Motivation_Package" with note ""
+    And I create a "ArchiMate.BusinessObject" named "ObjA" in "relationship create/Motivation_Package" with note ""
+    Then the create succeeds
+
+  Scenario Outline: A worked example of every supported relationship
+    When I relate "relationship create/Motivation_Package/<source>" to "relationship create/Motivation_Package/<target>" as "<relation>"
+    Then the relate succeeds
 
     Examples:
-      | source       | target  | relation                 | outcome                                              |
-      | Requirement1 | Goal1   | ArchiMate.Realization    | succeeds                                             |
-      | Stakeholder1 | Goal1   | ArchiMate.Association    | succeeds                                             |
-      | Driver1      | Goal1   | ArchiMate.Influence      | succeeds                                             |
-      | Goal1        | Goal1   | ArchiMate.Specialization | succeeds                                             |
-      | Goal1        | Value1  | ArchiMate.Specialization | fails with "same type"                               |
-      | Goal1        | Driver1 | ArchiMate.Composition    | fails with "different ArchiMate types"               |
-      | Goal1        | Driver1 | ArchiMate.Triggering     | fails with "behaviour elements"                      |
-      | Requirement1 | Goal1   | ArchiMate.Frobnicate     | fails with "not a known ArchiMate relationship type" |
+      | source | target | relation                 |
+      | ReqA   | GoalA  | ArchiMate.Realization    |
+      | GoalA  | GoalB  | ArchiMate.Specialization |
+      | GoalA  | GoalB  | ArchiMate.Composition    |
+      | GoalA  | GoalB  | ArchiMate.Aggregation    |
+      | GoalA  | GoalB  | ArchiMate.Association    |
+      | ProcA  | GoalA  | ArchiMate.Influence      |
+      | ProcA  | ProcB  | ArchiMate.Triggering     |
+      | ProcA  | ProcB  | ArchiMate.Flow           |
+      | ProcA  | ObjA   | ArchiMate.Access         |
+      | ProcA  | GoalB  | ArchiMate.Serving        |
 
-  Scenario: Influence must target a motivation element
-    Given the working model:
-      | source | TestProject.xml                   |
-      | output | relationship_create_influence.xml |
-      | root   | relationship create influence     |
-    When I create a "ArchiMate.BusinessProcess" named "Proc" in "relationship create influence/Motivation_Package" with note ""
-    And I relate "relationship create influence/Motivation_Package/Driver1" to "relationship create influence/Motivation_Package/Proc" as "ArchiMate.Influence"
-    Then the relate fails with "must target a motivation element"
+  Scenario Outline: Relationships ArchiMate does not permit are refused
+    When I relate "relationship create/Motivation_Package/<source>" to "relationship create/Motivation_Package/<target>" as "<relation>"
+    Then the relate fails with "<message>"
 
-  Scenario: A created relationship round-trips and is visible from both ends
-    Given the working model:
-      | source | TestProject.xml                |
-      | output | relationship_create.xml        |
-      | root   | relationship create            |
-    When I relate "relationship create/Motivation_Package/Stakeholder1" to "relationship create/Motivation_Package/Goal1" as "ArchiMate.Association" named "cares about"
+    Examples:
+      | source | target | relation                 | message                                             |
+      | GoalA  | ProcA  | ArchiMate.Specialization | same type                                            |
+      | GoalA  | ReqA   | ArchiMate.Composition    | different ArchiMate types                            |
+      | GoalA  | GoalB  | ArchiMate.Triggering     | behaviour elements                                   |
+      | ProcA  | ObjA   | ArchiMate.Influence      | must target a motivation element                     |
+      | ReqA   | GoalA  | ArchiMate.Frobnicate     | not a known ArchiMate relationship type              |
+
+  Scenario: The same (type, source, target) relationship cannot be created twice
+    When I relate "relationship create/Motivation_Package/ReqA" to "relationship create/Motivation_Package/GoalB" as "ArchiMate.Realization"
+    And I relate "relationship create/Motivation_Package/ReqA" to "relationship create/Motivation_Package/GoalB" as "ArchiMate.Realization"
+    Then the relate fails with "already exists"
+
+  Scenario: A named relationship round-trips and is visible from both ends
+    When I relate "relationship create/Motivation_Package/Stakeholder1" to "relationship create/Motivation_Package/GoalA" as "ArchiMate.Association" named "cares about"
     Then the relate succeeds
     And after reload the element "relationship create/Motivation_Package/Stakeholder1" relations include:
       | type                 | name        | direction | otherName |
-      | ArchiMate.Association | cares about | outgoing  | Goal1     |
-    And after reload the element "relationship create/Motivation_Package/Goal1" relations include:
+      | ArchiMate.Association | cares about | outgoing  | GoalA     |
+    And after reload the element "relationship create/Motivation_Package/GoalA" relations include:
       | type                 | direction | otherName    |
       | ArchiMate.Association | incoming  | Stakeholder1 |

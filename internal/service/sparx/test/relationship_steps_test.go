@@ -39,6 +39,27 @@ func registerRelationshipSteps(sc *godog.ScenarioContext, w *common.World) {
 		common.Logf(ctx, "deleted relationship %s", w.LastRelID)
 		return w.Save(ctx)
 	})
+
+	sc.Step(`^I delete the relationship "([^"]*)"$`, func(ctx context.Context, id string) error {
+		w.Err = w.Mut.DeleteRelationship(id)
+		if w.Err != nil {
+			common.Logf(ctx, "delete relationship %q → error: %v", id, w.Err)
+			return nil
+		}
+		common.Logf(ctx, "deleted relationship %q", id)
+		return w.Save(ctx)
+	})
+
+	sc.Step(`^I delete the relationship between "([^"]*)" and "([^"]*)"$`, func(ctx context.Context, src, tgt string) error {
+		n, err := w.Mut.DeleteRelationshipsBetween(src, tgt)
+		w.Err = err
+		if err != nil {
+			common.Logf(ctx, "delete between %q and %q → error: %v", src, tgt, err)
+			return nil
+		}
+		common.Logf(ctx, "deleted %d relationship(s) between %q and %q", n, src, tgt)
+		return w.Save(ctx)
+	})
 }
 
 var errNoRel = errString("no relationship was created in this scenario")

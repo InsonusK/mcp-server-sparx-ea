@@ -150,12 +150,20 @@ func (s *Service) CreateRelationship(sourceRef, targetRef, archimateRelType, nam
 		return nil, fmt.Errorf("sparx: %s from %s (%s) to %s (%s) is not allowed: %s",
 			relBare, src.Name, qualify(srcBare), tgt.Name, qualify(tgtBare), reason)
 	}
+	// (type, source, target) is unique: no duplicate relationship.
+	stereo := "ArchiMate_" + relBare
+	for _, c := range s.doc.Connectors() {
+		if c.SourceID == src.XMIID && c.TargetID == tgt.XMIID && c.Stereotype == stereo {
+			return nil, fmt.Errorf("sparx: a %s relationship from %s to %s already exists (%s)",
+				relBare, src.Name, tgt.Name, c.XMIID)
+		}
+	}
 
 	ea := relEA[relBare]
 	conn, err := s.doc.AddConnector(eaxmi.ConnectorSpec{
 		SourceID: src.XMIID, TargetID: tgt.XMIID, Name: strings.TrimSpace(name),
 		EAType: ea.EAType, ModelRepr: ea.ModelRepr,
-		Stereotype: "ArchiMate_" + relBare, Direction: ea.Direction,
+		Stereotype: stereo, Direction: ea.Direction,
 		Documentation: documentation,
 	})
 	if err != nil {
@@ -165,6 +173,35 @@ func (s *Service) CreateRelationship(sourceRef, targetRef, archimateRelType, nam
 		ID: conn.XMIID, Type: qualify(relBare), Name: conn.Name, Direction: "outgoing",
 		OtherID: tgt.XMIID, OtherName: tgt.Name, OtherType: qualify(tgtBare),
 	}, nil
+}
+
+// DeleteRelationshipsBetween removes every relationship whose source is
+// sourceRef and target is targetRef. Returns how many were removed; it is an
+// error if there were none.
+func (s *Service) DeleteRelationshipsBetween(sourceRef, targetRef string) (int, error) {
+	src, _ := s.resolveElement(sourceRef)
+	tgt, _ := s.resolveElement(targetRef)
+	if src == nil {
+		return 0, fmt.Errorf("sparx: no source element for %q", sourceRef)
+	}
+	if tgt == nil {
+		return 0, fmt.Errorf("sparx: no target element for %q", targetRef)
+	}
+	var ids []string
+	for _, c := range s.doc.Connectors() {
+		if c.SourceID == src.XMIID && c.TargetID == tgt.XMIID {
+			ids = append(ids, c.XMIID)
+		}
+	}
+	if len(ids) == 0 {
+		return 0, fmt.Errorf("sparx: no relationship from %s to %s", src.Name, tgt.Name)
+	}
+	for _, id := range ids {
+		if err := s.doc.RemoveConnector(id); err != nil {
+			return 0, fmt.Errorf("sparx: %w", err)
+		}
+	}
+	return len(ids), nil
 }
 
 // DeleteRelationship removes a relationship by its id.
@@ -238,21 +275,6 @@ func (s *Service) Save(path string) error {
 }
 
 // ---------- helpers ----------
-
-func (s *Service) resolvePackage(ref string) *eaxmi.Package {
-	if looksLikeID(ref) {
-		if p, ok := s.doc.PackageByID(ref); ok {
-			return p
-		}
-		for _, p := range s.allPackages() {
-			if strings.EqualFold(p.GUID, ref) {
-				return p
-			}
-		}
-		return nil
-	}
-	return s.walkPackages(splitPath(ref))
-}
 
 func (s *Service) childElement(p *eaxmi.Package, name string) *eaxmi.Element {
 	for _, e := range p.Elements {

@@ -18,8 +18,10 @@ import (
 
 func TestFeatures(t *testing.T) {
 	// tmp/ holds the saved working copies from methods 4-6 scenarios: cleared
-	// at the start of every run, kept afterwards for import into Sparx EA.
+	// at the start of every run, kept afterwards for import into Sparx EA. One
+	// file per feature, accumulating that feature's changes.
 	_ = os.RemoveAll(common.TmpDir)
+	common.ResetWorkingModels()
 
 	opts := godog.Options{
 		Format:   "pretty",
