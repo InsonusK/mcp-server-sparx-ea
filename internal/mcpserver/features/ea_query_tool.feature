@@ -6,10 +6,10 @@ Feature: The ea_query MCP tool
   Background:
     Given a running MCP server
 
-  Scenario: The server advertises exactly the ea_query tool
+  Scenario: The server advertises the ea_query tool
     When I list the MCP tools
     Then the tool "ea_query" is available
-    And exactly 1 tool is advertised
+    And exactly 18 tools are advertised
 
   Scenario: ea_query returns query rows as JSON
     When I call "ea_query" with file "TestProject.eapx" and sql "select Object_ID, Name from t_object"

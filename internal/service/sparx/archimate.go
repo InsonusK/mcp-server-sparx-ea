@@ -1,6 +1,9 @@
 package sparx
 
-import "strings"
+import (
+	"sort"
+	"strings"
+)
 
 // The service speaks ArchiMate: an element has one Type ("ArchiMate.Goal"), not
 // a (uml:Class, stereotype) pair. This file is the ArchiMate 3.2 vocabulary,
@@ -248,6 +251,23 @@ func IsKnownElementType(qualified string) bool {
 func IsKnownRelationshipType(qualified string) bool {
 	name, ok := unqualify(qualified)
 	return ok && archimateRelationships[name]
+}
+
+// ElementTypes returns the qualified names of every ArchiMate element type the
+// service accepts ("ArchiMate.Goal", …), sorted.
+func ElementTypes() []string { return qualifiedSorted(archimateElements) }
+
+// RelationshipTypes returns the qualified names of every ArchiMate relationship
+// type the service accepts ("ArchiMate.Realization", …), sorted.
+func RelationshipTypes() []string { return qualifiedSorted(archimateRelationships) }
+
+func qualifiedSorted(set map[string]bool) []string {
+	out := make([]string, 0, len(set))
+	for name := range set {
+		out = append(out, qualify(name))
+	}
+	sort.Strings(out)
+	return out
 }
 
 func toSet(vs ...string) map[string]bool {
