@@ -11,6 +11,9 @@ type Model interface {
 	Package(ref string) (*sparx.PackageInfo, error)
 	Diagram(ref string) (*sparx.DiagramInfo, error)
 
+	CreateRootPackage(name string) (*sparx.PackageInfo, error)
+	SetRootName(newName string, freshIdentity bool) (string, error)
+
 	CreateElement(parentRef, archimateType, name, documentation string) (*sparx.ElementInfo, error)
 	RenameElement(ref, newName string) (*sparx.ElementInfo, error)
 	SetElementDocumentation(ref, documentation string) (*sparx.ElementInfo, error)
@@ -39,3 +42,15 @@ type Model interface {
 type SparxOpener func(path string) (Model, error)
 
 func defaultSparxOpener(path string) (Model, error) { return sparx.Open(path) }
+
+// ModelFactory builds a new, empty Model from a root package name.
+// Options.NewModel overrides it; the default builds the real XMI service.
+type ModelFactory func(rootName string) (Model, error)
+
+func defaultModelFactory(rootName string) (Model, error) {
+	m, err := sparx.NewModel(rootName)
+	if err != nil {
+		return nil, err
+	}
+	return m, nil
+}

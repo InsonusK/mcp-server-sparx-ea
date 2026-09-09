@@ -31,3 +31,14 @@ Feature: Create a model from scratch (a new EA root node)
     Then the create succeeds
     And after reload the package "rootnode create tree" packages are "A"
     And after reload the package "rootnode create tree/A" packages are "B"
+
+  Scenario: An ArchiMate element created from scratch keeps its stereotype after import
+    Given a new model:
+      | root   | rootnode create archimate     |
+      | output | rootnode_create_archimate.xml |
+    When I create a package "Capabilities" in "rootnode create archimate"
+    And I create a "ArchiMate.ApplicationService" named "Model read" in "rootnode create archimate/Capabilities" with note "navigate the tree"
+    Then the create succeeds
+    And after reload the element "rootnode create archimate/Capabilities/Model read" is:
+      | field | value                          |
+      | type  | ArchiMate.ApplicationService   |
