@@ -28,7 +28,7 @@ func parseRect(s string) (sparx.Rect, error) {
 
 func registerDiagramSteps(sc *godog.ScenarioContext, w *common.World) {
 	sc.Step(`^I read the diagram "([^"]*)"$`, func(ctx context.Context, ref string) error {
-		w.Diagram, w.Err = w.Active().Diagram(ref)
+		w.Diagram, w.Err = w.Active().Diagram(w.Rel(ref))
 		if w.Err != nil {
 			common.Logf(ctx, "read diagram %q → error: %v", ref, w.Err)
 			return nil
@@ -44,7 +44,7 @@ func registerDiagramSteps(sc *godog.ScenarioContext, w *common.World) {
 		if err != nil {
 			return err
 		}
-		w.Err = w.Mut.AddToDiagram(d, e, rect)
+		w.Err = w.Mut.AddToDiagram(w.Rel(d), w.Rel(e), rect)
 		if w.Err != nil {
 			common.Logf(ctx, "add %q to %q → error: %v", e, d, w.Err)
 			return nil
@@ -59,7 +59,7 @@ func registerDiagramSteps(sc *godog.ScenarioContext, w *common.World) {
 		if err != nil {
 			return err
 		}
-		w.Err = w.Mut.MoveOnDiagram(d, e, rect)
+		w.Err = w.Mut.MoveOnDiagram(w.Rel(d), w.Rel(e), rect)
 		if w.Err != nil {
 			return nil
 		}
@@ -69,7 +69,7 @@ func registerDiagramSteps(sc *godog.ScenarioContext, w *common.World) {
 
 	sc.Step(`^I remove "([^"]*)" from the diagram "([^"]*)"$`, func(ctx context.Context, e, d string) error {
 		w.LastDiagramRef = d
-		w.Err = w.Mut.RemoveFromDiagram(d, e)
+		w.Err = w.Mut.RemoveFromDiagram(w.Rel(d), w.Rel(e))
 		if w.Err != nil {
 			return nil
 		}

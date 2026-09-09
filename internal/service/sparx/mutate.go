@@ -37,6 +37,13 @@ func (s *Service) SetRootName(newName string, freshIdentity bool) (string, error
 	return newName, nil
 }
 
+// Absorb merges another model's root packages (with a fresh identity) into this
+// one, so several independently-built models become one importable file with a
+// package per source. Used by the test harness.
+func (s *Service) Absorb(other *Service) error {
+	return errWrap(s.doc.Merge(other.doc))
+}
+
 // RenamePackage renames a package (by id or path). Unlike SetRootName it keeps
 // the package identity.
 func (s *Service) RenamePackage(ref, newName string) error {

@@ -55,7 +55,10 @@ func initializeScenario(sc *godog.ScenarioContext) {
 		w.Reset()
 		return ctx, nil
 	})
-	sc.After(func(ctx context.Context, _ *godog.Scenario, _ error) (context.Context, error) {
+	sc.After(func(ctx context.Context, _ *godog.Scenario, err error) (context.Context, error) {
+		if err == nil {
+			_ = w.Finish(ctx) // merge this scenario's package into its output file
+		}
 		w.Reset()
 		return ctx, nil
 	})

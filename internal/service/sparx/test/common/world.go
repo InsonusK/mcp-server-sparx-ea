@@ -12,6 +12,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -24,20 +25,16 @@ import (
 // cleared at the start of a run, kept afterwards for manual import into Sparx.
 const TmpDir = "tmp"
 
-// One working copy per output file, shared across the scenarios of a feature so
-// that tmp/<output>.xml accumulates every successful change (a failed operation
-// Saves nothing, so it never pollutes the file). Reset by ResetWorkingModels.
-var (
-	workingModels = map[string]*sparx.Service{}
-	workingRoots  = map[string]string{}
-)
+// Each scenario builds a fully independent working copy of the fixture (its own
+// root package, fresh GUIDs) and saves it as one "part" under tmp/.parts/<feature>/.
+// Every save also rebuilds tmp/<feature>.xml by merging all of that feature's
+// parts, so the file the user imports has one package per scenario and the
+// scenarios never influence each other.
+var scenarioCount int
 
-// ResetWorkingModels drops the per-output working copies. TestFeatures calls it
-// at the start of a run.
-func ResetWorkingModels() {
-	workingModels = map[string]*sparx.Service{}
-	workingRoots = map[string]string{}
-}
+// ResetWorkingModels resets the per-run scenario counter. TestFeatures calls it
+// once per run (after wiping TmpDir).
+func ResetWorkingModels() { scenarioCount = 0 }
 
 // World is one scenario's state.
 type World struct {
@@ -51,15 +48,29 @@ type World struct {
 	Err     error
 
 	// working copy (the "Given the working model" step)
-	Mut       *sparx.Service
-	Source    string
-	Output    string // tmp filename this scenario writes to
-	RootName  string
-	SavedPath string
+	Mut      *sparx.Service
+	Source   string
+	Output   string // tmp file this scenario's package is merged into
+	RootName string // this scenario's root package name (unique within Output)
+	Seq      int    // this scenario's ordinal (names the part file)
 
 	LastRelID      string
 	LastElemPath   string
 	LastDiagramRef string
+}
+
+// Rel turns a path written relative to the scenario's package ("Motivation_Package/GoalA")
+// into one this scenario's model resolves.
+func (w *World) Rel(path string) string {
+	if w.RootName == "" || strings.HasPrefix(path, w.RootName+"/") || eaxmiIsID(path) {
+		return path
+	}
+	return w.RootName + "/" + path
+}
+
+func eaxmiIsID(ref string) bool {
+	return strings.HasPrefix(ref, "EAID_") || strings.HasPrefix(ref, "EAPK_") ||
+		(strings.HasPrefix(ref, "{") && strings.HasSuffix(ref, "}"))
 }
 
 func NewWorld() *World { return &World{} }
@@ -97,18 +108,15 @@ func (w *World) theModelFile(ctx context.Context, name string) error {
 	return nil
 }
 
-// theWorkingModel loads a fixture into an in-memory working copy, renames its
-// root package (so the Saved copy imports into EA as a separate package), and
-// records which tmp file this scenario writes to.
+// theWorkingModel loads a fresh, independent working copy of a fixture for this
+// scenario: its own root package (named after the scenario, unique within the
+// output file), fresh GUIDs. Edits never touch the fixture. At scenario end the
+// package is merged into tmp/<output> alongside the other scenarios'.
 //
 //	Given the working model:
-//	  | source   | TestProject.xml          |
-//	  | output   | element_create_basic.xml |
-//	  | root     | element create basic     |
-//	  | identity | fresh                    |  # optional: "fresh" (default) | "keep"
-//
-// identity=fresh regenerates every GUID so the file imports next to the
-// original; identity=keep changes only the root package's name and id.
+//	  | source   | TestProject.xml         |
+//	  | output   | relationship_create.xml |
+//	  | identity | fresh                   |  # optional: "fresh" (default) | "keep"
 func (w *World) theWorkingModel(ctx context.Context, table *godog.Table) error {
 	cfg := map[string]string{}
 	for _, r := range table.Rows {
@@ -116,57 +124,97 @@ func (w *World) theWorkingModel(ctx context.Context, table *godog.Table) error {
 			cfg[r.Cells[0].Value] = r.Cells[1].Value
 		}
 	}
-	src, out, root := cfg["source"], cfg["output"], cfg["root"]
-	if src == "" || out == "" || root == "" {
-		return fmt.Errorf(`the working model needs "source", "output" and "root" rows`)
+	src, out := cfg["source"], cfg["output"]
+	if src == "" || out == "" {
+		return fmt.Errorf(`the working model needs "source" and "output" rows`)
 	}
-	if cached, ok := workingModels[out]; ok {
-		w.Mut, w.Source, w.Output, w.RootName, w.SavedPath = cached, src, out, workingRoots[out], ""
-		Logf(ctx, "continuing the accumulated working copy for %s (root %q)", out, w.RootName)
-		return nil
-	}
-
-	freshIdentity := cfg["identity"] != "keep"
 	svc, err := sparx.Open(FixturePath(src))
 	if err != nil {
 		return fmt.Errorf("open %s: %w", src, err)
 	}
-	newRoot, err := svc.SetRootName(root, freshIdentity)
+	scenarioCount++
+	w.Seq = scenarioCount
+	root := fmt.Sprintf("%02d %s", w.Seq, w.ScenarioName)
+	newRoot, err := svc.SetRootName(root, cfg["identity"] != "keep")
 	if err != nil {
 		return err
 	}
-	workingModels[out] = svc
-	workingRoots[out] = newRoot
-	w.Mut, w.Source, w.Output, w.RootName, w.SavedPath = svc, src, out, newRoot, ""
-	Logf(ctx, "new working copy of %q → root %q → accumulates into %s/%s (fixture untouched)",
+	w.Mut, w.Source, w.Output, w.RootName = svc, src, out, newRoot
+	Logf(ctx, "working model of %q → package %q → merges into %s/%s (fixture untouched)",
 		src, newRoot, TmpDir, out)
 	return nil
 }
 
-// Save persists the working copy to TmpDir/<output>.
-func (w *World) Save(ctx context.Context) error {
+func (w *World) outputPath() string { return filepath.Join(TmpDir, w.Output) }
+
+func (w *World) partsDir() string {
+	return filepath.Join(TmpDir, ".parts", strings.TrimSuffix(w.Output, ".xml"))
+}
+
+func (w *World) partPath() string {
+	return filepath.Join(w.partsDir(), fmt.Sprintf("%02d.xml", w.Seq))
+}
+
+// Save persists this scenario's current working copy. Called after every
+// successful mutation and from the After hook. It writes the scenario's own
+// "part" file, then rebuilds tmp/<output> by merging every part of that feature
+// — so the file always reflects the latest state of every scenario and no
+// scenario can influence another.
+func (w *World) Save(ctx context.Context) error { return w.persist(ctx) }
+
+func (w *World) persist(ctx context.Context) error {
 	if w.Mut == nil {
-		return fmt.Errorf("no working model (missing 'Given the working model')")
+		return nil
+	}
+	if err := os.MkdirAll(w.partsDir(), 0o755); err != nil {
+		return err
+	}
+	if err := w.Mut.Save(w.partPath()); err != nil {
+		return fmt.Errorf("save part %s: %w", w.partPath(), err)
+	}
+
+	parts, err := filepath.Glob(filepath.Join(w.partsDir(), "*.xml"))
+	if err != nil {
+		return err
+	}
+	sort.Strings(parts)
+
+	combined, err := sparx.Open(parts[0])
+	if err != nil {
+		return fmt.Errorf("open part %s: %w", parts[0], err)
+	}
+	for _, p := range parts[1:] {
+		part, err := sparx.Open(p)
+		if err != nil {
+			return fmt.Errorf("open part %s: %w", p, err)
+		}
+		if err := combined.Absorb(part); err != nil {
+			return fmt.Errorf("merge part %s into %s: %w", p, w.Output, err)
+		}
 	}
 	if err := os.MkdirAll(TmpDir, 0o755); err != nil {
 		return err
 	}
-	w.SavedPath = filepath.Join(TmpDir, w.Output)
-	if err := w.Mut.Save(w.SavedPath); err != nil {
-		return fmt.Errorf("save: %w", err)
+	if err := combined.Save(w.outputPath()); err != nil {
+		return fmt.Errorf("save %s: %w", w.Output, err)
 	}
-	Logf(ctx, "saved → %s (open in Sparx / import to review)", w.SavedPath)
+	Logf(ctx, "merged %d scenario package(s) into %s (open in Sparx / import to review)",
+		len(parts), w.outputPath())
 	return nil
 }
 
-// Reloaded reopens the last Saved working copy.
+// Finish persists this scenario's working copy if it has one (call from the
+// After hook so every scenario contributes a package, even one with only a
+// Background).
+func (w *World) Finish(ctx context.Context) error { return w.persist(ctx) }
+
+// Reloaded persists this scenario's working copy, then reopens the merged output
+// file so "after reload" assertions run against a real XMI round-trip.
 func (w *World) Reloaded(ctx context.Context) (*sparx.Service, error) {
-	if w.SavedPath == "" {
-		if err := w.Save(ctx); err != nil {
-			return nil, err
-		}
+	if err := w.persist(ctx); err != nil {
+		return nil, err
 	}
-	return sparx.Open(w.SavedPath)
+	return sparx.Open(w.outputPath())
 }
 
 // ---------- generic outcome steps ----------
@@ -285,7 +333,7 @@ func (w *World) reloadElementIs(ctx context.Context, ref string, table *godog.Ta
 	if err != nil {
 		return err
 	}
-	el, err := svc.Element(ref)
+	el, err := svc.Element(w.Rel(ref))
 	if err != nil {
 		return err
 	}
@@ -297,7 +345,7 @@ func (w *World) reloadElementFieldIs(ctx context.Context, field, want string) er
 	if err != nil {
 		return err
 	}
-	el, err := svc.Element(w.LastElemPath)
+	el, err := svc.Element(w.Rel(w.LastElemPath))
 	if err != nil {
 		return err
 	}
@@ -313,7 +361,7 @@ func (w *World) reloadElementGUIDIsNot(ctx context.Context, ref, notWant string)
 	if err != nil {
 		return err
 	}
-	el, err := svc.Element(ref)
+	el, err := svc.Element(w.Rel(ref))
 	if err != nil {
 		return err
 	}
@@ -329,7 +377,7 @@ func (w *World) reloadElementNotFound(ctx context.Context, ref string) error {
 	if err != nil {
 		return err
 	}
-	if _, err := svc.Element(ref); err == nil {
+	if _, err := svc.Element(w.Rel(ref)); err == nil {
 		return fmt.Errorf("element %q still resolves after reload", ref)
 	}
 	Logf(ctx, "element %q is gone after reload", ref)
@@ -341,7 +389,7 @@ func (w *World) reloadElementNoRelationTo(ctx context.Context, ref, other string
 	if err != nil {
 		return err
 	}
-	el, err := svc.Element(ref)
+	el, err := svc.Element(w.Rel(ref))
 	if err != nil {
 		return err
 	}
@@ -359,7 +407,7 @@ func (w *World) reloadElementRelationsInclude(ctx context.Context, ref string, t
 	if err != nil {
 		return err
 	}
-	el, err := svc.Element(ref)
+	el, err := svc.Element(w.Rel(ref))
 	if err != nil {
 		return err
 	}
@@ -375,7 +423,7 @@ func (w *World) reloadDiagramHasNObjects(ctx context.Context, ref string, n int)
 	if err != nil {
 		return err
 	}
-	d, err := svc.Diagram(ref)
+	d, err := svc.Diagram(w.Rel(ref))
 	if err != nil {
 		return err
 	}
@@ -390,7 +438,7 @@ func (w *World) reloadDiagramObjectsInclude(ctx context.Context, table *godog.Ta
 	if err != nil {
 		return err
 	}
-	d, err := svc.Diagram(w.LastDiagramRef)
+	d, err := svc.Diagram(w.Rel(w.LastDiagramRef))
 	if err != nil {
 		return err
 	}
@@ -414,6 +462,12 @@ func (w *World) reloadRootIs(ctx context.Context, want string) error {
 		}
 	}
 	return fmt.Errorf("after reload root packages are %v, want %q", roots, want)
+}
+
+// reloadRootIsScenario checks the merged output file carries this scenario's own
+// root package (the harness names it "NN <scenario name>").
+func (w *World) reloadRootIsScenario(ctx context.Context) error {
+	return w.reloadRootIs(ctx, w.RootName)
 }
 
 // ---------- registration ----------
@@ -450,6 +504,7 @@ func RegisterSharedSteps(sc *godog.ScenarioContext, w *World) {
 	sc.Step(`^after reload the diagram "([^"]*)" has (\d+) placed elements$`, w.reloadDiagramHasNObjects)
 	sc.Step(`^after reload the diagram placed elements include:$`, w.reloadDiagramObjectsInclude)
 	sc.Step(`^after reload the root package is "([^"]*)"$`, w.reloadRootIs)
+	sc.Step(`^after reload the root package is this scenario's package$`, w.reloadRootIsScenario)
 }
 
 // ---------- table helpers ----------
