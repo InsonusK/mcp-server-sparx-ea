@@ -87,9 +87,13 @@ func (w *World) theModelFile(ctx context.Context, name string) error {
 // records which tmp file this scenario writes to.
 //
 //	Given the working model:
-//	  | source | TestProject.xml          |
-//	  | output | element_create_basic.xml |
-//	  | root   | element create basic     |
+//	  | source   | TestProject.xml          |
+//	  | output   | element_create_basic.xml |
+//	  | root     | element create basic     |
+//	  | identity | fresh                    |  # optional: "fresh" (default) | "keep"
+//
+// identity=fresh regenerates every GUID so the file imports next to the
+// original; identity=keep changes only the root package's name and id.
 func (w *World) theWorkingModel(ctx context.Context, table *godog.Table) error {
 	cfg := map[string]string{}
 	for _, r := range table.Rows {
@@ -101,11 +105,12 @@ func (w *World) theWorkingModel(ctx context.Context, table *godog.Table) error {
 	if src == "" || out == "" || root == "" {
 		return fmt.Errorf(`the working model needs "source", "output" and "root" rows`)
 	}
+	freshIdentity := cfg["identity"] != "keep"
 	svc, err := sparx.Open(FixturePath(src))
 	if err != nil {
 		return fmt.Errorf("open %s: %w", src, err)
 	}
-	newRoot, err := svc.SetRootName(root, true) // fresh identity: files import side by side
+	newRoot, err := svc.SetRootName(root, freshIdentity)
 	if err != nil {
 		return err
 	}
@@ -280,6 +285,22 @@ func (w *World) reloadElementFieldIs(ctx context.Context, field, want string) er
 	return nil
 }
 
+func (w *World) reloadElementGUIDIsNot(ctx context.Context, ref, notWant string) error {
+	svc, err := w.Reloaded(ctx)
+	if err != nil {
+		return err
+	}
+	el, err := svc.Element(ref)
+	if err != nil {
+		return err
+	}
+	if el.GUID == notWant {
+		return fmt.Errorf("after reload %s still has guid %s, expected a fresh one", ref, notWant)
+	}
+	Logf(ctx, "reloaded %q has a fresh guid %s (was %s)", ref, el.GUID, notWant)
+	return nil
+}
+
 func (w *World) reloadElementNotFound(ctx context.Context, ref string) error {
 	svc, err := w.Reloaded(ctx)
 	if err != nil {
@@ -400,6 +421,7 @@ func RegisterSharedSteps(sc *godog.ScenarioContext, w *World) {
 	sc.Step(`^after reload the element "([^"]*)" is:$`, w.reloadElementIs)
 	sc.Step(`^after reload the element field "([^"]*)" is "([^"]*)"$`, w.reloadElementFieldIs)
 	sc.Step(`^after reload the element "([^"]*)" cannot be found$`, w.reloadElementNotFound)
+	sc.Step(`^after reload the element "([^"]*)" guid is not "([^"]*)"$`, w.reloadElementGUIDIsNot)
 	sc.Step(`^after reload the element "([^"]*)" has no relation to "([^"]*)"$`, w.reloadElementNoRelationTo)
 	sc.Step(`^after reload the element "([^"]*)" relations include:$`, w.reloadElementRelationsInclude)
 	sc.Step(`^after reload the diagram "([^"]*)" has (\d+) placed elements$`, w.reloadDiagramHasNObjects)
