@@ -91,22 +91,9 @@ func (d *Document) ResolvePackage(ref string) *Package {
 	return d.walkPackages(SplitPath(ref))
 }
 
-// walkPackages follows package-name segments down from the model root. If the
-// first segment does not name a top-level package but the model has exactly one
-// top-level package, the walk is retried from inside it — so a path can be
-// written relative to "the root package".
+// walkPackages follows package-name segments down from the synthetic model root.
 func (d *Document) walkPackages(segs []string) *Package {
-	if p := walkFrom(d.Root, segs); p != nil {
-		return p
-	}
-	if len(d.Root.Packages) == 1 && len(segs) > 0 && d.Root.Packages[0].Name != segs[0] {
-		return walkFrom(d.Root.Packages[0], segs)
-	}
-	return nil
-}
-
-func walkFrom(start *Package, segs []string) *Package {
-	cur := start
+	cur := d.Root
 	for _, seg := range segs {
 		var next *Package
 		for _, p := range cur.Packages {

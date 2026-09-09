@@ -12,7 +12,7 @@ import (
 
 func registerRelationshipSteps(sc *godog.ScenarioContext, w *common.World) {
 	relate := func(ctx context.Context, src, tgt, rel, name string) error {
-		r, err := w.Mut.CreateRelationship(w.Rel(src), w.Rel(tgt), rel, name, "")
+		r, err := w.Mut.CreateRelationship(src, tgt, rel, name, "")
 		w.Err = err
 		if err != nil {
 			common.Logf(ctx, "relate %q -> %q as %s → error: %v", src, tgt, rel, err)
@@ -51,7 +51,7 @@ func registerRelationshipSteps(sc *godog.ScenarioContext, w *common.World) {
 	})
 
 	sc.Step(`^I delete the relationship between "([^"]*)" and "([^"]*)"$`, func(ctx context.Context, src, tgt string) error {
-		n, err := w.Mut.DeleteRelationshipsBetween(w.Rel(src), w.Rel(tgt))
+		n, err := w.Mut.DeleteRelationshipsBetween(src, tgt)
 		w.Err = err
 		if err != nil {
 			common.Logf(ctx, "delete between %q and %q → error: %v", src, tgt, err)
