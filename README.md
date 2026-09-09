@@ -32,6 +32,11 @@ The server is pure Go — a single static binary, no runtime dependencies.
 
 ## Installation
 
+- **Install script** (Linux / macOS):
+
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/install.sh | bash
+  ```
 - **Release binary** — [Releases](https://github.com/InsonusK/mcp-server-sparx-ea/releases):
   `linux`, `darwin`, `windows` × `amd64`, `arm64`.
 - **From source** — Go 1.23+:
@@ -87,8 +92,10 @@ For an **AI agent**, the executable instructions live in
 | --- | --- |
 | `client/eaxmi/` | The EA XMI 2.1 codec — parse, navigate, edit, copy, re-serialise. Package `eaxmi`, pure Go. |
 | `internal/service/sparx/` | The ArchiMate service: ArchiMate vocabulary + validation over `eaxmi`. |
-| `internal/mcpserver/` | The MCP server — 17 tools over the service. |
+| `internal/mcpserver/` | The MCP server — 20 tools over the service, one file per concept. |
+| `tools/modelgen/` | Regenerates `docs/mcp-server-sparx-ea.xml` (the model of the server). |
 | `main.go` | `server.ServeStdio` entry point. |
+| `install.sh` | One-line release installer for Linux / macOS. |
 | `docs/skills/cucumber-go-testing.md` | How the tests are written (every test is a Cucumber scenario). |
 
 ## Testing

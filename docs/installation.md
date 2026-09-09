@@ -12,30 +12,30 @@ and put `mcp-server-sparx-ea` somewhere permanent.
 Each archive is `mcp-server-sparx-ea_v<version>_<os>_<arch>.tar.gz` (`.zip` for
 Windows) and unpacks to a single `mcp-server-sparx-ea` binary.
 
-### Download the latest release in one command (Linux / macOS)
-
-Grabs the right archive for your OS and CPU from the newest release and unpacks
-the binary into the current directory:
+### Install script (Linux / macOS)
 
 ```bash
-REPO=InsonusK/mcp-server-sparx-ea
-OS=$(uname -s | tr '[:upper:]' '[:lower:]')                       # linux | darwin
-ARCH=$(uname -m); case $ARCH in x86_64) ARCH=amd64;; aarch64|arm64) ARCH=arm64;; esac
-curl -fsSL "https://api.github.com/repos/$REPO/releases/latest" \
-  | grep -o "https://[^\"]*_${OS}_${ARCH}\.tar\.gz" \
-  | xargs curl -fsSL \
-  | tar -xz
+curl -fsSL https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/install.sh | bash
 ```
 
-Then move it onto your `PATH`, e.g. `sudo install mcp-server-sparx-ea /usr/local/bin/`.
+[`install.sh`](../install.sh) detects your OS and CPU, downloads the newest
+release, checks it against `SHA256SUMS`, and installs the binary to
+`/usr/local/bin` (with `sudo` if that path needs it). Options — as flags or
+environment variables:
 
-With the [GitHub CLI](https://cli.github.com/) instead:
+| Flag | Env var | Default |
+| --- | --- | --- |
+| `--version <v>` | `VERSION` | latest release |
+| `--dir <path>` | `INSTALL_DIR` | `/usr/local/bin` |
+| `--no-sudo` | `NO_SUDO=1` | (uses `sudo` when needed) |
 
 ```bash
-gh release download --repo InsonusK/mcp-server-sparx-ea \
-  --pattern "*_$(uname -s | tr '[:upper:]' '[:lower:]')_amd64.tar.gz"
-tar -xzf mcp-server-sparx-ea_*.tar.gz
+# a specific version, into a dir you own, no sudo
+curl -fsSL https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/install.sh \
+  | INSTALL_DIR="$HOME/.local/bin" bash -s -- --version 0.5.0 --no-sudo
 ```
+
+Prefer to see the script before running it? Download it, read it, then run it.
 
 Releases are cut by `.github/workflows/release.yml` whenever `mcpserver.Version`
 is bumped on `master`.
