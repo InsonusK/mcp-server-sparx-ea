@@ -105,7 +105,7 @@ func (w *World) theWorkingModel(ctx context.Context, table *godog.Table) error {
 	if err != nil {
 		return fmt.Errorf("open %s: %w", src, err)
 	}
-	newRoot, err := svc.SetRootName(root)
+	newRoot, err := svc.SetRootName(root, true) // fresh identity: files import side by side
 	if err != nil {
 		return err
 	}

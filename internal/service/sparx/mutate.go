@@ -22,15 +22,16 @@ type Rect struct {
 // one).
 func (s *Service) RootPackages() []string { return s.doc.RootPackages() }
 
-// SetRootName renames the single EA root package and gives it a fresh identity,
-// so a Saved copy imports into EA as a new package rather than merging into the
-// original. Returns the new root name.
-func (s *Service) SetRootName(newName string) (string, error) {
+// SetRootName renames the single EA root package. With freshIdentity=true it
+// also regenerates every GUID in the model, so a Saved copy imports into EA as
+// a fully independent package that can sit next to the original (an XMI import
+// matches by GUID). Returns the new root name.
+func (s *Service) SetRootName(newName string, freshIdentity bool) (string, error) {
 	newName = strings.TrimSpace(newName)
 	if newName == "" {
 		return "", fmt.Errorf("sparx: root name is required")
 	}
-	if err := s.doc.RenameRootPackage(newName); err != nil {
+	if err := s.doc.RenameRoot(newName, freshIdentity); err != nil {
 		return "", fmt.Errorf("sparx: %w", err)
 	}
 	return newName, nil

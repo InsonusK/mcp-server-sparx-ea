@@ -35,7 +35,8 @@
   // --- Cucumber (feature-файлы) --------------------------------------------
   "cucumber.glue": [
     // Маска путей к step-определениям на Go
-    "**/*_test.go"
+    "**/*_test.go",
+     "**/test/**/*.go"
   ],
   "cucumber.features": [
     // Пути к feature-файлам для автокомплита

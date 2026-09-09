@@ -13,4 +13,4 @@
 *.out
 
 # sparx service: saved working copies from methods 4-6 tests (kept for manual Sparx import)
-internal/service/sparx/test/tmp/
+tmp/

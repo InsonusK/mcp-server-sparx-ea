@@ -13,7 +13,7 @@ func (d *Document) RootPackages() []string {
 }
 
 // SetPackageName renames a package (model-tree name attribute, and the
-// package_name back-reference on its direct child elements).
+// package_name back-reference on its child elements).
 func (d *Document) SetPackageName(id, newName string) error {
 	pkg, ok := d.packageByID[id]
 	if !ok {
@@ -30,22 +30,33 @@ func (d *Document) SetPackageName(id, newName string) error {
 	return nil
 }
 
-// RenameRootPackage gives the single EA root package a new name AND a fresh
-// GUID, then repoints every direct child (subpackages, elements, diagrams) and
-// its extension records at the new id. A fresh id is what makes an XMI import
-// land as a new package next to the original instead of merging into it — used
-// by the test suite so many working copies can be imported side by side.
-func (d *Document) RenameRootPackage(newName string) error {
+// RenameRoot renames the single EA root package. With freshIdentity=true it
+// first regenerates every GUID in the model (RemapIdentity), so the Saved copy
+// imports into EA as a fully independent package next to the original;
+// otherwise only the root package gets a fresh id.
+func (d *Document) RenameRoot(newName string, freshIdentity bool) error {
 	if len(d.Root.Packages) != 1 {
 		return fmt.Errorf("eaxmi: expected exactly one root package, found %d", len(d.Root.Packages))
 	}
+	if freshIdentity {
+		if err := d.RemapIdentity(); err != nil {
+			return err
+		}
+		return d.SetPackageName(d.Root.Packages[0].XMIID, newName)
+	}
+	return d.renameRootWithFreshRootID(newName)
+}
+
+// renameRootWithFreshRootID gives just the root package a new name and id and
+// repoints its direct children.
+func (d *Document) renameRootWithFreshRootID(newName string) error {
 	root := d.Root.Packages[0]
 	oldID, oldName := root.XMIID, root.Name
 
 	newGUID := NewGUID()
 	newID := xmiIDFromGUID(newGUID, "EAPK_")
+	oldBody := underscoreBody(root.GUID)
 
-	// model tree node
 	pe := d.doc.FindElement("//packagedElement[@xmi:id='" + oldID + "']")
 	if pe == nil {
 		return fmt.Errorf("eaxmi: root package node %q not found", oldID)
@@ -53,23 +64,22 @@ func (d *Document) RenameRootPackage(newName string) error {
 	pe.CreateAttr("xmi:id", newID)
 	pe.CreateAttr("name", newName)
 
-	// extension <element xmi:idref>
 	if el := d.extension().FindElement("//element[@xmi:idref='" + oldID + "']"); el != nil {
 		el.CreateAttr("xmi:idref", newID)
 	}
-
-	// direct children point their package/owner at the root id
-	for _, m := range d.doc.FindElements("//model[@package='" + oldID + "']") {
-		m.CreateAttr("package", newID)
-	}
-	for _, m := range d.doc.FindElements("//model[@owner='" + oldID + "']") {
-		m.CreateAttr("owner", newID)
+	// direct children reference the root by id in several attributes
+	for _, attr := range []string{"package", "package2", "owner"} {
+		for _, m := range d.doc.FindElements("//*[@" + attr + "='" + oldID + "']") {
+			m.CreateAttr(attr, newID)
+		}
+		for _, m := range d.doc.FindElements("//*[@" + attr + "='EAID_" + oldBody + "']") {
+			m.CreateAttr(attr, "EAID_"+underscoreBody(newGUID))
+		}
 	}
 	for _, ep := range d.extension().FindElements("//extendedProperties[@package_name='" + oldName + "']") {
 		ep.CreateAttr("package_name", newName)
 	}
 
-	// update the parsed view
 	delete(d.packageByID, oldID)
 	root.XMIID, root.GUID, root.Name = newID, newGUID, newName
 	d.packageByID[newID] = root
