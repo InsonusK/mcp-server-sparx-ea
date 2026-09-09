@@ -2,345 +2,110 @@
 <xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ArchiMate3="http://www.sparxsystems.com/profiles/ArchiMate3/1.0">
 	<xmi:Documentation exporter="Enterprise Architect" exporterVersion="6.5" exporterID="1554"/>
 	<uml:Model xmi:type="uml:Model" name="EA_Model" visibility="public">
-		<packagedElement xmi:type="uml:Package" xmi:id="EAPK_12EDEB75_D31A_4b24_9476_EA75A66E41E8" name="Model" visibility="public">
-			<packagedElement xmi:type="uml:Package" xmi:id="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" name="Motivation_Package" visibility="public">
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778" name="Assessment1" visibility="public"/>
-				<edge xmi:type="uml:ControlFlow" xmi:id="EAID_B6F59AC2_0DC9_44f3_B203_F00015D095E3" visibility="public" source="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778" target="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_0290A600_22E9_4dfd_8B55_BAFC17B7D631" name="Capability1" visibility="public"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_01BCB3F2_328E_4174_9E98_91128D8C3288" name="Constraint1" visibility="public"/>
-				<packagedElement xmi:type="uml:Dependency" xmi:id="EAID_AD81CE18_026D_4f1b_8AB8_C6CA98DAE248" visibility="public" supplier="EAID_F3C2209E_B146_4328_863E_622BABD2B43E" client="EAID_01BCB3F2_328E_4174_9E98_91128D8C3288"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_73BE52AC_BEAB_4d1e_B258_510BDC942C0A" name="CourseOfAction1" visibility="public"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687" name="Driver1" visibility="public"/>
-				<edge xmi:type="uml:ControlFlow" xmi:id="EAID_3E217468_BE46_4b39_989A_DD9A26DA3EA2" name="Driver to Assessment" visibility="public" source="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687" target="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778"/>
-				<packagedElement xmi:type="uml:Association" xmi:id="EAID_1D69D97B_27B5_4123_BAD7_CC6F57A13AD7" visibility="public">
-					<memberEnd xmi:idref="EAID_dst69D97B_27B5_4123_BAD7_CC6F57A13AD7"/>
-					<memberEnd xmi:idref="EAID_src69D97B_27B5_4123_BAD7_CC6F57A13AD7"/>
-					<ownedEnd xmi:type="uml:Property" xmi:id="EAID_src69D97B_27B5_4123_BAD7_CC6F57A13AD7" visibility="public" association="EAID_1D69D97B_27B5_4123_BAD7_CC6F57A13AD7" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false" aggregation="none">
-						<type xmi:idref="EAID_5A4C2C8B_C2A3_403f_AD64_FA5DA9C46772"/>
-					</ownedEnd>
-					<ownedEnd xmi:type="uml:Property" xmi:id="EAID_dst69D97B_27B5_4123_BAD7_CC6F57A13AD7" visibility="public" association="EAID_1D69D97B_27B5_4123_BAD7_CC6F57A13AD7" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false" aggregation="none">
-						<type xmi:idref="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687"/>
-					</ownedEnd>
+		<packagedElement xmi:type="uml:Package" xmi:id="EAPK_9BBDDB5F_C7B6_408a_A31B_5CB0C99F50E9" name="DeepModel" visibility="public">
+			<packagedElement xmi:type="uml:Package" xmi:id="EAPK_7BEBDC56_B676_44a8_BF3D_717B759D289D" name="Package1" visibility="public">
+				<packagedElement xmi:type="uml:Package" xmi:id="EAPK_1F44AD06_C9E5_4d5d_81DE_7A8C008CF596" name="Package2" visibility="public">
+					<packagedElement xmi:type="uml:Package" xmi:id="EAPK_ADA3C3E9_107A_4b4c_9F13_FE7E9F45ABAD" name="Package3" visibility="public">
+						<packagedElement xmi:type="uml:Class" xmi:id="EAID_99561940_921F_4d09_927B_D810999B0739" name="Goal1" visibility="public"/>
+						<packagedElement xmi:type="uml:Class" xmi:id="EAID_F81E4853_59CD_459b_89CA_D7B91BD8A71A" name="Resource1" visibility="public"/>
+						<packagedElement xmi:type="uml:Dependency" xmi:id="EAID_9754A01D_CD53_46e6_90C6_7E5B272D693F" visibility="public" supplier="EAID_99561940_921F_4d09_927B_D810999B0739" client="EAID_F81E4853_59CD_459b_89CA_D7B91BD8A71A"/>
+					</packagedElement>
 				</packagedElement>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_F3C2209E_B146_4328_863E_622BABD2B43E" name="Goal1" visibility="public"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_A0E2952D_58F4_4066_B44E_ADF8CE5C7BE5" name="Location1" visibility="public"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_E49A40A1_A8AC_4a9b_BBE9_06F8EE12C7D4" name="Meaning1" visibility="public"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_999982B4_F72C_47b0_8945_627119C59C9D" name="Outcome1" visibility="public"/>
-				<packagedElement xmi:type="uml:Dependency" xmi:id="EAID_DC37F9A5_7995_4a57_8A86_44C47F775CAA" visibility="public" supplier="EAID_F3C2209E_B146_4328_863E_622BABD2B43E" client="EAID_999982B4_F72C_47b0_8945_627119C59C9D"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_DDE824E3_F741_4617_A317_8794B4427014" name="Principle1" visibility="public"/>
-				<packagedElement xmi:type="uml:Dependency" xmi:id="EAID_405F01E0_D152_4573_8D1A_E03D7C23F3B7" visibility="public" supplier="EAID_F3C2209E_B146_4328_863E_622BABD2B43E" client="EAID_DDE824E3_F741_4617_A317_8794B4427014"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_4C5FDBFC_5F57_464d_A38B_2B7116DC0523" name="Requirement1" visibility="public"/>
-				<packagedElement xmi:type="uml:Dependency" xmi:id="EAID_99B336DA_3A8D_49dd_868C_38E1B584DCF6" visibility="public" supplier="EAID_F3C2209E_B146_4328_863E_622BABD2B43E" client="EAID_4C5FDBFC_5F57_464d_A38B_2B7116DC0523"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_D6A837E2_D2A9_446c_AC26_56EC2B267DA7" name="Resource1" visibility="public"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_5A4C2C8B_C2A3_403f_AD64_FA5DA9C46772" name="Stakeholder1" visibility="public"/>
-				<packagedElement xmi:type="uml:Class" xmi:id="EAID_BFEE23B4_E92F_49d7_A4DF_97FE0B944CD2" name="Value1" visibility="public"/>
-				<packagedElement xmi:type="uml:Activity" xmi:id="EAID_39365A7E_9DA9_4611_BE15_697EF3F855EB" name="ValueStream1" visibility="public" isReadOnly="false" isSingleExecution="false"/>
 			</packagedElement>
 		</packagedElement>
-		<ArchiMate3:ArchiMate_Assessment base_Class="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778"/>
-		<ArchiMate3:ArchiMate_Influence base_ControlFlow="EAID_B6F59AC2_0DC9_44f3_B203_F00015D095E3"/>
-		<ArchiMate3:ArchiMate_Capability base_Class="EAID_0290A600_22E9_4dfd_8B55_BAFC17B7D631"/>
-		<ArchiMate3:ArchiMate_Constraint base_Class="EAID_01BCB3F2_328E_4174_9E98_91128D8C3288"/>
-		<ArchiMate3:ArchiMate_Realization base_Dependency="EAID_AD81CE18_026D_4f1b_8AB8_C6CA98DAE248"/>
-		<ArchiMate3:ArchiMate_CourseOfAction base_Class="EAID_73BE52AC_BEAB_4d1e_B258_510BDC942C0A"/>
-		<ArchiMate3:ArchiMate_Driver base_Class="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687"/>
-		<ArchiMate3:ArchiMate_Influence base_ControlFlow="EAID_3E217468_BE46_4b39_989A_DD9A26DA3EA2"/>
-		<ArchiMate3:ArchiMate_Association base_Association="EAID_1D69D97B_27B5_4123_BAD7_CC6F57A13AD7"/>
-		<ArchiMate3:ArchiMate_Goal base_Class="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-		<ArchiMate3:ArchiMate_Location base_Class="EAID_A0E2952D_58F4_4066_B44E_ADF8CE5C7BE5"/>
-		<ArchiMate3:ArchiMate_Meaning base_Class="EAID_E49A40A1_A8AC_4a9b_BBE9_06F8EE12C7D4"/>
-		<ArchiMate3:ArchiMate_Outcome base_Class="EAID_999982B4_F72C_47b0_8945_627119C59C9D"/>
-		<ArchiMate3:ArchiMate_Realization base_Dependency="EAID_DC37F9A5_7995_4a57_8A86_44C47F775CAA"/>
-		<ArchiMate3:ArchiMate_Principle base_Class="EAID_DDE824E3_F741_4617_A317_8794B4427014"/>
-		<ArchiMate3:ArchiMate_Realization base_Dependency="EAID_405F01E0_D152_4573_8D1A_E03D7C23F3B7"/>
-		<ArchiMate3:ArchiMate_Requirement base_Class="EAID_4C5FDBFC_5F57_464d_A38B_2B7116DC0523"/>
-		<ArchiMate3:ArchiMate_Realization base_Dependency="EAID_99B336DA_3A8D_49dd_868C_38E1B584DCF6"/>
-		<ArchiMate3:ArchiMate_Resource base_Class="EAID_D6A837E2_D2A9_446c_AC26_56EC2B267DA7"/>
-		<ArchiMate3:ArchiMate_Stakeholder base_Class="EAID_5A4C2C8B_C2A3_403f_AD64_FA5DA9C46772"/>
-		<ArchiMate3:ArchiMate_Value base_Class="EAID_BFEE23B4_E92F_49d7_A4DF_97FE0B944CD2"/>
-		<ArchiMate3:ArchiMate_ValueStream base_Activity="EAID_39365A7E_9DA9_4611_BE15_697EF3F855EB"/>
+		<ArchiMate3:ArchiMate_Goal base_Class="EAID_99561940_921F_4d09_927B_D810999B0739"/>
+		<ArchiMate3:ArchiMate_Resource base_Class="EAID_F81E4853_59CD_459b_89CA_D7B91BD8A71A"/>
+		<ArchiMate3:ArchiMate_Realization base_Dependency="EAID_9754A01D_CD53_46e6_90C6_7E5B272D693F"/>
 	</uml:Model>
 	<xmi:Extension extender="Enterprise Architect" extenderID="6.5">
 		<elements>
-			<element xmi:idref="EAPK_12EDEB75_D31A_4b24_9476_EA75A66E41E8" xmi:type="uml:Package" name="Model" scope="public">
-				<model package2="EAID_12EDEB75_D31A_4b24_9476_EA75A66E41E8" tpos="0" ea_localid="1" ea_eleType="package"/>
+			<element xmi:idref="EAPK_9BBDDB5F_C7B6_408a_A31B_5CB0C99F50E9" xmi:type="uml:Package" name="DeepModel" scope="public">
+				<model package2="EAID_9BBDDB5F_C7B6_408a_A31B_5CB0C99F50E9" tpos="0" ea_localid="5" ea_eleType="package"/>
 				<properties isSpecification="false" sType="Package" nType="0" scope="public"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-09 03:43:21" modified="2026-09-09 03:43:21" complexity="1" status="Proposed"/>
+				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-09 03:42:55" modified="2026-09-09 03:42:55" complexity="1" status="Proposed"/>
 				<code gentype="Java"/>
 				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
 				<tags/>
 				<xrefs/>
 				<extendedProperties tagged="0"/>
 				<packageproperties version="1.0" owner="InsonusK" xmiver="Enterprise Architect XMI 2.1/UML 2.1"/>
-				<paths xmlpath="D:\MyProjects\mcp-server-sparx-ea\example\TestProject-Model.xml"/>
-				<times created="2012-04-17 00:00:00" modified="2012-04-17 00:00:00" lastsavedate="2026-09-09 03:43:58"/>
-				<flags iscontrolled="TRUE" isprotected="FALSE" batchsave="1" batchload="1" usedtd="FALSE" logxml="FALSE" packageFlags="Recurse=1;isModel=1;"/>
+				<paths xmlpath="D:\MyProjects\mcp-server-sparx-ea\example\TestProject-DeepModel.xml"/>
+				<times created="2026-09-09 00:00:00" modified="2026-09-09 00:00:00" lastsavedate="2026-09-09 03:43:58"/>
+				<flags iscontrolled="TRUE" isprotected="FALSE" batchsave="1" batchload="1" usedtd="FALSE" logxml="FALSE" packageFlags="isModel=1;Recurse=1;"/>
 			</element>
-			<element xmi:idref="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" xmi:type="uml:Package" name="Motivation_Package" scope="public">
-				<model package2="EAID_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" package="EAPK_12EDEB75_D31A_4b24_9476_EA75A66E41E8" tpos="0" ea_localid="2" ea_eleType="package"/>
-				<properties documentation="Package description" isSpecification="false" sType="Package" nType="0" scope="public"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:22:20" modified="2026-09-09 01:06:16" complexity="1" status="Proposed"/>
+			<element xmi:idref="EAPK_7BEBDC56_B676_44a8_BF3D_717B759D289D" xmi:type="uml:Package" name="Package1" scope="public">
+				<model package2="EAID_7BEBDC56_B676_44a8_BF3D_717B759D289D" package="EAPK_9BBDDB5F_C7B6_408a_A31B_5CB0C99F50E9" tpos="0" ea_localid="6" ea_eleType="package"/>
+				<properties isSpecification="false" sType="Package" nType="0" scope="public"/>
+				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-09 03:41:25" modified="2026-09-09 03:41:25" complexity="1" status="Proposed"/>
 				<code gentype="Java"/>
 				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
 				<tags/>
 				<xrefs/>
-				<extendedProperties tagged="0" package_name="Model"/>
+				<extendedProperties tagged="0" package_name="DeepModel"/>
 				<packageproperties version="1.0"/>
 				<paths/>
-				<times created="2026-09-08 20:22:20" modified="2026-09-09 01:06:16"/>
+				<times created="2026-09-09 03:41:25" modified="2026-09-09 03:41:25"/>
 				<flags iscontrolled="FALSE" isprotected="FALSE" usedtd="FALSE" logxml="FALSE" packageFlags="isModel=1;VICON=3;"/>
 			</element>
-			<element xmi:idref="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778" xmi:type="uml:Class" name="Assessment1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="4" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Assessment" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:11" modified="2026-09-08 20:51:11" complexity="1" status="Proposed"/>
+			<element xmi:idref="EAPK_1F44AD06_C9E5_4d5d_81DE_7A8C008CF596" xmi:type="uml:Package" name="Package2" scope="public">
+				<model package2="EAID_1F44AD06_C9E5_4d5d_81DE_7A8C008CF596" package="EAPK_7BEBDC56_B676_44a8_BF3D_717B759D289D" tpos="0" ea_localid="7" ea_eleType="package"/>
+				<properties isSpecification="false" sType="Package" nType="0" scope="public"/>
+				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-09 03:41:32" modified="2026-09-09 03:41:32" complexity="1" status="Proposed"/>
+				<code gentype="Java"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<tags/>
+				<xrefs/>
+				<extendedProperties tagged="0" package_name="Package1"/>
+				<packageproperties version="1.0"/>
+				<paths/>
+				<times created="2026-09-09 03:41:32" modified="2026-09-09 03:41:32"/>
+				<flags iscontrolled="FALSE" isprotected="FALSE" usedtd="FALSE" logxml="FALSE"/>
+			</element>
+			<element xmi:idref="EAPK_ADA3C3E9_107A_4b4c_9F13_FE7E9F45ABAD" xmi:type="uml:Package" name="Package3" scope="public">
+				<model package2="EAID_ADA3C3E9_107A_4b4c_9F13_FE7E9F45ABAD" package="EAPK_1F44AD06_C9E5_4d5d_81DE_7A8C008CF596" tpos="0" ea_localid="8" ea_eleType="package"/>
+				<properties isSpecification="false" sType="Package" nType="0" scope="public"/>
+				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-09 03:41:38" modified="2026-09-09 03:41:38" complexity="1" status="Proposed"/>
+				<code gentype="Java"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<tags/>
+				<xrefs/>
+				<extendedProperties tagged="0" package_name="Package2"/>
+				<packageproperties version="1.0"/>
+				<paths/>
+				<times created="2026-09-09 03:41:38" modified="2026-09-09 03:41:38"/>
+				<flags iscontrolled="FALSE" isprotected="FALSE" usedtd="FALSE" logxml="FALSE"/>
+			</element>
+			<element xmi:idref="EAID_99561940_921F_4d09_927B_D810999B0739" xmi:type="uml:Class" name="Goal1" scope="public">
+				<model package="EAPK_ADA3C3E9_107A_4b4c_9F13_FE7E9F45ABAD" tpos="0" ea_localid="22" ea_eleType="element"/>
+				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Goal" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-09 03:41:58" modified="2026-09-09 03:41:58" complexity="1" status="Proposed"/>
 				<code gentype="Java"/>
 				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
 				<tags/>
-				<xrefs value="$XREFPROP=$XID={9AF821BE-FC42-45e7-8A5D-2D8C88348DAA}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Assessment;FQName=ArchiMate3::ArchiMate_Assessment;@ENDSTEREO;$DES;$CLT={A0D485C0-C57E-4a4d-8FF1-66D594FA6778}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={57B883B4-04CF-4a88-8E6E-E04989272DBF}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={A0D485C0-C57E-4a4d-8FF1-66D594FA6778}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
+				<xrefs value="$XREFPROP=$XID={F5F2E349-7FB5-48d1-AA97-D3415A4F5D25}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Goal;FQName=ArchiMate3::ArchiMate_Goal;@ENDSTEREO;$DES;$CLT={99561940-921F-4d09-927B-D810999B0739}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={AE632A17-910C-4b1d-83CC-FD8D488A0D72}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={99561940-921F-4d09-927B-D810999B0739}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+				<extendedProperties tagged="0" package_name="Package3"/>
 				<links>
-					<ControlFlow xmi:id="EAID_B6F59AC2_0DC9_44f3_B203_F00015D095E3" start="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778" end="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-					<ControlFlow xmi:id="EAID_3E217468_BE46_4b39_989A_DD9A26DA3EA2" start="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687" end="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778"/>
+					<Dependency xmi:id="EAID_9754A01D_CD53_46e6_90C6_7E5B272D693F" start="EAID_F81E4853_59CD_459b_89CA_D7B91BD8A71A" end="EAID_99561940_921F_4d09_927B_D810999B0739"/>
 				</links>
 			</element>
-			<element xmi:idref="EAID_0290A600_22E9_4dfd_8B55_BAFC17B7D631" xmi:type="uml:Class" name="Capability1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="13" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Capability" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:31" modified="2026-09-08 20:51:31" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={13515986-D477-4407-AE4A-8F3193587DDB}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Capability;FQName=ArchiMate3::ArchiMate_Capability;@ENDSTEREO;$DES;$CLT={0290A600-22E9-4dfd-8B55-BAFC17B7D631}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={65CD57A5-7DBB-448c-891B-5113197BEEF1}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={0290A600-22E9-4dfd-8B55-BAFC17B7D631}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-			</element>
-			<element xmi:idref="EAID_01BCB3F2_328E_4174_9E98_91128D8C3288" xmi:type="uml:Class" name="Constraint1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="11" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Constraint" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:28" modified="2026-09-08 20:51:28" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={25F009D8-4D1A-4798-9550-38FE82A34E1C}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Constraint;FQName=ArchiMate3::ArchiMate_Constraint;@ENDSTEREO;$DES;$CLT={01BCB3F2-328E-4174-9E98-91128D8C3288}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={F4EFDBBB-C0DE-4c20-8DBB-41E65EA2A704}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={01BCB3F2-328E-4174-9E98-91128D8C3288}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-				<links>
-					<Dependency xmi:id="EAID_AD81CE18_026D_4f1b_8AB8_C6CA98DAE248" start="EAID_01BCB3F2_328E_4174_9E98_91128D8C3288" end="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-				</links>
-			</element>
-			<element xmi:idref="EAID_73BE52AC_BEAB_4d1e_B258_510BDC942C0A" xmi:type="uml:Class" name="CourseOfAction1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="15" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_CourseOfAction" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:36" modified="2026-09-08 20:51:36" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={D1CAF2CB-FED3-49c0-834B-42EEFEEE80A2}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_CourseOfAction;FQName=ArchiMate3::ArchiMate_CourseOfAction;@ENDSTEREO;$DES;$CLT={73BE52AC-BEAB-4d1e-B258-510BDC942C0A}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={9F802D5F-02E7-4e51-9322-C839D291B37D}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={73BE52AC-BEAB-4d1e-B258-510BDC942C0A}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-			</element>
-			<element xmi:idref="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687" xmi:type="uml:Class" name="Driver1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="3" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Driver" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:09" modified="2026-09-08 20:51:10" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={3E0B4986-4446-42ad-8E5B-4709B81D2631}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Driver;FQName=ArchiMate3::ArchiMate_Driver;@ENDSTEREO;$DES;$CLT={C9B43583-96BB-498e-9870-7AF4B3D8A687}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={8E4A48FA-7629-4fa1-BC94-AA1AEDD76AC6}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={C9B43583-96BB-498e-9870-7AF4B3D8A687}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-				<links>
-					<ControlFlow xmi:id="EAID_3E217468_BE46_4b39_989A_DD9A26DA3EA2" start="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687" end="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778"/>
-					<Association xmi:id="EAID_1D69D97B_27B5_4123_BAD7_CC6F57A13AD7" start="EAID_5A4C2C8B_C2A3_403f_AD64_FA5DA9C46772" end="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687"/>
-				</links>
-			</element>
-			<element xmi:idref="EAID_F3C2209E_B146_4328_863E_622BABD2B43E" xmi:type="uml:Class" name="Goal1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="7" ea_eleType="element"/>
-				<properties documentation="Goal description" isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Goal" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:18" modified="2026-09-09 01:06:36" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={2084E7C2-C420-4a45-98F4-BCB3AF6C4837}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Goal;FQName=ArchiMate3::ArchiMate_Goal;@ENDSTEREO;$DES;$CLT={F3C2209E-B146-4328-863E-622BABD2B43E}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={E83DDA57-E9A5-416d-81AB-060FF57DE023}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={F3C2209E-B146-4328-863E-622BABD2B43E}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-				<links>
-					<Dependency xmi:id="EAID_405F01E0_D152_4573_8D1A_E03D7C23F3B7" start="EAID_DDE824E3_F741_4617_A317_8794B4427014" end="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-					<Dependency xmi:id="EAID_99B336DA_3A8D_49dd_868C_38E1B584DCF6" start="EAID_4C5FDBFC_5F57_464d_A38B_2B7116DC0523" end="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-					<Dependency xmi:id="EAID_AD81CE18_026D_4f1b_8AB8_C6CA98DAE248" start="EAID_01BCB3F2_328E_4174_9E98_91128D8C3288" end="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-					<ControlFlow xmi:id="EAID_B6F59AC2_0DC9_44f3_B203_F00015D095E3" start="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778" end="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-					<Dependency xmi:id="EAID_DC37F9A5_7995_4a57_8A86_44C47F775CAA" start="EAID_999982B4_F72C_47b0_8945_627119C59C9D" end="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-				</links>
-			</element>
-			<element xmi:idref="EAID_A0E2952D_58F4_4066_B44E_ADF8CE5C7BE5" xmi:type="uml:Class" name="Location1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="16" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Location" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:38" modified="2026-09-08 20:51:38" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={E37B78D2-BA26-424b-B8EF-4DA06A330822}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Location;FQName=ArchiMate3::ArchiMate_Location;@ENDSTEREO;$DES;$CLT={A0E2952D-58F4-4066-B44E-ADF8CE5C7BE5}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={DA6B90AD-5245-4f70-A3B7-1C2E87E29F9B}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={A0E2952D-58F4-4066-B44E-ADF8CE5C7BE5}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-			</element>
-			<element xmi:idref="EAID_E49A40A1_A8AC_4a9b_BBE9_06F8EE12C7D4" xmi:type="uml:Class" name="Meaning1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="6" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Meaning" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:15" modified="2026-09-08 20:51:15" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={0DD1165D-C692-4957-AC74-9FCFFB1D7894}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Meaning;FQName=ArchiMate3::ArchiMate_Meaning;@ENDSTEREO;$DES;$CLT={E49A40A1-A8AC-4a9b-BBE9-06F8EE12C7D4}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={D83B16AB-EBBC-47bb-A550-2271009B2636}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={E49A40A1-A8AC-4a9b-BBE9-06F8EE12C7D4}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-			</element>
-			<element xmi:idref="EAID_999982B4_F72C_47b0_8945_627119C59C9D" xmi:type="uml:Class" name="Outcome1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="8" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Outcome" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:20" modified="2026-09-08 20:51:20" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={3C5E08E8-FC98-47fe-8C51-667B6084C88F}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Outcome;FQName=ArchiMate3::ArchiMate_Outcome;@ENDSTEREO;$DES;$CLT={999982B4-F72C-47b0-8945-627119C59C9D}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={85795E0D-3E0F-4068-B594-BBF626450C87}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={999982B4-F72C-47b0-8945-627119C59C9D}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-				<links>
-					<Dependency xmi:id="EAID_DC37F9A5_7995_4a57_8A86_44C47F775CAA" start="EAID_999982B4_F72C_47b0_8945_627119C59C9D" end="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-				</links>
-			</element>
-			<element xmi:idref="EAID_DDE824E3_F741_4617_A317_8794B4427014" xmi:type="uml:Class" name="Principle1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="9" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Principle" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:21" modified="2026-09-08 20:51:21" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={CB404617-B414-449b-8E09-A351E076D619}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Principle;FQName=ArchiMate3::ArchiMate_Principle;@ENDSTEREO;$DES;$CLT={DDE824E3-F741-4617-A317-8794B4427014}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={57D1C505-930C-4df5-A095-24B2A3D36C2F}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={DDE824E3-F741-4617-A317-8794B4427014}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-				<links>
-					<Dependency xmi:id="EAID_405F01E0_D152_4573_8D1A_E03D7C23F3B7" start="EAID_DDE824E3_F741_4617_A317_8794B4427014" end="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-				</links>
-			</element>
-			<element xmi:idref="EAID_4C5FDBFC_5F57_464d_A38B_2B7116DC0523" xmi:type="uml:Class" name="Requirement1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="10" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Requirement" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:26" modified="2026-09-08 20:51:26" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={56951CB8-C59A-4e2e-AA88-FB64F07C8C29}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Requirement;FQName=ArchiMate3::ArchiMate_Requirement;@ENDSTEREO;$DES;$CLT={4C5FDBFC-5F57-464d-A38B-2B7116DC0523}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={592DBD68-CEA9-41cc-AD4D-1A82FD05E43B}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={4C5FDBFC-5F57-464d-A38B-2B7116DC0523}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-				<links>
-					<Dependency xmi:id="EAID_99B336DA_3A8D_49dd_868C_38E1B584DCF6" start="EAID_4C5FDBFC_5F57_464d_A38B_2B7116DC0523" end="EAID_F3C2209E_B146_4328_863E_622BABD2B43E"/>
-				</links>
-			</element>
-			<element xmi:idref="EAID_D6A837E2_D2A9_446c_AC26_56EC2B267DA7" xmi:type="uml:Class" name="Resource1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="12" ea_eleType="element"/>
+			<element xmi:idref="EAID_F81E4853_59CD_459b_89CA_D7B91BD8A71A" xmi:type="uml:Class" name="Resource1" scope="public">
+				<model package="EAPK_ADA3C3E9_107A_4b4c_9F13_FE7E9F45ABAD" tpos="0" ea_localid="21" ea_eleType="element"/>
 				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Resource" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:30" modified="2026-09-08 20:51:30" complexity="1" status="Proposed"/>
+				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-09 03:41:53" modified="2026-09-09 03:41:53" complexity="1" status="Proposed"/>
 				<code gentype="Java"/>
 				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
 				<tags/>
-				<xrefs value="$XREFPROP=$XID={A190F82B-BFA1-4046-B301-B6B0633EFCA2}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Resource;FQName=ArchiMate3::ArchiMate_Resource;@ENDSTEREO;$DES;$CLT={D6A837E2-D2A9-446c-AC26-56EC2B267DA7}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={6251C50F-1DDB-45b9-8D6C-C92CDCA65DBA}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={D6A837E2-D2A9-446c-AC26-56EC2B267DA7}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-			</element>
-			<element xmi:idref="EAID_5A4C2C8B_C2A3_403f_AD64_FA5DA9C46772" xmi:type="uml:Class" name="Stakeholder1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="2" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Stakeholder" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:06" modified="2026-09-08 20:51:06" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={20CF85D7-B5ED-48f1-99FA-3596B6EBEDE9}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Stakeholder;FQName=ArchiMate3::ArchiMate_Stakeholder;@ENDSTEREO;$DES;$CLT={5A4C2C8B-C2A3-403f-AD64-FA5DA9C46772}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={0B6A853A-493D-4b40-A311-EE84532A9BCC}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={5A4C2C8B-C2A3-403f-AD64-FA5DA9C46772}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
+				<xrefs value="$XREFPROP=$XID={CC750192-F2DA-4863-963B-812150100508}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Resource;FQName=ArchiMate3::ArchiMate_Resource;@ENDSTEREO;$DES;$CLT={F81E4853-59CD-459b-89CA-D7B91BD8A71A}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={9F11FC71-AEE5-4355-8C26-03764BEBEF58}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={F81E4853-59CD-459b-89CA-D7B91BD8A71A}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+				<extendedProperties tagged="0" package_name="Package3"/>
 				<links>
-					<Association xmi:id="EAID_1D69D97B_27B5_4123_BAD7_CC6F57A13AD7" start="EAID_5A4C2C8B_C2A3_403f_AD64_FA5DA9C46772" end="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687"/>
+					<Dependency xmi:id="EAID_9754A01D_CD53_46e6_90C6_7E5B272D693F" start="EAID_F81E4853_59CD_459b_89CA_D7B91BD8A71A" end="EAID_99561940_921F_4d09_927B_D810999B0739"/>
 				</links>
-			</element>
-			<element xmi:idref="EAID_BFEE23B4_E92F_49d7_A4DF_97FE0B944CD2" xmi:type="uml:Class" name="Value1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="5" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Value" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:13" modified="2026-09-08 20:51:14" complexity="1" status="Proposed"/>
-				<code gentype="Java"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={931B2C31-8B96-40cd-B9B1-FC532A872C46}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Value;FQName=ArchiMate3::ArchiMate_Value;@ENDSTEREO;$DES;$CLT={BFEE23B4-E92F-49d7-A4DF-97FE0B944CD2}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={B086331A-39E9-4daa-8EB1-78CB8363C638}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={BFEE23B4-E92F-49d7-A4DF-97FE0B944CD2}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
-			</element>
-			<element xmi:idref="EAID_39365A7E_9DA9_4611_BE15_697EF3F855EB" xmi:type="uml:Activity" name="ValueStream1" scope="public">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" tpos="0" ea_localid="14" ea_eleType="element"/>
-				<properties isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_ValueStream" isAbstract="false"/>
-				<project author="InsonusK" version="1.0" phase="1.0" created="2026-09-08 20:51:33" modified="2026-09-08 20:51:34" complexity="1" status="Proposed"/>
-				<code gentype="&lt;none&gt;"/>
-				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
-				<tags/>
-				<xrefs value="$XREFPROP=$XID={DD721CA6-D6B9-44d2-A29C-0F82B2ADD427}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_ValueStream;FQName=ArchiMate3::ArchiMate_ValueStream;@ENDSTEREO;$DES;$CLT={39365A7E-9DA9-4611-BE15-697EF3F855EB}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={F228DE89-1E0B-4224-B164-CBBA64F895FF}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=_HideUmlLinks@ENDNAME;@TYPE=string@ENDTYPE;@VALU=True@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;@PROP=@NAME=_defaultDiagramType@ENDNAME;@TYPE=string@ENDTYPE;@VALU=ArchiMate3::Motivation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={39365A7E-9DA9-4611-BE15-697EF3F855EB}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<extendedProperties tagged="0" package_name="Motivation_Package"/>
 			</element>
 		</elements>
 		<connectors>
-			<connector xmi:idref="EAID_B6F59AC2_0DC9_44f3_B203_F00015D095E3">
-				<source xmi:idref="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778">
-					<model ea_localid="4" type="Class" name="Assessment1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</source>
-				<target xmi:idref="EAID_F3C2209E_B146_4328_863E_622BABD2B43E">
-					<model ea_localid="7" type="Class" name="Goal1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="true"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</target>
-				<model ea_localid="6"/>
-				<properties ea_type="ControlFlow" stereotype="ArchiMate_Influence" direction="Source -&gt; Destination"/>
-				<documentation/>
-				<appearance linemode="2" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-				<labels mb=" &#xA;첔rchiMate_Influence�"/>
-				<extendedProperties conditional=" &#xA;첔rchiMate_Influence�" virtualInheritance="0"/>
-				<style/>
-				<xrefs value="$XREFPROP=$XID={0267C6C3-9D27-4ba9-B728-389D14B14523}$XID;$NAM=Stereotypes$NAM;$TYP=connector property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Influence;FQName=ArchiMate3::ArchiMate_Influence;@ENDSTEREO;$DES;$CLT={B6F59AC2-0DC9-44f3-B203-F00015D095E3}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<tags/>
-			</connector>
-			<connector xmi:idref="EAID_3E217468_BE46_4b39_989A_DD9A26DA3EA2" name="Driver to Assessment">
-				<source xmi:idref="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687">
-					<model ea_localid="3" type="Class" name="Driver1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</source>
-				<target xmi:idref="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778">
-					<model ea_localid="4" type="Class" name="Assessment1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="true"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</target>
-				<model ea_localid="5"/>
-				<properties ea_type="ControlFlow" stereotype="ArchiMate_Influence" direction="Source -&gt; Destination"/>
-				<documentation value="Driver to Assessment Description"/>
-				<appearance linemode="2" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-				<labels mb=" &#xA;첔rchiMate_Influence�" rt="Driver to Assessment"/>
-				<extendedProperties conditional=" &#xA;첔rchiMate_Influence�" virtualInheritance="0"/>
-				<style/>
-				<xrefs value="$XREFPROP=$XID={58272AA5-BF96-4e54-9450-51E2D5CDD6D9}$XID;$NAM=Stereotypes$NAM;$TYP=connector property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Influence;FQName=ArchiMate3::ArchiMate_Influence;@ENDSTEREO;$DES;$CLT={3E217468-BE46-4b39-989A-DD9A26DA3EA2}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<tags/>
-			</connector>
-			<connector xmi:idref="EAID_AD81CE18_026D_4f1b_8AB8_C6CA98DAE248">
-				<source xmi:idref="EAID_01BCB3F2_328E_4174_9E98_91128D8C3288">
-					<model ea_localid="11" type="Class" name="Constraint1"/>
+			<connector xmi:idref="EAID_9754A01D_CD53_46e6_90C6_7E5B272D693F">
+				<source xmi:idref="EAID_F81E4853_59CD_459b_89CA_D7B91BD8A71A">
+					<model ea_localid="21" type="Class" name="Resource1"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -350,8 +115,8 @@
 					<xrefs/>
 					<tags/>
 				</source>
-				<target xmi:idref="EAID_F3C2209E_B146_4328_863E_622BABD2B43E">
-					<model ea_localid="7" type="Class" name="Goal1"/>
+				<target xmi:idref="EAID_99561940_921F_4d09_927B_D810999B0739">
+					<model ea_localid="22" type="Class" name="Goal1"/>
 					<role visibility="Public" targetScope="instance"/>
 					<type aggregation="none" containment="Unspecified"/>
 					<constraints/>
@@ -361,148 +126,14 @@
 					<xrefs/>
 					<tags/>
 				</target>
-				<model ea_localid="10"/>
+				<model ea_localid="11"/>
 				<properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
 				<documentation/>
 				<appearance linemode="2" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
 				<labels mb=" &#xA;첔rchiMate_Realization�"/>
 				<extendedProperties conditional=" &#xA;첔rchiMate_Realization�" virtualInheritance="0"/>
 				<style/>
-				<xrefs value="$XREFPROP=$XID={19C68A22-20BE-4134-8466-DDC861D6C672}$XID;$NAM=Stereotypes$NAM;$TYP=connector property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Realization;FQName=ArchiMate3::ArchiMate_Realization;@ENDSTEREO;$DES;$CLT={AD81CE18-026D-4f1b-8AB8-C6CA98DAE248}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<tags/>
-			</connector>
-			<connector xmi:idref="EAID_1D69D97B_27B5_4123_BAD7_CC6F57A13AD7">
-				<source xmi:idref="EAID_5A4C2C8B_C2A3_403f_AD64_FA5DA9C46772">
-					<model ea_localid="2" type="Class" name="Stakeholder1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Unspecified;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</source>
-				<target xmi:idref="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687">
-					<model ea_localid="3" type="Class" name="Driver1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Unspecified;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</target>
-				<model ea_localid="4"/>
-				<properties ea_type="Association" stereotype="ArchiMate_Association" direction="Unspecified"/>
-				<modifiers isRoot="false" isLeaf="false"/>
-				<parameterSubstitutions/>
-				<documentation/>
-				<appearance linemode="2" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-				<labels mb=" &#xA;첔rchiMate_Association�"/>
-				<extendedProperties conditional=" &#xA;첔rchiMate_Association�" virtualInheritance="0"/>
-				<style/>
-				<xrefs value="$XREFPROP=$XID={B803408D-DA20-4357-B420-BC42B6F29C96}$XID;$NAM=Stereotypes$NAM;$TYP=connector property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Association;FQName=ArchiMate3::ArchiMate_Association;@ENDSTEREO;$DES;$CLT={1D69D97B-27B5-4123-BAD7-CC6F57A13AD7}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<tags/>
-			</connector>
-			<connector xmi:idref="EAID_405F01E0_D152_4573_8D1A_E03D7C23F3B7">
-				<source xmi:idref="EAID_DDE824E3_F741_4617_A317_8794B4427014">
-					<model ea_localid="9" type="Class" name="Principle1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</source>
-				<target xmi:idref="EAID_F3C2209E_B146_4328_863E_622BABD2B43E">
-					<model ea_localid="7" type="Class" name="Goal1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="true"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</target>
-				<model ea_localid="9"/>
-				<properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-				<documentation/>
-				<appearance linemode="2" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-				<labels mb=" &#xA;첔rchiMate_Realization�"/>
-				<extendedProperties conditional=" &#xA;첔rchiMate_Realization�" virtualInheritance="0"/>
-				<style/>
-				<xrefs value="$XREFPROP=$XID={83722779-3308-4319-B3AF-2F8DD3EF46D9}$XID;$NAM=Stereotypes$NAM;$TYP=connector property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Realization;FQName=ArchiMate3::ArchiMate_Realization;@ENDSTEREO;$DES;$CLT={405F01E0-D152-4573-8D1A-E03D7C23F3B7}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<tags/>
-			</connector>
-			<connector xmi:idref="EAID_99B336DA_3A8D_49dd_868C_38E1B584DCF6">
-				<source xmi:idref="EAID_4C5FDBFC_5F57_464d_A38B_2B7116DC0523">
-					<model ea_localid="10" type="Class" name="Requirement1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</source>
-				<target xmi:idref="EAID_F3C2209E_B146_4328_863E_622BABD2B43E">
-					<model ea_localid="7" type="Class" name="Goal1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="true"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</target>
-				<model ea_localid="8"/>
-				<properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-				<documentation/>
-				<appearance linemode="2" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-				<labels mb=" &#xA;첔rchiMate_Realization�"/>
-				<extendedProperties conditional=" &#xA;첔rchiMate_Realization�" virtualInheritance="0"/>
-				<style/>
-				<xrefs value="$XREFPROP=$XID={495A3D09-AFAA-475a-91A6-40722D22A25A}$XID;$NAM=Stereotypes$NAM;$TYP=connector property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Realization;FQName=ArchiMate3::ArchiMate_Realization;@ENDSTEREO;$DES;$CLT={99B336DA-3A8D-49dd-868C-38E1B584DCF6}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
-				<tags/>
-			</connector>
-			<connector xmi:idref="EAID_DC37F9A5_7995_4a57_8A86_44C47F775CAA">
-				<source xmi:idref="EAID_999982B4_F72C_47b0_8945_627119C59C9D">
-					<model ea_localid="8" type="Class" name="Outcome1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</source>
-				<target xmi:idref="EAID_F3C2209E_B146_4328_863E_622BABD2B43E">
-					<model ea_localid="7" type="Class" name="Goal1"/>
-					<role visibility="Public" targetScope="instance"/>
-					<type aggregation="none" containment="Unspecified"/>
-					<constraints/>
-					<modifiers isOrdered="false" changeable="none" isNavigable="true"/>
-					<style value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"/>
-					<documentation/>
-					<xrefs/>
-					<tags/>
-				</target>
-				<model ea_localid="7"/>
-				<properties ea_type="Dependency" stereotype="ArchiMate_Realization" direction="Source -&gt; Destination"/>
-				<documentation/>
-				<appearance linemode="2" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
-				<labels mb=" &#xA;첔rchiMate_Realization�"/>
-				<extendedProperties conditional=" &#xA;첔rchiMate_Realization�" virtualInheritance="0"/>
-				<style/>
-				<xrefs value="$XREFPROP=$XID={1149B17B-CE48-4b7d-A9BA-F0B370325F3A}$XID;$NAM=Stereotypes$NAM;$TYP=connector property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Realization;FQName=ArchiMate3::ArchiMate_Realization;@ENDSTEREO;$DES;$CLT={DC37F9A5-7995-4a57-8A86-44C47F775CAA}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+				<xrefs value="$XREFPROP=$XID={F93D9A78-641D-4155-BC37-F24468C7FECD}$XID;$NAM=Stereotypes$NAM;$TYP=connector property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=ArchiMate_Realization;FQName=ArchiMate3::ArchiMate_Realization;@ENDSTEREO;$DES;$CLT={9754A01D-CD53-46e6-90C6-7E5B272D693F}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
 				<tags/>
 			</connector>
 		</connectors>
@@ -1125,38 +756,19 @@
 			</uml:Profile>
 		</profiles>
 		<diagrams>
-			<diagram xmi:id="EAID_EA3BF442_E212_4e5e_9812_23F14C78B4BE">
-				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" localID="1" owner="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53"/>
-				<properties name="Motivation_Diagram" type="Logical" documentation="Diagram description"/>
-				<project author="InsonusK" version="1.0" created="2026-09-08 20:22:27" modified="2026-09-09 01:06:26"/>
+			<diagram xmi:id="EAID_3C5142D8_3983_441c_AEA7_C4B78EBF3E25">
+				<model package="EAPK_ADA3C3E9_107A_4b4c_9F13_FE7E9F45ABAD" localID="2" owner="EAPK_ADA3C3E9_107A_4b4c_9F13_FE7E9F45ABAD"/>
+				<properties name="Package3Diagram" type="Logical"/>
+				<project author="InsonusK" version="1.0" created="2026-09-09 03:41:49" modified="2026-09-09 03:42:09"/>
 				<style1 value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=0;PPgs.cy=0;DocSize.cx=850;DocSize.cy=1098;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AllDockable=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
-				<style2 value="ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=ArchiMate3::Motivation;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=7E4937C5;"/>
-				<swimlanes value="locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=12370374;ofCol=-1;ufCol=-1;hl=1;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"/>
+				<style2 value="ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;SPT=1;MDGDgm=ArchiMate3::Motivation;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=278C23CA;"/>
+				<swimlanes value="locked=false;orientation=0;width=0;inbar=false;names=false;color=-1;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=1;ufh=0;hh=0;cls=0;bw=0;hli=0;SwimlaneFont=lfh:-10,lfw:0,lfi:0,lfu:0,lfs:0,lfface:Calibri,lfe:0,lfo:0,lfchar:1,lfop:0,lfcp:0,lfq:0,lfpf=0,lfWidth=0;"/>
 				<matrixitems value="locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"/>
 				<extendedProperties/>
 				<elements>
-					<element geometry="Left=520;Top=680;Right=610;Bottom=750;" subject="EAID_A0E2952D_58F4_4066_B44E_ADF8CE5C7BE5" seqno="1" style="DUID=F42BABC8;UCRect=1;HideIcon=0;LBL=CX=90:CY=15:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=330;Top=680;Right=430;Bottom=750;" subject="EAID_73BE52AC_BEAB_4d1e_B258_510BDC942C0A" seqno="2" style="DUID=B38D855D;UCRect=1;HideIcon=0;LBL=CX=100:CY=15:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=110;Top=650;Right=230;Bottom=720;" subject="EAID_39365A7E_9DA9_4611_BE15_697EF3F855EB" seqno="3" style="DUID=5464125E;UCRect=1;HideIcon=0;"/>
-					<element geometry="Left=520;Top=560;Right=620;Bottom=630;" subject="EAID_0290A600_22E9_4dfd_8B55_BAFC17B7D631" seqno="4" style="DUID=BD3AD71C;UCRect=1;HideIcon=0;LBL=CX=100:CY=15:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=300;Top=550;Right=400;Bottom=620;" subject="EAID_D6A837E2_D2A9_446c_AC26_56EC2B267DA7" seqno="5" style="DUID=48D3842E;UCRect=1;HideIcon=0;LBL=CX=100:CY=15:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=60;Top=380;Right=160;Bottom=450;" subject="EAID_01BCB3F2_328E_4174_9E98_91128D8C3288" seqno="6" style="DUID=4C031FE4;UCRect=1;HideIcon=0;"/>
-					<element geometry="Left=490;Top=440;Right=590;Bottom=510;" subject="EAID_4C5FDBFC_5F57_464d_A38B_2B7116DC0523" seqno="7" style="DUID=80EB017B;UCRect=1;HideIcon=0;"/>
-					<element geometry="Left=220;Top=450;Right=320;Bottom=520;" subject="EAID_DDE824E3_F741_4617_A317_8794B4427014" seqno="8" style="DUID=588D6C09;UCRect=1;HideIcon=0;LBL=CX=100:CY=15:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=350;Top=450;Right=450;Bottom=520;" subject="EAID_999982B4_F72C_47b0_8945_627119C59C9D" seqno="9" style="DUID=894A2C18;UCRect=1;HideIcon=0;LBL=CX=100:CY=15:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=460;Top=250;Right=560;Bottom=320;" subject="EAID_F3C2209E_B146_4328_863E_622BABD2B43E" seqno="10" style="DUID=928C1A97;UCRect=1;HideIcon=0;LBL=CX=100:CY=15:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=230;Top=200;Right=330;Bottom=270;" subject="EAID_E49A40A1_A8AC_4a9b_BBE9_06F8EE12C7D4" seqno="11" style="DUID=EBB2BA37;HideIcon=0;"/>
-					<element geometry="Left=40;Top=180;Right=150;Bottom=250;" subject="EAID_BFEE23B4_E92F_49d7_A4DF_97FE0B944CD2" seqno="12" style="DUID=EA6D7A78;HideIcon=0;"/>
-					<element geometry="Left=450;Top=90;Right=550;Bottom=160;" subject="EAID_A0D485C0_C57E_4a4d_8FF1_66D594FA6778" seqno="13" style="DUID=7C5253D2;UCRect=1;HideIcon=0;LBL=CX=100:CY=15:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=250;Top=80;Right=350;Bottom=150;" subject="EAID_C9B43583_96BB_498e_9870_7AF4B3D8A687" seqno="14" style="DUID=80BDB998;UCRect=1;HideIcon=0;LBL=CX=100:CY=15:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
-					<element geometry="Left=70;Top=60;Right=170;Bottom=130;" subject="EAID_5A4C2C8B_C2A3_403f_AD64_FA5DA9C46772" seqno="15" style="DUID=8BA94004;UCRect=1;HideIcon=0;"/>
-					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=2;$LLB=;LLT=;LMT=;LMB=CX=102:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_AD81CE18_026D_4f1b_8AB8_C6CA98DAE248" style="Mode=2;EOID=928C1A97;SOID=4C031FE4;Color=-1;LWidth=1;Hidden=0;"/>
-					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=CX=102:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_405F01E0_D152_4573_8D1A_E03D7C23F3B7" style="Mode=2;EOID=928C1A97;SOID=588D6C09;Color=-1;LWidth=1;Hidden=0;"/>
-					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=CX=102:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_99B336DA_3A8D_49dd_868C_38E1B584DCF6" style="Mode=2;EOID=928C1A97;SOID=80EB017B;Color=-1;LWidth=1;Hidden=0;"/>
-					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=CX=102:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_DC37F9A5_7995_4a57_8A86_44C47F775CAA" style="Mode=2;EOID=928C1A97;SOID=894A2C18;Color=-1;LWidth=1;Hidden=0;"/>
-					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=3;$LLB=;LLT=;LMT=;LMB=CX=102:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_B6F59AC2_0DC9_44f3_B203_F00015D095E3" style="Mode=2;EOID=928C1A97;SOID=7C5253D2;Color=-1;LWidth=1;Hidden=0;"/>
-					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=2;$LLB=;LLT=;LMT=;LMB=CX=102:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_3E217468_BE46_4b39_989A_DD9A26DA3EA2" style="Mode=2;EOID=7C5253D2;SOID=80BDB998;Color=-1;LWidth=1;Hidden=0;"/>
-					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=2;$LLB=;LLT=;LMT=;LMB=CX=102:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_1D69D97B_27B5_4123_BAD7_CC6F57A13AD7" style="Mode=2;EOID=80BDB998;SOID=8BA94004;Color=-1;LWidth=1;Hidden=0;"/>
+					<element geometry="Left=330;Top=80;Right=430;Bottom=150;" subject="EAID_99561940_921F_4d09_927B_D810999B0739" seqno="1" style="DUID=749F61BE;UCRect=1;HideIcon=0;LBL=CX=100:CY=15:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
+					<element geometry="Left=130;Top=290;Right=230;Bottom=360;" subject="EAID_F81E4853_59CD_459b_89CA_D7B91BD8A71A" seqno="2" style="DUID=92B65AAC;UCRect=1;HideIcon=0;LBL=CX=100:CY=15:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:ALT=0:ROT=0;"/>
+					<element geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=CX=102:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_9754A01D_CD53_46e6_90C6_7E5B272D693F" style="Mode=2;EOID=749F61BE;SOID=92B65AAC;Color=-1;LWidth=1;Hidden=0;"/>
 				</elements>
 			</diagram>
 		</diagrams>
