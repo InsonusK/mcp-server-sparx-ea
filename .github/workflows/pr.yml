@@ -46,14 +46,26 @@ jobs:
           fetch-depth: 0
       - name: The app version must increase
         run: |
+          version_file=internal/mcpserver/server.go
           version_of() { grep -oE 'Version = "[^"]+"' "$1" | head -1 | sed -E 's/.*"([^"]+)".*/\1/'; }
-          PR_VERSION=$(version_of internal/mcpserver/server.go)
-          git show "origin/${{ github.base_ref }}:internal/mcpserver/server.go" > /tmp/base_server.go
+
+          PR_VERSION=$(version_of "$version_file")
+          if [ -z "$PR_VERSION" ]; then
+            echo "could not read mcpserver.Version from $version_file" >&2
+            exit 1
+          fi
+
+          git fetch --no-tags origin "${{ github.base_ref }}"
+          if ! git show "origin/${{ github.base_ref }}:$version_file" > /tmp/base_server.go 2>/dev/null; then
+            echo "$version_file does not exist on ${{ github.base_ref }} yet — its introduction is the bump; version=$PR_VERSION"
+            exit 0
+          fi
+
           BASE_VERSION=$(version_of /tmp/base_server.go)
           echo "base=$BASE_VERSION  pr=$PR_VERSION"
-          if [ -z "$PR_VERSION" ] || [ -z "$BASE_VERSION" ]; then
-            echo "could not read mcpserver.Version from internal/mcpserver/server.go" >&2
-            exit 1
+          if [ -z "$BASE_VERSION" ]; then
+            echo "$version_file on ${{ github.base_ref }} has no mcpserver.Version — treating $PR_VERSION as the bump"
+            exit 0
           fi
           if [ "$PR_VERSION" = "$BASE_VERSION" ]; then
             echo "ERROR: bump mcpserver.Version when Go code or the workflow changes" >&2
@@ -61,7 +73,7 @@ jobs:
           fi
           HIGHEST=$(printf '%s\n%s\n' "$BASE_VERSION" "$PR_VERSION" | sort -V | tail -1)
           if [ "$HIGHEST" != "$PR_VERSION" ]; then
-            echo "ERROR: mcpserver.Version $PR_VERSION is lower than $BASE_VERSION on master" >&2
+            echo "ERROR: mcpserver.Version $PR_VERSION is lower than $BASE_VERSION on ${{ github.base_ref }}" >&2
             exit 1
           fi
           echo "version increased: $BASE_VERSION -> $PR_VERSION"
