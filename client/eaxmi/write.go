@@ -306,6 +306,41 @@ func (d *Document) connEndModel(end *etree.Element, elemID string) {
 	end.CreateElement("type").CreateAttr("containment", "Unspecified")
 }
 
+// MoveElement re-parents an element into newPkgID.
+func (d *Document) MoveElement(id, newPkgID string) error {
+	el, ok := d.elementByID[id]
+	if !ok {
+		return fmt.Errorf("eaxmi: no element %q", id)
+	}
+	newPkg, ok := d.packageByID[newPkgID]
+	if !ok {
+		return fmt.Errorf("eaxmi: no package %q", newPkgID)
+	}
+	pe := d.doc.FindElement("//packagedElement[@xmi:id='" + id + "']")
+	newHost := d.doc.FindElement("//packagedElement[@xmi:id='" + newPkgID + "']")
+	if pe == nil || newHost == nil {
+		return fmt.Errorf("eaxmi: element or package node not found")
+	}
+	if p := pe.Parent(); p != nil {
+		p.RemoveChild(pe)
+	}
+	newHost.AddChild(pe)
+
+	if m := d.extension().FindElement("//element[@xmi:idref='" + id + "']/model"); m != nil {
+		m.CreateAttr("package", newPkgID)
+	}
+	if ep := d.extension().FindElement("//element[@xmi:idref='" + id + "']/extendedProperties"); ep != nil {
+		ep.CreateAttr("package_name", newPkg.Name)
+	}
+
+	if el.Package != nil {
+		el.Package.Elements = removeElement(el.Package.Elements, el)
+	}
+	newPkg.Elements = append(newPkg.Elements, el)
+	el.Package = newPkg
+	return nil
+}
+
 // RemoveElement deletes an element and every connector that touches it.
 func (d *Document) RemoveElement(id string) error {
 	el, ok := d.elementByID[id]
