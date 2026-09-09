@@ -34,8 +34,6 @@ vocabulary and relationship rules before it is written.
 - **Release binary** — [Releases](https://github.com/InsonusK/mcp-server-sparx-ea/releases):
   `linux_amd64`, `linux_arm64`, `darwin_amd64`, `darwin_arm64`. The machine
   needs `mdbtools` + `glib` installed.
-- **Container** — `ghcr.io/insonusk/mcp-server-sparx-ea:latest` (libraries
-  bundled).
 - **From source** — Go 1.23+ and the `mdbtools` dev headers:
 
   ```bash

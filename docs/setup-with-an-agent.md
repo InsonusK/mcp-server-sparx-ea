@@ -13,7 +13,7 @@ No ports, no accounts, no server to keep running.
 
 ## Step 1 — get the program
 
-Three ways, pick one.
+Two ways, pick one.
 
 ### a) Download a release binary
 
@@ -28,16 +28,7 @@ sudo apt-get install -y mdbtools libglib2.0-0   # Debian / Ubuntu
 brew install mdbtools glib                       # macOS
 ```
 
-### b) Use the container image (no local build, libraries bundled)
-
-```
-ghcr.io/insonusk/mcp-server-sparx-ea:latest
-```
-
-Register it in your client as a `docker run` command — see
-[the container section below](#option-b-run-it-as-a-container).
-
-### c) Build from source
+### b) Build from source
 
 ```bash
 # Debian / Ubuntu
@@ -51,16 +42,14 @@ CGO_ENABLED=1 go build -o mcp-server-sparx-ea .
 
 ---
 
-Whichever you chose, note the **full path** to the binary (or the image name),
-for example:
+Either way, note the **full path** to the binary, for example:
 
 ```
 /home/you/bin/mcp-server-sparx-ea        (Linux/macOS)
-ghcr.io/insonusk/mcp-server-sparx-ea     (container)
 ```
 
 > Windows: the server links the `mdbtools` C library, which is awkward on
-> Windows. Use WSL (Ubuntu) or the container image.
+> Windows. Running it under WSL (Ubuntu) is the simplest path.
 
 ---
 
@@ -121,29 +110,6 @@ The pattern is always the same — a JSON object keyed by a name, with a
 ```json
 { "mcpServers": { "sparx-ea": { "command": "<full path>" } } }
 ```
-
-### Option B: run it as a container
-
-If you chose the container image, the `command` is `docker` and the arguments
-run it in interactive (stdio) mode with your model files mounted:
-
-```json
-{
-  "mcpServers": {
-    "sparx-ea": {
-      "command": "docker",
-      "args": [
-        "run", "-i", "--rm",
-        "-v", "/path/to/your/models:/work",
-        "ghcr.io/insonusk/mcp-server-sparx-ea:latest"
-      ]
-    }
-  }
-}
-```
-
-Pass file paths to the tools **under the mount point**, e.g.
-`file=/work/TestProject.eapx`.
 
 ---
 
