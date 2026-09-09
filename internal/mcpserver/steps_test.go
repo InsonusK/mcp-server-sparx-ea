@@ -56,6 +56,11 @@ func (w *toolWorld) aRunningMCPServerWithAFakeModel() error {
 			w.fake.openedWith = path
 			return w.fake, nil
 		},
+		NewModel: func(rootName string) (mcpserver.Model, error) {
+			w.fake.rec("NewModel(%s)", rootName)
+			w.fake.rootName = rootName
+			return w.fake, nil
+		},
 	})
 }
 

@@ -11,8 +11,9 @@ written.
 Install and register the server first — see the `README.md` and
 [docs/installation.md](../installation.md). Read tools take a `file` (the
 exported `.xml`). Editing tools also take an `output` and write the changed
-copy there; `output` must differ from `file`. Read
-[the editing workflow](../workflow.md) before making changes.
+copy there; `output` must differ from `file`. (`ea_new_model` is the exception —
+it builds a model from scratch, so it takes `root` + `output` and no `file`.)
+Read [the editing workflow](../workflow.md) before making changes.
 
 ## Common conventions
 
@@ -98,6 +99,48 @@ The type names this server accepts. Takes **no arguments** and opens no file.
 ```
 ea_archimate_types
 ```
+
+---
+
+## Model tools
+
+### `ea_new_model`
+
+Build a model from scratch — one EA root package named `root`, with the ArchiMate3
+profile embedded so ArchiMate elements are recognised on import. **No `file`.**
+
+| Arg | Type | Required | Description |
+| --- | --- | --- | --- |
+| `root` | string | yes | the single root package name |
+| `output` | string | yes | where to write the new model |
+
+**Returns** `{"result": <tree>, "saved": "<output>"}`. Chain the other tools with
+`file` = this `output`.
+
+### `ea_create_root_package`
+
+Add a new top-level package alongside the model root.
+
+| Arg | Type | Required | Description |
+| --- | --- | --- | --- |
+| `file`, `output` | string | yes | `output` ≠ `file` |
+| `name` | string | yes | the new package name |
+
+**Returns** `{"result": <PackageInfo>, "saved": "<output>"}`.
+
+### `ea_set_root_name`
+
+Rename the single EA root package. With `fresh_identity` it also regenerates every
+GUID, so the saved copy imports into EA as an independent package next to the
+original.
+
+| Arg | Type | Required | Description |
+| --- | --- | --- | --- |
+| `file`, `output` | string | yes | `output` ≠ `file` |
+| `name` | string | yes | the new root name |
+| `fresh_identity` | bool | no | also regenerate every GUID (default `false`) |
+
+**Returns** `{"result": {"rootName": "<new name>"}, "saved": "<output>"}`.
 
 ---
 

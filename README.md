@@ -74,7 +74,8 @@ confirmation.
 | --- | --- | --- |
 | Setup with an agent | [docs/setup-with-an-agent.md](docs/setup-with-an-agent.md) | Registering the server with Claude Desktop / Claude Code / Cursor, and troubleshooting |
 | Editing workflow | [docs/workflow.md](docs/workflow.md) | The export → edit → re-import loop, `report.xml`, identity |
-| ArchiMate tools | [docs/api/archimate.md](docs/api/archimate.md) | The 17 read and editing tools over an exported model |
+| ArchiMate tools | [docs/api/archimate.md](docs/api/archimate.md) | The 20 read and editing tools over an exported model |
+| Model of the server | [docs/model.md](docs/model.md) | The ArchiMate model of the server itself (`docs/mcp-server-sparx-ea.xml`) and its roadmap |
 | Glossary | [docs/glossary/](docs/glossary/README.md) | Sparx EA, XMI, ArchiMate, MCP |
 
 For an **AI agent**, the executable instructions live in

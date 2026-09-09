@@ -1,7 +1,7 @@
 ---
 name: sparx-ea-mcp-edit
 description: How to call the ArchiMate editing tools of mcp-server-sparx-ea — create/update/delete elements, relationships and packages, and place elements on diagrams, writing an importable XMI copy
-whenToUse: when an agent needs to change an exported Sparx EA ArchiMate model (.xml) — add or edit elements, relationships or packages, or place elements on a diagram — and produce a file the user re-imports into EA
+whenToUse: when an agent needs to build a new Sparx EA ArchiMate model or change an exported one (.xml) — create a model from scratch, add or edit elements, relationships or packages, or place elements on a diagram — and produce a file the user imports into EA
 tags:
   - skill/documentation/for-ai
   - concern/documentation
@@ -15,7 +15,7 @@ tags:
 Register the server first — see [sparx-ea-mcp.skill.md](./sparx-ea-mcp.skill.md) and its [installation.md](./installation.md). Get every `ref` and every `type` from the read tools first — see [sparx-ea-mcp-read.skill.md](./sparx-ea-mcp-read.skill.md).
 
 # Core conventions
-- Every tool here takes **`file`** (the input model) and **`output`** (where to write the edited copy). `output` must be a different path from `file`; the tool refuses `output == file`.
+- Every tool here takes **`file`** (the input model) and **`output`** (where to write the edited copy). `output` must be a different path from `file`; the tool refuses `output == file`. The one exception is `ea_new_model`: it builds a model from scratch, so it takes **`root`** + **`output`** and no `file`.
 - **Chain edits**: pass one tool's `output` as the next tool's `file`. Two tools writing the same `output` do not accumulate — the second overwrites.
 - Result shape: `{"result": <object>, "saved": "<output>"}`. `<object>` is the affected element / relationship / package / diagram after the change.
 - A `ref` is an id, a braced GUID, or a slash path (`Model/Pkg/Elem`).
@@ -23,6 +23,38 @@ Register the server first — see [sparx-ea-mcp.skill.md](./sparx-ea-mcp.skill.m
 - After the last edit, tell the user to import the final `output` into EA: `File → Import → Package from XMI`.
 
 # Methods
+
+## `ea_new_model`
+```
+tools/call ea_new_model { "root": "<root package name>", "output": "<out>" }
+```
+Builds a model from scratch — one EA root package named `root`, with the ArchiMate3
+profile embedded so `ea_create_element` works and EA recognises the stereotypes on
+import. No `file`. Then chain the other tools with `file` = this `output`.
+
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `root` | string | yes | the single root package name |
+| `output` | string | yes | where to write the new model |
+
+**Returns** `{"result": <tree>, "saved": "<out>"}`.
+
+## `ea_create_root_package`
+```
+tools/call ea_create_root_package { "file": "<in>", "output": "<out>", "name": "<name>" }
+```
+Adds a new top-level package alongside the model root (not marked as a model).
+**Returns** `{"result": <PackageInfo>, "saved": "<out>"}`.
+
+## `ea_set_root_name`
+```
+tools/call ea_set_root_name
+  { "file": "<in>", "output": "<out>", "name": "<new name>", "fresh_identity": false }
+```
+Renames the single EA root package. With `fresh_identity: true` it also regenerates
+every GUID, so the saved copy imports into EA as an independent package that can sit
+next to the original (XMI import matches by GUID).
+**Returns** `{"result": {"rootName": "<new name>"}, "saved": "<out>"}`.
 
 ## `ea_create_element`
 ```
