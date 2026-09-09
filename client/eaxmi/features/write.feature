@@ -10,6 +10,16 @@ Feature: Editing the model and writing it back
     And there are 0 elements
     And there are 0 connectors
 
+  Scenario: A new model carries the ArchiMate3 profile definitions
+    Given a new model with root "Fresh"
+    When I add an element "Aim" of type "uml:Class" stereotype "ArchiMate_Goal" under "Fresh"
+    And I write and reopen as "fresh_profile.xml"
+    Then the element "Fresh/Aim" is:
+      | field      | value          |
+      | stereotype | ArchiMate_Goal |
+    And the written file contains "<profiles>"
+    And the written file contains "uml:Profile"
+
   Scenario: A blank root name is refused
     Then creating a new model with root "   " fails with "root name is required"
 

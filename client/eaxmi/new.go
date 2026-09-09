@@ -1,17 +1,26 @@
 package eaxmi
 
 import (
+	_ "embed"
 	"fmt"
 	"strings"
 )
+
+// archimate3Profiles is the <profiles> block (the ArchiMate3 MDG stereotype
+// definitions) EA needs to recognise the stereotypes an imported package
+// carries. It is static MDG content — the same in every EA ArchiMate export —
+// so it is embedded verbatim and carried by every from-scratch model.
+//
+//go:embed archimate3_profile.xml
+var archimate3Profiles string
 
 // NewModel builds a valid EA "Export Package to XMI" document from scratch — not
 // a copy of a fixture. It contains one root package named rootName (marked as an
 // EA model root), ready for AddPackage / AddElement. Save writes it like any
 // working copy.
 //
-// It has no ArchiMate profile block; plain packages and UML elements work as-is,
-// ArchiMate elements would need the profile definitions added.
+// It carries the ArchiMate3 profile definitions, so ArchiMate elements added to
+// it import into EA with their stereotypes recognised.
 func NewModel(rootName string) (*Document, error) {
 	rootName = strings.TrimSpace(rootName)
 	if rootName == "" {
@@ -40,6 +49,7 @@ func NewModel(rootName string) (*Document, error) {
 		<primitivetypes>
 			<packagedElement xmi:type="uml:Package" xmi:id="EAPrimitiveTypesPackage" name="EA_PrimitiveTypes_Package" visibility="public"/>
 		</primitivetypes>
+		` + strings.TrimSpace(archimate3Profiles) + `
 		<diagrams/>
 	</xmi:Extension>
 </xmi:XMI>`

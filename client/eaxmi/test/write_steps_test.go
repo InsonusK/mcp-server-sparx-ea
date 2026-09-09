@@ -3,6 +3,8 @@ package eaxmitest
 import (
 	"context"
 	"fmt"
+	"os"
+	"strings"
 
 	"github.com/cucumber/godog"
 
@@ -144,5 +146,16 @@ func registerWriteSteps(sc *godog.ScenarioContext, w *world) {
 	// assertions that run against the reopened file and read raw XML
 	sc.Step(`^the reopened file has no dangling id references$`, func(ctx context.Context) error {
 		return noDanglingRefs(ctx, w)
+	})
+
+	sc.Step(`^the written file contains "([^"]*)"$`, func(ctx context.Context, want string) error {
+		b, err := os.ReadFile(w.savedPath)
+		if err != nil {
+			return err
+		}
+		if !strings.Contains(string(b), want) {
+			return fmt.Errorf("written file %s does not contain %q", w.savedPath, want)
+		}
+		return nil
 	})
 }
