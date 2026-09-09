@@ -117,7 +117,11 @@ func (w *World) theWorkingModel(ctx context.Context, table *godog.Table) error {
 	w.Mut, w.Source, w.Output, w.RootName, w.SavedPath = svc, src, out, newRoot, ""
 	Logf(ctx, "working copy of %q → root renamed to %q → saves to %s/%s (edits never touch the fixture)",
 		src, newRoot, TmpDir, out)
-	return nil
+	// Write the pristine working copy straight away, so even a scenario whose
+	// very first operation is rejected still leaves its tmp file — useful to
+	// confirm the aborted operation left the model intact. Successful mutation
+	// steps overwrite it.
+	return w.Save(ctx)
 }
 
 // Save persists the working copy to TmpDir/<output>.

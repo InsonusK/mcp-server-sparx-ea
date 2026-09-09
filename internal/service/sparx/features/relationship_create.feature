@@ -13,16 +13,18 @@ Feature: Create relationships, with ArchiMate validation (method 5)
       | output | relationship_create.xml |
       | root   | relationship create     |
     And the relationship helper elements in "relationship create/Motivation_Package"
-    When I relate "relationship create/Motivation_Package/ReqA" to "relationship create/Motivation_Package/GoalA" as "ArchiMate.Realization"
-    And I relate "relationship create/Motivation_Package/GoalA" to "relationship create/Motivation_Package/GoalB" as "ArchiMate.Specialization"
-    And I relate "relationship create/Motivation_Package/GoalA" to "relationship create/Motivation_Package/GoalB" as "ArchiMate.Composition"
-    And I relate "relationship create/Motivation_Package/GoalA" to "relationship create/Motivation_Package/GoalB" as "ArchiMate.Aggregation"
-    And I relate "relationship create/Motivation_Package/GoalA" to "relationship create/Motivation_Package/GoalB" as "ArchiMate.Association"
-    And I relate "relationship create/Motivation_Package/ProcA" to "relationship create/Motivation_Package/GoalA" as "ArchiMate.Influence"
-    And I relate "relationship create/Motivation_Package/ProcA" to "relationship create/Motivation_Package/ProcB" as "ArchiMate.Triggering"
-    And I relate "relationship create/Motivation_Package/ProcA" to "relationship create/Motivation_Package/ProcB" as "ArchiMate.Flow"
-    And I relate "relationship create/Motivation_Package/ProcA" to "relationship create/Motivation_Package/ObjA" as "ArchiMate.Access"
-    And I relate "relationship create/Motivation_Package/ProcA" to "relationship create/Motivation_Package/GoalB" as "ArchiMate.Serving"
+    When I relate, in "relationship create/Motivation_Package":
+      | source | target | relation                 |
+      | ReqA   | GoalA  | ArchiMate.Realization    |
+      | GoalA  | GoalB  | ArchiMate.Specialization |
+      | GoalA  | GoalB  | ArchiMate.Composition    |
+      | GoalA  | GoalB  | ArchiMate.Aggregation    |
+      | GoalA  | GoalB  | ArchiMate.Association    |
+      | ProcA  | GoalA  | ArchiMate.Influence      |
+      | ProcA  | ProcB  | ArchiMate.Triggering     |
+      | ProcA  | ProcB  | ArchiMate.Flow           |
+      | ProcA  | ObjA   | ArchiMate.Access         |
+      | ProcA  | GoalB  | ArchiMate.Serving        |
     Then the relate succeeds
 
   Scenario Outline: Relationships ArchiMate does not permit are refused

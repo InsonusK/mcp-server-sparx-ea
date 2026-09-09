@@ -52,6 +52,43 @@ func registerRelationshipSteps(sc *godog.ScenarioContext, w *common.World) {
 	})
 	sc.Step(`^I relate "([^"]*)" to "([^"]*)" as "([^"]*)" named "([^"]*)"$`, relate)
 
+	// Table form: one row per relationship, all within one package.
+	//   When I relate, in "<pkg>":
+	//     | source | target | relation              | name |
+	//     | ReqA   | GoalA  | ArchiMate.Realization |      |
+	sc.Step(`^I relate, in "([^"]*)":$`, func(ctx context.Context, pkg string, table *godog.Table) error {
+		if len(table.Rows) < 2 {
+			return errString("the relate table needs a header and at least one row")
+		}
+		cols := map[string]int{}
+		for i, c := range table.Rows[0].Cells {
+			cols[c.Value] = i
+		}
+		for _, key := range []string{"source", "target", "relation"} {
+			if _, ok := cols[key]; !ok {
+				return errString("the relate table needs a " + key + " column")
+			}
+		}
+		w.Err = nil
+		for _, row := range table.Rows[1:] {
+			cell := func(name string) string {
+				if i, ok := cols[name]; ok && i < len(row.Cells) {
+					return row.Cells[i].Value
+				}
+				return ""
+			}
+			src := pkg + "/" + cell("source")
+			tgt := pkg + "/" + cell("target")
+			if err := relate(ctx, src, tgt, cell("relation"), cell("name")); err != nil {
+				return err
+			}
+			if w.Err != nil {
+				return nil // stop at the first rejected relationship, keep w.Err for the outcome step
+			}
+		}
+		return nil
+	})
+
 	sc.Step(`^I delete the last created relationship$`, func(ctx context.Context) error {
 		if w.LastRelID == "" {
 			return errNoRel
