@@ -10,7 +10,31 @@ import (
 	"github.com/InsonusK/mcp-server-sparx-ea/internal/service/sparx/test/common"
 )
 
+// helperElements is the fixed set of fresh elements the relationship scenarios
+// connect. They are created fresh in every scenario (not taken from the fixture)
+// so a scenario never trips the "relationship already exists" guard on a
+// relationship the fixture already carries.
+var helperElements = []struct{ typ, name string }{
+	{"ArchiMate.Goal", "GoalA"},
+	{"ArchiMate.Goal", "GoalB"},
+	{"ArchiMate.Requirement", "ReqA"},
+	{"ArchiMate.BusinessProcess", "ProcA"},
+	{"ArchiMate.BusinessProcess", "ProcB"},
+	{"ArchiMate.BusinessObject", "ObjA"},
+}
+
 func registerRelationshipSteps(sc *godog.ScenarioContext, w *common.World) {
+	sc.Step(`^the relationship helper elements in "([^"]*)"$`, func(ctx context.Context, pkg string) error {
+		for _, h := range helperElements {
+			if _, err := w.Mut.CreateElement(pkg, h.typ, h.name, ""); err != nil {
+				w.Err = err
+				return err
+			}
+		}
+		common.Logf(ctx, "created %d helper elements in %q", len(helperElements), pkg)
+		return w.Save(ctx)
+	})
+
 	relate := func(ctx context.Context, src, tgt, rel, name string) error {
 		r, err := w.Mut.CreateRelationship(src, tgt, rel, name, "")
 		w.Err = err

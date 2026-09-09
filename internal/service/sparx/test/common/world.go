@@ -24,21 +24,6 @@ import (
 // cleared at the start of a run, kept afterwards for manual import into Sparx.
 const TmpDir = "tmp"
 
-// One working copy per output file, shared across the scenarios of a feature so
-// that tmp/<output>.xml accumulates every successful change (a failed operation
-// Saves nothing, so it never pollutes the file). Reset by ResetWorkingModels.
-var (
-	workingModels = map[string]*sparx.Service{}
-	workingRoots  = map[string]string{}
-)
-
-// ResetWorkingModels drops the per-output working copies. TestFeatures calls it
-// at the start of a run.
-func ResetWorkingModels() {
-	workingModels = map[string]*sparx.Service{}
-	workingRoots = map[string]string{}
-}
-
 // World is one scenario's state.
 type World struct {
 	ScenarioName string
@@ -120,12 +105,6 @@ func (w *World) theWorkingModel(ctx context.Context, table *godog.Table) error {
 	if src == "" || out == "" || root == "" {
 		return fmt.Errorf(`the working model needs "source", "output" and "root" rows`)
 	}
-	if cached, ok := workingModels[out]; ok {
-		w.Mut, w.Source, w.Output, w.RootName, w.SavedPath = cached, src, out, workingRoots[out], ""
-		Logf(ctx, "continuing the accumulated working copy for %s (root %q)", out, w.RootName)
-		return nil
-	}
-
 	freshIdentity := cfg["identity"] != "keep"
 	svc, err := sparx.Open(FixturePath(src))
 	if err != nil {
@@ -135,10 +114,8 @@ func (w *World) theWorkingModel(ctx context.Context, table *godog.Table) error {
 	if err != nil {
 		return err
 	}
-	workingModels[out] = svc
-	workingRoots[out] = newRoot
 	w.Mut, w.Source, w.Output, w.RootName, w.SavedPath = svc, src, out, newRoot, ""
-	Logf(ctx, "new working copy of %q → root %q → accumulates into %s/%s (fixture untouched)",
+	Logf(ctx, "working copy of %q → root renamed to %q → saves to %s/%s (edits never touch the fixture)",
 		src, newRoot, TmpDir, out)
 	return nil
 }

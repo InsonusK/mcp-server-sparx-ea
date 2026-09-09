@@ -67,6 +67,13 @@ func (d *Document) extension() *etree.Element {
 	return d.doc.FindElement("//Extension")
 }
 
+// umlModel is <uml:Model>, the semantic tree. EA puts the ArchiMate profile
+// applications (<ArchiMate3:ArchiMate_Goal base_Class="…"/> …) here, as direct
+// children of the model — not in <xmi:Extension>.
+func (d *Document) umlModel() *etree.Element {
+	return d.doc.FindElement("//Model")
+}
+
 // AddElement creates an element in the package pkgID (an "" pkgID means the
 // model root). It updates both the model tree and the <xmi:Extension> block and
 // returns the new Element.
@@ -313,6 +320,7 @@ func (d *Document) RemoveElement(id string) error {
 	d.deleteByID("packagedElement", id)
 	d.deleteExtByIDRef("element", id)
 	d.deleteProfileApplication(id)
+	d.removeDiagramReferences(id)
 	delete(d.elementByID, id)
 	if el.Package != nil {
 		el.Package.Elements = removeElement(el.Package.Elements, el)
@@ -337,6 +345,7 @@ func (d *Document) RemoveConnector(id string) error {
 	d.deleteByID("generalization", id)
 	d.deleteExtByIDRef("connector", id)
 	d.deleteProfileApplication(id)
+	d.removeDiagramReferences(id)
 	for _, links := range d.doc.FindElements("//links") {
 		for _, l := range links.ChildElements() {
 			if l.SelectAttrValue("xmi:id", "") == id {
@@ -473,21 +482,64 @@ func (d *Document) extensionConnectorsBlock() *etree.Element {
 }
 
 func (d *Document) addProfileApplication(stereotype, baseAttr, id string) {
-	ext := d.extension()
-	pa := ext.CreateElement("ArchiMate3:" + stereotype)
+	m := d.umlModel()
+	if m == nil {
+		return
+	}
+	pa := m.CreateElement("ArchiMate3:" + stereotype)
 	pa.CreateAttr(baseAttr, id)
 }
 
+// deleteProfileApplication removes every <ArchiMate3:*> profile application that
+// points at id (its base_Class / base_Dependency / base_ControlFlow / … equals
+// id). EA keeps these under <uml:Model>; older exports may also carry some in
+// <xmi:Extension>, so both are swept.
 func (d *Document) deleteProfileApplication(id string) {
-	for _, pa := range d.extension().ChildElements() {
-		if pa.Space != "ArchiMate3" {
+	for _, parent := range []*etree.Element{d.umlModel(), d.extension()} {
+		if parent == nil {
 			continue
 		}
-		for _, a := range pa.Attr {
-			if a.Value == id {
-				d.extension().RemoveChild(pa)
+		for _, pa := range parent.ChildElements() {
+			if pa.Space != "ArchiMate3" {
+				continue
+			}
+			for _, a := range pa.Attr {
+				if a.Value == id {
+					parent.RemoveChild(pa)
+					break
+				}
 			}
 		}
+	}
+}
+
+// removeDiagramReferences drops every on-diagram entry (element box or connector
+// line) whose subject is id, across all diagrams, and keeps the in-memory model
+// in sync. EA's XMI importer rejects a diagram that references an element or
+// connector the import does not contain.
+func (d *Document) removeDiagramReferences(id string) {
+	for _, els := range d.extension().FindElements("//diagram/elements") {
+		for _, o := range els.ChildElements() {
+			if o.SelectAttrValue("subject", "") == id {
+				els.RemoveChild(o)
+			}
+		}
+	}
+	for _, g := range d.diagramByID {
+		objs := g.Objects[:0]
+		for _, o := range g.Objects {
+			if o.SubjectID != id {
+				objs = append(objs, o)
+			}
+		}
+		g.Objects = objs
+		links := g.Links[:0]
+		for _, l := range g.Links {
+			if l.ConnectorID != id {
+				links = append(links, l)
+			}
+		}
+		g.Links = links
 	}
 }
 
