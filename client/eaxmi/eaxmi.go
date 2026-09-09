@@ -75,22 +75,11 @@ func Read(r io.Reader) (*Document, error) {
 // Connectors returns every relationship in the document.
 func (d *Document) Connectors() []*Connector { return d.connectorAll }
 
-// ElementByID looks up an element by its xmi:id (e.g. "EAID_...").
+// ElementByID looks up an element by its xmi:id (e.g. "EAID_..."). For a lookup
+// by id, GUID or path, use ResolveElement (navigate.go).
 func (d *Document) ElementByID(id string) (*Element, bool) {
 	e, ok := d.elementByID[id]
 	return e, ok
-}
-
-// PackageByID looks up a package by its xmi:id (e.g. "EAPK_...").
-func (d *Document) PackageByID(id string) (*Package, bool) {
-	p, ok := d.packageByID[id]
-	return p, ok
-}
-
-// DiagramByID looks up a diagram by its xmi:id.
-func (d *Document) DiagramByID(id string) (*Diagram, bool) {
-	g, ok := d.diagramByID[id]
-	return g, ok
 }
 
 // guidFromXMIID converts an EA xmi:id ("EAID_A_B_C_D_E" / "EAPK_…") to the
