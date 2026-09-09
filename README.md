@@ -1,49 +1,44 @@
 # mcp-server-sparx-ea
 
-An [MCP](https://modelcontextprotocol.io) server that answers **SQL queries
-against Sparx Enterprise Architect project files** (`.eapx` / `.eap`, which are
-Microsoft Access JET databases) over stdio.
+An [MCP](docs/glossary/model-context-protocol.md) server that lets an AI agent
+**read and edit [Sparx Enterprise Architect](docs/glossary/sparx-enterprise-architect.md)
+models** over stdio — both the raw project database and the [ArchiMate](docs/glossary/archimate.md)
+model itself.
 
-Queries run **in-process**: the server binds directly to the `mdbtools` C library
-(`libmdb` / `libmdbsql`) through cgo — no `mdb-*` subprocess, no temporary files.
+## Why
 
-> Status: base connector. One tool (`ea_query`) is implemented. The
-> domain-specific tools from [`task/base-task.md`](task/base-task.md)
-> (`ea_search_objects`, `ea_get_connectors`) are not built yet.
+Sparx EA stores a project in a Microsoft Access database (`.eapx`) that no
+standard tool can read on Linux, and its ArchiMate content is buried in
+UML-with-stereotypes. This server gives an agent two ways in:
 
-## Layout
+- **SQL** against the `.eapx` file, in-process (cgo binding to `mdbtools` — no
+  subprocess, no temp files), read-only.
+- **ArchiMate operations** against a model the user exported to
+  [XMI](docs/glossary/xmi.md) (`File → Export → Package to XMI`): navigate the
+  tree, read an element with its relationships, create/rename/move/delete
+  elements, relationships and packages, place elements on diagrams. Edits are
+  written to a **new** XMI file that the user re-imports into EA — see
+  [the editing workflow](docs/workflow.md).
 
-| Path | What |
-|------|------|
-| `client/eapx/` | The connector library (package `eapx`). `Open(path)` → `Connector`; `Connector.Query(sql)` → `ResultSet`. `cgo_mdb.go` is the cgo binding, `connector.go` the Go API. |
-| `client/eapx/features/` | The connector's Cucumber specs (`.feature`). |
-| `client/eapx/test/` | Black-box godog step definitions + `testdata/` fixtures (package `eapxtest`). |
-| `internal/mcpserver/` | Wires the connector to an MCP server and exposes the `ea_query` tool, with its own `features/` + step defs. |
-| `internal/bddsupport/` | Helpers shared by the mcpserver / project-wide step files. |
-| `main.go` | `server.ServeStdio` entry point. |
-| `features/` | Project-wide architectural Cucumber specs (no `os/exec` anywhere, binary links `libmdb`). |
-| `tools/testkit/` | Normalises Go test / coverage / gremlins output into the report contract. |
-| `example/` | Sample projects used by the mcpserver spec (`TestProject`, `EmptyProject`, `CyrillicProject`). |
+Element types are ArchiMate types (`ArchiMate.Goal`), not `uml:Class` +
+stereotype pairs; every mutation is validated against the ArchiMate 3.2
+vocabulary and relationship rules before it is written.
 
-Every test is a Cucumber scenario. Conventions for writing them:
-[docs/skills/cucumber-go-testing.md](docs/skills/cucumber-go-testing.md).
-One `go test ./...` runs everything.
+## Installation
 
-## Build
-
-Prerequisites (Debian/Ubuntu):
+Requires Go 1.23+ and the `mdbtools` development headers (Debian/Ubuntu):
 
 ```bash
 sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
-```
-
-```bash
 CGO_ENABLED=1 go build -o mcp-server-sparx-ea .
 ```
 
-## Use
+See [docs/installation.md](docs/installation.md) for other platforms and for
+registering the server with an MCP client.
 
-The server speaks MCP over stdio. Register it with an MCP client, e.g.:
+## Quick start
+
+Register the built binary with an MCP client:
 
 ```json
 {
@@ -53,59 +48,51 @@ The server speaks MCP over stdio. Register it with an MCP client, e.g.:
 }
 ```
 
-### Tool: `ea_query`
-
-| Argument | Required | Description |
-|----------|----------|-------------|
-| `file` | yes | Path to the `.eapx` file on the server's filesystem. |
-| `sql` | yes | A single read-only `SELECT` statement. |
-
-Returns a text content block containing JSON:
-
-```json
-{ "columns": ["Object_ID", "Name"], "rows": [["2", "Stakeholder1"]], "rowCount": 1 }
-```
-
-Write/DDL statements (`INSERT`, `UPDATE`, `DELETE`, `DROP`, …) are rejected —
-`mdbtools` is read-only. Text is decoded to UTF-8 (JET4 stores it as UCS-2LE).
-
-Example against the sample project:
+Then, from the agent:
 
 ```
-ea_query file=example/TestProject.eapx  sql="select Object_ID, Name, Object_Type from t_object"
+ea_query        file=example/TestProject.eapx  sql="select Object_ID, Name from t_object"
+ea_model_tree   file=example/TestProject.xml
+ea_create_element  file=example/TestProject.xml  output=/tmp/edited.xml \
+                   parent="Model/Motivation_Package"  type=ArchiMate.Goal  name="Reduce cost"
 ```
 
-Useful tables: `t_object` (elements), `t_connector` (relationships),
-`t_package`, `t_diagram`, `t_attribute`, `t_operation`.
+`ea_create_element` writes `/tmp/edited.xml`; the user imports it back into EA
+(`File → Import → Package from XMI`), which diffs by GUID and asks for
+confirmation.
+
+## Documentation
+
+| Topic | Docs | Covers |
+| --- | --- | --- |
+| Editing workflow | [docs/workflow.md](docs/workflow.md) | The export → edit → re-import loop, `report.xml`, identity |
+| SQL query tool | [docs/api/sql-query.md](docs/api/sql-query.md) | `ea_query` — read-only SQL against `.eapx` |
+| ArchiMate tools | [docs/api/archimate.md](docs/api/archimate.md) | The 17 read and editing tools over an exported model |
+| Glossary | [docs/glossary/](docs/glossary/README.md) | Sparx EA, XMI, ArchiMate, MCP |
+
+For an **AI agent**, the executable instructions live in
+[docs/skills/sparx-ea/sparx-ea-mcp.skill.md](docs/skills/sparx-ea/sparx-ea-mcp.skill.md).
+
+## Layout
+
+| Path | What |
+| --- | --- |
+| `client/eapx/` | The `.eapx` SQL connector (cgo → `mdbtools`). Package `eapx`. |
+| `client/eaxmi/` | The EA XMI 2.1 codec — parse, navigate, edit, copy, re-serialise. Package `eaxmi`, pure Go. |
+| `internal/service/sparx/` | The ArchiMate service: ArchiMate vocabulary + validation over `eaxmi`. |
+| `internal/mcpserver/` | The MCP server — wires both to 18 tools. |
+| `main.go` | `server.ServeStdio` entry point. |
+| `docs/skills/cucumber-go-testing.md` | How the tests are written (every test is a Cucumber scenario). |
 
 ## Testing
 
-Four targets, per
-[solution-conformance-testing](.claude/skills/solution-conformance-testing/SKILL.md):
+Every test is a Cucumber scenario (godog); one `make unit-test` runs all 176.
 
 | Command | Does |
-|---------|------|
-| `make unit-test` | Every Cucumber scenario in one run, with `-race` and coverage. |
+| --- | --- |
+| `make unit-test` | Every scenario, with `-race` and coverage. |
 | `make mutation-test` | Mutation testing with [gremlins](docs/adr/0001-go-mutation-testing-tool.md). |
-| `make test-report` | Assembles `public/` (per-kind reports + shields.io badges + landing page). |
+| `make test-report` | Assembles `public/` (reports + badges + landing page). |
 | `make test-and-report` | All three, in order. |
 
-Toggles: `WITH_CODE_COVERAGE=true` (emit the normalised coverage result + badge),
-`ONLY_DELTA=true DELTA_BASE=<ref>` (mutate only changed code).
-
-Normalised results land in `tmp/result/*.json`, native reports in
-`tmp/report/<kind>/`. Test-writing conventions:
-[docs/skills/cucumber-go-testing.md](docs/skills/cucumber-go-testing.md).
-
-Current numbers: 40 scenarios green · **95.8%** line coverage · **100%** mutation score.
-
-Cyrillic decoding (Name and Note) is covered by `CyrillicProject.eapx`
-(`client/eapx/features/text_encoding.feature`), including exact byte-level
-assertions and a Cyrillic literal in a `WHERE` clause.
-
-### Supported SQL
-
-The connector is a thin pass-through to the mdbtools SQL engine:
-`SELECT <cols> FROM <table> [WHERE <col> = / <> / LIKE ... AND / OR ...]`.
-`ORDER BY`, `LIMIT`, `IN (...)`, `JOIN` and `count(*)` with a `WHERE` clause are
-**not** supported by the backend. Rows come back in storage order.
+Conventions: [docs/skills/cucumber-go-testing.md](docs/skills/cucumber-go-testing.md).
