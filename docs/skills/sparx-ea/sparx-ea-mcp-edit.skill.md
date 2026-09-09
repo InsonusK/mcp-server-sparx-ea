@@ -153,11 +153,11 @@ Removes the placement; the element stays in the model. **Errors** — `no diagra
 # Rule
 
 ## MUST
-- Pass an `output` different from `file` on every call — `output == file` is refused, and never edit a `.eapx` this way.
+- Pass an `output` different from `file` on every call — `output == file` is refused.
 - Chain edits through `output → file`. Never send two edits to the same `output` expecting them to combine.
 - Get `ref`s and `type`s from the read tools (`sparx-ea-mcp-read.skill.md`) before editing — an unresolved `ref` or unknown `type` is a tool error, not a silent no-op.
 - Tell the user the final `output` file must be imported into EA for the change to land; the tools never touch the live project.
-- Never document or call `ea_query` or a read tool from this skill — they belong to their own skills.
+- Never document or call a read tool from this skill — the read tools belong to `sparx-ea-mcp-read.skill.md`.
 
 ## SHOULD
 - Check `ea_archimate_types` output when a `type` is refused, rather than guessing another name.

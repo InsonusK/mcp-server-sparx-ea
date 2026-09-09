@@ -9,9 +9,7 @@ on:
 permissions:
   contents: write
 
-# The binary links mdbtools through cgo and dynamically, so each artifact is
-# built on its own native OS/arch (no cross-compiling) and still needs mdbtools
-# + glib installed on the target machine.
+# Pure Go (CGO_ENABLED=0) — every target cross-compiles from one Linux runner.
 
 jobs:
   guard:
@@ -36,18 +34,10 @@ jobs:
             echo "publish=true" >> "$GITHUB_OUTPUT"
           fi
 
-  build:
+  release:
     needs: guard
     if: needs.guard.outputs.publish == 'true'
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - { runner: ubuntu-latest,     goos: linux,  goarch: amd64 }
-          - { runner: ubuntu-24.04-arm,  goos: linux,  goarch: arm64 }
-          - { runner: macos-13,          goos: darwin, goarch: amd64 }
-          - { runner: macos-14,          goos: darwin, goarch: arm64 }
-    runs-on: ${{ matrix.runner }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -55,54 +45,30 @@ jobs:
           go-version-file: go.mod
           cache: true
 
-      - name: Install mdbtools (Linux)
-        if: matrix.goos == 'linux'
-        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
-
-      - name: Install mdbtools (macOS)
-        if: matrix.goos == 'darwin'
-        run: brew install mdbtools pkg-config glib
-
-      - name: Build
+      - name: Cross-compile
+        env:
+          CGO_ENABLED: "0"
+          VERSION: ${{ needs.guard.outputs.version }}
         run: |
-          CGO_ENABLED=1 GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} \
-            go build -trimpath -ldflags "-s -w" -o mcp-server-sparx-ea .
+          mkdir dist
+          for target in linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64 windows/arm64; do
+            goos=${target%/*}; goarch=${target#*/}
+            bin=mcp-server-sparx-ea; [ "$goos" = windows ] && bin=$bin.exe
+            name="mcp-server-sparx-ea_v${VERSION}_${goos}_${goarch}"
+            echo "building $name"
+            GOOS=$goos GOARCH=$goarch go build -trimpath -ldflags "-s -w" -o "$bin" .
+            if [ "$goos" = windows ]; then
+              zip -q "dist/$name.zip" "$bin"
+            else
+              tar -czf "dist/$name.tar.gz" "$bin"
+            fi
+            rm -f "$bin"
+          done
+          cd dist && sha256sum * > SHA256SUMS
 
-      - name: Package
-        run: |
-          name="mcp-server-sparx-ea_v${{ needs.guard.outputs.version }}_${{ matrix.goos }}_${{ matrix.goarch }}"
-          mkdir "$name"
-          cp mcp-server-sparx-ea "$name/"
-          cp README.md "$name/" 2>/dev/null || true
-          [ -f LICENSE ] && cp LICENSE "$name/" || true
-          tar -czf "$name.tar.gz" "$name"
-          shasum -a 256 "$name.tar.gz" > "$name.tar.gz.sha256"
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: dist-${{ matrix.goos }}-${{ matrix.goarch }}
-          path: |
-            mcp-server-sparx-ea_v*.tar.gz
-            mcp-server-sparx-ea_v*.tar.gz.sha256
-          if-no-files-found: error
-
-  release:
-    needs: [guard, build]
-    if: needs.guard.outputs.publish == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-        with:
-          pattern: dist-*
-          merge-multiple: true
-          path: dist
       - name: Create the GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           v="v${{ needs.guard.outputs.version }}"
-          gh release create "$v" dist/* \
-            --title "$v" \
-            --generate-notes \
-            --notes "Each binary links mdbtools dynamically — install \`mdbtools\` and \`glib\` on the target machine (\`apt-get install mdbtools libglib2.0-0\` / \`brew install mdbtools glib\`)."
+          gh release create "$v" dist/* --title "$v" --generate-notes

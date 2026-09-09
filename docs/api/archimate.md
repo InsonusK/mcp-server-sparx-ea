@@ -329,4 +329,3 @@ Remove an element's placement from a diagram (the element stays in the model).
 ## See also
 
 - [The editing workflow](../workflow.md) — export, chain edits, re-import.
-- [SQL query](sql-query.md) — raw table access for data these tools do not expose.

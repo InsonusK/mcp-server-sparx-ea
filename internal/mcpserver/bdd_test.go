@@ -7,7 +7,7 @@ import (
 	"github.com/cucumber/godog"
 )
 
-// TestFeatures runs the ea_query tool's Cucumber specs under features/.
+// TestFeatures runs the MCP tool Cucumber specs under features/.
 func TestFeatures(t *testing.T) {
 	format := "pretty"
 	if f := os.Getenv("GODOG_FORMAT"); f != "" {

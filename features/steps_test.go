@@ -1,11 +1,9 @@
 package features
 
 import (
-	"context"
 	"fmt"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"strings"
 
 	"github.com/cucumber/godog"
@@ -13,14 +11,8 @@ import (
 	"github.com/InsonusK/mcp-server-sparx-ea/internal/bddsupport"
 )
 
-type world struct {
-	binPath string
-}
-
-func (w *world) reset() { *w = world{} }
-
-// noProjectPackageImportsOsExec proves the DoD guarantee that no first-party
-// package shells out to a subprocess.
+// noProjectPackageImportsOsExec proves that no first-party package shells out to
+// a subprocess.
 func noProjectPackageImportsOsExec(module string) error {
 	cmd := exec.Command("go", "list", "-deps",
 		"-f", "{{.ImportPath}} {{join .Imports \" \"}}", "./...")
@@ -47,45 +39,30 @@ func noProjectPackageImportsOsExec(module string) error {
 	return nil
 }
 
-func (w *world) theServerBinaryIsBuilt() error {
-	root := bddsupport.RepoRoot()
-	outPath := filepath.Join(root, "tmp", "bin", "mcp-server-sparx-ea")
-	if err := os.MkdirAll(filepath.Dir(outPath), 0o755); err != nil {
-		return err
-	}
-	cmd := exec.Command("go", "build", "-o", outPath, ".")
-	cmd.Dir = root
-	cmd.Env = append(os.Environ(), "CGO_ENABLED=1")
+func buildWith(env ...string) error {
+	cmd := exec.Command("go", "build", "-o", os.DevNull, ".")
+	cmd.Dir = bddsupport.RepoRoot()
+	cmd.Env = append(os.Environ(), env...)
 	if out, err := cmd.CombinedOutput(); err != nil {
-		return fmt.Errorf("build failed: %v\n%s", err, out)
+		return fmt.Errorf("go build (%v) failed: %v\n%s", env, err, out)
 	}
-	w.binPath = outPath
 	return nil
 }
 
-func (w *world) binaryLinkedAgainst(lib string) error {
-	if w.binPath == "" {
-		return fmt.Errorf("the binary has not been built yet")
+func binaryBuildsWithCGODisabled() error {
+	return buildWith("CGO_ENABLED=0")
+}
+
+func binaryBuildsFor(target string) error {
+	goos, goarch, ok := strings.Cut(target, "/")
+	if !ok {
+		return fmt.Errorf("target %q is not GOOS/GOARCH", target)
 	}
-	out, err := exec.Command("ldd", w.binPath).CombinedOutput()
-	if err != nil {
-		return fmt.Errorf("ldd failed: %v\n%s", err, out)
-	}
-	if !strings.Contains(string(out), lib) {
-		return fmt.Errorf("binary is not linked against %q:\n%s", lib, out)
-	}
-	return nil
+	return buildWith("CGO_ENABLED=0", "GOOS="+goos, "GOARCH="+goarch)
 }
 
 func InitializeScenario(sc *godog.ScenarioContext) {
-	w := &world{}
-
-	sc.Before(func(ctx context.Context, _ *godog.Scenario) (context.Context, error) {
-		w.reset()
-		return ctx, nil
-	})
-
 	sc.Step(`^no package under "([^"]*)" imports "os/exec"$`, noProjectPackageImportsOsExec)
-	sc.Step(`^the server binary is built$`, w.theServerBinaryIsBuilt)
-	sc.Step(`^the binary is dynamically linked against "([^"]*)"$`, w.binaryLinkedAgainst)
+	sc.Step(`^the binary builds with CGO disabled$`, binaryBuildsWithCGODisabled)
+	sc.Step(`^the binary builds for "([^"]*)"$`, binaryBuildsFor)
 }

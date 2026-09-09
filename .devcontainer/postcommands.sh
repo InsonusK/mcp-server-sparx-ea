@@ -1,7 +1,4 @@
-sudo apt-get update
-sudo apt-get install -y \
-  build-essential \
-  pkg-config \
-  libglib2.0-dev \
-  mdbtools-dev \
-  libmdbsql3t64
+#!/usr/bin/env bash
+# The project is pure Go — nothing to install beyond the Go toolchain the
+# devcontainer image already provides.
+exit 0

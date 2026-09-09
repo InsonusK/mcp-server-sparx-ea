@@ -1,5 +1,5 @@
-// Command mcp-server-sparx-ea is an MCP server that answers SQL queries against
-// Sparx Enterprise Architect project files (.eapx) over stdio.
+// Command mcp-server-sparx-ea is an MCP server for reading and editing ArchiMate
+// models exported from Sparx Enterprise Architect, over stdio.
 package main
 
 import (
