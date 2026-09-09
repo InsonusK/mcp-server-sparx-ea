@@ -10,9 +10,13 @@ import (
 	"github.com/mark3labs/mcp-go/client"
 	"github.com/mark3labs/mcp-go/mcp"
 
-	"github.com/InsonusK/mcp-server-sparx-ea/internal/bddsupport"
+	"path/filepath"
+
 	"github.com/InsonusK/mcp-server-sparx-ea/internal/mcpserver"
 )
+
+// fixturePath resolves a fixture name against this package's frozen testdata/.
+func fixturePath(name string) string { return filepath.Join("testdata", name) }
 
 type toolWorld struct {
 	client  *client.Client
@@ -80,7 +84,7 @@ func (w *toolWorld) iCallEaQueryWithOnly(arg string) error {
 	args := map[string]any{}
 	switch arg {
 	case "file":
-		args["file"] = bddsupport.ResolvePath("example/TestProject.eapx")
+		args["file"] = fixturePath("TestProject.eapx")
 	case "sql":
 		args["sql"] = "select Object_ID from t_object"
 	default:
@@ -97,7 +101,7 @@ func (w *toolWorld) iCallToolWith(name, file, sql string) error {
 	req := mcp.CallToolRequest{}
 	req.Params.Name = name
 	req.Params.Arguments = map[string]any{
-		"file": bddsupport.ResolvePath(file),
+		"file": fixturePath(file),
 		"sql":  sql,
 	}
 	w.toolRes, w.toolErr = w.client.CallTool(context.Background(), req)

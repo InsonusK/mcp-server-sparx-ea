@@ -11,7 +11,7 @@ SHELL := /bin/bash
 export CGO_ENABLED := 1
 
 GO        ?= go
-COVERPKG  ?= ./client/eapx,./internal/mcpserver
+COVERPKG  ?= ./client/eapx,./client/eaxmi,./internal/mcpserver,./internal/service/sparx
 TESTKIT   := $(GO) run ./tools/testkit
 GOTESTSUM ?= $(GO) run gotest.tools/gotestsum@v1.13.0
 GREMLINS  ?= $(GO) run github.com/go-gremlins/gremlins/cmd/gremlins@v0.6.0
@@ -28,7 +28,7 @@ DELTA_BASE         ?=
 # mutant and --coverpkg attributes coverage back to <pkg>. --workers 1 + the
 # large timeout coefficient avoid gremlins' adaptive-timeout collapse, which
 # mislabels healthy mutants "TIMED OUT" on a fast parallel run.
-MUTATE_PKGS ?= ./client/eapx ./internal/mcpserver
+MUTATE_PKGS ?= ./client/eapx ./client/eaxmi ./internal/mcpserver ./internal/service/sparx
 
 # gremlins derives each mutant's timeout from the baseline test duration; on a
 # sub-second suite that estimate is far too tight and healthy mutants get
