@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1">
+	<xmi:Documentation exporter="Enterprise Architect" exporterVersion="6.5" exporterID="1554"/>
+	<uml:Model xmi:type="uml:Model" name="EA_Model" visibility="public">
+		<packagedElement xmi:type="uml:Package" xmi:id="EAPK_11111111_1111_1111_1111_111111111111" name="Plain" visibility="public">
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_AAAAAAAA_1111_1111_1111_111111111111" name="PlainClass" visibility="public"/>
+			<packagedElement xmi:type="uml:Component" xmi:id="EAID_BBBBBBBB_1111_1111_1111_111111111111" name="PlainComponent" visibility="public"/>
+			<packagedElement xmi:type="uml:Dependency" xmi:id="EAID_CCCCCCCC_1111_1111_1111_111111111111" visibility="public" supplier="EAID_BBBBBBBB_1111_1111_1111_111111111111" client="EAID_AAAAAAAA_1111_1111_1111_111111111111"/>
+		</packagedElement>
+	</uml:Model>
+	<xmi:Extension extender="Enterprise Architect" extenderID="6.5">
+		<elements>
+			<element xmi:idref="EAPK_11111111_1111_1111_1111_111111111111">
+				<model package="" ea_localid="1" ea_eleType="package"/>
+			</element>
+			<element xmi:idref="EAID_AAAAAAAA_1111_1111_1111_111111111111" xmi:type="uml:Class" name="PlainClass" scope="public">
+				<model package="EAPK_11111111_1111_1111_1111_111111111111" ea_localid="2" ea_eleType="element"/>
+				<properties documentation="a plain class with no stereotype" sType="Class" nType="0" scope="public" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+				<project author="tester" version="1.0" phase="1.0"/>
+			</element>
+			<element xmi:idref="EAID_BBBBBBBB_1111_1111_1111_111111111111" xmi:type="uml:Component" name="PlainComponent" scope="public">
+				<model package="EAPK_11111111_1111_1111_1111_111111111111" ea_localid="3" ea_eleType="element"/>
+				<properties documentation="" sType="Component" nType="0" scope="public"/>
+				<project author="tester" version="1.0" phase="1.0"/>
+			</element>
+		</elements>
+		<connectors>
+			<connector xmi:idref="EAID_CCCCCCCC_1111_1111_1111_111111111111">
+				<source xmi:idref="EAID_AAAAAAAA_1111_1111_1111_111111111111">
+					<model ea_localid="2" type="Class" name="PlainClass"/>
+				</source>
+				<target xmi:idref="EAID_BBBBBBBB_1111_1111_1111_111111111111">
+					<model ea_localid="3" type="Component" name="PlainComponent"/>
+				</target>
+				<model ea_localid="1"/>
+				<properties ea_type="Dependency" direction="Source -&gt; Destination"/>
+				<documentation/>
+			</connector>
+		</connectors>
+		<diagrams/>
+	</xmi:Extension>
+</xmi:XMI>

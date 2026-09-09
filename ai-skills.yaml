@@ -7,6 +7,7 @@ sources:
       - skills/common-workflow/develop
       - skills/common-workflow/test
       - skills/common-workflow/documentation
+      - skills/devops
   - path: ./docs/skills
     type: local
       

@@ -1,0 +1,124 @@
+name: Publish reports
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# A newer push to master makes an in-flight run's report describe code that is
+# no longer there — cancel it rather than let it publish stale numbers.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      relevant: ${{ steps.filter.outputs.code == 'true' || steps.filter.outputs.tests == 'true' || steps.filter.outputs.ci == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            code:
+              - '**/*.go'
+              - 'go.mod'
+              - 'go.sum'
+            tests:
+              - '**/features/**'
+              - '**/*_test.go'
+              - '**/testdata/**'
+            ci:
+              - '.github/workflows/**'
+              - 'Makefile'
+              - 'Dockerfile'
+              - 'tools/testkit/**'
+
+  unit-test:
+    needs: changes
+    if: needs.changes.outputs.relevant == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Install mdbtools headers
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
+      - name: make unit-test WITH_CODE_COVERAGE=true
+        run: make unit-test WITH_CODE_COVERAGE=true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-report
+          path: |
+            tmp/result
+            tmp/report/tests
+            tmp/report/coverage
+          if-no-files-found: error
+
+  mutation-test:
+    needs: changes
+    if: needs.changes.outputs.relevant == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Install mdbtools headers
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
+      # Full run — no ONLY_DELTA. Report-only: the PR gate already enforced the
+      # threshold before this reached master, so this job never fails the push.
+      - name: make mutation-test
+        run: make mutation-test || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mutation-test-report
+          path: |
+            tmp/result
+            tmp/report/mutation
+          if-no-files-found: error
+
+  test-report:
+    needs: [unit-test, mutation-test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      # upload-artifact strips the common "tmp/" prefix — download back into tmp/.
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: "*-test-report"
+          merge-multiple: true
+          path: tmp
+      - name: make test-report
+        run: make test-report
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: test-report
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
