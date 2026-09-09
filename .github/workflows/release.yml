@@ -1,0 +1,133 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  packages: write
+
+# The binary links mdbtools through cgo and dynamically, so each artifact is
+# built on its own native OS/arch (no cross-compiling) and still needs mdbtools
+# + glib installed on the target machine. The container image bundles them and
+# is the portable option.
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.v.outputs.publish }}
+      version: ${{ steps.v.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: v
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(grep -oE 'Version = "[^"]+"' internal/mcpserver/server.go | head -1 | sed -E 's/.*"([^"]+)".*/\1/')
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if [ -z "$version" ]; then echo "could not read mcpserver.Version" >&2; exit 1; fi
+          if gh release view "v$version" >/dev/null 2>&1; then
+            echo "v$version already released — nothing to do"
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "v$version is new — will build and release"
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    needs: guard
+    if: needs.guard.outputs.publish == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { runner: ubuntu-latest,     goos: linux,  goarch: amd64 }
+          - { runner: ubuntu-24.04-arm,  goos: linux,  goarch: arm64 }
+          - { runner: macos-13,          goos: darwin, goarch: amd64 }
+          - { runner: macos-14,          goos: darwin, goarch: arm64 }
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Install mdbtools (Linux)
+        if: matrix.goos == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
+
+      - name: Install mdbtools (macOS)
+        if: matrix.goos == 'darwin'
+        run: brew install mdbtools pkg-config glib
+
+      - name: Build
+        run: |
+          CGO_ENABLED=1 GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} \
+            go build -trimpath -ldflags "-s -w" -o mcp-server-sparx-ea .
+
+      - name: Package
+        run: |
+          name="mcp-server-sparx-ea_v${{ needs.guard.outputs.version }}_${{ matrix.goos }}_${{ matrix.goarch }}"
+          mkdir "$name"
+          cp mcp-server-sparx-ea "$name/"
+          cp README.md "$name/" 2>/dev/null || true
+          [ -f LICENSE ] && cp LICENSE "$name/" || true
+          tar -czf "$name.tar.gz" "$name"
+          shasum -a 256 "$name.tar.gz" > "$name.tar.gz.sha256"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: |
+            mcp-server-sparx-ea_v*.tar.gz
+            mcp-server-sparx-ea_v*.tar.gz.sha256
+          if-no-files-found: error
+
+  release:
+    needs: [guard, build]
+    if: needs.guard.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: dist-*
+          merge-multiple: true
+          path: dist
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v="v${{ needs.guard.outputs.version }}"
+          gh release create "$v" dist/* \
+            --title "$v" \
+            --generate-notes \
+            --notes "Per-OS binaries link mdbtools dynamically — install \`mdbtools\` on the target machine. Or use the container image \`ghcr.io/${{ github.repository_owner }}/mcp-server-sparx-ea:${{ needs.guard.outputs.version }}\`."
+
+  image:
+    needs: guard
+    if: needs.guard.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          build-args: VERSION=${{ needs.guard.outputs.version }}
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/mcp-server-sparx-ea:${{ needs.guard.outputs.version }}
+            ghcr.io/${{ github.repository_owner }}/mcp-server-sparx-ea:latest

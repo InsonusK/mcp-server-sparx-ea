@@ -1,10 +1,18 @@
-Feature: Concurrent access to one connection is serialized safely
-  Architectural concern: the mdbtools engine is single-threaded. The Connector
-  must guard it so that concurrent callers get correct results and no data race
-  (the suite runs under -race).
+Feature: Concurrent callers of one connection are serialized
+  Architectural concern: the mdbtools engine is single-threaded and keeps cursor
+  state on the handle. The Connector mutex must make concurrent Query calls
+  behave as if run one at a time. If the mutex is removed, goroutines querying
+  different objects see each other's rows and this test fails. Runs under -race.
 
-  Scenario: Many goroutines share one connection
-    Given a connection to the Sparx EA file "example/TestProject.eapx"
-    When I run the query "select count(*) from t_object" from 40 goroutines concurrently
-    Then all 40 queries succeed
-    And every concurrent query returned the value "16"
+  Background:
+    Given a connection to the Sparx EA file "TestProject.eapx"
+
+  Scenario: 60 goroutines each read a different element and get exactly its row
+    Given the elements to read concurrently:
+      | Object_ID | Name         | Object_Type |
+      | 2         | Stakeholder1 | Class       |
+      | 7         | Goal1        | Class       |
+      | 14        | ValueStream1 | Activity    |
+    When 60 goroutines read those elements concurrently, round-robin
+    Then no goroutine returned an error
+    And every goroutine got exactly its assigned row

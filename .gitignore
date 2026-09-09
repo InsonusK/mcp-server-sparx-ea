@@ -11,3 +11,6 @@
 /public/
 /mcp-server-sparx-ea
 *.out
+
+# sparx service: saved working copies from methods 4-6 tests (kept for manual Sparx import)
+tmp/

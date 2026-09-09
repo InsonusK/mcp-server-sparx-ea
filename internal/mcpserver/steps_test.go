@@ -10,15 +10,20 @@ import (
 	"github.com/mark3labs/mcp-go/client"
 	"github.com/mark3labs/mcp-go/mcp"
 
-	"github.com/InsonusK/mcp-server-sparx-ea/internal/bddsupport"
+	"path/filepath"
+
 	"github.com/InsonusK/mcp-server-sparx-ea/internal/mcpserver"
 )
+
+// fixturePath resolves a fixture name against this package's frozen testdata/.
+func fixturePath(name string) string { return filepath.Join("testdata", name) }
 
 type toolWorld struct {
 	client  *client.Client
 	tools   []mcp.Tool
 	toolRes *mcp.CallToolResult
 	toolErr error
+	fake    *fakeModel
 }
 
 func (w *toolWorld) reset() {
@@ -28,8 +33,8 @@ func (w *toolWorld) reset() {
 	*w = toolWorld{}
 }
 
-func (w *toolWorld) aRunningMCPServer() error {
-	c, err := client.NewInProcessClient(mcpserver.New(nil))
+func (w *toolWorld) startClient(srv *mcpserver.Options) error {
+	c, err := client.NewInProcessClient(mcpserver.New(srv))
 	if err != nil {
 		return err
 	}
@@ -45,6 +50,20 @@ func (w *toolWorld) aRunningMCPServer() error {
 	}
 	w.client = c
 	return nil
+}
+
+func (w *toolWorld) aRunningMCPServer() error { return w.startClient(nil) }
+
+// aRunningMCPServerWithAFakeModel wires the sparx tools to a spy fake so tool
+// behaviour can be checked without an XMI file. ea_query keeps the real eapx.
+func (w *toolWorld) aRunningMCPServerWithAFakeModel() error {
+	w.fake = defaultFake()
+	return w.startClient(&mcpserver.Options{
+		Sparx: func(path string) (mcpserver.Model, error) {
+			w.fake.openedWith = path
+			return w.fake, nil
+		},
+	})
 }
 
 func (w *toolWorld) iListTheMCPTools() error {
@@ -80,7 +99,7 @@ func (w *toolWorld) iCallEaQueryWithOnly(arg string) error {
 	args := map[string]any{}
 	switch arg {
 	case "file":
-		args["file"] = bddsupport.ResolvePath("example/TestProject.eapx")
+		args["file"] = fixturePath("TestProject.eapx")
 	case "sql":
 		args["sql"] = "select Object_ID from t_object"
 	default:
@@ -97,7 +116,7 @@ func (w *toolWorld) iCallToolWith(name, file, sql string) error {
 	req := mcp.CallToolRequest{}
 	req.Params.Name = name
 	req.Params.Arguments = map[string]any{
-		"file": bddsupport.ResolvePath(file),
+		"file": fixturePath(file),
 		"sql":  sql,
 	}
 	w.toolRes, w.toolErr = w.client.CallTool(context.Background(), req)
@@ -181,11 +200,13 @@ func InitializeScenario(sc *godog.ScenarioContext) {
 	sc.Step(`^a running MCP server$`, w.aRunningMCPServer)
 	sc.Step(`^I list the MCP tools$`, w.iListTheMCPTools)
 	sc.Step(`^the tool "([^"]*)" is available$`, w.theToolIsAvailable)
-	sc.Step(`^exactly (\d+) tool is advertised$`, w.exactlyNToolsAdvertised)
+	sc.Step(`^exactly (\d+) tools? (?:is|are) advertised$`, w.exactlyNToolsAdvertised)
 	sc.Step(`^I call "([^"]*)" with file "([^"]*)" and sql "([^"]*)"$`, w.iCallToolWith)
 	sc.Step(`^I call "ea_query" with only (\w+) set$`, w.iCallEaQueryWithOnly)
 	sc.Step(`^the tool call is not an error$`, w.theToolCallIsNotAnError)
 	sc.Step(`^the tool call is an error containing "([^"]*)"$`, w.theToolCallIsAnErrorContaining)
 	sc.Step(`^the tool JSON field "([^"]*)" equals "([^"]*)"$`, w.theToolJSONFieldEquals)
 	sc.Step(`^the tool JSON contains "(.*)"$`, w.theToolJSONContains)
+
+	registerSparxSteps(sc, w)
 }

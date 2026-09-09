@@ -1,52 +1,74 @@
-Feature: Run SQL queries against a Sparx EA file
-  As an MCP server component
-  I want to send SQL SELECT statements to a .eapx file
-  So that an agent can read model data out of it
+Feature: Running SELECT queries against a Sparx EA file
+  As an LLM agent
+  I want Connector.Query to return exactly the rows and columns the SQL asks for
+  So that I can read Sparx EA model data reliably
 
   Background:
-    Given a connection to the Sparx EA file "example/TestProject.eapx"
+    Given a connection to the Sparx EA file "TestProject.eapx"
 
-  Scenario Outline: Selecting rows from the model
-    When I run the query "<sql>"
-    Then the query succeeds
-    And the result has <rows> rows
-    And the result columns are "<columns>"
+  Scenario: Reading one element by id, including its memo (Note) column
+    When I run the query "select Object_ID, Name, Object_Type, Stereotype, Author, Note from t_object where Object_ID = 7"
+    Then the result is exactly:
+      | Object_ID | Name  | Object_Type | Stereotype     | Author   | Note             |
+      | 7         | Goal1 | Class       | ArchiMate_Goal | InsonusK | Goal description |
 
-    Examples:
-      | sql                                                                       | rows | columns                        |
-      | select Object_ID, Name, Object_Type from t_object                          | 16   | Object_ID,Name,Object_Type     |
-      | select Object_ID from t_object where Object_ID = 999999                     | 0    | Object_ID                      |
-      | select count(*) from t_object                                              | 1    | count                          |
-      | select Name, Notes from t_package                                          | 2    | Name,Notes                     |
+  Scenario: Reading the two packages
+    When I run the query "select Package_ID, Name, Parent_ID from t_package"
+    Then the result is exactly:
+      | Package_ID | Name               | Parent_ID |
+      | 1          | Model              | 0         |
+      | 2          | Motivation_Package | 1         |
 
-  Scenario: Reading a specific element by id
-    When I run the query "select Object_ID, Name, Object_Type from t_object where Object_ID = 2"
-    Then the query succeeds
-    And the result has 1 rows
-    And row 0 equals "2,Stakeholder1,Class"
+  Scenario: Reading relationships that end at the Goal element
+    When I run the query "select Connector_ID, Connector_Type, Start_Object_ID, End_Object_ID from t_connector where End_Object_ID = 7"
+    Then the result is exactly:
+      | Connector_ID | Connector_Type | Start_Object_ID | End_Object_ID |
+      | 6            | ControlFlow    | 4               | 7             |
+      | 7            | Dependency     | 8               | 7             |
+      | 8            | Dependency     | 10              | 7             |
+      | 9            | Dependency     | 9               | 7             |
+      | 10           | Dependency     | 11              | 7             |
 
-  Scenario: Aggregate query returns the computed value
-    When I run the query "select count(*) from t_object"
-    Then the query succeeds
-    And the single result value is "16"
-
-  Scenario: An empty project yields no model elements
-    Given a connection to the Sparx EA file "example/EmptyProject.eapx"
+  Scenario: Selecting all elements returns every row
     When I run the query "select Object_ID, Name from t_object"
+    Then the result has 16 rows
+    And the result contains the rows:
+      | Object_ID | Name               |
+      | 1         | Motivation_Package |
+      | 2         | Stakeholder1       |
+      | 7         | Goal1              |
+      | 14        | ValueStream1       |
+      | 16        | Location1          |
+
+  Scenario: A filter that matches nothing yields an empty result, not an error
+    When I run the query "select Object_ID, Name from t_object where Object_ID = 999999"
     Then the query succeeds
-    And the result has 0 rows
+    And the result is empty
+    And the result columns are "Object_ID, Name"
 
   Scenario Outline: The leading keyword is recognised regardless of letter case
     When I run the query "<sql>"
-    Then the query succeeds
-    And the result has 16 rows
+    Then the result is exactly:
+      | Object_ID | Name  |
+      | 7         | Goal1 |
 
     Examples:
-      | sql                            |
-      | SELECT Object_ID from t_object |
-      | SeLeCt Object_ID from t_object |
+      | sql                                                     |
+      | select Object_ID, Name from t_object where Object_ID = 7 |
+      | SELECT Object_ID, Name FROM t_object WHERE Object_ID = 7 |
+      | SeLeCt Object_ID, Name from t_object where Object_ID = 7 |
 
-  Scenario: Leading whitespace before SELECT is tolerated
-    When I run the query "    select Object_ID from t_object"
-    Then the query succeeds
-    And the result has 16 rows
+  Scenario: Leading whitespace before the statement is tolerated
+    When I run the query "    select Object_ID, Name from t_object where Object_ID = 7"
+    Then the result is exactly:
+      | Object_ID | Name  |
+      | 7         | Goal1 |
+
+  Scenario: The empty project has no elements but still has the root package
+    Given a connection to the Sparx EA file "EmptyProject.eapx"
+    When I run the query "select Object_ID, Name from t_object"
+    Then the result is empty
+    When I run the query "select Package_ID, Name, Parent_ID from t_package"
+    Then the result is exactly:
+      | Package_ID | Name  | Parent_ID |
+      | 1          | Model | 0         |
