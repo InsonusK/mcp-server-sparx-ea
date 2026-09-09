@@ -64,6 +64,18 @@ func registerElementSteps(sc *godog.ScenarioContext, w *common.World) {
 		return w.Save(ctx)
 	})
 
+	sc.Step(`^I move the element "([^"]*)" into "([^"]*)"$`, func(ctx context.Context, ref, parent string) error {
+		el, err := w.Mut.MoveElement(ref, parent)
+		w.Err = err
+		if err != nil {
+			common.Logf(ctx, "move element %q into %q → error: %v", ref, parent, err)
+			return nil
+		}
+		w.LastElemPath = el.Path
+		common.Logf(ctx, "moved element %q into %q → %s", ref, parent, el.Path)
+		return w.Save(ctx)
+	})
+
 	sc.Step(`^I delete the element "([^"]*)"$`, func(ctx context.Context, ref string) error {
 		w.Err = w.Mut.DeleteElement(ref)
 		if w.Err != nil {

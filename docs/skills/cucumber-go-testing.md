@@ -106,6 +106,10 @@ internal/service/sparx/test/
 - `common/` — обычный пакет с экспортируемым `World`; action-шаги в `sparxtest` берут `*common.World`.
 - Граница: `common/` = plumbing + assertions (что переиспользуется); `test/*_steps_test.go` = действия
   (что специфично для операции). Читателю сразу видно: assertion → в `common/`, действие → рядом с feature.
+- **Файлы feature и step — по концепту модели** (`package`, `element`, `relationship`, `diagram`,
+  `rootnode`), и продакшн-код сервиса разложен так же (`package.go`, `element.go`, …). Даже если
+  операции над концептами похожи (у package и element есть create/rename/move/delete), они выделяются
+  отдельно — сервис инкапсулирует специфику каждого концепта.
 
 Общее для обоих: фикстуры в `testdata/` (не ссылки на `example/`); раннер
 `Options.Paths=["../features"]`, `Tags="~@todo"`, `Strict=true`, `TestingT=t`; env `GODOG_STEPS=1` → каталог шагов.

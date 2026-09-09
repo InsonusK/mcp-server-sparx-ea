@@ -33,6 +33,7 @@ type World struct {
 	Tree    *sparx.Node
 	Element *sparx.ElementInfo
 	Diagram *sparx.DiagramInfo
+	Pkg     *sparx.PackageInfo
 	Err     error
 
 	// working copy (the "Given the working model" step)
@@ -45,6 +46,7 @@ type World struct {
 	LastRelID      string
 	LastElemPath   string
 	LastDiagramRef string
+	LastPkgPath    string
 }
 
 func NewWorld() *World { return &World{} }
@@ -397,6 +399,99 @@ func (w *World) reloadRootIs(ctx context.Context, want string) error {
 	return fmt.Errorf("after reload root packages are %v, want %q", roots, want)
 }
 
+// ---------- generic "the package …" comparators ----------
+
+func (w *World) packageIs(ctx context.Context, table *godog.Table) error {
+	return fieldTable(w.Pkg, table, "package")
+}
+
+func (w *World) packageContains(ctx context.Context, kind, list string) error {
+	if w.Pkg == nil {
+		return fmt.Errorf("no package read (err: %v)", w.Err)
+	}
+	var got []string
+	switch kind {
+	case "packages":
+		got = w.Pkg.Packages
+	case "elements":
+		got = w.Pkg.Elements
+	case "diagrams":
+		got = w.Pkg.Diagrams
+	default:
+		return fmt.Errorf("unknown package child kind %q", kind)
+	}
+	return sameSet(got, SplitList(list))
+}
+
+func (w *World) reloadPackage(ctx context.Context, ref string) (*sparx.PackageInfo, error) {
+	svc, err := w.Reloaded(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return svc.Package(ref)
+}
+
+func (w *World) reloadPackageIs(ctx context.Context, ref string, table *godog.Table) error {
+	p, err := w.reloadPackage(ctx, ref)
+	if err != nil {
+		return err
+	}
+	return fieldTable(p, table, "reloaded package")
+}
+
+func (w *World) reloadPackageContains(ctx context.Context, ref, kind, list string) error {
+	p, err := w.reloadPackage(ctx, ref)
+	if err != nil {
+		return err
+	}
+	var got []string
+	switch kind {
+	case "packages":
+		got = p.Packages
+	case "elements":
+		got = p.Elements
+	case "diagrams":
+		got = p.Diagrams
+	}
+	return sameSet(got, SplitList(list))
+}
+
+func (w *World) reloadPackageNotFound(ctx context.Context, ref string) error {
+	svc, err := w.Reloaded(ctx)
+	if err != nil {
+		return err
+	}
+	if _, err := svc.Package(ref); err == nil {
+		return fmt.Errorf("package %q still resolves after reload", ref)
+	}
+	Logf(ctx, "package %q is gone after reload", ref)
+	return nil
+}
+
+func sameSet(got, want []string) error {
+	if len(want) == 1 && want[0] == "" {
+		want = nil
+	}
+	g := map[string]bool{}
+	for _, v := range got {
+		g[v] = true
+	}
+	for _, v := range want {
+		if !g[v] {
+			return fmt.Errorf("expected %q among %v", v, got)
+		}
+		delete(g, v)
+	}
+	if len(g) > 0 {
+		var extra []string
+		for v := range g {
+			extra = append(extra, v)
+		}
+		return fmt.Errorf("unexpected extra: %v (have %v, want %v)", extra, got, want)
+	}
+	return nil
+}
+
 // ---------- registration ----------
 
 // RegisterSharedSteps wires every plumbing / generic-comparator step.
@@ -404,8 +499,8 @@ func RegisterSharedSteps(sc *godog.ScenarioContext, w *World) {
 	sc.Step(`^the model file "([^"]*)"$`, w.theModelFile)
 	sc.Step(`^the working model:$`, w.theWorkingModel)
 
-	sc.Step(`^the (?:read|create|delete|placement|rename) succeeds$`, w.succeeds)
-	sc.Step(`^the (?:read|create|delete|placement|rename) fails with "([^"]*)"$`, w.failsWith)
+	sc.Step(`^the (?:read|create|delete|placement|rename|move) succeeds$`, w.succeeds)
+	sc.Step(`^the (?:read|create|delete|placement|rename|move) fails with "([^"]*)"$`, w.failsWith)
 	sc.Step(`^the relate (succeeds|fails with .+)$`, w.outcome)
 
 	sc.Step(`^the element is:$`, w.elementIs)
@@ -431,6 +526,12 @@ func RegisterSharedSteps(sc *godog.ScenarioContext, w *World) {
 	sc.Step(`^after reload the diagram "([^"]*)" has (\d+) placed elements$`, w.reloadDiagramHasNObjects)
 	sc.Step(`^after reload the diagram placed elements include:$`, w.reloadDiagramObjectsInclude)
 	sc.Step(`^after reload the root package is "([^"]*)"$`, w.reloadRootIs)
+
+	sc.Step(`^the package is:$`, w.packageIs)
+	sc.Step(`^the package (packages|elements|diagrams) are "([^"]*)"$`, w.packageContains)
+	sc.Step(`^after reload the package "([^"]*)" is:$`, w.reloadPackageIs)
+	sc.Step(`^after reload the package "([^"]*)" (packages|elements|diagrams) are "([^"]*)"$`, w.reloadPackageContains)
+	sc.Step(`^after reload the package "([^"]*)" cannot be found$`, w.reloadPackageNotFound)
 }
 
 // ---------- table helpers ----------

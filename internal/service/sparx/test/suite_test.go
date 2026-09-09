@@ -60,6 +60,7 @@ func initializeScenario(sc *godog.ScenarioContext) {
 
 	common.RegisterSharedSteps(sc, w)
 	registerTreeSteps(sc, w)
+	registerPackageSteps(sc, w)
 	registerElementSteps(sc, w)
 	registerRelationshipSteps(sc, w)
 	registerDiagramSteps(sc, w)
