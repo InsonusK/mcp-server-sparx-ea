@@ -13,10 +13,10 @@ const ReportRootName = "Sparx Service Test Report"
 // scratch so it carries none of the sources' model-root flags:
 //
 //  1. start an empty model whose one root package is ReportRootName
-//  2. for each source, take its root package name
-//  3. create a package with that name inside the report root
-//  4. deep-copy every child package of the source root into it, regenerating
-//     ids so nothing collides (eaxmi.CopyPackage)
+//  2. for each source, deep-copy its root package (with all its sub-packages) in
+//     as a child of the report root, regenerating every id the subtree owns so
+//     nothing collides and cross-references inside the source stay intact
+//     (eaxmi.CopyPackage — it also strips the copied package's model-root flags)
 //
 // EA's "Import Package from XMI" processes a single root, so the report has
 // exactly one. If it turns out broken, the individual sources say which one.
@@ -43,21 +43,12 @@ func AssembleReport(outPath string, sourcePaths []string) error {
 			failed = append(failed, fmt.Sprintf("%s: %v", p, err))
 			continue
 		}
-		roots := src.RootPackages()
-		if len(roots) == 0 {
+		if len(src.Root.Packages) == 0 {
 			failed = append(failed, p+": no root package")
 			continue
 		}
-		wrapper, err := base.AddPackage(rootID, roots[0])
-		if err != nil {
+		if _, err := base.CopyPackage(src, src.Root.Packages[0].XMIID, rootID); err != nil {
 			failed = append(failed, fmt.Sprintf("%s: %v", p, err))
-			continue
-		}
-		srcRoot := src.Root.Packages[0]
-		for _, child := range append([]*eaxmi.Package(nil), srcRoot.Packages...) {
-			if _, err := base.CopyPackage(src, child.XMIID, wrapper.XMIID); err != nil {
-				failed = append(failed, fmt.Sprintf("%s/%s: %v", p, child.Name, err))
-			}
 		}
 	}
 

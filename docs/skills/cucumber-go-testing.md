@@ -120,14 +120,15 @@ internal/service/sparx/test/
   `tmp/scenario/<output>.xml`. **Файл фикстуры никогда не перезаписывается.**
 - `tmp/` в `.gitignore`, чистится в начале прогона (`os.RemoveAll` в `TestFeatures`), **остаётся после**.
   Раскладка:
-  - `tmp/scenario/<output>.xml` — по файлу на сценарий (root-пакет = имя сценария, свежие GUID);
-  - `tmp/report.xml` — все сценарии, слитые в один файл (по top-level пакету на сценарий),
-    собирается после прогона (`sparx.AssembleReport` → `eaxmi.Document.Merge`).
-  Пользователь импортирует **`report.xml`** (один импорт); если он оказался битым — по
-  `tmp/scenario/*.xml` видно, какой именно сценарий его сломал. Merge — **после** тестов и
-  **не на критическом пути**: ассерты `after reload` читают `tmp/scenario/<output>.xml`.
-- Сценарии с fixture-identity (`identity: keep`, напр. `root_rename`) в `report.xml` **не** кладём —
-  они делят GUID с фикстурой.
+  - `tmp/scenario/<output>.xml` — сценарии, которые идут в отчёт (root-пакет = имя сценария, свежие GUID);
+  - `tmp/report.xml` — они же, собранные в один файл (`sparx.AssembleReport`): пустая модель
+    `eaxmi.NewModel` + `eaxmi.Document.CopyPackage` каждого сценарного root-пакета внутрь
+    (все свои id регенерируются, `isModel`/`Recurse` снимаются, чужие ссылки не трогаются);
+  - `tmp/<output>.xml` — сценарии, помеченные `| report | no |` (напр. `root_rename` — делит
+    GUID с фикстурой): импортируются по отдельности, в отчёт не идут.
+  Пользователь импортирует **`report.xml`** (один импорт); если он битый — по `tmp/scenario/*.xml`
+  видно, какой сценарий виноват. Сборка — **после** тестов и **не на критическом пути**:
+  ассерты `after reload` читают `tmp/scenario/<output>.xml` (или `tmp/<output>.xml`).
 - **Каждый мутационный сценарий явно объявляет** источник, выходной файл и (для EA) имя root-пакета:
   ```gherkin
   Given the working model:

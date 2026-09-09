@@ -34,6 +34,39 @@ Feature: Copy a package (deep, with a fresh identity)
       | field  | value                    |
       | parent | package copy destination |
 
+  Scenario: A copied package keeps a relationship that points outside it
+    Given a new model:
+      | root   | package copy xref     |
+      | output | package_copy_xref.xml |
+    When I create a package "Anchor" in "package copy xref"
+    And I create a "ArchiMate.Goal" named "AnchorGoal" in "package copy xref/Anchor" with note ""
+    And I create a package "Mobile" in "package copy xref"
+    And I create a "ArchiMate.Requirement" named "MobileReq" in "package copy xref/Mobile" with note ""
+    And I relate "package copy xref/Mobile/MobileReq" to "package copy xref/Anchor/AnchorGoal" as "ArchiMate.Realization"
+    And I copy the package "package copy xref/Mobile" into "package copy xref/Anchor"
+    Then the create succeeds
+    # the copy's connector still resolves to the original AnchorGoal (a foreign ref,
+    # left alone like EA does in example/side1.xml)
+    And after reload the element "package copy xref/Anchor/Mobile/MobileReq" relations include:
+      | type                  | direction | otherName  |
+      | ArchiMate.Realization | outgoing  | AnchorGoal |
+
+  Scenario: A copied package keeps a diagram object that shows an element outside it
+    Given the working model:
+      | source | TestProject.xml            |
+      | output | package_copy_xref_diag.xml |
+      | root   | package copy xref diagram  |
+    When I create a package "Outside" in "package copy xref diagram"
+    And I create a "ArchiMate.Goal" named "Visitor" in "package copy xref diagram/Outside" with note ""
+    And I add "package copy xref diagram/Outside/Visitor" to the diagram "package copy xref diagram/Motivation_Package/Motivation_Diagram" at 10,10,110,80
+    And I copy the package "package copy xref diagram/Motivation_Package" into "package copy xref diagram/Outside"
+    Then the create succeeds
+    And after reload the diagram "package copy xref diagram/Outside/Motivation_Package/Motivation_Diagram" has 16 placed elements
+    And after reload the diagram "package copy xref diagram/Outside/Motivation_Package/Motivation_Diagram" placed elements include:
+      | name    |
+      | Visitor |
+      | Goal1   |
+
   Scenario: Copying a package into its own descendant is refused
     Given a new model:
       | root   | package copy cycle     |

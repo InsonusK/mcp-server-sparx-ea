@@ -11,7 +11,6 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
-	"strings"
 	"testing"
 
 	"github.com/cucumber/godog"
@@ -59,22 +58,15 @@ func TestFeatures(t *testing.T) {
 	}
 }
 
-// assembleReport merges every scenario file (except the root-rename ones, which
-// deliberately keep the fixture identity and would collide) into one importable
-// tmp/report.xml — one sub-package per scenario.
+// assembleReport merges every file under tmp/scenario/ into one importable
+// tmp/report.xml — one sub-package per scenario. Scenarios that opt out
+// ("| report | no |") save straight to tmp/ and are not here.
 func assembleReport(t *testing.T) error {
-	files, err := filepath.Glob(filepath.Join(common.ScenarioDir, "*.xml"))
+	srcs, err := filepath.Glob(filepath.Join(common.ScenarioDir, "*.xml"))
 	if err != nil {
 		return err
 	}
-	sort.Strings(files)
-	var srcs []string
-	for _, f := range files {
-		if strings.HasPrefix(filepath.Base(f), "root_rename") {
-			continue
-		}
-		srcs = append(srcs, f)
-	}
+	sort.Strings(srcs)
 	if len(srcs) == 0 {
 		t.Logf("no scenario files in %s — skipping tmp/report.xml", common.ScenarioDir)
 		return nil

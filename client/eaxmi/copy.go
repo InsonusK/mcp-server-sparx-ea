@@ -163,11 +163,19 @@ func (d *Document) CopyPackage(src *Document, srcPkgID, destParentID string) (*P
 		if m := dExt.FindElement(".//element[@xmi:idref='" + newID + "']/model"); m != nil {
 			m.CreateAttr("package", destParentID)
 		}
-		if fl := dExt.FindElement(".//element[@xmi:idref='" + newID + "']/flags"); fl != nil {
-			pf := fl.SelectAttrValue("packageFlags", "")
-			pf = strings.ReplaceAll(pf, "isModel=1;", "")
-			pf = strings.ReplaceAll(pf, "Recurse=1;", "")
-			fl.CreateAttr("packageFlags", pf)
+		// nothing in the copy is a model root any more — a copied package always
+		// lands under a parent. Strip isModel / Recurse from every package record.
+		copiedPkgIDs := map[string]bool{newID: true}
+		for _, pe := range newPE.FindElements(".//packagedElement[@xmi:type='uml:Package']") {
+			copiedPkgIDs[pe.SelectAttrValue("xmi:id", "")] = true
+		}
+		for id := range copiedPkgIDs {
+			if fl := dExt.FindElement(".//element[@xmi:idref='" + id + "']/flags"); fl != nil {
+				pf := fl.SelectAttrValue("packageFlags", "")
+				pf = strings.ReplaceAll(pf, "isModel=1;", "")
+				pf = strings.ReplaceAll(pf, "Recurse=1;", "")
+				fl.CreateAttr("packageFlags", pf)
+			}
 		}
 	}
 

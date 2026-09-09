@@ -13,6 +13,7 @@ Feature: Rename the model's root package (RootNodeNameChange)
     Given the working model:
       | source   | TestProject.xml            |
       | output   | root_rename_fresh.xml      |
+      | report   | no                         |
       | root     | ROOT renamed fresh         |
       | identity | fresh                      |
     When I read the element "ROOT renamed fresh/Motivation_Package/Goal1"
@@ -28,6 +29,7 @@ Feature: Rename the model's root package (RootNodeNameChange)
     Given the working model:
       | source   | TestProject.xml       |
       | output   | root_rename_keep.xml  |
+      | report   | no                    |
       | root     | ROOT renamed keep ids |
       | identity | keep                  |
     When I read the element "ROOT renamed keep ids/Motivation_Package/Goal1"

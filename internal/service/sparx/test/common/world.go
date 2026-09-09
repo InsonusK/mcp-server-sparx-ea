@@ -23,9 +23,11 @@ import (
 // TmpDir is gitignored, cleared at the start of a run, kept afterwards for
 // manual import into Sparx. Layout:
 //
-//	tmp/scenario/<output>.xml   one file per scenario (root package = scenario name)
-//	tmp/report.xml              all scenarios merged, one package each — import this;
-//	                            if it is broken, the tmp/scenario/ files say which one
+//	tmp/scenario/<output>.xml   scenarios that go into the report (root = scenario name)
+//	tmp/report.xml              those, merged, one package each — import this one;
+//	                            a broken report points back at the tmp/scenario/ files
+//	tmp/<output>.xml            scenarios kept out of the report ("| report | no |"),
+//	                            imported on their own
 const (
 	TmpDir      = "tmp"
 	ScenarioDir = TmpDir + "/scenario"
@@ -49,6 +51,7 @@ type World struct {
 	Output    string // tmp filename this scenario writes to
 	RootName  string
 	SavedPath string
+	InReport  bool // false => kept out of tmp/report.xml, saved straight to tmp/
 
 	LastRelID      string
 	LastElemPath   string
@@ -124,8 +127,9 @@ func (w *World) theWorkingModel(ctx context.Context, table *godog.Table) error {
 		return err
 	}
 	w.Mut, w.Source, w.Output, w.RootName, w.SavedPath = svc, src, out, newRoot, ""
-	Logf(ctx, "working copy of %q → root renamed to %q → saves to %s/%s (edits never touch the fixture)",
-		src, newRoot, TmpDir, out)
+	w.InReport = cfg["report"] != "no"
+	Logf(ctx, "working copy of %q → root renamed to %q → saves to %s (edits never touch the fixture)",
+		src, newRoot, w.savedDir())
 	// Write the pristine working copy straight away, so even a scenario whose
 	// very first operation is rejected still leaves its tmp file — useful to
 	// confirm the aborted operation left the model intact. Successful mutation
@@ -155,19 +159,29 @@ func (w *World) theNewModel(ctx context.Context, table *godog.Table) error {
 		return err
 	}
 	w.Mut, w.Source, w.Output, w.RootName, w.SavedPath = svc, "", out, root, ""
-	Logf(ctx, "new model with root %q → saves to %s/%s", root, ScenarioDir, out)
+	w.InReport = cfg["report"] != "no"
+	Logf(ctx, "new model with root %q → saves to %s", root, w.savedDir())
 	return w.Save(ctx)
 }
 
-// Save persists the working copy to ScenarioDir/<output>.
+// savedDir is tmp/scenario for scenarios that feed the report, tmp/ for the ones
+// kept out of it ("| report | no |").
+func (w *World) savedDir() string {
+	if w.InReport {
+		return ScenarioDir
+	}
+	return TmpDir
+}
+
+// Save persists the working copy to savedDir()/<output>.
 func (w *World) Save(ctx context.Context) error {
 	if w.Mut == nil {
 		return fmt.Errorf("no working model (missing 'Given the working model')")
 	}
-	if err := os.MkdirAll(ScenarioDir, 0o755); err != nil {
+	if err := os.MkdirAll(w.savedDir(), 0o755); err != nil {
 		return err
 	}
-	w.SavedPath = filepath.Join(ScenarioDir, w.Output)
+	w.SavedPath = filepath.Join(w.savedDir(), w.Output)
 	if err := w.Mut.Save(w.SavedPath); err != nil {
 		return fmt.Errorf("save: %w", err)
 	}
@@ -402,11 +416,15 @@ func (w *World) reloadDiagramHasNObjects(ctx context.Context, ref string, n int)
 }
 
 func (w *World) reloadDiagramObjectsInclude(ctx context.Context, table *godog.Table) error {
+	return w.reloadDiagramObjectsIncludeRef(ctx, w.LastDiagramRef, table)
+}
+
+func (w *World) reloadDiagramObjectsIncludeRef(ctx context.Context, ref string, table *godog.Table) error {
 	svc, err := w.Reloaded(ctx)
 	if err != nil {
 		return err
 	}
-	d, err := svc.Diagram(w.LastDiagramRef)
+	d, err := svc.Diagram(ref)
 	if err != nil {
 		return err
 	}
@@ -559,6 +577,7 @@ func RegisterSharedSteps(sc *godog.ScenarioContext, w *World) {
 	sc.Step(`^after reload the element "([^"]*)" relations include:$`, w.reloadElementRelationsInclude)
 	sc.Step(`^after reload the diagram "([^"]*)" has (\d+) placed elements$`, w.reloadDiagramHasNObjects)
 	sc.Step(`^after reload the diagram placed elements include:$`, w.reloadDiagramObjectsInclude)
+	sc.Step(`^after reload the diagram "([^"]*)" placed elements include:$`, w.reloadDiagramObjectsIncludeRef)
 	sc.Step(`^after reload the root package is "([^"]*)"$`, w.reloadRootIs)
 
 	sc.Step(`^the package is:$`, w.packageIs)
