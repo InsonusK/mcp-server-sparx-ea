@@ -45,21 +45,26 @@ func TestFeatures(t *testing.T) {
 		ScenarioInitializer: initializeScenario,
 		Options:             &opts,
 	}
-	if suite.Run() != 0 {
-		t.Fatal("cucumber scenarios failed")
+	rc := suite.Run()
+
+	// Always assemble the report — even from a partial / failed run. If a
+	// scenario broke its file, the report is where you notice, and
+	// tmp/scenario/*.xml says which one.
+	if err := assembleReport(t); err != nil {
+		t.Errorf("assemble tmp/report.xml: %v", err)
 	}
 
-	if err := assembleReport(t); err != nil {
-		t.Fatalf("assemble tmp/report.xml: %v", err)
+	if rc != 0 {
+		t.Fatal("cucumber scenarios failed")
 	}
 }
 
 // assembleReport merges every scenario file (except the root-rename ones, which
 // deliberately keep the fixture identity and would collide) into one importable
-// tmp/report.xml — each scenario a top-level package.
+// tmp/report.xml — one sub-package per scenario.
 func assembleReport(t *testing.T) error {
 	files, err := filepath.Glob(filepath.Join(common.ScenarioDir, "*.xml"))
-	if err != nil || len(files) == 0 {
+	if err != nil {
 		return err
 	}
 	sort.Strings(files)
@@ -69,6 +74,10 @@ func assembleReport(t *testing.T) error {
 			continue
 		}
 		srcs = append(srcs, f)
+	}
+	if len(srcs) == 0 {
+		t.Logf("no scenario files in %s — skipping tmp/report.xml", common.ScenarioDir)
+		return nil
 	}
 	out := filepath.Join(common.TmpDir, "report.xml")
 	if err := sparx.AssembleReport(out, srcs); err != nil {

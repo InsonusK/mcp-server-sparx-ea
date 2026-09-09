@@ -41,14 +41,23 @@ func AssembleReport(outPath string, sourcePaths []string) error {
 		}
 	}
 
+	var failed []string
 	for _, p := range sourcePaths {
 		src, err := eaxmi.Open(p)
 		if err != nil {
-			return fmt.Errorf("sparx: report source %q: %w", p, err)
+			failed = append(failed, fmt.Sprintf("%s: %v", p, err))
+			continue
 		}
 		if err := base.MergeUnder(src, rootID); err != nil {
-			return fmt.Errorf("sparx: merge %q: %w", p, err)
+			failed = append(failed, fmt.Sprintf("%s: %v", p, err))
+			continue
 		}
 	}
-	return errWrap(base.WriteFile(outPath))
+	if err := base.WriteFile(outPath); err != nil {
+		return errWrap(err)
+	}
+	if len(failed) > 0 {
+		return fmt.Errorf("sparx: report written, but %d source(s) could not be merged: %v", len(failed), failed)
+	}
+	return nil
 }
