@@ -21,6 +21,15 @@ type world struct {
 	element *sparx.ElementInfo
 	diagram *sparx.DiagramInfo
 	lastErr error
+
+	// methods 4-6: the in-memory working copy and where it was last saved
+	scenarioName   string
+	mutSvc         *sparx.Service
+	mutFixture     string
+	savedPath      string
+	lastRelID      string
+	lastElemPath   string
+	lastDiagramRef string
 }
 
 func newWorld() *world { return &world{} }

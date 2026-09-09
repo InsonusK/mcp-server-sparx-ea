@@ -9,6 +9,11 @@ import (
 )
 
 func TestFeatures(t *testing.T) {
+	// tmp/ holds the saved working copies from methods 4-6 scenarios. Cleared
+	// at the start of every run, kept afterwards for manual review / import
+	// into Sparx EA. It is gitignored.
+	_ = os.RemoveAll(tmpDir)
+
 	opts := godog.Options{
 		Format:   "pretty",
 		Paths:    []string{"../features"},
@@ -36,8 +41,9 @@ func TestFeatures(t *testing.T) {
 func initializeScenario(sc *godog.ScenarioContext) {
 	w := newWorld()
 
-	sc.Before(func(ctx context.Context, _ *godog.Scenario) (context.Context, error) {
+	sc.Before(func(ctx context.Context, s *godog.Scenario) (context.Context, error) {
 		w.reset()
+		w.scenarioName = s.Name
 		return ctx, nil
 	})
 	sc.After(func(ctx context.Context, _ *godog.Scenario, _ error) (context.Context, error) {
@@ -49,4 +55,5 @@ func initializeScenario(sc *godog.ScenarioContext) {
 	registerElementSteps(sc, w)
 	registerDiagramSteps(sc, w)
 	registerVocabSteps(sc, w)
+	registerMutateSteps(sc, w)
 }
