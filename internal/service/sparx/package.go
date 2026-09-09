@@ -120,6 +120,33 @@ func (s *Service) MovePackage(ref, newParentRef string) (*PackageInfo, error) {
 	return s.Package(p.XMIID)
 }
 
+// CopyPackage deep-copies a package (with a fresh identity, so nothing collides)
+// into the package at destParentRef — anywhere in the same model, including
+// under a different root package. Returns the new package.
+func (s *Service) CopyPackage(ref, destParentRef string) (*PackageInfo, error) {
+	src := s.resolvePackage(ref)
+	if src == nil {
+		return nil, fmt.Errorf("sparx: no package for %q", ref)
+	}
+	dest := s.resolvePackage(destParentRef)
+	if dest == nil {
+		return nil, fmt.Errorf("sparx: no package for %q", destParentRef)
+	}
+	for a := dest; a != nil; a = a.Parent {
+		if a == src {
+			return nil, fmt.Errorf("sparx: cannot copy a package into itself or its own descendant")
+		}
+	}
+	if other := childPackage(dest, src.Name); other != nil {
+		return nil, fmt.Errorf("sparx: package %q already has a sub-package named %q", dest.Name, src.Name)
+	}
+	np, err := s.doc.CopyPackage(s.doc, src.XMIID, dest.XMIID)
+	if err != nil {
+		return nil, errWrap(err)
+	}
+	return s.Package(np.XMIID)
+}
+
 // DeletePackage removes a package. With cascadeDelete=false it refuses a package
 // that still contains sub-packages, elements or diagrams. With cascadeDelete=true
 // it removes the whole subtree (and every relationship attached to a deleted

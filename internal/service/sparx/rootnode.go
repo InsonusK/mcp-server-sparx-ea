@@ -26,6 +26,19 @@ func NewModel(rootName string) (*Service, error) {
 // one).
 func (s *Service) RootPackages() []string { return s.doc.RootPackages() }
 
+// CreateRootPackage adds a new top-level package alongside the model root.
+func (s *Service) CreateRootPackage(name string) (*PackageInfo, error) {
+	name = strings.TrimSpace(name)
+	if name == "" {
+		return nil, fmt.Errorf("sparx: package name is required")
+	}
+	p, err := s.doc.AddRootPackage(name)
+	if err != nil {
+		return nil, errWrap(err)
+	}
+	return s.Package(p.XMIID)
+}
+
 // SetRootName renames the single EA root package. With freshIdentity=true it
 // also regenerates every GUID in the model, so a Saved copy imports into EA as
 // a fully independent package that can sit next to the original (an XMI import

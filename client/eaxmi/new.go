@@ -46,6 +46,60 @@ func NewModel(rootName string) (*Document, error) {
 	return Read(strings.NewReader(xml))
 }
 
+// AddRootPackage adds a package named name directly under <uml:Model> — a new
+// top-level package alongside the model root (not marked as a model). Returns it.
+func (d *Document) AddRootPackage(name string) (*Package, error) {
+	name = strings.TrimSpace(name)
+	if name == "" {
+		return nil, fmt.Errorf("eaxmi: package name is required")
+	}
+	for _, p := range d.Root.Packages {
+		if p.Name == name {
+			return nil, fmt.Errorf("eaxmi: a root package named %q already exists", name)
+		}
+	}
+	umlModel := d.doc.FindElement("//Model")
+	if umlModel == nil {
+		return nil, fmt.Errorf("eaxmi: no <uml:Model>")
+	}
+	guid := NewGUID()
+	id := xmiIDFromGUID(guid, "EAPK_")
+
+	pe := umlModel.CreateElement("packagedElement")
+	pe.CreateAttr("xmi:type", "uml:Package")
+	pe.CreateAttr("xmi:id", id)
+	pe.CreateAttr("name", name)
+	pe.CreateAttr("visibility", "public")
+
+	el := d.extensionElementsBlock().CreateElement("element")
+	el.CreateAttr("xmi:idref", id)
+	el.CreateAttr("xmi:type", "uml:Package")
+	el.CreateAttr("name", name)
+	el.CreateAttr("scope", "public")
+	m := el.CreateElement("model")
+	m.CreateAttr("package2", "EAID_"+underscoreBody(guid))
+	m.CreateAttr("tpos", "0")
+	m.CreateAttr("ea_localid", "0")
+	m.CreateAttr("ea_eleType", "package")
+	pr := el.CreateElement("properties")
+	pr.CreateAttr("isSpecification", "false")
+	pr.CreateAttr("sType", "Package")
+	pr.CreateAttr("nType", "0")
+	pr.CreateAttr("scope", "public")
+	proj := el.CreateElement("project")
+	proj.CreateAttr("author", genAuthor)
+	proj.CreateAttr("version", "1.0")
+	proj.CreateAttr("phase", "1.0")
+	proj.CreateAttr("status", "Proposed")
+	el.CreateElement("style").CreateAttr("appearance", "BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;")
+	el.CreateElement("extendedProperties").CreateAttr("tagged", "0")
+
+	np := &Package{XMIID: id, GUID: guid, Name: name, Parent: d.Root}
+	d.Root.Packages = append(d.Root.Packages, np)
+	d.packageByID[id] = np
+	return np, nil
+}
+
 func escapeXMLAttr(s string) string {
 	return strings.NewReplacer("&", "&amp;", "<", "&lt;", ">", "&gt;", `"`, "&quot;").Replace(s)
 }

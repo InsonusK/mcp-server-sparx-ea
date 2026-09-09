@@ -9,36 +9,31 @@ import (
 // ReportRootName is the single root package of an assembled report.
 const ReportRootName = "Sparx Service Test Report"
 
-// AssembleReport merges several XMI files into one importable file with a single
-// root package (EA's XMI import processes one root): each source's root package
-// becomes a child of ReportRootName, keeping its own sub-packages. If the output
-// turns out broken in EA, the individual sources say which one is at fault.
+// AssembleReport combines several XMI files into one importable file, built from
+// scratch so it carries none of the sources' model-root flags:
 //
-// Sources must be identity-disjoint (each built with a fresh identity — see
-// SetRootName). The first source provides the shared wrapper (profile
-// definitions, primitive types).
+//  1. start an empty model whose one root package is ReportRootName
+//  2. for each source, take its root package name
+//  3. create a package with that name inside the report root
+//  4. deep-copy every child package of the source root into it, regenerating
+//     ids so nothing collides (eaxmi.CopyPackage)
+//
+// EA's "Import Package from XMI" processes a single root, so the report has
+// exactly one. If it turns out broken, the individual sources say which one.
 func AssembleReport(outPath string, sourcePaths []string) error {
 	if len(sourcePaths) == 0 {
 		return fmt.Errorf("sparx: no sources for the report")
 	}
 
-	base, err := eaxmi.Open(sourcePaths[0])
+	base, err := eaxmi.NewModel(ReportRootName)
 	if err != nil {
-		return fmt.Errorf("sparx: report base %q: %w", sourcePaths[0], err)
-	}
-	// Turn the base into an empty shell: one root package, no content.
-	roots := base.RootPackages()
-	if len(roots) == 0 {
-		return fmt.Errorf("sparx: report base has no root package")
+		return fmt.Errorf("sparx: report shell: %w", err)
 	}
 	rootID := base.Root.Packages[0].XMIID
-	if err := base.SetPackageName(rootID, ReportRootName); err != nil {
-		return fmt.Errorf("sparx: report root: %w", err)
-	}
-	for _, child := range append([]*eaxmi.Package(nil), base.Root.Packages[0].Packages...) {
-		if _, err := base.RemovePackage(child.XMIID); err != nil {
-			return fmt.Errorf("sparx: clearing report shell: %w", err)
-		}
+
+	// carry the ArchiMate profile definitions so EA recognises the stereotypes
+	if first, err := eaxmi.Open(sourcePaths[0]); err == nil {
+		_ = base.CopyProfileDefinitions(first)
 	}
 
 	var failed []string
@@ -48,16 +43,29 @@ func AssembleReport(outPath string, sourcePaths []string) error {
 			failed = append(failed, fmt.Sprintf("%s: %v", p, err))
 			continue
 		}
-		if err := base.MergeUnder(src, rootID); err != nil {
+		roots := src.RootPackages()
+		if len(roots) == 0 {
+			failed = append(failed, p+": no root package")
+			continue
+		}
+		wrapper, err := base.AddPackage(rootID, roots[0])
+		if err != nil {
 			failed = append(failed, fmt.Sprintf("%s: %v", p, err))
 			continue
 		}
+		srcRoot := src.Root.Packages[0]
+		for _, child := range append([]*eaxmi.Package(nil), srcRoot.Packages...) {
+			if _, err := base.CopyPackage(src, child.XMIID, wrapper.XMIID); err != nil {
+				failed = append(failed, fmt.Sprintf("%s/%s: %v", p, child.Name, err))
+			}
+		}
 	}
+
 	if err := base.WriteFile(outPath); err != nil {
 		return errWrap(err)
 	}
 	if len(failed) > 0 {
-		return fmt.Errorf("sparx: report written, but %d source(s) could not be merged: %v", len(failed), failed)
+		return fmt.Errorf("sparx: report written, but %d part(s) failed: %v", len(failed), failed)
 	}
 	return nil
 }

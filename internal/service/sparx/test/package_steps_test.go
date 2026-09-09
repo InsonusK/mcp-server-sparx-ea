@@ -58,6 +58,30 @@ func registerPackageSteps(sc *godog.ScenarioContext, w *common.World) {
 		return w.Save(ctx)
 	})
 
+	sc.Step(`^I copy the package "([^"]*)" into "([^"]*)"$`, func(ctx context.Context, ref, parent string) error {
+		p, err := w.Mut.CopyPackage(ref, parent)
+		w.Err = err
+		if err != nil {
+			common.Logf(ctx, "copy package %q into %q → error: %v", ref, parent, err)
+			return nil
+		}
+		w.LastPkgPath = p.Path
+		common.Logf(ctx, "copied package %q into %q → %s (id %s)", ref, parent, p.Path, p.ID)
+		return w.Save(ctx)
+	})
+
+	sc.Step(`^I create a root package "([^"]*)"$`, func(ctx context.Context, name string) error {
+		p, err := w.Mut.CreateRootPackage(name)
+		w.Err = err
+		if err != nil {
+			common.Logf(ctx, "create root package %q → error: %v", name, err)
+			return nil
+		}
+		w.LastPkgPath = p.Path
+		common.Logf(ctx, "created root package %q", name)
+		return w.Save(ctx)
+	})
+
 	sc.Step(`^I delete the package "([^"]*)"$`, func(ctx context.Context, ref string) error {
 		_, w.Err = w.Mut.DeletePackage(ref, false)
 		if w.Err != nil {
