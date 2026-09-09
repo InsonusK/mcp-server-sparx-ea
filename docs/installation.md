@@ -1,5 +1,18 @@
 # Installation
 
+## Pre-built
+
+- **Release binaries** — the [Releases](https://github.com/InsonusK/mcp-server-sparx-ea/releases)
+  page has one archive per platform (`linux_amd64`, `linux_arm64`,
+  `darwin_amd64`, `darwin_arm64`), each with a `.sha256`. They link `mdbtools`
+  dynamically, so the target machine still needs the runtime libraries:
+  `sudo apt-get install -y mdbtools libglib2.0-0` / `brew install mdbtools glib`.
+- **Container** — `ghcr.io/insonusk/mcp-server-sparx-ea:<version>` (and
+  `:latest`), `linux/amd64` and `linux/arm64`, with the libraries bundled.
+
+Both are published by `.github/workflows/release.yml` whenever `mcpserver.Version`
+is bumped on `master`.
+
 ## Build from source
 
 The server links the `mdbtools` C library through cgo, so it needs a C toolchain

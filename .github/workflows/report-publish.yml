@@ -39,6 +39,7 @@ jobs:
             ci:
               - '.github/workflows/**'
               - 'Makefile'
+              - 'Dockerfile'
               - 'tools/testkit/**'
 
   unit-test:

@@ -13,12 +13,35 @@ No ports, no accounts, no server to keep running.
 
 ## Step 1 — get the program
 
-You need the compiled binary. Build it once:
+Three ways, pick one.
+
+### a) Download a release binary
+
+From the repository's **Releases** page, download the archive for your OS and
+CPU (`linux_amd64`, `linux_arm64`, `darwin_amd64`, `darwin_arm64`), unpack it,
+and put `mcp-server-sparx-ea` somewhere permanent.
+
+The machine also needs the `mdbtools` runtime libraries:
+
+```bash
+sudo apt-get install -y mdbtools libglib2.0-0   # Debian / Ubuntu
+brew install mdbtools glib                       # macOS
+```
+
+### b) Use the container image (no local build, libraries bundled)
+
+```
+ghcr.io/insonusk/mcp-server-sparx-ea:latest
+```
+
+Register it in your client as a `docker run` command — see
+[the container section below](#option-b-run-it-as-a-container).
+
+### c) Build from source
 
 ```bash
 # Debian / Ubuntu
 sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
-
 # macOS
 brew install mdbtools pkg-config glib
 
@@ -26,18 +49,18 @@ brew install mdbtools pkg-config glib
 CGO_ENABLED=1 go build -o mcp-server-sparx-ea .
 ```
 
-This produces a file called `mcp-server-sparx-ea` in the current folder. Move it
-somewhere permanent and note the **full path**, for example:
+---
+
+Whichever you chose, note the **full path** to the binary (or the image name),
+for example:
 
 ```
 /home/you/bin/mcp-server-sparx-ea        (Linux/macOS)
-C:\Tools\mcp-server-sparx-ea.exe          (Windows)
+ghcr.io/insonusk/mcp-server-sparx-ea     (container)
 ```
 
-You will paste that path into your client's config.
-
-> Windows note: the server links the `mdbtools` C library, which is awkward to
-> build on Windows. Running it under WSL (Ubuntu) is the simplest path.
+> Windows: the server links the `mdbtools` C library, which is awkward on
+> Windows. Use WSL (Ubuntu) or the container image.
 
 ---
 
@@ -98,6 +121,29 @@ The pattern is always the same — a JSON object keyed by a name, with a
 ```json
 { "mcpServers": { "sparx-ea": { "command": "<full path>" } } }
 ```
+
+### Option B: run it as a container
+
+If you chose the container image, the `command` is `docker` and the arguments
+run it in interactive (stdio) mode with your model files mounted:
+
+```json
+{
+  "mcpServers": {
+    "sparx-ea": {
+      "command": "docker",
+      "args": [
+        "run", "-i", "--rm",
+        "-v", "/path/to/your/models:/work",
+        "ghcr.io/insonusk/mcp-server-sparx-ea:latest"
+      ]
+    }
+  }
+}
+```
+
+Pass file paths to the tools **under the mount point**, e.g.
+`file=/work/TestProject.eapx`.
 
 ---
 

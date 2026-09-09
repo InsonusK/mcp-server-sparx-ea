@@ -31,14 +31,19 @@ vocabulary and relationship rules before it is written.
 
 ## Installation
 
-Requires Go 1.23+ and the `mdbtools` development headers (Debian/Ubuntu):
+- **Release binary** — [Releases](https://github.com/InsonusK/mcp-server-sparx-ea/releases):
+  `linux_amd64`, `linux_arm64`, `darwin_amd64`, `darwin_arm64`. The machine
+  needs `mdbtools` + `glib` installed.
+- **Container** — `ghcr.io/insonusk/mcp-server-sparx-ea:latest` (libraries
+  bundled).
+- **From source** — Go 1.23+ and the `mdbtools` dev headers:
 
-```bash
-sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
-CGO_ENABLED=1 go build -o mcp-server-sparx-ea .
-```
+  ```bash
+  sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
+  CGO_ENABLED=1 go build -o mcp-server-sparx-ea .
+  ```
 
-Other platforms: [docs/installation.md](docs/installation.md).
+Details: [docs/installation.md](docs/installation.md).
 
 ## Quick start
 
