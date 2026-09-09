@@ -23,6 +23,11 @@ func (d *Document) SetPackageName(id, newName string) error {
 	if pe := d.doc.FindElement("//packagedElement[@xmi:id='" + id + "']"); pe != nil {
 		pe.CreateAttr("name", newName)
 	}
+	// the <xmi:Extension> record for a package carries the name too — EA's XMI
+	// import treats it as authoritative, so it must move in step.
+	if e := d.extension().FindElement("//element[@xmi:idref='" + id + "']"); e != nil {
+		e.CreateAttr("name", newName)
+	}
 	for _, ep := range d.extension().FindElements("//extendedProperties[@package_name='" + old + "']") {
 		ep.CreateAttr("package_name", newName)
 	}
@@ -66,6 +71,7 @@ func (d *Document) renameRootWithFreshRootID(newName string) error {
 
 	if el := d.extension().FindElement("//element[@xmi:idref='" + oldID + "']"); el != nil {
 		el.CreateAttr("xmi:idref", newID)
+		el.CreateAttr("name", newName)
 	}
 	// direct children reference the root by id in several attributes
 	for _, attr := range []string{"package", "package2", "owner"} {
