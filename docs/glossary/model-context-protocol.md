@@ -19,9 +19,9 @@ sequenceDiagram
   participant S as MCP server (this project)
   C->>S: initialize
   C->>S: tools/list
-  S-->>C: [ea_query, ea_model_tree, ea_create_element, …]
+  S-->>C: [ea_model_tree, ea_element, ea_create_element, …]
   Note over C: the model picks a tool and arguments
-  C->>S: tools/call { name: "ea_query", arguments: { file, sql } }
+  C->>S: tools/call { name: "ea_element", arguments: { file, ref } }
   S-->>C: content: [ text: "{...json...}" ]  (or isError: true)
 ```
 
@@ -35,12 +35,12 @@ sequenceDiagram
 ## How it is structured in this project
 
 `internal/mcpserver` builds one `server.MCPServer` (using
-`github.com/mark3labs/mcp-go`) and registers 18 tools. `main.go` runs it with
+`github.com/mark3labs/mcp-go`) and registers 17 tools. `main.go` runs it with
 `server.ServeStdio`. Each tool handler:
 
 1. reads its arguments,
-2. opens the target file through an injected opener (real implementation, or a
-   fake in tests),
+2. opens the target model through an injected opener (the real XMI service,
+   or a fake in tests),
 3. calls the connector / ArchiMate service,
 4. returns the result as JSON text, or the error as a tool error.
 

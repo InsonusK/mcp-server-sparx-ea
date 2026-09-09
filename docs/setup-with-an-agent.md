@@ -13,54 +13,28 @@ No ports, no accounts, no server to keep running.
 
 ## Step 1 — get the program
 
-Three ways, pick one.
+It is a single file with no dependencies. Two ways, pick one.
 
 ### a) Download a release binary
 
 From the repository's **Releases** page, download the archive for your OS and
-CPU (`linux_amd64`, `linux_arm64`, `darwin_amd64`, `darwin_arm64`), unpack it,
-and put `mcp-server-sparx-ea` somewhere permanent.
+CPU (`linux` / `darwin` / `windows`, `amd64` or `arm64`), unpack it, and put
+`mcp-server-sparx-ea` (or `.exe`) somewhere permanent.
 
-The machine also needs the `mdbtools` runtime libraries:
-
-```bash
-sudo apt-get install -y mdbtools libglib2.0-0   # Debian / Ubuntu
-brew install mdbtools glib                       # macOS
-```
-
-### b) Use the container image (no local build, libraries bundled)
-
-```
-ghcr.io/insonusk/mcp-server-sparx-ea:latest
-```
-
-Register it in your client as a `docker run` command — see
-[the container section below](#option-b-run-it-as-a-container).
-
-### c) Build from source
+### b) Build from source
 
 ```bash
-# Debian / Ubuntu
-sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
-# macOS
-brew install mdbtools pkg-config glib
-
-# then, in the project folder:
-CGO_ENABLED=1 go build -o mcp-server-sparx-ea .
+go build -o mcp-server-sparx-ea .
 ```
 
 ---
 
-Whichever you chose, note the **full path** to the binary (or the image name),
-for example:
+Either way, note the **full path** to the binary, for example:
 
 ```
 /home/you/bin/mcp-server-sparx-ea        (Linux/macOS)
-ghcr.io/insonusk/mcp-server-sparx-ea     (container)
+C:\Tools\mcp-server-sparx-ea.exe          (Windows)
 ```
-
-> Windows: the server links the `mdbtools` C library, which is awkward on
-> Windows. Use WSL (Ubuntu) or the container image.
 
 ---
 
@@ -122,44 +96,20 @@ The pattern is always the same — a JSON object keyed by a name, with a
 { "mcpServers": { "sparx-ea": { "command": "<full path>" } } }
 ```
 
-### Option B: run it as a container
-
-If you chose the container image, the `command` is `docker` and the arguments
-run it in interactive (stdio) mode with your model files mounted:
-
-```json
-{
-  "mcpServers": {
-    "sparx-ea": {
-      "command": "docker",
-      "args": [
-        "run", "-i", "--rm",
-        "-v", "/path/to/your/models:/work",
-        "ghcr.io/insonusk/mcp-server-sparx-ea:latest"
-      ]
-    }
-  }
-}
-```
-
-Pass file paths to the tools **under the mount point**, e.g.
-`file=/work/TestProject.eapx`.
-
 ---
 
 ## Step 3 — check it works
 
-Ask your assistant something that uses the server. For example, put a sample
-Sparx EA file where the assistant can reach it and say:
-
-> Using the sparx-ea tools, list the elements in `example/TestProject.eapx`.
-
-The assistant should call `ea_query` and show you rows from the model. If you
-don't have a project file yet, ask:
+Ask your assistant something that uses the server. The simplest check needs no
+file:
 
 > What ArchiMate types does the sparx-ea server accept?
 
-which calls `ea_archimate_types` and needs no file.
+which calls `ea_archimate_types`. To try a real model, export a package from EA
+(`File → Export → Package to XMI`), put the `.xml` where the assistant can reach
+it, and say:
+
+> Using the sparx-ea tools, show me the model tree of `model.xml`.
 
 ---
 
@@ -168,17 +118,15 @@ which calls `ea_archimate_types` and needs no file.
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | Client shows the server as "failed" / "disconnected" | wrong path in the config | use the **absolute** path; run `which mcp-server-sparx-ea` (or `where` on Windows) to confirm it |
-| `error while loading shared libraries: libmdb...` | the machine has the binary but not the `mdbtools` runtime | install `mdbtools` (`sudo apt-get install mdbtools` / `brew install mdbtools`) on the machine that runs the server |
 | Tools don't appear after editing the config | the client wasn't restarted | fully quit and reopen the client (Claude Desktop especially) |
-| `file not found` from `ea_query` | the path you gave points nowhere the server can see | give a path on the **same machine the server runs on**, absolute if unsure |
+| `sparx: no ... for "<path>"` | the `ref` you gave does not match the model | run `ea_model_tree` first to see the exact paths |
+| `file not found` / a parse error | the path you gave points nowhere the server can see, or is not an XMI export | give a path on the **same machine the server runs on**; make sure it is `File → Export → Package to XMI` output, not the `.eapx` |
 | The agent edited a model but "nothing changed in EA" | editing tools write a new `.xml`; they never touch the live project | import the tool's `output` file into EA: `File → Import → Package from XMI` — see [the editing workflow](workflow.md) |
 
 ---
 
 ## What the server can do once connected
 
-- `ea_query` — read-only SQL against a `.eapx` project file
-  ([reference](api/sql-query.md)).
 - `ea_model_tree`, `ea_element`, `ea_package`, `ea_diagram`,
   `ea_archimate_types` — read an [ArchiMate](glossary/archimate.md) model the
   user exported to [XMI](glossary/xmi.md).

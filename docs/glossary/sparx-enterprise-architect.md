@@ -48,10 +48,11 @@ So an ArchiMate model is UML-with-stereotypes on disk.
 
 ## How this project uses it
 
-- `ea_query` reads the `.eapx` database directly (via `mdbtools`), read-only.
-- The ArchiMate tools work on an **XMI export** of the model, not the `.eapx` —
-  EA 15.2's `.eapx` cannot be written safely from outside EA. See
-  [the editing workflow](../workflow.md).
+The ArchiMate tools work on an **XMI export** of the model, not the `.eapx` —
+EA 15.2's `.eapx` cannot be written safely from outside EA, and is not a
+convenient read format either. The user exports a package
+(`File → Export → Package to XMI`), the tools edit a copy, and the user
+re-imports the result. See [the editing workflow](../workflow.md).
 
 ## Related concepts
 
@@ -61,5 +62,4 @@ So an ArchiMate model is UML-with-stereotypes on disk.
 ## Sources
 
 - Sparx Systems, *Enterprise Architect User Guide* — <https://sparxsystems.com/enterprise_architect_user_guide/>
-- File-format observations from `client/eapx/` (the `mdbtools` connector) and
-  `client/eaxmi/` (the XMI codec) in this repository.
+- XMI-format observations from `client/eaxmi/` (the XMI codec) in this repository.
