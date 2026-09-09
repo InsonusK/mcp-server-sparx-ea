@@ -12,8 +12,8 @@ tags:
 - Give an agent everything needed to call the `mcp-server-sparx-ea` tools correctly: the ArchiMate read tools and the ArchiMate editing tools.
 
 # Core Principle
-- The server exposes **17 MCP tools** (names below). Every tool takes a `file` path on the server's filesystem and never fetches anything over the network.
-- All tools operate on a model the user exported from EA to XMI 2.1 (`File → Export → Package to XMI`), a `.xml` file. Editing tools also write a **new** `.xml` (`output`, must differ from `file`); the user re-imports it into EA.
+- The server exposes **20 MCP tools** (names below). Every tool except `ea_new_model` takes a `file` path on the server's filesystem and never fetches anything over the network.
+- All tools operate on a model the user exported from EA to XMI 2.1 (`File → Export → Package to XMI`), a `.xml` file. Editing tools also write a **new** `.xml` (`output`, must differ from `file`); the user re-imports it into EA. `ea_new_model` builds a model from scratch — it has no `file`, only `root` and `output`.
 - Element and relationship types are ArchiMate 3.2 types (`ArchiMate.Goal`, `ArchiMate.Realization`), validated before any write. Call `ea_archimate_types` for the accepted list.
 - Every failure is returned as an MCP **tool error** (`isError: true`, reason in the text), never a transport error. A service-level reason is prefixed `sparx:`.
 - A tool result is JSON in a text content block. Editing tools return `{"result": <object>, "saved": "<output>"}`.
@@ -26,7 +26,7 @@ See [installation.md](./installation.md) for building the server and registering
 | Domain | Skill | Covers |
 | --- | --- | --- |
 | ArchiMate read | [sparx-ea-mcp-read.skill.md](./sparx-ea-mcp-read.skill.md) | `ea_model_tree`, `ea_element`, `ea_package`, `ea_diagram`, `ea_archimate_types` |
-| ArchiMate edit | [sparx-ea-mcp-edit.skill.md](./sparx-ea-mcp-edit.skill.md) | `ea_create_element`, `ea_update_element`, `ea_delete_element`, `ea_create_relationship`, `ea_delete_relationship`, `ea_create_package`, `ea_update_package`, `ea_copy_package`, `ea_delete_package`, `ea_place_on_diagram`, `ea_move_on_diagram`, `ea_remove_from_diagram` |
+| ArchiMate edit | [sparx-ea-mcp-edit.skill.md](./sparx-ea-mcp-edit.skill.md) | `ea_new_model`, `ea_create_root_package`, `ea_set_root_name`, `ea_create_element`, `ea_update_element`, `ea_delete_element`, `ea_create_relationship`, `ea_delete_relationship`, `ea_create_package`, `ea_update_package`, `ea_copy_package`, `ea_delete_package`, `ea_place_on_diagram`, `ea_move_on_diagram`, `ea_remove_from_diagram` |
 
 # Rule
 
