@@ -26,14 +26,15 @@ The server speaks MCP over stdio, no flags, no environment variables.
 }
 ```
 
-After registering, `tools/list` returns 17 tools:
+After registering, `tools/list` returns 21 tools:
 
 ```
 ea_model_tree  ea_element  ea_package  ea_diagram  ea_archimate_types
+ea_new_model  ea_create_root_package  ea_set_root_name
 ea_create_element  ea_update_element  ea_delete_element
 ea_create_relationship  ea_delete_relationship
 ea_create_package  ea_update_package  ea_copy_package  ea_delete_package
-ea_place_on_diagram  ea_move_on_diagram  ea_remove_from_diagram
+ea_create_diagram  ea_place_on_diagram  ea_move_on_diagram  ea_remove_from_diagram
 ```
 
 ## Files the server reads

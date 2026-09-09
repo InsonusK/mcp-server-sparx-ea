@@ -30,6 +30,7 @@ type Model interface {
 	CopyPackage(ref, destParentRef string) (*sparx.PackageInfo, error)
 	DeletePackage(ref string, cascadeDelete bool) (int, error)
 
+	CreateDiagram(parentRef, name, layer string) (*sparx.DiagramInfo, error)
 	AddToDiagram(diagramRef, elementRef string, at sparx.Rect) error
 	MoveOnDiagram(diagramRef, elementRef string, at sparx.Rect) error
 	RemoveFromDiagram(diagramRef, elementRef string) error

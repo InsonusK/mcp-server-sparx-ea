@@ -154,6 +154,11 @@ func (f *fakeModel) DeletePackage(ref string, cascade bool) (int, error) {
 	return f.count, f.err
 }
 
+func (f *fakeModel) CreateDiagram(parent, name, layer string) (*sparx.DiagramInfo, error) {
+	f.rec("CreateDiagram(%s,%s,%s)", parent, name, layer)
+	return f.diagram, f.err
+}
+
 func (f *fakeModel) AddToDiagram(d, e string, at sparx.Rect) error {
 	f.rec("AddToDiagram(%s,%s,%v)", d, e, at)
 	return f.err

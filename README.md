@@ -15,13 +15,13 @@ over stdio.
 Sparx EA stores its ArchiMate content as UML-with-stereotypes in an Access
 database that only EA can write. This server works on a model the user exported
 to [XMI](docs/glossary/xmi.md) (`File → Export → Package to XMI`) and gives an
-agent 20 typed operations over it:
+agent 21 typed operations over it:
 
 - **Read** — navigate the tree, read an element with its relationships, read a
   package or a diagram, list the accepted ArchiMate types.
 - **Edit** — create / rename / move / delete elements, relationships and
-  packages; copy a package; place elements on diagrams. Every edit is written to
-  a **new** XMI file the user re-imports into EA — see
+  packages; copy a package; create diagrams and place elements on them. Every
+  edit is written to a **new** XMI file the user re-imports into EA — see
   [the editing workflow](docs/workflow.md).
 
 Element types are ArchiMate types (`ArchiMate.Goal`), not `uml:Class` +
@@ -85,8 +85,8 @@ confirmation.
 | --- | --- | --- |
 | Setup with an agent | [docs/setup-with-an-agent.md](docs/setup-with-an-agent.md) | Registering the server with Claude Desktop / Claude Code / Cursor, and troubleshooting |
 | Editing workflow | [docs/workflow.md](docs/workflow.md) | The export → edit → re-import loop, `report.xml`, identity |
-| ArchiMate tools | [docs/api/archimate.md](docs/api/archimate.md) | The 20 read and editing tools over an exported model |
-| Model of the server | [docs/model.md](docs/model.md) | The ArchiMate model of the server itself (`docs/mcp-server-sparx-ea.xml`) and its roadmap |
+| ArchiMate tools | [docs/api/archimate.md](docs/api/archimate.md) | The 21 read and editing tools over an exported model |
+| Model of the server | [docs/model.md](docs/model.md) | The ArchiMate model of the server itself (`docs/mcp-server-sparx-ea.arch.xml`), its diagrams and its roadmap |
 | Glossary | [docs/glossary/](docs/glossary/README.md) | Sparx EA, XMI, ArchiMate, MCP |
 
 For an **AI agent**, the executable instructions live in
@@ -98,8 +98,8 @@ For an **AI agent**, the executable instructions live in
 | --- | --- |
 | `client/eaxmi/` | The EA XMI 2.1 codec — parse, navigate, edit, copy, re-serialise. Package `eaxmi`, pure Go. |
 | `internal/service/sparx/` | The ArchiMate service: ArchiMate vocabulary + validation over `eaxmi`. |
-| `internal/mcpserver/` | The MCP server — 20 tools over the service, one file per concept. |
-| `tools/modelgen/` | Regenerates `docs/mcp-server-sparx-ea.xml` (the model of the server). |
+| `internal/mcpserver/` | The MCP server — 21 tools over the service, one file per concept. |
+| `tools/modelgen/` | Regenerates `docs/mcp-server-sparx-ea.arch.xml` (the model of the server, with diagrams). |
 | `main.go` | `server.ServeStdio` entry point. |
 | `scripts/` | Release installers — `install.sh` (Linux / macOS), `install.ps1` (Windows). |
 | `docs/skills/cucumber-go-testing.md` | How the tests are written (every test is a Cucumber scenario). |

@@ -1,7 +1,7 @@
 ---
 name: sparx-ea-mcp-edit
-description: How to call the ArchiMate editing tools of mcp-server-sparx-ea — create/update/delete elements, relationships and packages, and place elements on diagrams, writing an importable XMI copy
-whenToUse: when an agent needs to build a new Sparx EA ArchiMate model or change an exported one (.xml) — create a model from scratch, add or edit elements, relationships or packages, or place elements on a diagram — and produce a file the user imports into EA
+description: How to call the ArchiMate editing tools of mcp-server-sparx-ea — create/update/delete elements, relationships and packages, and create diagrams and place elements on them, writing an importable XMI copy
+whenToUse: when an agent needs to build a new Sparx EA ArchiMate model or change an exported one (.xml) — create a model from scratch, add or edit elements, relationships or packages, or create a diagram and place elements on it — and produce a file the user imports into EA
 tags:
   - skill/documentation/for-ai
   - concern/documentation
@@ -145,6 +145,20 @@ tools/call ea_delete_package { "file": "<in>", "output": "<out>", "ref": "<ref>"
 Without `cascade`, a non-empty package is refused. A root package is never deleted.
 **Returns** `{"result": {"removed": <count>}, "saved": "<out>"}`.
 **Errors** — `no package for`, `is an EA root package; rename it instead of deleting`, `is not empty; pass cascadeDelete to remove its contents`.
+
+## `ea_create_diagram`
+```
+tools/call ea_create_diagram
+  { "file": "<in>", "output": "<out>", "parent": "<ref>", "name": "<name>", "layer": "Motivation" }
+```
+| Name | Type | Required | Notes |
+| --- | --- | --- | --- |
+| `file`, `output`, `parent`, `name` | string | yes | `name` unique within `parent` |
+| `layer` | string | no | ArchiMate viewpoint / EA toolbox: `Motivation`, `Strategy`, `Business`, `Application`, `Technology`, `Physical`, `Implementation_Migration`. Omit for a plain diagram. |
+
+Creates an **empty** diagram — fill it with `ea_place_on_diagram`. **Returns**
+`{"result": <DiagramInfo>, "saved": "<out>"}`; `diagramType` is always `Logical`.
+**Errors** — `no package for`, `diagram name is required`, `already has a diagram named`, `not a known ArchiMate diagram layer`.
 
 ## `ea_place_on_diagram` / `ea_move_on_diagram`
 ```

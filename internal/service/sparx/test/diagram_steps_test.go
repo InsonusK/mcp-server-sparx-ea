@@ -38,6 +38,19 @@ func registerDiagramSteps(sc *godog.ScenarioContext, w *common.World) {
 		return nil
 	})
 
+	sc.Step(`^I create a diagram "([^"]*)" with layer "([^"]*)" in "([^"]*)"$`, func(ctx context.Context, name, layer, parent string) error {
+		w.LastDiagramRef = parent + "/" + name
+		g, err := w.Mut.CreateDiagram(parent, name, layer)
+		w.Err = err
+		if err != nil {
+			common.Logf(ctx, "create diagram %q (layer %q) in %q → error: %v", name, layer, parent, err)
+			return nil
+		}
+		w.Diagram = g
+		common.Logf(ctx, "created diagram %q (id %s, type %s) in %q", name, g.ID, g.DiagramType, parent)
+		return w.Save(ctx)
+	})
+
 	sc.Step(`^I add "([^"]*)" to the diagram "([^"]*)" at (.+)$`, func(ctx context.Context, e, d, r string) error {
 		w.LastDiagramRef = d
 		rect, err := parseRect(r)
