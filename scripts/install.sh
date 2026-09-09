@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # Install mcp-server-sparx-ea from a GitHub release.
 #
-#   curl -fsSL https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/scripts/install.sh | bash
 #
 # Options (flags or environment variables):
 #   --version <v>   VERSION       release to install (default: latest)
 #   --dir <path>    INSTALL_DIR   where to put the binary (default: /usr/local/bin)
 #   --no-sudo       NO_SUDO=1     never call sudo; fail if INSTALL_DIR is not writable
 #
-# Supports linux and darwin (macOS) on amd64 and arm64. On Windows use the .zip
-# from the Releases page.
+# Supports linux and darwin (macOS) on amd64 and arm64. On Windows use
+# scripts/install.ps1.
 set -euo pipefail
 
 REPO="InsonusK/mcp-server-sparx-ea"
