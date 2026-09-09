@@ -441,9 +441,16 @@ func (d *Document) RemoveDiagramObject(diagramID, elementID string) error {
 	return nil
 }
 
-// WriteFile serialises the (possibly edited) document to path.
+// WriteFile serialises the (possibly edited) document to path. etree writes
+// UTF-8, so the XML declaration is normalised to UTF-8 (EA reads either, and
+// keeping a windows-1252 declaration on UTF-8 bytes would corrupt Cyrillic).
 func (d *Document) WriteFile(path string) error {
-	d.doc.Indent(1)
+	for _, tok := range d.doc.Child {
+		if pi, ok := tok.(*etree.ProcInst); ok && pi.Target == "xml" {
+			pi.Inst = `version="1.0" encoding="UTF-8"`
+		}
+	}
+	d.doc.Indent(2)
 	return d.doc.WriteToFile(path)
 }
 
