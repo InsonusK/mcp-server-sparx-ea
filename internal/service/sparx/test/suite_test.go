@@ -9,16 +9,21 @@ package sparxtest
 import (
 	"context"
 	"os"
+	"path/filepath"
+	"sort"
+	"strings"
 	"testing"
 
 	"github.com/cucumber/godog"
 
+	"github.com/InsonusK/mcp-server-sparx-ea/internal/service/sparx"
 	"github.com/InsonusK/mcp-server-sparx-ea/internal/service/sparx/test/common"
 )
 
 func TestFeatures(t *testing.T) {
-	// tmp/ holds the saved working copies from methods 4-6 scenarios: cleared
-	// at the start of every run, kept afterwards for import into Sparx EA.
+	// tmp/ holds the saved working copies: cleared at the start of every run,
+	// kept afterwards for import into Sparx EA (tmp/scenario/*.xml per scenario,
+	// tmp/report.xml all of them merged).
 	_ = os.RemoveAll(common.TmpDir)
 
 	opts := godog.Options{
@@ -43,6 +48,34 @@ func TestFeatures(t *testing.T) {
 	if suite.Run() != 0 {
 		t.Fatal("cucumber scenarios failed")
 	}
+
+	if err := assembleReport(t); err != nil {
+		t.Fatalf("assemble tmp/report.xml: %v", err)
+	}
+}
+
+// assembleReport merges every scenario file (except the root-rename ones, which
+// deliberately keep the fixture identity and would collide) into one importable
+// tmp/report.xml — each scenario a top-level package.
+func assembleReport(t *testing.T) error {
+	files, err := filepath.Glob(filepath.Join(common.ScenarioDir, "*.xml"))
+	if err != nil || len(files) == 0 {
+		return err
+	}
+	sort.Strings(files)
+	var srcs []string
+	for _, f := range files {
+		if strings.HasPrefix(filepath.Base(f), "root_rename") {
+			continue
+		}
+		srcs = append(srcs, f)
+	}
+	out := filepath.Join(common.TmpDir, "report.xml")
+	if err := sparx.AssembleReport(out, srcs); err != nil {
+		return err
+	}
+	t.Logf("merged %d scenario file(s) → %s", len(srcs), out)
+	return nil
 }
 
 func initializeScenario(sc *godog.ScenarioContext) {

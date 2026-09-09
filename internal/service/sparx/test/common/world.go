@@ -20,9 +20,16 @@ import (
 	"github.com/InsonusK/mcp-server-sparx-ea/internal/service/sparx"
 )
 
-// TmpDir is where methods 4-6 scenarios save their working copy — gitignored,
-// cleared at the start of a run, kept afterwards for manual import into Sparx.
-const TmpDir = "tmp"
+// TmpDir is gitignored, cleared at the start of a run, kept afterwards for
+// manual import into Sparx. Layout:
+//
+//	tmp/scenario/<output>.xml   one file per scenario (root package = scenario name)
+//	tmp/report.xml              all scenarios merged, one package each — import this;
+//	                            if it is broken, the tmp/scenario/ files say which one
+const (
+	TmpDir      = "tmp"
+	ScenarioDir = TmpDir + "/scenario"
+)
 
 // World is one scenario's state.
 type World struct {
@@ -126,19 +133,19 @@ func (w *World) theWorkingModel(ctx context.Context, table *godog.Table) error {
 	return w.Save(ctx)
 }
 
-// Save persists the working copy to TmpDir/<output>.
+// Save persists the working copy to ScenarioDir/<output>.
 func (w *World) Save(ctx context.Context) error {
 	if w.Mut == nil {
 		return fmt.Errorf("no working model (missing 'Given the working model')")
 	}
-	if err := os.MkdirAll(TmpDir, 0o755); err != nil {
+	if err := os.MkdirAll(ScenarioDir, 0o755); err != nil {
 		return err
 	}
-	w.SavedPath = filepath.Join(TmpDir, w.Output)
+	w.SavedPath = filepath.Join(ScenarioDir, w.Output)
 	if err := w.Mut.Save(w.SavedPath); err != nil {
 		return fmt.Errorf("save: %w", err)
 	}
-	Logf(ctx, "saved → %s (open in Sparx / import to review)", w.SavedPath)
+	Logf(ctx, "saved → %s", w.SavedPath)
 	return nil
 }
 
