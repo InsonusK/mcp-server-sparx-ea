@@ -15,7 +15,7 @@ over stdio.
 Sparx EA stores its ArchiMate content as UML-with-stereotypes in an Access
 database that only EA can write. This server works on a model the user exported
 to [XMI](docs/glossary/xmi.md) (`File → Export → Package to XMI`) and gives an
-agent 17 typed operations over it:
+agent 20 typed operations over it:
 
 - **Read** — navigate the tree, read an element with its relationships, read a
   package or a diagram, list the accepted ArchiMate types.
@@ -32,6 +32,17 @@ The server is pure Go — a single static binary, no runtime dependencies.
 
 ## Installation
 
+- **Install script** — Linux / macOS:
+
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/scripts/install.sh | bash
+  ```
+
+  Windows (PowerShell):
+
+  ```powershell
+  irm https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/scripts/install.ps1 | iex
+  ```
 - **Release binary** — [Releases](https://github.com/InsonusK/mcp-server-sparx-ea/releases):
   `linux`, `darwin`, `windows` × `amd64`, `arm64`.
 - **From source** — Go 1.23+:
@@ -87,8 +98,10 @@ For an **AI agent**, the executable instructions live in
 | --- | --- |
 | `client/eaxmi/` | The EA XMI 2.1 codec — parse, navigate, edit, copy, re-serialise. Package `eaxmi`, pure Go. |
 | `internal/service/sparx/` | The ArchiMate service: ArchiMate vocabulary + validation over `eaxmi`. |
-| `internal/mcpserver/` | The MCP server — 17 tools over the service. |
+| `internal/mcpserver/` | The MCP server — 20 tools over the service, one file per concept. |
+| `tools/modelgen/` | Regenerates `docs/mcp-server-sparx-ea.xml` (the model of the server). |
 | `main.go` | `server.ServeStdio` entry point. |
+| `scripts/` | Release installers — `install.sh` (Linux / macOS), `install.ps1` (Windows). |
 | `docs/skills/cucumber-go-testing.md` | How the tests are written (every test is a Cucumber scenario). |
 
 ## Testing
