@@ -1,0 +1,117 @@
+name: PR validation
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+
+# The server links mdbtools through cgo; it only builds on Linux, so there is no
+# OS matrix. The aggregate `test` job below is the one to require in branch
+# protection — the underlying jobs skip themselves when a PR changes nothing
+# testable.
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.filter.outputs.code }}
+      tests: ${{ steps.filter.outputs.tests }}
+      workflow: ${{ steps.filter.outputs.workflow }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            code:
+              - '**/*.go'
+              - 'go.mod'
+              - 'go.sum'
+            tests:
+              - '**/features/**'
+              - '**/*_test.go'
+              - '**/testdata/**'
+            workflow:
+              - '.github/workflows/pr.yml'
+              - 'Makefile'
+
+  version-check:
+    needs: changes
+    if: github.base_ref == 'master' && (needs.changes.outputs.code == 'true' || needs.changes.outputs.workflow == 'true')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: The app version must increase
+        run: |
+          version_of() { grep -oE 'Version = "[^"]+"' "$1" | head -1 | sed -E 's/.*"([^"]+)".*/\1/'; }
+          PR_VERSION=$(version_of internal/mcpserver/server.go)
+          git show "origin/${{ github.base_ref }}:internal/mcpserver/server.go" > /tmp/base_server.go
+          BASE_VERSION=$(version_of /tmp/base_server.go)
+          echo "base=$BASE_VERSION  pr=$PR_VERSION"
+          if [ -z "$PR_VERSION" ] || [ -z "$BASE_VERSION" ]; then
+            echo "could not read mcpserver.Version from internal/mcpserver/server.go" >&2
+            exit 1
+          fi
+          if [ "$PR_VERSION" = "$BASE_VERSION" ]; then
+            echo "ERROR: bump mcpserver.Version when Go code or the workflow changes" >&2
+            exit 1
+          fi
+          HIGHEST=$(printf '%s\n%s\n' "$BASE_VERSION" "$PR_VERSION" | sort -V | tail -1)
+          if [ "$HIGHEST" != "$PR_VERSION" ]; then
+            echo "ERROR: mcpserver.Version $PR_VERSION is lower than $BASE_VERSION on master" >&2
+            exit 1
+          fi
+          echo "version increased: $BASE_VERSION -> $PR_VERSION"
+
+  unit-test:
+    needs: changes
+    if: needs.changes.outputs.code == 'true' || needs.changes.outputs.tests == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Install mdbtools headers
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
+      - name: make unit-test
+        run: make unit-test
+
+  mutation-test:
+    needs: changes
+    if: needs.changes.outputs.code == 'true' || needs.changes.outputs.tests == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Install mdbtools headers
+        run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libglib2.0-dev mdbtools-dev
+      - name: make mutation-test (only the code this PR changed)
+        run: make mutation-test ONLY_DELTA=true DELTA_BASE=${{ github.event.pull_request.base.sha }}
+
+  test:
+    name: test
+    needs: [changes, version-check, unit-test, mutation-test]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Aggregate result
+        run: |
+          fail=0
+          for j in "version-check ${{ needs.version-check.result }}" \
+                   "unit-test ${{ needs.unit-test.result }}" \
+                   "mutation-test ${{ needs.mutation-test.result }}"; do
+            set -- $j
+            echo "$1: $2"
+            [ "$2" = "failure" ] && fail=1
+          done
+          [ "$fail" = "0" ] && echo "PR validation passed (skipped jobs count as passing)" || exit 1

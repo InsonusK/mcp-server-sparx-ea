@@ -1,5 +1,10 @@
 # mcp-server-sparx-ea
 
+[![PR validation](https://github.com/InsonusK/mcp-server-sparx-ea/actions/workflows/pr.yml/badge.svg)](https://github.com/InsonusK/mcp-server-sparx-ea/actions/workflows/pr.yml)
+[![Tests](https://img.shields.io/endpoint?url=https://insonusk.github.io/mcp-server-sparx-ea/tests-badge.json)](https://insonusk.github.io/mcp-server-sparx-ea/tests/)
+[![Coverage](https://img.shields.io/endpoint?url=https://insonusk.github.io/mcp-server-sparx-ea/coverage-badge.json)](https://insonusk.github.io/mcp-server-sparx-ea/coverage/)
+[![Mutation score](https://img.shields.io/endpoint?url=https://insonusk.github.io/mcp-server-sparx-ea/mutation-badge.json)](https://insonusk.github.io/mcp-server-sparx-ea/mutation/)
+
 An [MCP](docs/glossary/model-context-protocol.md) server that lets an AI agent
 **read and edit [Sparx Enterprise Architect](docs/glossary/sparx-enterprise-architect.md)
 models** over stdio — both the raw project database and the [ArchiMate](docs/glossary/archimate.md)

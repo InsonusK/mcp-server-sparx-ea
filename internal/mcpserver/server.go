@@ -16,7 +16,7 @@ import (
 )
 
 // Version is reported to MCP clients during initialization.
-const Version = "0.2.0"
+const Version = "0.3.0"
 
 // Options overrides the tool handlers' dependencies. A nil *Options (or nil
 // fields) uses the real eapx connector and XMI service.
