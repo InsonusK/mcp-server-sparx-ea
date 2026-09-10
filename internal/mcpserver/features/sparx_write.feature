@@ -99,6 +99,17 @@ Feature: The ArchiMate editing tools
       | cascade | true             |
     Then the model method "DeletePackage(Model/Motivation,true)" was called
 
+  Scenario: ea_create_relationship surfaces the rule warning in its result
+    When I call "ea_create_relationship" with:
+      | file   | model.xml              |
+      | output | edited.xml             |
+      | source | Model/Motivation/Req1  |
+      | target | Model/Motivation/Goal1 |
+      | type   | ArchiMate.Realization  |
+    Then the tool call is not an error
+    And the tool JSON contains "discouraged by the ArchiMate rules"
+    And the model was saved to "edited.xml"
+
   Scenario: ea_create_diagram maps its arguments and saves the copy
     When I call "ea_create_diagram" with:
       | file   | model.xml        |

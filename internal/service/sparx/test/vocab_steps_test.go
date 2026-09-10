@@ -33,4 +33,14 @@ func registerVocabSteps(sc *godog.ScenarioContext, _ *common.World) {
 		}
 		return nil
 	})
+
+	sc.Step(`^"([^"]*)" from "([^"]*)" to "([^"]*)" is "(allow|warn|deny)"$`,
+		func(ctx context.Context, rel, src, tgt, want string) error {
+			got := sparx.RelationshipVerdictName(rel, src, tgt)
+			if got != want {
+				return fmt.Errorf("%s %s -> %s: verdict %q, want %q", rel, src, tgt, got, want)
+			}
+			common.Logf(ctx, "%s %s -> %s: %s", rel, src, tgt, want)
+			return nil
+		})
 }

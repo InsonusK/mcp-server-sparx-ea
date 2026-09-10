@@ -32,9 +32,10 @@ func (s *Service) CreateRelationship(sourceRef, targetRef, archimateRelType, nam
 	if !sok || !tok {
 		return nil, fmt.Errorf("sparx: %s or %s is not an ArchiMate element; refusing to add a relationship", src.Name, tgt.Name)
 	}
-	if ok, reason := relationshipAllowed(relBare, srcBare, tgtBare); !ok {
-		return nil, fmt.Errorf("sparx: %s from %s (%s) to %s (%s) is not allowed: %s",
-			relBare, src.Name, qualify(srcBare), tgt.Name, qualify(tgtBare), reason)
+	verdict := RelationshipVerdict(relBare, srcBare, tgtBare)
+	if verdict == VerdictDeny {
+		return nil, fmt.Errorf("sparx: %s from %s (%s) to %s (%s) is not allowed by the ArchiMate relationship rules",
+			relBare, src.Name, qualify(srcBare), tgt.Name, qualify(tgtBare))
 	}
 	// (type, source, target) is unique: no duplicate relationship.
 	stereo := "ArchiMate_" + relBare
@@ -55,10 +56,16 @@ func (s *Service) CreateRelationship(sourceRef, targetRef, archimateRelType, nam
 	if err != nil {
 		return nil, fmt.Errorf("sparx: %w", err)
 	}
-	return &Relation{
+	rel := &Relation{
 		ID: conn.XMIID, Type: qualify(relBare), Name: conn.Name, Direction: "outgoing",
 		OtherID: tgt.XMIID, OtherName: tgt.Name, OtherType: qualify(tgtBare),
-	}, nil
+	}
+	if verdict == VerdictWarn {
+		rel.Verdict = "warn"
+		rel.Warning = fmt.Sprintf("%s from %s to %s is discouraged by the ArchiMate rules — verify it against ArchiMate 3.2 / Sparx EA",
+			relBare, qualify(srcBare), qualify(tgtBare))
+	}
+	return rel, nil
 }
 
 // DeleteRelationshipsBetween removes every relationship whose source is

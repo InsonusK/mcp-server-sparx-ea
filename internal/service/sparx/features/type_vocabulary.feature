@@ -18,3 +18,11 @@ Feature: The ArchiMate 3.2 type vocabulary
     Then "ArchiMate.Realization" is a known relationship type
     And "ArchiMate.Serving" is a known relationship type
     And "ArchiMate.Influence" is a known relationship type
+
+  Scenario: The relationship rules are queryable without touching a model
+    Then "ArchiMate.Assignment" from "ArchiMate.ApplicationComponent" to "ArchiMate.ApplicationFunction" is "allow"
+    And "ArchiMate.Realization" from "ArchiMate.ApplicationComponent" to "ArchiMate.ApplicationService" is "allow"
+    And "ArchiMate.Triggering" from "ArchiMate.Plateau" to "ArchiMate.Plateau" is "warn"
+    And "ArchiMate.Assignment" from "ArchiMate.Goal" to "ArchiMate.Node" is "deny"
+    And "ArchiMate.Triggering" from "ArchiMate.BusinessObject" to "ArchiMate.BusinessProcess" is "deny"
+    And "ArchiMate.Nonsense" from "ArchiMate.Goal" to "ArchiMate.Goal" is "deny"

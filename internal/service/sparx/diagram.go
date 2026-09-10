@@ -82,9 +82,11 @@ type PlacedElement struct {
 
 // PlacedLink is a connector shown on a diagram (EA auto-routes it).
 type PlacedLink struct {
-	ID   string `json:"id"`
-	Type string `json:"type"`
-	Name string `json:"name,omitempty"`
+	ID      string `json:"id"`
+	Type    string `json:"type"`
+	Name    string `json:"name,omitempty"`
+	Verdict string `json:"verdict,omitempty"` // "warn" | "deny" per the ArchiMate rules
+	Warning string `json:"warning,omitempty"`
 }
 
 // Diagram resolves ref (an ID, a GUID, or a slash path) and returns its contents.
@@ -114,6 +116,8 @@ func (s *Service) Diagram(ref string) (*DiagramInfo, error) {
 			if c.XMIID == l.ConnectorID {
 				pl.Type = relationType(c)
 				pl.Name = c.Name
+				v, rn, sn, tn := s.connectorVerdict(c)
+				annotateVerdict(&pl.Verdict, &pl.Warning, v, rn, sn, tn)
 				break
 			}
 		}

@@ -100,8 +100,12 @@ tools/call ea_create_relationship
 | `file`, `output`, `source`, `target`, `type` | string | yes |
 | `name`, `note` | string | no |
 
+The ArchiMate relationship rules classify the `(source type, target type, type)`
+triple: **allow** → created; **warn** → created, and `<Relation>` carries
+`"verdict": "warn"` + a `"warning"` string; **deny** → refused.
+
 **Returns** `{"result": <Relation>, "saved": "<out>"}`.
-**Errors** — `is not a known ArchiMate relationship type`; `no source element for` / `no target element for`; `is not allowed:` + reason (ArchiMate forbids it between those types); `already exists` (a `(type, source, target)` relationship is already there — it is a unique key).
+**Errors** — `is not a known ArchiMate relationship type`; `no source element for` / `no target element for`; `not allowed by the ArchiMate relationship rules` (verdict deny); `already exists` (a `(type, source, target)` relationship is already there — it is a unique key).
 
 ## `ea_delete_relationship`
 ```

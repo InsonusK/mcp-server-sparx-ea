@@ -24,10 +24,10 @@ Feature: Create relationships, with ArchiMate validation (method 5)
       | ProcA  | ProcB  | ArchiMate.Triggering     |
       | ProcA  | ProcB  | ArchiMate.Flow           |
       | ProcA  | ObjA   | ArchiMate.Access         |
-      | ProcA  | GoalB  | ArchiMate.Serving        |
+      | ProcA  | ProcB  | ArchiMate.Serving        |
     Then the relate succeeds
 
-  Scenario Outline: Relationships ArchiMate does not permit are refused
+  Scenario Outline: Relationships the ArchiMate rules deny are refused
     Given the working model:
       | source | TestProject.xml                 |
       | output | relationship_create_refused.xml |
@@ -38,11 +38,24 @@ Feature: Create relationships, with ArchiMate validation (method 5)
 
     Examples:
       | source | target | relation                 | message                                 |
-      | GoalA  | ProcA  | ArchiMate.Specialization | same type                               |
-      | GoalA  | ReqA   | ArchiMate.Composition    | different ArchiMate types               |
-      | GoalA  | GoalB  | ArchiMate.Triggering     | behaviour elements                      |
-      | ProcA  | ObjA   | ArchiMate.Influence      | must target a motivation element        |
+      | GoalA  | ProcA  | ArchiMate.Specialization | not allowed by the ArchiMate            |
+      | GoalA  | GoalB  | ArchiMate.Triggering     | not allowed by the ArchiMate            |
+      | ProcA  | ObjA   | ArchiMate.Influence      | not allowed by the ArchiMate            |
+      | ObjA   | ProcA  | ArchiMate.Triggering     | not allowed by the ArchiMate            |
       | ReqA   | GoalA  | ArchiMate.Frobnicate     | not a known ArchiMate relationship type |
+
+  Scenario: A discouraged relationship is created, with a warning
+    Given the working model:
+      | source | TestProject.xml              |
+      | output | relationship_create_warn.xml |
+      | root   | relationship create warn     |
+    And the relationship helper elements in "relationship create warn/Motivation_Package"
+    When I relate "relationship create warn/Motivation_Package/GoalA" to "relationship create warn/Motivation_Package/ReqA" as "ArchiMate.Composition"
+    Then the relate succeeds
+    And the relation warning contains "discouraged"
+    And after reload the element "relationship create warn/Motivation_Package/GoalA" relations include:
+      | type                 | direction | otherName | verdict |
+      | ArchiMate.Composition | outgoing  | ReqA      | warn    |
 
   Scenario: The same (type, source, target) relationship cannot be created twice
     Given the working model:

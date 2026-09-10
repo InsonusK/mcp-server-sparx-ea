@@ -43,7 +43,10 @@ func defaultFake() *fakeModel {
 			ID: "EAID_D", GUID: "{3}", Name: "Overview", Path: "Model/Motivation/Overview",
 			DiagramType: "Logical", Objects: []sparx.PlacedElement{}, Links: []sparx.PlacedLink{},
 		},
-		relation: &sparx.Relation{ID: "EAID_R", Type: "ArchiMate.Realization", Direction: "outgoing", OtherName: "Goal1"},
+		relation: &sparx.Relation{
+			ID: "EAID_R", Type: "ArchiMate.Realization", Direction: "outgoing", OtherName: "Goal1",
+			Verdict: "warn", Warning: "Realization from ArchiMate.X to ArchiMate.Y is discouraged by the ArchiMate rules",
+		},
 		count:    2,
 		rootName: "Model",
 	}

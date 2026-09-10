@@ -57,3 +57,9 @@ Feature: Model navigator tree (method 1)
       | kind    | name      | type           |
       | diagram | Диаграмма |                |
       | element | Цель      | ArchiMate.Goal |
+
+  Scenario: The tree flags relationships that break the ArchiMate rules
+    Given the model file "rule_violations.xml"
+    When I read the model tree
+    Then the tree notices include "violate the ArchiMate rules"
+    And the tree notices include "discouraged by the ArchiMate rules"
