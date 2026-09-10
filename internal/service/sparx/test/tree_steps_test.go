@@ -5,6 +5,7 @@ package sparxtest
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/cucumber/godog"
 
@@ -42,6 +43,16 @@ func registerTreeSteps(sc *godog.ScenarioContext, w *common.World) {
 		}
 		common.Logf(ctx, "node %q has %d child(ren)", path, len(rows))
 		return common.MatchTable(rows, table, true)
+	})
+
+	sc.Step(`^the tree notices include "([^"]*)"$`, func(ctx context.Context, want string) error {
+		for _, n := range w.Tree.Notices {
+			if strings.Contains(n, want) {
+				common.Logf(ctx, "notice: %s", n)
+				return nil
+			}
+		}
+		return fmt.Errorf("no tree notice contains %q (have %v)", want, w.Tree.Notices)
 	})
 
 	sc.Step(`^the node at path "([^"]*)" has id "([^"]*)"$`, func(ctx context.Context, path, want string) error {

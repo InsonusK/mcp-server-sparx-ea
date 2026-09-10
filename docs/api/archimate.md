@@ -38,6 +38,10 @@ the EA project browser.
 | --- | --- | --- | --- |
 | `file` | string | yes | the exported `.xml` model |
 
+The root node also carries `notices[]` — a heads-up when the model contains
+relationships the [rules](../archimate-relationship-matrix.md) classify as
+`deny` / `warn` (read the elements to see which).
+
 **Returns** a `Node`: `{kind, name, id, guid, type, path, children}`. `kind` is
 `package`, `diagram` or `element`; `type` is the ArchiMate type for elements
 (`unknown:<X>` for non-ArchiMate content).
@@ -57,7 +61,10 @@ One element by `ref`: its ArchiMate type, note and every relationship.
 
 **Returns** `{id, guid, name, type, path, documentation, relations[]}`. Each
 `relation` is `{id, type, name, direction, otherName, otherId, otherType}` —
-`direction` is `outgoing` or `incoming` relative to this element.
+`direction` is `outgoing` or `incoming` relative to this element. A relation
+whose `(source type, target type, relationship)` the
+[rules](../archimate-relationship-matrix.md) classify as discouraged or
+forbidden also carries `verdict` (`"warn"` / `"deny"`) and a `warning` string.
 
 **Errors** — `sparx: no element for "<ref>"`.
 
@@ -86,7 +93,9 @@ One diagram by `ref`: its type and what is placed on it.
 | `file` | string | yes |
 | `ref` | string | yes |
 
-**Returns** `{id, guid, name, path, diagramType, objects[], links[]}`. Each
+**Returns** `{id, guid, name, path, diagramType, objects[], links[]}` — a `link`
+whose connector breaks the [rules](../archimate-relationship-matrix.md) also
+carries `verdict` / `warning`. Each
 `object` is `{id, name, type, seq, left, top, right, bottom}` (EA coordinates:
 origin top-left); each `link` is `{id, type, name}`.
 
@@ -216,7 +225,15 @@ on any diagram.
 
 ### `ea_create_relationship`
 
-Add an ArchiMate relationship between two elements.
+Add an ArchiMate relationship between two elements. The
+[relationship rules](../archimate-relationship-matrix.md) classify every
+`(source type, target type, relationship)` triple:
+
+| verdict | `ea_create_relationship` |
+| --- | --- |
+| **allow** | created |
+| **warn** | created; the returned `Relation` carries `"verdict": "warn"` and a `"warning"` string |
+| **deny** | refused (`not allowed by the ArchiMate relationship rules`) |
 
 | Arg | Type | Required | Description |
 | --- | --- | --- | --- |
@@ -227,7 +244,8 @@ Add an ArchiMate relationship between two elements.
 | `name` | string | no | connector name |
 | `note` | string | no | documentation |
 
-**Returns** `{"result": <Relation>, "saved": "<output>"}`.
+**Returns** `{"result": <Relation>, "saved": "<output>"}` — `<Relation>` adds
+`verdict` / `warning` on a discouraged relationship.
 
 **Errors**
 
@@ -235,7 +253,7 @@ Add an ArchiMate relationship between two elements.
 | --- | --- |
 | `type` not a known relationship | `is not a known ArchiMate relationship type` |
 | `source` / `target` do not resolve | `no source element for` / `no target element for` |
-| ArchiMate does not permit it between those types | `is not allowed:` + a reason |
+| the rules deny it between those types | `not allowed by the ArchiMate relationship rules` |
 | a `(type, source, target)` relationship already exists | `already exists` |
 
 ```
@@ -396,3 +414,8 @@ Remove an element's placement from a diagram (the element stays in the model).
 ## See also
 
 - [The editing workflow](../workflow.md) — export, chain edits, re-import.
+- [The relationship rules](../archimate-relationship-matrix.md) — the
+  allow / warn / deny table
+  ([`internal/service/sparx/archimate_relationships.csv`](../../internal/service/sparx/archimate_relationships.csv)).
+- [`docs/examples/`](../examples/) — `relationships-allow.xml` /
+  `relationships-warn.xml` / `relationships-deny.xml`, one model per verdict.

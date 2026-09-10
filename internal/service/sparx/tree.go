@@ -1,6 +1,10 @@
 package sparx
 
-import "github.com/InsonusK/mcp-server-sparx-ea/client/eaxmi"
+import (
+	"fmt"
+
+	"github.com/InsonusK/mcp-server-sparx-ea/client/eaxmi"
+)
 
 // Method 1: the model navigator tree — packages, diagrams and elements with
 // their EA ids, like the Sparx EA project browser.
@@ -23,6 +27,10 @@ type Node struct {
 	Type     string   `json:"type,omitempty"` // ArchiMate type for elements, e.g. "ArchiMate.Goal"
 	Path     string   `json:"path"`
 	Children []*Node  `json:"children,omitempty"`
+
+	// Notices, on the root node only, flags relationships in the model that the
+	// ArchiMate rules classify as deny / warn — a heads-up on an imported model.
+	Notices []string `json:"notices,omitempty"`
 }
 
 // Tree returns the whole model as a navigator tree, rooted at the EA root
@@ -32,7 +40,32 @@ func (s *Service) Tree() *Node {
 	for _, p := range s.doc.Root.Packages {
 		root.Children = append(root.Children, s.packageNode(p, ""))
 	}
+	root.Notices = s.ruleNotices()
 	return root
+}
+
+// ruleNotices summarises every relationship in the model whose (type, source,
+// target) the ArchiMate rules classify as deny or warn.
+func (s *Service) ruleNotices() []string {
+	var deny, warn int
+	for _, c := range s.doc.Connectors() {
+		switch v, rn, _, _ := s.connectorVerdict(c); {
+		case rn == "":
+			continue
+		case v == VerdictDeny:
+			deny++
+		case v == VerdictWarn:
+			warn++
+		}
+	}
+	var out []string
+	if deny > 0 {
+		out = append(out, fmt.Sprintf("%d relationship(s) violate the ArchiMate rules (verdict deny) — read the elements to see which", deny))
+	}
+	if warn > 0 {
+		out = append(out, fmt.Sprintf("%d relationship(s) are discouraged by the ArchiMate rules (verdict warn)", warn))
+	}
+	return out
 }
 
 func (s *Service) packageNode(p *eaxmi.Package, parentPath string) *Node {

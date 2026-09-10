@@ -100,6 +100,8 @@ For an **AI agent**, the executable instructions live in
 | `internal/service/sparx/` | The ArchiMate service: ArchiMate vocabulary + validation over `eaxmi`. |
 | `internal/mcpserver/` | The MCP server — 21 tools over the service, one file per concept. |
 | `tools/modelgen/` | Regenerates `docs/mcp-server-sparx-ea.arch.xml` (the model of the server, with diagrams). |
+| `tools/reltable/` | Seeds `internal/service/sparx/archimate_relationships.csv` (the allow/warn/deny rules) and renders `docs/archimate-relationship-matrix.md`. |
+| `tools/relexamples/` | Regenerates `docs/examples/relationships-{allow,warn,deny}.xml`. |
 | `main.go` | `server.ServeStdio` entry point. |
 | `scripts/` | Release installers — `install.sh` (Linux / macOS), `install.ps1` (Windows). |
 | `docs/skills/cucumber-go-testing.md` | How the tests are written (every test is a Cucumber scenario). |

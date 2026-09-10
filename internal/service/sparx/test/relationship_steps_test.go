@@ -4,6 +4,7 @@ package sparxtest
 
 import (
 	"context"
+	"strings"
 
 	"github.com/cucumber/godog"
 
@@ -42,8 +43,8 @@ func registerRelationshipSteps(sc *godog.ScenarioContext, w *common.World) {
 			common.Logf(ctx, "relate %q -> %q as %s → error: %v", src, tgt, rel, err)
 			return nil
 		}
-		w.LastRelID = r.ID
-		common.Logf(ctx, "created %s %q -> %q (id %s)", rel, src, tgt, r.ID)
+		w.LastRelID, w.LastRel = r.ID, r
+		common.Logf(ctx, "created %s %q -> %q (id %s, verdict %q)", rel, src, tgt, r.ID, r.Verdict)
 		return w.Save(ctx)
 	}
 
@@ -86,6 +87,17 @@ func registerRelationshipSteps(sc *godog.ScenarioContext, w *common.World) {
 				return nil // stop at the first rejected relationship, keep w.Err for the outcome step
 			}
 		}
+		return nil
+	})
+
+	sc.Step(`^the relation warning contains "([^"]*)"$`, func(ctx context.Context, want string) error {
+		if w.LastRel == nil {
+			return errNoRel
+		}
+		if !strings.Contains(w.LastRel.Warning, want) {
+			return errString("relation warning " + w.LastRel.Warning + " does not contain " + want)
+		}
+		common.Logf(ctx, "relation warning: %s", w.LastRel.Warning)
 		return nil
 	})
 

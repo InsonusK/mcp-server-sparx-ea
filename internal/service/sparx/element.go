@@ -31,6 +31,13 @@ type Relation struct {
 	OtherName string `json:"otherName"`
 	OtherID   string `json:"otherId"`
 	OtherType string `json:"otherType"`
+
+	// Verdict is "warn" or "deny" when the ArchiMate rules classify this
+	// (type, source, target) triple as discouraged or not permitted; empty for
+	// an allowed relationship or a non-ArchiMate connector. Warning is the
+	// human-readable reason (set alongside Verdict).
+	Verdict string `json:"verdict,omitempty"`
+	Warning string `json:"warning,omitempty"`
 }
 
 // Element resolves ref (an ID, a GUID, or a slash path) and returns its details.
@@ -63,9 +70,48 @@ func (s *Service) Element(ref string) (*ElementInfo, error) {
 			rel.OtherName = other.Name
 			rel.OtherType = elementType(other)
 		}
+		v, rn, sn, tn := s.connectorVerdict(c)
+		annotateVerdict(&rel.Verdict, &rel.Warning, v, rn, sn, tn)
 		info.Relations = append(info.Relations, rel)
 	}
 	return info, nil
+}
+
+// connectorVerdict returns the ArchiMate rule verdict for a connector, and the
+// bare (relation, source, target) names — ("", …) when it is not an ArchiMate
+// relationship between two ArchiMate elements.
+func (s *Service) connectorVerdict(c *eaxmi.Connector) (v Verdict, rel, src, tgt string) {
+	relBare, ok := archimateTypeFromStereotype(c.Stereotype)
+	if !ok || !archimateRelationships[relBare] {
+		return VerdictAllow, "", "", ""
+	}
+	srcEl, _ := s.doc.ElementByID(c.SourceID)
+	tgtEl, _ := s.doc.ElementByID(c.TargetID)
+	if srcEl == nil || tgtEl == nil {
+		return VerdictAllow, "", "", ""
+	}
+	srcBare, sok := archimateTypeFromStereotype(srcEl.Stereotype)
+	tgtBare, tok := archimateTypeFromStereotype(tgtEl.Stereotype)
+	if !sok || !tok {
+		return VerdictAllow, "", "", ""
+	}
+	return RelationshipVerdict(relBare, srcBare, tgtBare), relBare, srcBare, tgtBare
+}
+
+// annotateVerdict fills the verdict / warning fields of a read relationship or
+// diagram link from connectorVerdict's result.
+func annotateVerdict(verdict, warning *string, v Verdict, rel, src, tgt string) {
+	if rel == "" {
+		return
+	}
+	switch v {
+	case VerdictDeny:
+		*verdict = "deny"
+		*warning = fmt.Sprintf("%s from %s to %s is not permitted by the ArchiMate rules", rel, qualify(src), qualify(tgt))
+	case VerdictWarn:
+		*verdict = "warn"
+		*warning = fmt.Sprintf("%s from %s to %s is discouraged by the ArchiMate rules", rel, qualify(src), qualify(tgt))
+	}
 }
 
 // CreateElement adds an element of ArchiMate type archimateType (e.g.

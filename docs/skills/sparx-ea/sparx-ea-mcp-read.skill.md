@@ -77,7 +77,11 @@ tools/call ea_element { "file": "<path>", "ref": "<ref>" }
       "otherType": "ArchiMate.Requirement" }
   ] }
 ```
-`direction` is `outgoing` or `incoming` relative to this element.
+`direction` is `outgoing` or `incoming` relative to this element. A relation
+whose `(source type, target type, relationship)` breaks the ArchiMate rules also
+carries `"verdict"` (`"warn"` / `"deny"`) and a `"warning"` string;
+`ea_model_tree`'s root node carries `"notices"` counting them across the model,
+and `ea_diagram`'s `links` are annotated the same way.
 
 ### Errors
 `sparx: no element for "<ref>"`.

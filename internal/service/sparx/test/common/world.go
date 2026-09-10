@@ -54,6 +54,7 @@ type World struct {
 	InReport  bool // false => kept out of tmp/report.xml, saved straight to tmp/
 
 	LastRelID      string
+	LastRel        *sparx.Relation
 	LastElemPath   string
 	LastDiagramRef string
 	LastPkgPath    string

@@ -47,60 +47,13 @@ var archimateRelationships = toSet(
 	"Access", "Influence", "Triggering", "Flow", "Specialization", "Association",
 )
 
-// ---------- element aspect (for relationship rules) ----------
-
-type aspect string
-
-const (
-	aspectActive     aspect = "active"   // active structure
-	aspectBehavior   aspect = "behavior" // behaviour
-	aspectPassive    aspect = "passive"  // passive structure
-	aspectMotivation aspect = "motivation"
-	aspectStrategy   aspect = "strategy"
-	aspectImpl       aspect = "implementation"
-	aspectComposite  aspect = "composite" // Location, Grouping
+// behaviorTypes is the ArchiMate behaviour vocabulary — the elements EA exports
+// as uml:Activity rather than uml:Class (events included).
+var behaviorTypes = toSet(
+	"BusinessProcess", "BusinessFunction", "BusinessInteraction", "BusinessEvent", "BusinessService",
+	"ApplicationFunction", "ApplicationInteraction", "ApplicationProcess", "ApplicationEvent", "ApplicationService",
+	"TechnologyFunction", "TechnologyProcess", "TechnologyInteraction", "TechnologyEvent", "TechnologyService",
 )
-
-var elementAspect = map[elementTypeName]aspect{
-	"Stakeholder": aspectMotivation, "Driver": aspectMotivation, "Assessment": aspectMotivation,
-	"Goal": aspectMotivation, "Outcome": aspectMotivation, "Principle": aspectMotivation,
-	"Requirement": aspectMotivation, "Constraint": aspectMotivation, "Meaning": aspectMotivation,
-	"Value": aspectMotivation,
-
-	"Resource": aspectStrategy, "Capability": aspectStrategy,
-	"CourseOfAction": aspectStrategy, "ValueStream": aspectStrategy,
-
-	"BusinessActor": aspectActive, "BusinessRole": aspectActive,
-	"BusinessCollaboration": aspectActive, "BusinessInterface": aspectActive,
-	"BusinessProcess": aspectBehavior, "BusinessFunction": aspectBehavior,
-	"BusinessInteraction": aspectBehavior, "BusinessEvent": aspectBehavior,
-	"BusinessService": aspectBehavior,
-	"BusinessObject":  aspectPassive, "Contract": aspectPassive, "Representation": aspectPassive,
-	"Product": aspectPassive,
-
-	"ApplicationComponent": aspectActive, "ApplicationCollaboration": aspectActive,
-	"ApplicationInterface": aspectActive,
-	"ApplicationFunction":  aspectBehavior, "ApplicationInteraction": aspectBehavior,
-	"ApplicationProcess": aspectBehavior, "ApplicationEvent": aspectBehavior,
-	"ApplicationService": aspectBehavior,
-	"DataObject":         aspectPassive,
-
-	"Node": aspectActive, "Device": aspectActive, "SystemSoftware": aspectActive,
-	"TechnologyCollaboration": aspectActive, "TechnologyInterface": aspectActive,
-	"Path": aspectActive, "CommunicationNetwork": aspectActive,
-	"TechnologyFunction": aspectBehavior, "TechnologyProcess": aspectBehavior,
-	"TechnologyInteraction": aspectBehavior, "TechnologyEvent": aspectBehavior,
-	"TechnologyService": aspectBehavior,
-	"Artifact":          aspectPassive,
-
-	"Equipment": aspectActive, "Facility": aspectActive, "DistributionNetwork": aspectActive,
-	"Material": aspectPassive,
-
-	"WorkPackage": aspectImpl, "Deliverable": aspectImpl, "ImplementationEvent": aspectImpl,
-	"Plateau": aspectImpl, "Gap": aspectImpl,
-
-	"Location": aspectComposite, "Grouping": aspectComposite,
-}
 
 // ---------- EA representation ----------
 
@@ -130,6 +83,22 @@ var relEA = map[elementTypeName]eaRelation{
 	"Specialization": {EAType: "Generalization", ModelRepr: "generalization", Direction: "", verified: true},
 }
 
+// EARelationship returns EA's serialisation of a bare ArchiMate relationship
+// name ("Realization"): the EA connector type, the model representation and the
+// direction. Exported for tooling that writes connectors directly via the eaxmi
+// codec (see tools/relexamples).
+func EARelationship(relBare string) (eaType, modelRepr, direction string, ok bool) {
+	e, ok := relEA[relBare]
+	return e.EAType, e.ModelRepr, e.Direction, ok
+}
+
+// EAElementForType returns EA's (uml type, stereotype) pair for a bare ArchiMate
+// element type ("Goal"). Exported for tooling (see tools/relexamples).
+func EAElementForType(typeBare string) (umlType, stereotype string) {
+	e := eaForElement(typeBare)
+	return e.UMLType, e.Stereotype
+}
+
 // eaElement is how EA serialises an ArchiMate element.
 type eaElement struct {
 	UMLType    string // <packagedElement xmi:type="…">
@@ -141,82 +110,10 @@ type eaElement struct {
 // uml:Activity.
 func eaForElement(t elementTypeName) eaElement {
 	umlType := "uml:Class"
-	if elementAspect[t] == aspectBehavior {
+	if behaviorTypes[t] {
 		umlType = "uml:Activity"
 	}
 	return eaElement{UMLType: umlType, Stereotype: "ArchiMate_" + t}
-}
-
-// ---------- relationship rules ----------
-
-// relationshipAllowed reports whether an ArchiMate relationship of type rel may
-// connect a source element of type src to a target of type tgt. Conservative:
-// it rejects a combination it is unsure about rather than let an invalid model
-// be written (EA re-validates on import as a backstop). All names are bare
-// ("Goal", "Realization").
-func relationshipAllowed(rel, src, tgt elementTypeName) (bool, string) {
-	if !archimateElements[src] {
-		return false, "unknown source element type"
-	}
-	if !archimateElements[tgt] {
-		return false, "unknown target element type"
-	}
-	if !archimateRelationships[rel] {
-		return false, "unknown relationship type"
-	}
-
-	sa, ta := elementAspect[src], elementAspect[tgt]
-	switch rel {
-	case "Association":
-		return true, "" // ArchiMate's universal fallback
-	case "Specialization":
-		if src != tgt {
-			return false, "specialization only connects two elements of the same type"
-		}
-		return true, ""
-	case "Composition", "Aggregation":
-		if src != tgt {
-			return false, rel + " between different ArchiMate types is not supported yet"
-		}
-		return true, ""
-	case "Influence":
-		if ta != aspectMotivation {
-			return false, "influence must target a motivation element"
-		}
-		return true, ""
-	case "Realization":
-		// A more concrete element realizes a more abstract one. Within
-		// motivation this is common (Requirement/Principle/Outcome realize a
-		// Goal); a motivation element does not realize a core element.
-		if ta == aspectMotivation {
-			return true, ""
-		}
-		if sa == aspectMotivation {
-			return false, "a motivation element only realizes another motivation element"
-		}
-		return true, ""
-	case "Assignment":
-		if sa == aspectActive && (ta == aspectBehavior || ta == aspectActive || ta == aspectPassive) {
-			return true, ""
-		}
-		return false, "assignment goes from an active-structure element to a behaviour, interface or object"
-	case "Serving":
-		if (sa == aspectActive || sa == aspectBehavior) && ta != aspectPassive {
-			return true, ""
-		}
-		return false, "serving goes from an active-structure or behaviour element"
-	case "Access":
-		if sa == aspectBehavior && ta == aspectPassive {
-			return true, ""
-		}
-		return false, "access goes from a behaviour element to a passive-structure element"
-	case "Triggering", "Flow":
-		if sa == aspectBehavior && ta == aspectBehavior {
-			return true, ""
-		}
-		return false, rel + " connects two behaviour elements"
-	}
-	return false, "relationship not permitted between these element types"
 }
 
 // ---------- name <-> EA stereotype ----------
@@ -251,6 +148,14 @@ func IsKnownElementType(qualified string) bool {
 func IsKnownRelationshipType(qualified string) bool {
 	name, ok := unqualify(qualified)
 	return ok && archimateRelationships[name]
+}
+
+// RelationshipAllowed reports whether ea_create_relationship would accept an
+// ArchiMate relationship of the qualified type relType ("ArchiMate.Realization")
+// from sourceType to targetType — i.e. the verdict is not Deny. Any unknown name
+// yields false. See RelationshipVerdict for the three-way answer.
+func RelationshipAllowed(relType, sourceType, targetType string) bool {
+	return RelationshipVerdictQualified(relType, sourceType, targetType) != VerdictDeny
 }
 
 // ElementTypes returns the qualified names of every ArchiMate element type the

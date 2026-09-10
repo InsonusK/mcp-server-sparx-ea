@@ -60,3 +60,11 @@ Feature: Read element information (method 2)
   Scenario: Reading a missing element is an error
     When I read the element "Model/Motivation_Package/DoesNotExist"
     Then the read fails with "no element for"
+
+  Scenario: A relationship the ArchiMate rules forbid is flagged on the element
+    Given the model file "rule_violations.xml"
+    When I read the element "Rule violations/Elements/Goal1"
+    Then the element relations include:
+      | type                 | direction | otherName | verdict |
+      | ArchiMate.Assignment | outgoing  | Node1     | deny    |
+      | ArchiMate.Realization | incoming  | Requirement1 |      |
