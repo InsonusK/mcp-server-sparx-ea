@@ -2,6 +2,11 @@
 
 The server is a single pure-Go binary with no runtime dependencies.
 
+> This is the human-facing guide. The agent-facing copy bundled with the
+> `sparx-ea-mcp` skill is
+> [`docs/skills/sparx-ea/installation.md`](skills/sparx-ea/installation.md) —
+> keep the two in sync when either changes.
+
 ## Pre-built binaries
 
 The [Releases](https://github.com/InsonusK/mcp-server-sparx-ea/releases) page has
@@ -28,6 +33,8 @@ environment variables:
 | `--version <v>` | `VERSION` | latest release |
 | `--dir <path>` | `INSTALL_DIR` | `/usr/local/bin` |
 | `--no-sudo` | `NO_SUDO=1` | (uses `sudo` when needed) |
+| `--register <scope>` | `REGISTER` | ask when interactive, else `no` |
+| `--no-register` | `REGISTER=no` | — |
 
 ```bash
 # a specific version, into a dir you own, no sudo
@@ -43,7 +50,8 @@ irm https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/script
 
 [`scripts/install.ps1`](../scripts/install.ps1) installs to
 `%LOCALAPPDATA%\Programs\mcp-server-sparx-ea` and adds it to your user `PATH`.
-To pass parameters (`-Version`, `-Dir`, `-NoPath`), wrap it in a scriptblock:
+To pass parameters (`-Version`, `-Dir`, `-NoPath`, `-Register <project|user|no>`),
+wrap it in a scriptblock:
 
 ```powershell
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/scripts/install.ps1))) -Version 0.5.0
@@ -77,6 +85,36 @@ flags or environment variables.
 
 For a step-by-step guide covering Claude Desktop, Claude Code and Cursor, plus
 troubleshooting, see **[setup-with-an-agent.md](setup-with-an-agent.md)**.
+
+### Register with Claude Code
+
+Both install scripts can register the server with **Claude Code** right after
+installing it. When run interactively they ask; otherwise pass the scope:
+
+| Scope | What it does | Where |
+| --- | --- | --- |
+| `project` | writes / merges `./.mcp.json` in the **current directory** — commit it and the whole team gets the server | repo root |
+| `user` | adds it to your personal Claude Code config (all projects) | `~/.claude.json` |
+| `no` | skip | — |
+
+```bash
+# Linux / macOS — install and write ./.mcp.json (run from your repo root)
+curl -fsSL https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/scripts/install.sh \
+  | bash -s -- --register project
+```
+
+```powershell
+# Windows
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/scripts/install.ps1))) -Register project
+```
+
+The scripts prefer the `claude` CLI (`claude mcp add --scope …`, which merges
+safely) and fall back to editing `.mcp.json` directly (via `python3` or `jq`) if
+it is not on `PATH`. A `project` registration records the bare binary name so the
+committed file works for every teammate who has `mcp-server-sparx-ea` on `PATH`.
+
+Claude Desktop cannot read a repository config — see
+[setup-with-an-agent.md](setup-with-an-agent.md) for its global file.
 
 ## What the server reads
 
