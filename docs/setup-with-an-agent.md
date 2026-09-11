@@ -79,13 +79,45 @@ Check it registered:
 claude mcp list
 ```
 
+### Claude Code — check it into the repository (project scope)
+
+Claude Code reads a **`.mcp.json` at the repository root**. Commit that file and
+everyone who opens the repo is offered the server — no per-machine setup. (Claude
+Code asks each user once before trusting a project's `.mcp.json`.)
+
+```bash
+claude mcp add --scope project sparx-ea -- mcp-server-sparx-ea
+```
+
+That writes (or merges into) `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "sparx-ea": { "command": "mcp-server-sparx-ea", "args": [] }
+  }
+}
+```
+
+Use the **bare binary name** (not an absolute path) so the file works on every
+teammate's machine — each person just needs `mcp-server-sparx-ea` on their `PATH`
+(the install script's default `/usr/local/bin` is). The install scripts can write
+this file for you — see [installation.md](installation.md#register-with-claude-code).
+
+`--scope user` instead of `--scope project` adds it to your personal config
+across all projects, without touching the repo.
+
 ### Cursor
 
-Settings → **MCP** → **Add new MCP server**:
+Per-project: commit a **`.cursor/mcp.json`** at the repo root (same shape as
+`.mcp.json` above). Or, globally, Settings → **MCP** → **Add new MCP server**:
 
 - Name: `sparx-ea`
 - Type: `command`
 - Command: `/home/you/bin/mcp-server-sparx-ea`
+
+Claude Desktop has **no** repository-level config — it only reads the global
+`claude_desktop_config.json` shown above.
 
 ### Any other MCP client
 
