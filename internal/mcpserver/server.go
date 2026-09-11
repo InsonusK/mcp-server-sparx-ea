@@ -15,7 +15,7 @@ import (
 )
 
 // Version is reported to MCP clients during initialization.
-const Version = "0.8.0"
+const Version = "0.9.0"
 
 // Options overrides the tool handlers' dependencies. A nil *Options (or a nil
 // field) uses the real XMI service.

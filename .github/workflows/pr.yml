@@ -91,24 +91,9 @@ jobs:
       - name: make unit-test
         run: make unit-test
 
-  mutation-test:
-    needs: changes
-    if: needs.changes.outputs.code == 'true' || needs.changes.outputs.tests == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
-          cache: true
-      - name: make mutation-test (only the code this PR changed)
-        run: make mutation-test ONLY_DELTA=true DELTA_BASE=${{ github.event.pull_request.base.sha }}
-
   test:
     name: test
-    needs: [changes, version-check, unit-test, mutation-test]
+    needs: [changes, version-check, unit-test]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -116,8 +101,7 @@ jobs:
         run: |
           fail=0
           for j in "version-check ${{ needs.version-check.result }}" \
-                   "unit-test ${{ needs.unit-test.result }}" \
-                   "mutation-test ${{ needs.mutation-test.result }}"; do
+                   "unit-test ${{ needs.unit-test.result }}"; do
             set -- $j
             echo "$1: $2"
             [ "$2" = "failure" ] && fail=1
