@@ -1,22 +1,31 @@
 # Installation and access — sparx-ea-mcp
 
+> Agent-facing copy, kept self-contained because this skill is synced into
+> `.claude/skills/` and `.agents/skills/`. The human version — install scripts,
+> flags, troubleshooting — is [`docs/installation.md`](../../installation.md);
+> keep the two in sync when either changes.
+
 ## Get the server
 
-The server is a single pure-Go binary, no dependencies.
+Single pure-Go binary, no dependencies.
 
 - **Release binary** — the repository's Releases page has archives for
   `linux` / `darwin` / `windows` × `amd64` / `arm64`.
-- **From source** — Go 1.23+:
+- **Install script** (Linux / macOS) — installs the binary and, on request,
+  registers it:
 
   ```bash
-  go build -o mcp-server-sparx-ea .
+  curl -fsSL https://raw.githubusercontent.com/InsonusK/mcp-server-sparx-ea/master/scripts/install.sh \
+    | bash -s -- --register project
   ```
 
-Verify: `go test ./...`.
+- **From source** — Go 1.23+: `go build -o mcp-server-sparx-ea .` (verify with
+  `go test ./...`).
 
 ## Register with an MCP client
 
-The server speaks MCP over stdio, no flags, no environment variables.
+The server speaks MCP over stdio — no flags, no environment variables. Add one
+entry keyed by a name (`sparx-ea`) with `command` set to the binary:
 
 ```json
 {
@@ -26,22 +35,19 @@ The server speaks MCP over stdio, no flags, no environment variables.
 }
 ```
 
-After registering, `tools/list` returns 21 tools:
+- **Claude Desktop / Cursor / other** — put that object in the client's config
+  file.
+- **Claude Code** — `claude mcp add --scope project sparx-ea -- mcp-server-sparx-ea`
+  writes / merges a `.mcp.json` at the repository root (commit it to share with
+  the team); `--scope user` adds it to the personal config instead. A committed
+  `.mcp.json` should use the bare binary name, not an absolute path.
 
-```
-ea_model_tree  ea_element  ea_package  ea_diagram  ea_archimate_types
-ea_new_model  ea_create_root_package  ea_set_root_name
-ea_create_element  ea_update_element  ea_delete_element
-ea_create_relationship  ea_delete_relationship
-ea_create_package  ea_update_package  ea_copy_package  ea_delete_package
-ea_create_diagram  ea_place_on_diagram  ea_move_on_diagram  ea_remove_from_diagram
-```
+MCP servers load at client start — a running session does not pick up a new
+registration until it restarts.
 
 ## Files the server reads
 
-All tools take a `file` — a model the user exported from EA
-(`File → Export → Package to XMI`, XMI 2.1). Editing tools also write to
-`output` (a different, writable path).
-
-The server never opens a path you did not pass in a tool argument, and never
-makes a network call.
+Every tool except `ea_new_model` takes a `file` — a model the user exported from
+EA (`File → Export → Package to XMI`, XMI 2.1), a `.xml`. Editing tools also
+write to `output` (a different, writable path). The server never opens a path you
+did not pass in a tool argument, and never makes a network call.

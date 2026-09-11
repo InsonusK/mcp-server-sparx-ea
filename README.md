@@ -67,6 +67,11 @@ Code and Cursor. The short version: point your client at the binary.
 }
 ```
 
+Using **Claude Code**? Commit a `.mcp.json` at the repo root and the whole team
+gets the server: `claude mcp add --scope project sparx-ea -- mcp-server-sparx-ea`,
+or let the install script write it (`install.sh --register project`). See
+[installation.md](docs/installation.md#register-with-claude-code).
+
 Then, from the agent:
 
 ```
