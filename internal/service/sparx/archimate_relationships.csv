@@ -38939,8 +38939,8 @@ Location,Grouping,Triggering,deny
 Location,Grouping,Flow,deny
 Location,Grouping,Specialization,deny
 Location,Grouping,Association,allow
-Grouping,Stakeholder,Composition,warn
-Grouping,Stakeholder,Aggregation,warn
+Grouping,Stakeholder,Composition,allow
+Grouping,Stakeholder,Aggregation,allow
 Grouping,Stakeholder,Assignment,deny
 Grouping,Stakeholder,Realization,deny
 Grouping,Stakeholder,Serving,deny
