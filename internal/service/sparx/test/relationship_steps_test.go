@@ -101,6 +101,16 @@ func registerRelationshipSteps(sc *godog.ScenarioContext, w *common.World) {
 		return nil
 	})
 
+	sc.Step(`^the relation has no warning$`, func(ctx context.Context) error {
+		if w.LastRel == nil {
+			return errNoRel
+		}
+		if w.LastRel.Warning != "" {
+			return errString("expected no warning, got: " + w.LastRel.Warning)
+		}
+		return nil
+	})
+
 	sc.Step(`^I delete the last created relationship$`, func(ctx context.Context) error {
 		if w.LastRelID == "" {
 			return errNoRel
