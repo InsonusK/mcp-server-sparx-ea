@@ -57,6 +57,24 @@ Feature: Create relationships, with ArchiMate validation (method 5)
       | type                 | direction | otherName | verdict |
       | ArchiMate.Composition | outgoing  | ReqA      | warn    |
 
+  Scenario Outline: A Grouping classifies a Stakeholder via a whole-part relationship, with no warning
+    Given the working model:
+      | source | TestProject.xml                  |
+      | output | relationship_create_grouping.xml |
+      | root   | relationship create grouping     |
+    When I create a "ArchiMate.Grouping" named "ManageClosely" in "relationship create grouping/Motivation_Package" with note ""
+    And I relate "relationship create grouping/Motivation_Package/ManageClosely" to "relationship create grouping/Motivation_Package/Stakeholder1" as "<relation>"
+    Then the relate succeeds
+    And the relation has no warning
+    And after reload the element "relationship create grouping/Motivation_Package/ManageClosely" relations include:
+      | type       | direction | otherName    |
+      | <relation> | outgoing  | Stakeholder1 |
+
+    Examples:
+      | relation              |
+      | ArchiMate.Composition |
+      | ArchiMate.Aggregation |
+
   Scenario: The same (type, source, target) relationship cannot be created twice
     Given the working model:
       | source | TestProject.xml             |
