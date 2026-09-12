@@ -53,7 +53,19 @@ var behaviorTypes = toSet(
 	"BusinessProcess", "BusinessFunction", "BusinessInteraction", "BusinessEvent", "BusinessService",
 	"ApplicationFunction", "ApplicationInteraction", "ApplicationProcess", "ApplicationEvent", "ApplicationService",
 	"TechnologyFunction", "TechnologyProcess", "TechnologyInteraction", "TechnologyEvent", "TechnologyService",
+	"ImplementationEvent", "ValueStream",
 )
+
+// interfaceTypes are the ArchiMate elements EA exports as uml:Interface rather
+// than uml:Class: the exposed-behaviour "interface" element of each active
+// layer. Confirmed against a real EA export (tmp/examples/sandbox.xml) — EA
+// only recognises the ArchiMate_*Interface stereotype on a uml:Interface base
+// (base_Interface); applied to a uml:Class it renders as an anonymous class.
+var interfaceTypes = toSet("ApplicationInterface", "BusinessInterface", "TechnologyInterface")
+
+// componentTypes are the ArchiMate elements EA exports as uml:Component rather
+// than uml:Class.
+var componentTypes = toSet("ApplicationComponent")
 
 // ---------- EA representation ----------
 
@@ -105,13 +117,19 @@ type eaElement struct {
 	Stereotype string // "ArchiMate_Goal"
 }
 
-// eaForElement returns EA's (uml type, stereotype) for an ArchiMate type. Every
-// ArchiMate element is uml:Class except behaviour elements, which EA exports as
-// uml:Activity.
+// eaForElement returns EA's (uml type, stereotype) for an ArchiMate type. Most
+// ArchiMate elements are uml:Class; behaviour elements are uml:Activity, the
+// three ArchiMate "interface" elements are uml:Interface, and
+// ApplicationComponent is uml:Component.
 func eaForElement(t elementTypeName) eaElement {
 	umlType := "uml:Class"
-	if behaviorTypes[t] {
+	switch {
+	case behaviorTypes[t]:
 		umlType = "uml:Activity"
+	case interfaceTypes[t]:
+		umlType = "uml:Interface"
+	case componentTypes[t]:
+		umlType = "uml:Component"
 	}
 	return eaElement{UMLType: umlType, Stereotype: "ArchiMate_" + t}
 }
