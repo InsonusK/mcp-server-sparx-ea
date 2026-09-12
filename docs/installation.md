@@ -116,6 +116,27 @@ committed file works for every teammate who has `mcp-server-sparx-ea` on `PATH`.
 Claude Desktop cannot read a repository config — see
 [setup-with-an-agent.md](setup-with-an-agent.md) for its global file.
 
+## Pull the skill into another project (ai-skills.yaml)
+
+The agent-facing skill — [`docs/skills/sparx-ea/`](skills/sparx-ea/) — can be
+pulled into any other project that uses the
+[ai-skills](https://github.com/InsonusK/ai-skills) tool, instead of copying the
+files by hand. Add a source entry to that project's `ai-skills.yaml`:
+
+```yaml
+sources:
+  - path: https://github.com/InsonusK/mcp-server-sparx-ea.git
+    type: github
+    tree: master
+    subpath:
+      - docs/skills/sparx-ea
+```
+
+Then run the ai-skills sync as usual — it fetches `sparx-ea-mcp.skill.md` (and
+its `sparx-ea-mcp-read` / `sparx-ea-mcp-edit` / `installation.md` companions)
+into the project's configured skill target (e.g. `.claude/skills/` or
+`.agents/skills/`).
+
 ## What the server reads
 
 The server reads model files from **its own filesystem**, by the path you pass

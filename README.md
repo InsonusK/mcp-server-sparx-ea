@@ -53,6 +53,11 @@ The server is pure Go — a single static binary, no runtime dependencies.
 
 Details: [docs/installation.md](docs/installation.md).
 
+Using the [ai-skills](https://github.com/InsonusK/ai-skills) tool in another
+project? Pull in the agent-facing skill straight from this repo instead of
+copying files — see
+[docs/installation.md#pull-the-skill-into-another-project-ai-skillsyaml](docs/installation.md#pull-the-skill-into-another-project-ai-skillsyaml).
+
 ## Quick start
 
 New to MCP? Follow the step-by-step
