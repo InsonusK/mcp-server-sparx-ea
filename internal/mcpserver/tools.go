@@ -15,6 +15,7 @@ import (
 //	tools_relationship.go relationships: create / delete
 //	tools_package.go      packages: read + create / rename / move / copy / delete
 //	tools_diagram.go      diagrams: read + place / move / remove an element
+//	tools_repair.go       EA-representation validate / fix / validate-and-fix
 //
 // Read tools take a "file" (an exported .xml model). Write tools also take
 // "output" and save the edited copy there, never overwriting "file".
@@ -36,6 +37,7 @@ func registerSparxTools(s *server.MCPServer, d deps) {
 	registerRelationshipTools(s, h)
 	registerPackageTools(s, h)
 	registerDiagramTools(s, h)
+	registerRepairTools(s, h)
 }
 
 // ---------- plumbing ----------

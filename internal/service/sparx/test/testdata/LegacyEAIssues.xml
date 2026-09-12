@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ArchiMate3="http://www.sparxsystems.com/profiles/ArchiMate3/1.0">
+	<xmi:Documentation exporter="Enterprise Architect" exporterVersion="6.5" exporterID="1554"/>
+	<uml:Model xmi:type="uml:Model" name="EA_Model" visibility="public">
+		<packagedElement xmi:type="uml:Package" xmi:id="EAPK_12EDEB75_D31A_4b24_9476_EA75A66E41E8" name="Model" visibility="public">
+			<packagedElement xmi:type="uml:Package" xmi:id="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" name="Motivation_Package" visibility="public">
+				<packagedElement xmi:type="uml:Class" xmi:id="EAID_11111111_1111_1111_1111_111111111111" name="OldInterface" visibility="public"/>
+				<packagedElement xmi:type="uml:Class" xmi:id="EAID_22222222_2222_2222_2222_222222222222" name="OldComponent" visibility="public"/>
+				<packagedElement xmi:type="uml:Class" xmi:id="EAID_33333333_3333_3333_3333_333333333333" name="OldValueStream" visibility="public"/>
+				<packagedElement xmi:type="uml:Class" xmi:id="EAID_44444444_4444_4444_4444_444444444444" name="GoodGoal" visibility="public"/>
+				<packagedElement xmi:type="uml:Activity" xmi:id="EAID_55555555_5555_5555_5555_555555555555" name="GoodProcess" visibility="public" isReadOnly="false" isSingleExecution="false"/>
+			</packagedElement>
+		</packagedElement>
+		<ArchiMate3:ArchiMate_TechnologyInterface base_Class="EAID_11111111_1111_1111_1111_111111111111"/>
+		<ArchiMate3:ArchiMate_ApplicationComponent base_Class="EAID_22222222_2222_2222_2222_222222222222"/>
+		<ArchiMate3:ArchiMate_ValueStream base_Class="EAID_33333333_3333_3333_3333_333333333333"/>
+		<ArchiMate3:ArchiMate_Goal base_Class="EAID_44444444_4444_4444_4444_444444444444"/>
+		<ArchiMate3:ArchiMate_BusinessProcess base_Activity="EAID_55555555_5555_5555_5555_555555555555"/>
+	</uml:Model>
+	<xmi:Extension extender="Enterprise Architect" extenderID="6.5">
+		<elements>
+			<element xmi:idref="EAPK_12EDEB75_D31A_4b24_9476_EA75A66E41E8">
+				<model package="" ea_localid="1" ea_eleType="package"/>
+			</element>
+			<element xmi:idref="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53">
+				<model package="EAPK_12EDEB75_D31A_4b24_9476_EA75A66E41E8" ea_localid="2" ea_eleType="package"/>
+			</element>
+			<element xmi:idref="EAID_11111111_1111_1111_1111_111111111111" xmi:type="uml:Class" name="OldInterface" scope="public">
+				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" ea_localid="3" ea_eleType="element"/>
+				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_TechnologyInterface" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+				<project author="tester" version="1.0" phase="1.0"/>
+			</element>
+			<element xmi:idref="EAID_22222222_2222_2222_2222_222222222222" xmi:type="uml:Class" name="OldComponent" scope="public">
+				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" ea_localid="4" ea_eleType="element"/>
+				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_ApplicationComponent" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+				<project author="tester" version="1.0" phase="1.0"/>
+			</element>
+			<element xmi:idref="EAID_33333333_3333_3333_3333_333333333333" xmi:type="uml:Class" name="OldValueStream" scope="public">
+				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" ea_localid="5" ea_eleType="element"/>
+				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_ValueStream" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+				<project author="tester" version="1.0" phase="1.0"/>
+			</element>
+			<element xmi:idref="EAID_44444444_4444_4444_4444_444444444444" xmi:type="uml:Class" name="GoodGoal" scope="public">
+				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" ea_localid="6" ea_eleType="element"/>
+				<properties isSpecification="false" sType="Class" nType="0" scope="public" stereotype="ArchiMate_Goal" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+				<project author="tester" version="1.0" phase="1.0"/>
+			</element>
+			<element xmi:idref="EAID_55555555_5555_5555_5555_555555555555" xmi:type="uml:Activity" name="GoodProcess" scope="public">
+				<model package="EAPK_91AD8E48_3AE7_49f7_AAAB_72CA99521F53" ea_localid="7" ea_eleType="element"/>
+				<properties isSpecification="false" sType="Activity" nType="0" scope="public" stereotype="ArchiMate_BusinessProcess" isAbstract="false"/>
+				<project author="tester" version="1.0" phase="1.0"/>
+			</element>
+		</elements>
+		<connectors/>
+		<diagrams/>
+	</xmi:Extension>
+</xmi:XMI>
