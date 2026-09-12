@@ -97,6 +97,7 @@ func initializeScenario(sc *godog.ScenarioContext) {
 	registerPackageSteps(sc, w)
 	registerElementSteps(sc, w)
 	registerElementEAReprSteps(sc, w)
+	registerElementEARepairSteps(sc, w)
 	registerRelationshipSteps(sc, w)
 	registerDiagramSteps(sc, w)
 	registerVocabSteps(sc, w)

@@ -428,6 +428,45 @@ func (d *Document) SetElementDocumentation(id, doc string) error {
 	return nil
 }
 
+// RetypeElement changes an existing element's EA base type (and, for
+// uml:Interface, its isAbstract flag) and re-points its ArchiMate3 profile
+// application at the matching base_ attribute. Used to repair an element
+// created before EA's (uml:Class, stereotype) mapping was corrected for its
+// ArchiMate type — see AddElement's ElementSpec.UMLType.
+func (d *Document) RetypeElement(id, newUMLType string) error {
+	el, ok := d.elementByID[id]
+	if !ok {
+		return fmt.Errorf("eaxmi: no element %q", id)
+	}
+	isAbstract := newUMLType == "uml:Interface"
+
+	if pe := d.doc.FindElement("//packagedElement[@xmi:id='" + id + "']"); pe != nil {
+		pe.CreateAttr("xmi:type", newUMLType)
+		if isAbstract {
+			pe.CreateAttr("isAbstract", "true")
+		} else {
+			pe.RemoveAttr("isAbstract")
+		}
+	}
+	if e := d.extension().FindElement("//element[@xmi:idref='" + id + "']"); e != nil {
+		e.CreateAttr("xmi:type", newUMLType)
+		if pr := e.FindElement("properties"); pr != nil {
+			pr.CreateAttr("sType", strings.TrimPrefix(newUMLType, "uml:"))
+			if isAbstract {
+				pr.CreateAttr("isAbstract", "true")
+			} else {
+				pr.CreateAttr("isAbstract", "false")
+			}
+		}
+	}
+	if el.Stereotype != "" {
+		d.deleteProfileApplication(id)
+		d.addProfileApplication(el.Stereotype, "base_"+strings.TrimPrefix(newUMLType, "uml:"), id)
+	}
+	el.UMLType = newUMLType
+	return nil
+}
+
 // AddDiagramObject places an element on a diagram.
 func (d *Document) AddDiagramObject(diagramID, elementID string, left, top, right, bottom int) error {
 	g, ok := d.diagramByID[diagramID]
