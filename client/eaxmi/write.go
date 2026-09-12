@@ -100,6 +100,9 @@ func (d *Document) AddElement(pkgID string, spec ElementSpec) (*Element, error) 
 	pe.CreateAttr("xmi:id", id)
 	pe.CreateAttr("name", spec.Name)
 	pe.CreateAttr("visibility", "public")
+	if spec.UMLType == "uml:Interface" {
+		pe.CreateAttr("isAbstract", "true")
+	}
 
 	// 2. extension <elements><element>
 	els := d.extensionElementsBlock()
@@ -126,7 +129,11 @@ func (d *Document) AddElement(pkgID string, spec ElementSpec) (*Element, error) 
 	}
 	pr.CreateAttr("isRoot", "false")
 	pr.CreateAttr("isLeaf", "false")
-	pr.CreateAttr("isAbstract", "false")
+	if spec.UMLType == "uml:Interface" {
+		pr.CreateAttr("isAbstract", "true")
+	} else {
+		pr.CreateAttr("isAbstract", "false")
+	}
 	pr.CreateAttr("isActive", "false")
 	proj := el.CreateElement("project")
 	proj.CreateAttr("author", author)

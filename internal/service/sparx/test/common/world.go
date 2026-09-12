@@ -17,6 +17,7 @@ import (
 
 	"github.com/cucumber/godog"
 
+	"github.com/InsonusK/mcp-server-sparx-ea/client/eaxmi"
 	"github.com/InsonusK/mcp-server-sparx-ea/internal/service/sparx"
 )
 
@@ -198,6 +199,19 @@ func (w *World) Reloaded(ctx context.Context) (*sparx.Service, error) {
 		}
 	}
 	return sparx.Open(w.SavedPath)
+}
+
+// ReloadedDoc reopens the last Saved working copy at the eaxmi layer, for
+// assertions about EA's raw representation (the uml:Class/uml:Interface/…
+// base type, the stereotype) that the sparx.Service API deliberately hides
+// behind one ArchiMate type per element.
+func (w *World) ReloadedDoc(ctx context.Context) (*eaxmi.Document, error) {
+	if w.SavedPath == "" {
+		if err := w.Save(ctx); err != nil {
+			return nil, err
+		}
+	}
+	return eaxmi.Open(w.SavedPath)
 }
 
 // ---------- generic outcome steps ----------
