@@ -44,6 +44,7 @@ type World struct {
 	Element *sparx.ElementInfo
 	Diagram *sparx.DiagramInfo
 	Pkg     *sparx.PackageInfo
+	Issues  []sparx.EAIssue
 	Err     error
 
 	// working copy (the "Given the working model" step)
@@ -581,8 +582,8 @@ func RegisterSharedSteps(sc *godog.ScenarioContext, w *World) {
 	sc.Step(`^the working model:$`, w.theWorkingModel)
 	sc.Step(`^a new model:$`, w.theNewModel)
 
-	sc.Step(`^the (?:read|create|delete|placement|rename|move) succeeds$`, w.succeeds)
-	sc.Step(`^the (?:read|create|delete|placement|rename|move) fails with "([^"]*)"$`, w.failsWith)
+	sc.Step(`^the (?:read|create|delete|placement|rename|move|fix) succeeds$`, w.succeeds)
+	sc.Step(`^the (?:read|create|delete|placement|rename|move|fix) fails with "([^"]*)"$`, w.failsWith)
 	sc.Step(`^the relate (succeeds|fails with .+)$`, w.outcome)
 
 	sc.Step(`^the element is:$`, w.elementIs)
@@ -657,6 +658,12 @@ func ToRows(list []any) ([]map[string]string, error) {
 		out = append(out, row)
 	}
 	return out, nil
+}
+
+// IssueRows flattens w.Issues (the last ValidateModel/FixElements/
+// ValidateAndFixModel result) for a data-table comparison.
+func (w *World) IssueRows() ([]map[string]string, error) {
+	return ToRows(anySlice(w.Issues))
 }
 
 func anySlice[T any](in []T) []any {

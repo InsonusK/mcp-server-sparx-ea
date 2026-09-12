@@ -22,6 +22,7 @@ type fakeModel struct {
 	pkg      *sparx.PackageInfo
 	diagram  *sparx.DiagramInfo
 	relation *sparx.Relation
+	issues   []sparx.EAIssue
 	count    int
 	rootName string
 }
@@ -47,6 +48,7 @@ func defaultFake() *fakeModel {
 			ID: "EAID_R", Type: "ArchiMate.Realization", Direction: "outgoing", OtherName: "Goal1",
 			Verdict: "warn", Warning: "Realization from ArchiMate.X to ArchiMate.Y is discouraged by the ArchiMate rules",
 		},
+		issues:   []sparx.EAIssue{},
 		count:    2,
 		rootName: "Model",
 	}
@@ -173,6 +175,19 @@ func (f *fakeModel) MoveOnDiagram(d, e string, at sparx.Rect) error {
 func (f *fakeModel) RemoveFromDiagram(d, e string) error {
 	f.rec("RemoveFromDiagram(%s,%s)", d, e)
 	return f.err
+}
+
+func (f *fakeModel) ValidateModel() []sparx.EAIssue {
+	f.rec("ValidateModel()")
+	return f.issues
+}
+func (f *fakeModel) FixElements(refs []string) ([]sparx.EAIssue, error) {
+	f.rec("FixElements(%v)", refs)
+	return f.issues, f.err
+}
+func (f *fakeModel) ValidateAndFixModel() ([]sparx.EAIssue, error) {
+	f.rec("ValidateAndFixModel()")
+	return f.issues, f.err
 }
 
 func (f *fakeModel) Save(path string) error {

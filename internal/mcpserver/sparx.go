@@ -35,6 +35,10 @@ type Model interface {
 	MoveOnDiagram(diagramRef, elementRef string, at sparx.Rect) error
 	RemoveFromDiagram(diagramRef, elementRef string) error
 
+	ValidateModel() []sparx.EAIssue
+	FixElements(refs []string) ([]sparx.EAIssue, error)
+	ValidateAndFixModel() ([]sparx.EAIssue, error)
+
 	Save(path string) error
 }
 

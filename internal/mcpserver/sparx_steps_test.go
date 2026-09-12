@@ -2,9 +2,11 @@ package mcpserver_test
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/cucumber/godog"
 	"github.com/mark3labs/mcp-go/mcp"
@@ -80,10 +82,16 @@ func registerSparxSteps(sc *godog.ScenarioContext, w *toolWorld) {
 	})
 }
 
-// typed turns a table cell into an int, a bool or a string, so numeric tool
-// args (diagram coordinates) and boolean args (cascade) reach the handler with
-// the right JSON type.
+// typed turns a table cell into an int, a bool, a []any (a JSON array, for a
+// refs-style list arg) or a string, so tool args reach the handler with the
+// right JSON type.
 func typed(s string) any {
+	if strings.HasPrefix(s, "[") {
+		var v []any
+		if err := json.Unmarshal([]byte(s), &v); err == nil {
+			return v
+		}
+	}
 	if n, err := strconv.Atoi(s); err == nil {
 		return n
 	}
